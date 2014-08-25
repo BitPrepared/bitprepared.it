@@ -15,3 +15,10 @@ share: true
 ---
 
 La prima pietra &egrave; sempre importante. Speriamo che questo sito sia uno strumento utile non solo per noi, ma anche per chi ci vorr&agrave; seguire.
+
+
+    int main(void) {
+        printf("Buona strada!");
+        return 0;
+    }
+{:lang="c"}

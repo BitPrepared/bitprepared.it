@@ -13,11 +13,9 @@ INSTALLAZIONE
 
 dalla radice del progetto lanciare: 
 
-  bundle (gem install bundler)
-
-  rake 
+`bundle` 						(gem install bundler)
 
 
 per effetturare dei test 
 
-  jekyll server -w
+`jekyll server -w`

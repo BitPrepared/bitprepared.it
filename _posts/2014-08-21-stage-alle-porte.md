@@ -12,6 +12,7 @@ image:
   creditlink: http://www.bitprepared.it
 comments: false
 share: true
+permalink: /articles/stage-alle-porte/
 ---
 
 Eccoci, 
