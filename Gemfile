@@ -10,4 +10,4 @@ gem 'stringex'
 gem 'font-awesome-sass'
 gem 'sass'
 gem 'jekyll-sass-converter'
-
+gem "mini_magick"
