@@ -10,7 +10,7 @@ image:
   feature: stage-alle-porte/features.jpg
   credit: Bit Prepared
   creditlink: http://www.bitprepared.it
-comments: false
+comments: true
 share: true
 permalink: /articles/stage-alle-porte/
 ---

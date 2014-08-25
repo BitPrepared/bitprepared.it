@@ -43,6 +43,7 @@
 	<meta name="HandheldFriendly" content="True">
 	<meta name="MobileOptimized" content="320">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
 	<!-- For all browsers -->
 	<link rel="stylesheet" href="{{ site.url }}/assets/css/main.css">
@@ -67,5 +68,9 @@
 	<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ site.url }}/images/apple-touch-icon-144x144-precomposed.png">
 
+
+	<!-- Picturefill libraries for Jekyll Picture Tag -->
+	<script src="{{ site.url }}/assets/js/vendor/matchmedia.js"></script>
+	<script src="{{ site.url }}/assets/js/vendor/picturefill.js"></script>
 
 	{% include scripts.html %}

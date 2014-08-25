@@ -74,6 +74,7 @@ b, i, strong, em, blockquote, p, q, span, figure, img, h1, h2, header, input, a 
 body {
     font-family: 'source-sans-pro', sans-serif;
     color: #222;
+    margin: 0;
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: 'source-sans-pro', sans-serif;
@@ -275,6 +276,47 @@ h1, h2, h3, h4, h5, h6 {
 	}
 }
 
+/* ASIDE */
+
+aside {
+    display: block;
+    width: 100%;
+    max-width: 640px;
+    margin-right: auto;
+    margin-bottom: 30px;
+    margin-left: auto;
+    font-size: 14px;
+    font-size: .875rem;
+    text-transform: uppercase;
+}
+
+.entry-meta a {
+    color: #222;
+}
+
+@media only screen and (min-width:62.5em) {
+    .entry-meta {
+        float: left;
+        width: 120px;
+        padding: 0;
+        margin: 0 40px 40px 0;
+    }
+}
+
+.entry-meta>span {
+    display: inline-block;
+    padding: 0 20px 10px 0;
+}
+
+@media only screen and (min-width:62.5em) {
+    .entry-meta>span {
+        display: block;
+        padding: 8px 0;
+        border-bottom: 1px solid #ccc;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+}
+
 /* FOOTER */
 
 .footer-wrapper {
@@ -306,7 +348,7 @@ footer {
 	text-align: center;
 	margin: 0 auto;
 	width: 100%;
-	position: fixed;
+	position: static;
 	bottom: 10px;
 }
 
@@ -353,7 +395,6 @@ footer .social-icons a {
 .entry-feature-image {
     margin-right: auto;
     margin-left: auto;
-    width: 960px;
 }
 
 .entry-tags {
@@ -371,16 +412,21 @@ footer .social-icons a {
 
 .entry-wrapper {
     max-width: 440px;
-    padding-right: 20px;
-    padding-left: 20px;
+    margin-left: auto;
+    margin-right: auto;
     margin: 0 auto 3em;
     *zoom: 1;
 }
 
 .entry-wrapper:before, .entry-wrapper:after {
-    display: table;
+    /* display: table; */
     line-height: 0;
     content: "";
+}
+
+.entry-wrapper footer {
+    position: static;
+    bottom: 0px;
 }
 
 .entry-wrapper:after {
@@ -390,8 +436,6 @@ footer .social-icons a {
 @media only screen and (min-width:48em) {
     .entry-wrapper {
 	    max-width: 760px;
-	    padding-right: 60px;
-	    padding-left: 60px;
 	}
 }
 
@@ -454,19 +498,6 @@ footer .social-icons a {
 
 .entry-content p:first-child {
     margin-top: 0;
-}
-
-/*
-@media only screen and (min-width:62.5em) {
-    .entry-content {
-    	float: left;
-	}
-}*/
-
-@media only screen and (min-width:62.5em) {
-    .entry-content {
-    	float: none;
-	}
 }
 
 .entry-content p>a, .entry-content li>a {
