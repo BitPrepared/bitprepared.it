@@ -1,0 +1,79 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<!--
+
+    Hey, Stai cercando di fare Reverse Engineering?
+    Perche' non ti unisci a noi ?
+
+    Cercarci su https://github.com/BitPrepared :)
+-->
+
+  <head>
+    {% include head.html %}
+  </head>
+
+  <body id="page">
+
+    <div class="navigation-wrapper">
+      {% include navigation.html %}
+    </div>
+
+    <div id="main" role="main">
+      <article class="entry">
+        <div class="entry-wrapper"> <!-- style="border: 1px solid red;" --> 
+          <header class="entry-header">
+            <span class="entry-tags">{% for tag in page.tags %}<a href="{{ site.url }}/tags/#{{ tag | cgi_encode }}" title="Pages tagged {{ tag }}">{{ tag }}</a>{% unless forloop.last %}&nbsp;&bull;&nbsp;{% endunless %}{% endfor %}</span>
+            
+            {% if page.image.feature %}
+
+              
+              <div class="entry-feature-image-wrapper">
+                {% if page.link %}
+                  <h1 class="entry-title"><span><a href="{{ page.link }}">{% if page.headline %}{{ page.headline }}{% else %}{{ page.title }}{% endif %} <span class="link-arrow">&rarr;</span></a></span></h1>
+                {% else %}
+                <h1 class="entry-title"><span>{% if page.headline %}{{ page.headline }}{% else %}{{ page.title }}{% endif %}</span></h1>
+                {% endif %}
+                <img src="{{ site.url }}/images/{{ page.image.feature }}" class="entry-feature-image" alt="{{ page.title }}" style="margin-top:0;"/>
+                {% if page.image.credit %}
+                  <p class="image-credit">Photo Credit: <a href="{{ page.image.creditlink }}">{{ page.image.credit }}</a>
+                {% endif %}
+              </div>
+              
+
+            {% else %}   
+
+              {% if page.link %}
+                <h1 class="entry-title"><a href="{{ page.link }}">{% if page.headline %}{{ page.headline }}{% else %}{{ page.title }}{% endif %} <span class="link-arrow">&rarr;</span></a></h1>
+              {% else %}
+                <h1 class="entry-title">{% if page.headline %}{{ page.headline }}{% else %}{{ page.title }}{% endif %}</h1>
+              {% endif %}
+
+            {% endif %}
+            
+          </header>
+          <div class="entry-content">
+
+              {{ content }}
+            
+          </div>
+        </div>
+        <div class="clearfix"/>
+
+      </article>
+    </div><!-- /#main -->
+
+    <div class="footer-wrapper">
+      <footer>
+        {% include footer.html %}
+      </footer>
+    </div>
+  </body>
+
+</html>
+
