@@ -51,8 +51,12 @@ Come Benedetto XVI ha detto :
 
 > "Le nuove tecnologie digitali stanno determinando cambiamenti fondamentali nei modelli di comunicazione e nei rapporti umani": cambiamenti che "sono particolarmente evidenti tra i giovani", i quali si sentono "a loro agio in un mondo digitale che spesso sembra invece estraneo a quanti di noi, adulti, hanno dovuto imparare a capire ed apprezzare le opportunità che esso offre per la comunicazione".
 
-Presto nuove notizie.
+Presto nuove notizie, ma nel frattempo :  
 
-Restate sintonizzati 
+
+[ISCRIVETEVI](https://eventi.agesci.org/eventi/servlet/Eventi?handlerID=View&methodID=view&siteID=CO-2014-34-A&xslID=RegistrationStart)
+
+
+e restate sintonizzati seguendo questo sito :)
 
 Lo staff
