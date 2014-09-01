@@ -60,3 +60,7 @@ Presto nuove notizie, ma nel frattempo :
 e restate sintonizzati seguendo questo sito :)
 
 Lo staff
+
+{% picture stage-alle-porte/volantino.jpg alt="volantino stage 2014" class="" %}
+
+
