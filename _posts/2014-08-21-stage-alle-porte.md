@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Bit Prepared va in scena!<span class='spacer'></span>
+title: Bit Prepared va in scena!
 description: "Stage per capi Bit Prepared 13 e 14 settembre 2014"
 modified: 2014-08-21
 author: yoghi

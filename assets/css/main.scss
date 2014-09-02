@@ -95,6 +95,71 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
+/* SEARCH */
+
+.navigation-wrapper form {
+    display: block;
+    padding: 6px 10px;
+}
+
+.search-field {
+    font-size: 12px;
+    color: #fff;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px solid #fff;
+    border-radius: 0;
+    box-shadow: none;
+    background-clip: padding-box;
+    -webkit-appearance: none;
+}
+.search-field:focus {
+    outline: 0;
+    box-shadow: none;
+}
+
+.search-form ::-webkit-input-placeholder {
+    font-size: 32px;
+    font-size: 2rem;
+}
+.icon-remove-sign {
+    position: absolute;
+    top: .6rem;
+    right: 1rem;
+    z-index: 1;
+    display: block;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+}
+.search-field::-webkit-search-decoration, .search-field::-webkit-search-cancel-button, .search-field::-webkit-search-results-button, .search-field::-webkit-search-results-decoration {
+    display: none;
+}
+
+#search-results {
+    clear: both;
+    width: 100%;
+    padding-top: 10px;
+}
+
+#search-results section{
+    text-align: left;
+    padding: 0 10px 0 10px;
+}
+
+#search-results p {
+    margin: 0;
+}
+
+#search-results ul {
+    width: 100%;
+    padding: 0px;
+}
+
+#search-results li {
+    float: none;
+    text-align: left;
+}
 
 /* SITE */
 
@@ -198,7 +263,7 @@ h1, h2, h3, h4, h5, h6 {
 .navigation-wrapper ul {
     display: inline-block;
     padding: 4px 20px;
-    margin: 0 0 50px;
+    margin: 0 0 0px;
     vertical-align: top;
     background-color: #000;
     -webkit-border-radius: 0 0 10px 10px;
@@ -236,7 +301,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .navigation-wrapper a {
     display: block;
-    padding: 6px 10px;
+    padding: 8px 10px 6px 10px;
     color: #fff;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -248,33 +313,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-/* SEARCH */
-
-.search-wrapper {
-    position: absolute;
-    top: 50px;
-    display: none;
-    width: 90%;
-    padding-right: 5%;
-    padding-left: 5%;
-    *zoom: 1;
-}
-
-.search-wrapper:before, .search-wrapper:after {
-    display: table;
-    line-height: 0;
-    content: "";
-}
-
-.search-wrapper:after {
-    clear: both;
-}
-
-@media only screen and (min-width:48em) {
-    .search-wrapper {
-    	top: 100px;
-	}
-}
 
 /* ASIDE */
 
@@ -514,6 +552,7 @@ footer .social-icons a {
     padding: 0;
     margin: 0;
     list-style-type: none;
+    display: block;
 }
 
 .post-list li {

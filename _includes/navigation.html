@@ -10,24 +10,29 @@
 				{% endif %} 
 			</li>
 	        {% endfor %}
-	        <li><a href="{{ site.url }}/feed.xml" title="Atom/RSS feed"><i class="icon-rss"></i> Feed</a></li>
 	        <li><a href="mailto:{{ site.email }}" title="Contatti"><i class="icon-envelope"></i> Contattaci</a></li>
 
 
-	        {% if site.search %}<li class="dosearch"><i class="icon-search"></i> Search</li>{% endif %}
+	        {% if site.search %}
+	        <li>
+		        <form action="/search/search.html" method="get">
+		        	<i class="icon-search"></i>
+					<input type="text" class="search-field" id="search-query" name="q" placeholder="Search.." autocomplete="off">
+				</form>
+	        </li>
+	        {% endif %}
+
+			{% if site.search %}
+	        <li id="search-results" style="display: none;">
+				<section>
+				  <div class="entries"></div>
+				</section>
+	        </li>
+	        {% endif %}
+
 	    </ul>
 	</nav>
 </div><!-- /.navigation-wrapper -->
 
 {% include browser-upgrade.html %}
-
-{% if site.search %}
-<div class="search-wrapper">
-	<div class="search-form">
-		<input type="text" class="search-field" placeholder="Search...">
-		<i class="icon-remove-sign icon-2x"></i>
-		<ul class="search-results post-list"></ul><!-- /.search-results -->
-	</div><!-- /.search-form -->
-</div><!-- ./search-wrapper -->
-{% endif %}
 
