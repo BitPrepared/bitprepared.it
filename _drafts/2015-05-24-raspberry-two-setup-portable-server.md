@@ -97,7 +97,7 @@ dpkg-reconfigure locales
 Per l'operatività
 
 ~~~
-sudo apt-get install nodejs gcc rubygems libmysqlclient-dev ruby-dev 
+sudo apt-get install nodejs gcc rubygems libmysqlclient-dev ruby-dev phpmyadmin
 
 \curl -sSL https://get.rvm.io | bash -s stable
 
@@ -111,4 +111,9 @@ gem install jekyll
 ~~~
 
 
+Si avrà quindi 
 
+http://192.168.1.1/phpmyadmin
+http://192.168.1.1/info.php 
+
+ecc 

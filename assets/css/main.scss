@@ -91,7 +91,7 @@ h1, h2, h3, h4, h5, h6 {
 
 @media only screen and (min-width:62.5em) {
     h1 {
-        font-size: 52px;font-size: 3.25rem;
+        font-size: 42px;font-size: 2.75rem;
     }
 }
 
@@ -625,4 +625,14 @@ footer .social-icons a {
 }
 .image-credit a {
     color: #6f6f6f;
+}
+
+/* TWEET */
+.twitter-tweet, .twitter-tweet-rendered {
+    text-align: center;
+}
+
+/* To center images */
+.center {
+    text-align: center;
 }
