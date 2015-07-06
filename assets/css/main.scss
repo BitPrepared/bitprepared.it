@@ -74,6 +74,7 @@ b, i, strong, em, blockquote, p, q, span, figure, img, h1, h2, header, input, a 
 body {
     font-family: 'source-sans-pro', sans-serif;
     color: #222;
+    background-image: url(/images/sfondo.gif);
     margin: 0;
 }
 h1, h2, h3, h4, h5, h6 {
@@ -211,7 +212,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .site-title a {
-    color: #000;
+    color: $green;
+    background: $white;
 }
 
 .site-description {
@@ -229,6 +231,7 @@ h1, h2, h3, h4, h5, h6 {
     -moz-animation-duration: 1s;
     -o-animation-duration: 1s;
     animation-duration: 1s;
+    background: $white;
 }
 
 @media only screen and (min-width:48em) {
@@ -407,7 +410,7 @@ footer .social-icons a {
 
 .entry-feature-image-wrapper {
     position: relative; 
-    width: 100%; /* for IE 6 */   
+    width: 100%; /* for IE 6 */
 }
 
 .entry-feature-image-wrapper h1 { 
@@ -449,10 +452,15 @@ footer .social-icons a {
 }
 
 .entry-wrapper {
-    max-width: 440px;
+    /* max-width: 440px; */
     margin-left: auto;
     margin-right: auto;
     margin: 0 auto 3em;
+    padding: 3px;
+    background: $whiteOpacity;
+    -webkit-border-radius: 0 0 10px 10px;
+    -moz-border-radius: 0 0 10px 10px;
+    border-radius: 0 0 10px 10px;
     *zoom: 1;
 }
 
@@ -473,7 +481,7 @@ footer .social-icons a {
 
 @media only screen and (min-width:48em) {
     .entry-wrapper {
-	    max-width: 760px;
+	    max-width: 640px;
 	}
 }
 

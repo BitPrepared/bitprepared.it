@@ -1,9 +1,9 @@
 title:            Bit Prepared
-description:      Digito ergo sum, per un uso consapevole del digitale
+description:      Esploratori nella rete
 logo:             agesci_logo.png
 disqus_shortname: true
 search:           true
-email:            info@bitprepared.it
+email:            capicampo@bitprepared.it
 
 # Plugins
 whitelist: []
@@ -19,10 +19,25 @@ lunr_search:
   min_length: 3 
 
 
+campo:
+  anno: 2015
+  mese: agosto
+  dal: 25
+  al: 29 
+  ritrovo:
+    giorno: 25 agosto 2015
+    ore: "10:30"
+    luogo: all’esterno della stazione ferroviaria di Vicenza (l’indirizzo è piazzale della stazione, Vicenza)
+  fine:
+    giorno: 29 agosto 2015
+    ore: "14:30"
+    luogo: Base scout "Ugo Ferrarese" - Costigiola (chi ha bisogno verrà accompagnato in stazione)
+  live: http://live.bitprepared.it  
+
 # Change url to your domain. Leave localhost server or blank when working locally.
 # You don't need to specify the protocol if you want it available on http and https. Example: //localhost:4000
-url:              //localhost:4000
-#url:              //www.bitprepared.it
+#url:              //localhost:4000
+url:              //precampo.bitprepared.it
 
 # Owner del sito
 owner:
@@ -62,8 +77,6 @@ links:
     url: /
   - title: About
     url: /about/
-  - title: Articles
-    url: /articles/
   - title: Base Scout Costigiola
     url: http://costigiola.it
     external: true
@@ -104,30 +117,30 @@ picture:
   presets:
     # Full width pictures
     default:
-      ppi: [1, 1.5]
+      ppi: [1]
       attr:
         class: blog-full
         itemprop: image
       source_lrg:
-        media: "(min-width: 40em)"
+        media: "(min-width: 50em)"
         width: 960
       source_med:
-        media: "(min-width: 30em)"
+        media: "(min-width: 40em)"
         width: 450
       source_default:
         width: 350
         height: 200
     # Half width pictures
     half:
-      ppi: [1, 1.5]
+      ppi: [1]
       attr:
         data-location: "{{location}}"
         data-active: nil
       source_lrg:
-        media: "(min-width: 40em)"
+        media: "(min-width: 50em)"
         width: 400
       source_med:
-        media: "(min-width: 30em)"
+        media: "(min-width: 40em)"
         width: 250
       source_default:
         width: 350
