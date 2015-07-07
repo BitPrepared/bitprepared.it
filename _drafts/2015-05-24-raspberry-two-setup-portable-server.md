@@ -16,7 +16,7 @@ share: true
 
 
 ~~~
-sudo apt-get install hostapd iw wireless-tools usbutils firmware-atheros 
+sudo apt-get install hostapd iw wireless-tools usbutils firmware-atheros dnsmasq
 sudo nano /etc/hostapd/hostapd.conf
 ~~~
 
@@ -73,6 +73,19 @@ iface wlan0 inet static
 iface default inet dhcp
 pre-up iptables-restore < /etc/iptables.ipv4.nat
 ~~~
+
+~~~
+sudo nano /etc/dnsmasq.conf
+~~~
+
+Il contentuo di **/etc/dnsmasq.conf** va modificato 
+
+~~~
+interface=wlan0
+dhcp-range=192.168.1.2,192.168.1.50,12h
+~~~
+
+
 
 Per sistemare problemi di locale: 
 
