@@ -7,10 +7,29 @@ author: yoghi
 category: articles
 tags: []
 image:
-  feature: 
+  feature: 2015/welcome-esploratori/welcome.png
   credit: Bit Prepared
   creditlink:
 comments: false
 share: true
 ---
 
+## Esploratori nella rete XXX° edizione
+
+Il ritrovo sarà martedì 25 agosto 2015 per le ore 10.30 all’esterno della stazione ferroviaria di Vicenza.
+Si raccomanda la massima puntualità in quanto dovremo prendere dei mezzi pubblici.
+Per chi avesse problemi di trasporto nel giorno di inizio campo ci può contattare alle email o numeri sotto elencati.
+La nostra avventura terminerà alle 14.30 di Sabato 29 agosto 2015 a Costigiola, dovremmo essere in stazione per le 15.00.
+Il campo si svolgerà presso la Base Scout Ugo Ferrarese. L’indirizzo è “Via Baden-Powell”, comune di Monteviale (località Costigiola).
+*ATTENZIONE*: Il nome della via è cambiato il 25 giugno 2009, era “Via Frà Mioli”, ovviamente sempre comune di Monteviale.
+
+
+## Importantissimo
+
+*È obbligatoria una tua conferma di partecipazione entro il 13 agosto. Puoi confermare via e-mail agli indirizzi riportati qui sopra.*
+
+{% include video.html %}
+
+
+Buona Caccia da
+Luca Ricci, Elisa Azzoni, don Andrea Ferraroni
