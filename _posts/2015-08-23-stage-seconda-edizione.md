@@ -1,31 +1,41 @@
 ---
 layout: post
-title: Bit Prepared torna in campo a settembre!
-description: "Stage per capi Bit Prepared 12 e 13 settembre 2014"
-modified: 2015-08-21
+title: Bit Prepared torna in campo!
+description: "Stage per capi Bit Prepared 12 e 13 settembre 2015"
+modified: 2015-08-23
 author: yoghi
 category: articles
 tags: [bitprepared,stage,specializzazioni]
 image:
-  feature: 2015/stage-alle-porte/features.jpg
+  feature: 2015/stage-alle-porte/features.png
   credit: Bit Prepared
   creditlink: http://www.bitprepared.it
 comments: true
 share: true
-permalink: /articles/2015/stage-alle-porte/
+permalink: /articles/2015/stage-torna-in-campo/
 ---
 
-Eccoci, 
 
-anche quest'anno lo stage &egrave; alle porte. 
+	I'm late, I'm late!
+	For a very important date.
+	No time to say "Hello, Goodbye".
+	I'm late, I'm late, I'm late.
+{:lang="c"}	
 
-Il 12 e 13 settembre alla base di Costigiola, avrà luogo lo stage "Bit Prepared".
+
+Si esatto ecco qui uno stage pronti per ripartire con il nuovo anno scout.
+
+Social, smartphone e le nuove tecnologie che i vostri ragazzi usano (e anche voi) non avranno più segreti impareremo a conoscerli ed ad usarli come strumenti educativi.
+
+Allora che aspetti? il 12 e 13 settembre Bit Prepared ti aspetta a costigiola :) 
+
+### Vuo saperne di più?
 
 Cosa è cambiato nello scoutismo in questa era digitale? 
 
 Cosa sono queste nuove parole: social network, smartphone, tablet, internet, blog, youtube?
 
-sono tutti termini sempre più presenti nella vita dei nostri ragazzi e a volte anche nelle nostre attività!
+*sono tutti termini sempre più presenti nella vita dei nostri ragazzi e a volte anche nelle nostre attività!* 
 
 Come è cambiato il modo di fare scoutismo, grazie a tutto questo?
 
@@ -47,21 +57,13 @@ Se tutto quello scritto prima ti pare aramaico, e i tuoi ragazzi ti prendono in 
 
 vieni ti aiuteremo a trovare in queste cose dei validi alleati per la tua sfida educativa, mantenendo però lo stile che ci contraddistingue!
 
-Come Benedetto XVI ha detto : 
+### Come faccio a parteciapre? 
 
-> "Le nuove tecnologie digitali stanno determinando cambiamenti fondamentali nei modelli di comunicazione e nei rapporti umani": cambiamenti che "sono particolarmente evidenti tra i giovani", i quali si sentono "a loro agio in un mondo digitale che spesso sembra invece estraneo a quanti di noi, adulti, hanno dovuto imparare a capire ed apprezzare le opportunità che esso offre per la comunicazione".
+[ISCRIVETEVI](http://buonacaccia.net/event.aspx?e=2936)
 
-Presto nuove notizie, ma nel frattempo :  
-
-
-[ISCRIVETEVI](https://eventi.agesci.org/eventi/servlet/Eventi?handlerID=View&methodID=view&siteID=CO-2014-34-A&xslID=RegistrationStart)
-
-
-e restate sintonizzati seguendo questo sito :)
+Il volantino in allegato contiene tanti indizi nascosti, leggilo con cura e poi passa a trovarci :) 
 
 Lo staff
-
-{% picture 2015/stage-alle-porte/volantino.jpg alt="volantino stage 2015" class="" %}
 
 <a href="{{ site.url }}/assets/files/lettera2015.pdf">Volantino PDF</a>
 
