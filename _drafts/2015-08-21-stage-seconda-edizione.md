@@ -1,25 +1,25 @@
 ---
 layout: post
-title: Bit Prepared va in scena!
-description: "Stage per capi Bit Prepared 13 e 14 settembre 2014"
-modified: 2014-08-21
+title: Bit Prepared torna in campo a settembre!
+description: "Stage per capi Bit Prepared 12 e 13 settembre 2014"
+modified: 2015-08-21
 author: yoghi
 category: articles
 tags: [bitprepared,stage,specializzazioni]
 image:
-  feature: 2014/stage-alle-porte/features.jpg
+  feature: 2015/stage-alle-porte/features.jpg
   credit: Bit Prepared
   creditlink: http://www.bitprepared.it
 comments: true
 share: true
-permalink: /articles/2014/stage-alle-porte/
+permalink: /articles/2015/stage-alle-porte/
 ---
 
 Eccoci, 
 
 anche quest'anno lo stage &egrave; alle porte. 
 
-Il 13 e 14 settembre alla base di Costigiola, avrà luogo lo stage "Bit Prepared".
+Il 12 e 13 settembre alla base di Costigiola, avrà luogo lo stage "Bit Prepared".
 
 Cosa è cambiato nello scoutismo in questa era digitale? 
 
@@ -61,6 +61,8 @@ e restate sintonizzati seguendo questo sito :)
 
 Lo staff
 
-{% picture 2014/stage-alle-porte/volantino.jpg alt="volantino stage 2014" class="" %}
+{% picture 2015/stage-alle-porte/volantino.jpg alt="volantino stage 2015" class="" %}
+
+<a href="{{ site.url }}/assets/files/lettera2015.pdf">Volantino PDF</a>
 
 
