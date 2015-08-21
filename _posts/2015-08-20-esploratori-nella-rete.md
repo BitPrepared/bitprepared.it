@@ -7,7 +7,7 @@ author: yoghi
 category: articles
 tags: [bitprepared,eg,competenza,specializzazioni]
 image:
-  feature: 2015/esploratori-nella-rete/features.jpg
+  feature: 2015/esploratori-nella-rete/features.png
   credit: Bit Prepared
   creditlink: http://www.bitprepared.it
 comments: true
