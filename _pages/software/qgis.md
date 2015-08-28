@@ -12,7 +12,7 @@ modified: 2015-08-28
 
 Per scaricare l'ultima versione di QGIS visitare il sito [qgis.org](http://qgis.org/en/site/forusers/download.html).
 
-qGis è disponibile per: 
+QGIS è disponibile per: 
 
 * Linux
 * Mac OS X
@@ -25,4 +25,4 @@ qGis è disponibile per:
 * Azimuth and Distance Plugin
 * OpenLayers Plugin 
 
-Entrambi i plugin si possono installare aprendo QGIS, cliccando su "Plugin", 
+Entrambi i plugin si possono installare aprendo QGIS, cliccando su "Plugin", "Gestisci e installa Plugin" e poi installare i plugin. 

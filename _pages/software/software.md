@@ -10,7 +10,9 @@ modified: 2015-08-28
   creditlink: http:// -->
 ---
 
-## Programmi utilizzati al campo di competenza "Esploratori della rete, BitPrepared"
+### Programmi utilizzati al campo di competenza 
+
+### "Esploratori della rete, BitPrepared!"
 
 [Libreoffice]({{ site.url }}{{ page.permalink }}libreoffice) 
 
@@ -25,4 +27,6 @@ modified: 2015-08-28
 [PRBM]({{ site.url }}{{ page.permalink }}prbm)
 
 [Flora]({{ site.url }}{{ page.permalink }}flora)
+
+[Vlc]({{ site.url }}{{ page.permalink }}vlc)
 

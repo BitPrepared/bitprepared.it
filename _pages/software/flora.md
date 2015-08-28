@@ -10,4 +10,4 @@ modified: 2015-08-28
   creditlink: http:// -->
 ---
 
-Puoi utilizzare Flora, per il riconoscimento di fiori tramite ricerca dicotomica, andando al link [http://bitprepared.it/flora/flora.php](http://bitprepared.it/flora/flora.php)  
+Puoi utilizzare Flora, per il riconoscimento di fiori tramite ricerca dicotomica, andando al link [www.bitprepared.it/flora/flora.php](http://www.bitprepared.it/flora/flora.php)  

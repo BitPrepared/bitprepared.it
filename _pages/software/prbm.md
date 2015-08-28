@@ -21,4 +21,4 @@ PRBM è disponibile per:
 Requisiti: [Java 1.7](http://www.oracle.com/technetwork/java/javase/downloads/java-se-jre-7-download-432155.html)
 
 ###PRBM - Mobile
-disponibile sul Play Store di Android [link](https://play.google.com/store/apps/details?id=it.bitprepared.prbm.mobile)
+disponibile sul Play Store di Android [(link)](https://play.google.com/store/apps/details?id=it.bitprepared.prbm.mobile) 
