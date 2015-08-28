@@ -64,6 +64,8 @@ links:
     url: /about/
   - title: Articles
     url: /articles/
+  - title: Programmi
+    url: /software/
   - title: Base Scout Costigiola
     url: http://costigiola.it
     external: true
