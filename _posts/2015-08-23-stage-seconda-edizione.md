@@ -65,6 +65,6 @@ Il volantino in allegato contiene tanti indizi nascosti, leggilo con cura e poi 
 
 Lo staff
 
-<a href="{{ site.url }}/assets/files/lettera2015.pdf">Volantino PDF</a>
+<a href="{{ site.url }}/assets/files/lettera_2015.pdf">Volantino PDF</a>
 
 
