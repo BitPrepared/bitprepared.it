@@ -4,15 +4,13 @@ permalink: /software/
 title: Programmi
 tags: [bitprepared, programmi]
 modified: 2015-08-28
-<!-- image:
-  feature: about/staff_low.jpg
+image:
+  feature: software/software.png
   credit: Bit Prepared
-  creditlink: http:// -->
+  creditlink: http://www.bitprepared.it
 ---
 
-### Programmi utilizzati al campo di competenza 
-
-### "Esploratori della rete, BitPrepared!"
+### Programmi Utili per una scout digitale "leale"
 
 [Libreoffice]({{ site.url }}{{ page.permalink }}libreoffice) 
 
