@@ -28,13 +28,13 @@
 
     <div id="main" role="main">
       <article class="entry">
-        <div class="entry-wrapper"> <!-- style="border: 1px solid red;" --> 
+        <div class="entry-wrapper"> <!-- style="border: 1px solid red;" -->
           <header class="entry-header">
             <span class="entry-tags">{% for tag in page.tags %}<a href="{{ site.url }}/tags/#{{ tag | cgi_encode }}" title="Pages tagged {{ tag }}">{{ tag }}</a>{% unless forloop.last %}&nbsp;&bull;&nbsp;{% endunless %}{% endfor %}</span>
-            
+
             {% if page.image.feature %}
 
-              
+
               <div class="entry-feature-image-wrapper">
                 {% if page.link %}
                   <h1 class="entry-title"><span><a href="{{ page.link }}">{% if page.headline %}{{ page.headline }}{% else %}{{ page.title }}{% endif %} <span class="link-arrow">&rarr;</span></a></span></h1>
@@ -48,9 +48,9 @@
                   <p class="image-credit">Photo Credit: <a href="{{ page.image.creditlink }}">{{ page.image.credit }}</a>
                 {% endif %}
               </div>
-              
 
-            {% else %}   
+
+            {% else %}
 
               {% if page.link %}
                 <h1 class="entry-title"><a href="{{ page.link }}">{% if page.headline %}{{ page.headline }}{% else %}{{ page.title }}{% endif %} <span class="link-arrow">&rarr;</span></a></h1>
@@ -59,12 +59,12 @@
               {% endif %}
 
             {% endif %}
-            
+
           </header>
           <div class="entry-content">
 
               {{ content }}
-            
+
           </div>
         </div>
         <div class="clearfix"/>
@@ -80,4 +80,3 @@
   </body>
 
 </html>
-
