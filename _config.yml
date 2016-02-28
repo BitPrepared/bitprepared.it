@@ -9,14 +9,14 @@ email:            info@bitprepared.it
 whitelist: []
 gems:      ['jekyll-lunr-js-search']
 
-# output 
+# output
 encoding:         "utf-8"
 
 # search
 lunr_search:
   stopwords: "stopwords.txt"
   #ignorato??
-  min_length: 3 
+  min_length: 3
 
 
 # Change url to your domain. Leave localhost server or blank when working locally.
@@ -29,6 +29,7 @@ owner:
   name: Bit Prepared
   twitter: bitprepared
   github: bitprepared
+  facebook: Bit-Prepared-1005896716166983
 
 # Authors information
 authors:
