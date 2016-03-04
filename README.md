@@ -5,9 +5,6 @@ Sito bitprepared con news ed articoli a gestione pubblica
 
 
 
-
-
-
 ### INSTALLAZIONE
  
 dalla radice del progetto lanciare: 
