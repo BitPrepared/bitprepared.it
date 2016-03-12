@@ -133,6 +133,11 @@ footer.container {
 .soc-facebook:before {
     content:'b';
 }
+
+.soc-github:before {
+    content:'Q';
+}
+
 .soc-rss:before {
     content:',';
 }
