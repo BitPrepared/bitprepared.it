@@ -1,9 +1,26 @@
+header figcaption, header figcaption h1, header figcaption h2 {
+	display:inline;
+}
+
 h4 small
 {
     display: block;
     font-size: 60%;
     color: #888;
 }
+
+header {
+	margin: 0 auto;
+	
+}
+
+.container, header, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
+    width: 1170px;
+}
+
+header img {
+	width: 13%;
+}	
 
 .mainContent, footer.container {
     max-width: 900px;
@@ -21,8 +38,4 @@ footer.container {
     }
 }
 @media (min-width: 980px) {
-    body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-        padding-bottom: 40px;
-    }
 }
