@@ -52,7 +52,7 @@
 	   <figure>
 		<img src="images/logo.jpg" alt="logo bitprepared" />
 		<figcaption>
-			<h1>BitPrepared<h1> - <h2>Digito ergo sum</h2>
+			<h1>{{site.title}}<h1> - <h2>{{site.subtitle}}</h2>
 		</figcaption>
 	   </figure> 
 		<div class="navbar navbar-inverse">
@@ -63,7 +63,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </a>
-                        <a class="brand" href="{{ site.url }}/">{{ site.title }}</a>
+                        <a class="brand" href="{{ site.url }}/">Home</a>
                         <div class="nav-collapse collapse">
                             <ul class="nav">
                                 <li><a href="{{ site.url }}/blog">Posts Archive</a></li>
@@ -83,13 +83,16 @@
                 </div>
                 <div class="span4 sidebar">
                     <div class="well">
-                        <h4>{{ site.title }}{% if site.subtitle %} <small>{{ site.subtitle }}</small>{% endif %}</h4>
+                        <!-- <h4>{{ site.title }}{% if site.subtitle %} <small>{{ site.subtitle }}</small>{% endif %}</h4> -->
+			<h4><a class="twitter-timeline"  href="https://twitter.com/BitPrepared" data-widget-id="703529989984153601">Tweets by @BitPrepared</a><h4>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          
                     </div>
                     <div class="well sidebar-nav">
                         <h4>Links</h4>
                         <ul class="nav">
-                            <li><a href="http://sculpin.io">sculpin.io</a></li>
-                            <li><a href="http://twitter.com/getsculpin">@getsculpin</a></li>
+                            <li><a href="https://twitter.com/BitPrepared">@BitPrepared on Twitter</a></li>
+                            <li><a href="https://www.facebook.com/Bit-Prepared-1005896716166983/?fref=nf">BitPrepared on Facebook</a></li>
                         </ul>
                     </div>
                 </div>
@@ -97,6 +100,11 @@
         </div>
         <footer class="container">
             &copy; {{ "now"|date("Y") }} {{ site.title }}
+	    <ul class="soc">
+		<li><a class="soc-twitter" href="https://twitter.com/BitPrepared"></a></li>
+		<li><a class="soc-facebook" href="https://www.facebook.com/Bit-Prepared-1005896716166983/?fref=nf"></a></li>
+		<li><a class="soc-rss soc-icon-last" href="#"></a></li>
+	    </ul>
         </footer>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
