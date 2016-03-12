@@ -4,14 +4,18 @@ header figcaption, header figcaption h1, header figcaption h2 {
 
 h4 small
 {
-    display: block;
+    /*display: block;*/
     font-size: 60%;
     color: #888;
 }
 
-header {
-	margin: 0 auto;
-	
+.siteheader {
+	top:0;
+	left:10%;
+	right:10%;
+	position:fixed;	
+	background-color:#fff;
+	opacity:0.9;
 }
 
 .navbar-inverse .brand {
@@ -31,8 +35,12 @@ header {
 	text-decoration: underline;
 }
 
-.container, header, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
-    width: 1170px;
+main {
+	margin-top:220px;
+}
+
+header figure {
+	margin: 0 auto;
 }
 
 header img {
@@ -112,7 +120,7 @@ footer.container {
     border-radius: 99px;
     margin-right: 10px;
     color: #fff;
-    background-color: #897979;
+    background-color: #333;
 }
 
 .soc-icon-last{

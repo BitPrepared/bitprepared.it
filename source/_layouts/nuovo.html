@@ -48,7 +48,7 @@
         {% endblock %}
     </head>
     <body>
-        <header>
+        <header class="siteheader">
 	   <figure>
 		<img src="images/logo.jpg" alt="logo bitprepared" />
 		<figcaption>
@@ -76,7 +76,8 @@
                 </div>
             </div>
         </header>
-        <div class="mainContent container">
+       <main>
+	 <div class="mainContent container">
             <div class="row-fluid">
                 <div class="span8">
                     {% block content_wrapper %}{% block content %}{% endblock %}{% endblock %}
@@ -93,11 +94,14 @@
                         <ul class="nav">
                             <li><a href="https://twitter.com/BitPrepared">@BitPrepared on Twitter</a></li>
                             <li><a href="https://www.facebook.com/Bit-Prepared-1005896716166983/?fref=nf">BitPrepared on Facebook</a></li>
+                            <li><a href="costigiola.it">Base scout Costigiola</a></li>
+                            <li><a href="buonacaccia.net">Buona Caccia</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
+	</main>
         <footer class="container">
             &copy; {{ "now"|date("Y") }} {{ site.title }}
 	    <ul class="soc">
