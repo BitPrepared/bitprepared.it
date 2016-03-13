@@ -130,6 +130,7 @@ footer.container {
 .soc-twitter:before {
     content:'a';
 }
+
 .soc-facebook:before {
     content:'b';
 }
@@ -137,7 +138,6 @@ footer.container {
 .soc-github:before {
     content:'Q';
 }
-
 .soc-rss:before {
     content:',';
 }
