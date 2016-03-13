@@ -1,5 +1,11 @@
+@font-face {
+	font-family: Exo;
+	src: url('../fonts/Exo2-Regular.otf');
+}
+
 header figcaption, header figcaption h1, header figcaption h2 {
 	display:inline;
+	font-family:Exo;
 }
 
 h4 small
