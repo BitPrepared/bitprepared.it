@@ -127,6 +127,10 @@ main a {
 	color:blue;
 }
 
+main article h2 {
+	font-size:20px;
+}
+
 aside {
 	background-color:#F5F5F5;
 	float:right;
