@@ -1,0 +1,201 @@
+	/*==========  Mobile First Method  ==========*/
+ 
+	/* Custom, iPhone Retina */
+	@media only screen and (min-width : 320px){
+
+		body {
+			width:20em;
+		}
+
+		/* Logo e sua didascalia (figcaption) */	
+		header figure img {
+			width: 20em;
+		}
+
+		header figure figcaption {
+			width: 20em;
+			margin: 0 auto;
+		}
+		/* Fine logo e sua didascalia */	
+		
+		#menu li {
+			text-align:center;
+			padding-top: 0.7em;
+			padding-bottom: 0.7em;
+		}
+
+		#menu a {
+			font-size: 1.5em;
+		}
+
+		#menu li ul {
+			background-color: #848484;
+		}
+	}
+ 
+	/* Extra Small Devices, Phones */
+	@media only screen and (min-width : 480px){
+	
+		body {
+			width: 26em;
+		}
+
+		header figure {
+			width:26em;
+			margin:0 auto;
+		}
+
+		header figure figcaption {
+			width: 26em;
+		}	
+
+		nav {
+			width: 26em;
+			margin:0 auto;
+		}
+ 
+	}
+ 
+	/* Small Devices, Tablets */
+	@media only screen and (min-width : 768px){
+
+		body {
+			width:45em;
+		}
+
+		/* Logo e sua didascalia (figcaption) */	
+		header figure {
+			width:45em;
+		}
+ 
+		header figure img {
+        		width: 10em;
+		}	
+
+		header figcaption {
+        		display:inline;
+		}
+		/* Fine logo e sua didascalia */	
+ 
+		nav {
+			width:45em;
+		}
+
+	}
+ 
+	/* Medium Devices, Desktops */
+	@media only screen and (min-width : 992px){
+
+
+		/* Logo e sua didascalia (figcaption) */	
+		header figure {
+			width:50em;
+			margin:0 auto;
+		}
+		/* Fine logo e sua didascalia */	
+ 
+
+		body {
+			width:50em;
+			margin: 0 auto;
+		}
+
+		nav {
+			width:50em;
+			position:fixed;
+		}
+		
+		#menu, #menu ul {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+
+		#menu li { 
+			padding: 0.8em;
+			float: left;
+			background-color: #2F2F2F; /* border-right: 1px solid #222; */
+			position: relative;                                                                                                                                                                                                                     
+		}
+
+		#menu a {
+			color: #FFFFFF;
+			font-size: 1em;
+			font-family: Droid Sans;
+			text-decoration: none;
+		}
+	
+	
+		#menu ul {
+			width: auto;
+			position: absolute;
+			top: 2.6em;
+			z-index: 1; 
+			opacity: 0;
+			visibility: hidden;
+		}
+
+		#menu ul a {
+			display: block;
+			white-space: nowrap;
+			float: none;
+			text-transform: none;
+		}
+		
+		#menu li ul {
+			background-color: #2F2F2F;
+		}
+
+		#menu li:hover > ul {
+			    opacity: 1; visibility: visible; margin: 0;
+		}
+	}
+ 
+	/* Large Devices, Wide Screens */
+	@media only screen and (min-width : 1200px){
+ 
+		body {
+        		width:72em;
+		}
+	
+		/* Logo e sua didascalia (figcaption) */	
+		header figure {
+			width:72em;
+			margin:0 auto;
+		}
+		/* Fine logo e sua didascalia */	
+
+		nav {
+			width:72em;
+		}
+	}
+ 
+ 
+ 
+	/*==========  Non-Mobile First Method  ==========*/
+ 
+	/* Large Devices, Wide Screens */
+	@media only screen and (max-width : 1200px){
+ 
+	}
+ 
+	/* Medium Devices, Desktops */
+	@media only screen and (max-width : 992px){
+ 
+	}
+ 
+	/* Small Devices, Tablets */
+	@media only screen and (max-width : 768px){
+	
+ 
+	}
+ 
+	/* Extra Small Devices, Phones */
+	@media only screen and (max-width : 480px){
+
+	}
+ 
+	/* Custom, iPhone Retina */
+	@media only screen and (max-width : 320px){
+ 
+	}
