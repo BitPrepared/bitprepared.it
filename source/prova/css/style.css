@@ -77,27 +77,20 @@ nav {
 	background-color:#2F2F2F;
 }
 
-main section {
-	background-color:grey;
-}
-
-main, aside {
-	margin-top:60px;
-}
-
-main {
-	width:65%;
-	margin-right:5%;
-}
-
 main a {
 	color:blue;
 }
 
+main section h1 {
+	font-size: 1.5em;
+}
+
+main section h2 {
+	font-size: 1.3em;
+}
+
 aside {
 	background-color:#F5F5F5;
-	float:right;
-	width:30%;
 }
 
 aside li {
@@ -105,7 +98,7 @@ aside li {
 }
 
 aside #links {
-	padding-left:5%;
+	padding-left:1em;
 }
 
 footer {
@@ -114,7 +107,6 @@ footer {
 
 aside #twitter-box {
 	margin: 0 auto;
-	width:90%;
 }
 
 /* Stile per i loghi dei Social Network nel footer */ @font-face {

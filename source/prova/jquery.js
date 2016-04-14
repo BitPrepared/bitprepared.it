@@ -19,11 +19,12 @@ if ($(this).scrollTop() > 1){
 
 			$('.menu-icon').show(); 
 			$( ".menu-icon" ).unbind('click').click(function() {
-				$( "#menu" ).slideToggle("slow"slow"");
+				$( "#menu" ).slideToggle("slow");
 			});
 		}
 		else {
-		
-			$('.menu-icon').hide(); 
+					
+			$('.menu-icon').hide();
+		        $('#menu').show();	
 		}
 	});

@@ -157,6 +157,24 @@
 		#menu li:hover > ul {
 			    opacity: 1; visibility: visible; margin: 0;
 		}
+	
+		main section {
+			float:left;
+			width:30em;
+			margin-top:4em;
+			margin-right:2em;
+		}
+	
+		aside {
+			float:left;
+		        width:18em;
+			margin-top:4em;
+		}
+		
+		aside #twitter-box {
+			width: 18em;	
+		}
+		
 	}
  
 	/* Large Devices, Wide Screens */
@@ -175,6 +193,18 @@
 
 		nav {
 			width:72em;
+		}
+		
+		main section {
+			width:50em;
+		}
+	
+		aside {
+		        width:20em;
+		}
+
+		aside #twitter-box {
+			width: 20em;	
 		}
 	}
  
