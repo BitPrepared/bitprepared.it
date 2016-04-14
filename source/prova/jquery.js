@@ -13,4 +13,12 @@ if ($(this).scrollTop() > 1){
 	$(".hide_title").hide();
   }
 });
-	  
+
+	$( window ).resize(function() {
+		if ($(window).width() < 768) {
+			$('header').hide();
+		}
+		else {
+			$('header').show();
+		}
+	});
