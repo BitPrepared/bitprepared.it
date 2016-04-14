@@ -18,6 +18,10 @@
 		}
 		/* Fine logo e sua didascalia */	
 		
+		#menu {
+			display:none;
+		}
+		
 		#menu li {
 			text-align:center;
 			padding-top: 0.7em;
@@ -104,7 +108,11 @@
 			width:50em;
 			position:fixed;
 		}
-		
+	
+		#menu {
+			display:block;
+		}
+
 		#menu, #menu ul {
 			margin: 0;
 			padding: 0;

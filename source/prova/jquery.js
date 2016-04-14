@@ -15,10 +15,15 @@ if ($(this).scrollTop() > 1){
 });
 
 	$( window ).resize(function() {
-		if ($(window).width() < 768) {
-			$('header').hide();
+		if ($(window).width() < 992) {
+
+			$('.menu-icon').show(); 
+			$( ".menu-icon" ).unbind('click').click(function() {
+				$( "#menu" ).slideToggle("slow"slow"");
+			});
 		}
 		else {
-			$('header').show();
+		
+			$('.menu-icon').hide(); 
 		}
 	});

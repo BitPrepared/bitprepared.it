@@ -12,6 +12,32 @@ header figcaption h1, header figcaption h2, header figcaption h3{
 	font-family:Exo;
 }
 
+.menu-icon {
+	margin-top:1em;
+	margin-left:1em;
+	margin-bottom:1em;
+    
+    position:relative;
+    display:inline-block;
+    width:4em;
+    text-indent:-999em;
+}
+ 
+.border-icon {
+    height:1.4em;
+    border-top:0.5em solid #fff;
+    border-bottom:0.5em solid #fff;
+}
+ 
+.border-icon:before {
+    content:"";
+    position:absolute;
+    top:0.45em;
+    left:0;
+    width:4em;
+    border-top:0.5em solid #fff;
+}
+
 nav {
     background-color: #2F2F2F;
 }
