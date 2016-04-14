@@ -1,4 +1,4 @@
-	/*==========  Mobile First Method  ==========*/
+	/* Dimensioni utilizzate da Bootstrap */
  
 	/* Custom, iPhone Retina */
 	@media only screen and (min-width : 320px){
@@ -8,6 +8,11 @@
 		}
 
 		/* Logo e sua didascalia (figcaption) */	
+		header figure {
+			width:20em;
+			margin:0 auto;
+		}
+
 		header figure img {
 			width: 20em;
 		}
@@ -46,7 +51,6 @@
 
 		header figure {
 			width:26em;
-			margin:0 auto;
 		}
 
 		header figure figcaption {
@@ -209,31 +213,42 @@
 	}
  
  
- 
-	/*==========  Non-Mobile First Method  ==========*/
- 
-	/* Large Devices, Wide Screens */
-	@media only screen and (max-width : 1200px){
- 
-	}
- 
-	/* Medium Devices, Desktops */
-	@media only screen and (max-width : 992px){
- 
-	}
- 
-	/* Small Devices, Tablets */
-	@media only screen and (max-width : 768px){
-	
- 
-	}
- 
-	/* Extra Small Devices, Phones */
-	@media only screen and (max-width : 480px){
-
-	}
- 
-	/* Custom, iPhone Retina */
 	@media only screen and (max-width : 320px){
  
+		body {
+			width:10em;
+		}
+
+		/* Logo e sua didascalia (figcaption) */	
+		header figure {
+			width:10em;
+			margin:0 auto;
+		}
+
+		header figure img {
+			width: 10em;
+		}
+
+		header figure figcaption {
+			width: 10em;
+			margin: 0 auto;
+		}
+		
+		#menu {
+			display:none;
+		}
+		
+		#menu li {
+			text-align:center;
+			padding-top: 0.7em;
+			padding-bottom: 0.7em;
+		}
+
+		#menu a {
+			font-size: 1.5em;
+		}
+
+		#menu li ul {
+			background-color: #848484;
+		}
 	}

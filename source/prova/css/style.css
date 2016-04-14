@@ -1,3 +1,5 @@
+
+/** Definisco il font Exo utilizzato nell'header */
 @font-face {
 	font-family: Exo;
 	src: url('../fonts/Exo2-Regular.otf');
@@ -8,58 +10,48 @@ body {
 }
 
 header figcaption h1, header figcaption h2, header figcaption h3{
-	display:inline;
+	display:inline;		/* Bitprepared e Digito ergo sum su una linea inveche che su due linee diverse */
 	font-family:Exo;
 }
-
+/* L'icona del menu su mobile (width < 768px) è realizzata tramite un box (.menu-icon) i cui bordi superiore
+ * e inferiore sono bianchi.
+ * .border-icon invece rappresenta la linea centrale dell'icona
+ */
 .menu-icon {
+ 	width:4em;
 	margin-top:1em;
 	margin-left:1em;
 	margin-bottom:1em;
-    
-    position:relative;
-    display:inline-block;
-    width:4em;
-    text-indent:-999em;
+	position:relative;
+	display:inline-block;
+	text-indent:-999em;
 }
  
 .border-icon {
-    height:1.4em;
-    border-top:0.5em solid #fff;
-    border-bottom:0.5em solid #fff;
+	height:1.4em;
+	border-top:0.5em solid #fff;
+	border-bottom:0.5em solid #fff;
 }
  
 .border-icon:before {
-    content:"";
-    position:absolute;
-    top:0.45em;
-    left:0;
-    width:4em;
-    border-top:0.5em solid #fff;
+	content:"";
+	position:absolute;
+ 	top:0.45em;
+ 	left:0;
+	width:4em;
+	border-top:0.5em solid #fff;
 }
 
 nav {
-    background-color: #2F2F2F;
+	background-color: #2F2F2F;
 }
 
-#menu, #menu ul {
-	list-style-type: none;
-	list-style-position: inside;
-}
-
+/* Attenzione, #menu = nav ul (primo ul) */
 #menu, #menu li ul {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
-	background-color: #2F2F2F; /*background-image: linear-gradient(#444, #111); */
-}
-
-#menu:before, #menu:after {
-    content: ""; display: table;
-}
-
-#menu:after {
-    clear: both;
+	background-color: #2F2F2F; 
 }
 
 #menu li a {
@@ -71,10 +63,6 @@ nav {
 #menu li:hover > a {
 	text-decoration:underline;
 	font-family: Droid Sans;
-}
-
-#menu ul a:hover {
-	background-color:#2F2F2F;
 }
 
 main a {
@@ -109,40 +97,65 @@ aside #twitter-box {
 	margin: 0 auto;
 }
 
-/* Stile per i loghi dei Social Network nel footer */ @font-face {
-    font-family: 'si'; src: url('../fonts/socicon.eot'); src:
-    url('../fonts/socicon.eot?#iefix') format('embedded-opentype'),
-	 url('../fonts/socicon.woff') format('woff'),
-	 url('../fonts/socicon.ttf') format('truetype'),
-	 url('../fonts/socicon.svg#icomoonregular') format('svg');
-    font-weight: normal; font-style: normal;
-
+/* Stile per i loghi dei Social Network nell'aside e nel footer */
+@font-face {
+	font-family: 'si';
+	src: url('../fonts/socicon.eot');
+	src: url('../fonts/socicon.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/socicon.woff') format('woff'),
+		url('../fonts/socicon.ttf') format('truetype'),
+		url('../fonts/socicon.svg#icomoonregular') format('svg');
+    	font-weight: normal;
+	font-style: normal;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     @font-face {
-	font-family:si; src: url(../fonts/socicon.svg) format(svg);
+	font-family:si;
+	src: url(../fonts/socicon.svg) format(svg);
     }
 }
 
 .soc {
-    overflow:hidden; margin:0; padding:0; list-style:none;
+    overflow:hidden;
+    margin:0;
+    padding:0;
+    list-style:none;
 }
 
 .soc li {
-    display:inline-block; *display:inline; zoom:1;
+	display:inline-block;
+	*display:inline;
+	zoom:1;
 }
 
 .soc li a {
-    font-family:si!important; font-style:normal; font-weight:400;
-    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-    -webkit-box-sizing:border-box; -moz-box-sizing:border-box;
-    -ms-box-sizing:border-box; -o-box-sizing:border-box;
-    box-sizing:border-box; overflow:hidden; text-decoration:none;
-    text-align:center; display:block; /* position: relative; */ z-index:
-    1; width: 40px; height: 40px; line-height: 40px; font-size: 22px;
-    -webkit-border-radius: 99px; -moz-border-radius: 99px; border-radius:
-    99px; margin-right: 10px; color: #fff; background-color: #333;
+    font-family:si!important;
+    font-style:normal;
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -ms-box-sizing:border-box;
+    -o-box-sizing:border-box;
+    box-sizing:border-box;
+    overflow:hidden;
+    text-decoration:none;
+    text-align:center;
+    display:block;
+    /* position: relative; */
+    z-index: 1;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 22px;
+    -webkit-border-radius: 99px;
+    -moz-border-radius: 99px;
+    border-radius: 99px;
+    margin-right: 10px;
+    color: #fff;
+    background-color: #333;
 }
 
 .soc-icon-last{
@@ -161,4 +174,6 @@ aside #twitter-box {
     content:'Q';
 } .soc-rss:before {
     content:',';
-} /* Fine stile per i loghi dei SN */
+}
+
+/* Fine stile per i loghi dei SN */
