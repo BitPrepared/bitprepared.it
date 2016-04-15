@@ -6,6 +6,7 @@
 }
 
 body {
+	font-family: Exo;
 	margin: 0 auto; 
 }
 
@@ -56,18 +57,20 @@ nav {
 
 #menu li a {
 	color: #FFFFFF;
-	font-family: Droid Sans;
 	text-decoration: none;
 }
 
 #menu li:hover > a {
 	text-decoration:underline;
-	font-family: Droid Sans;
 }
 
 main a {
-	color:blue;
+	color: #6495FF;
 	text-decoration:none;
+}
+
+main section p {
+	font-family: Arial;
 }
 
 main section h1 {

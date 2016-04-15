@@ -14,7 +14,7 @@
 		}
 
 		header figure img {
-			width: 20em;
+			width: 10em;
 		}
 
 		header figure figcaption {
@@ -77,7 +77,7 @@
 		}
  
 		header figure img {
-        		width: 10em;
+        		width: 8em;
 		}	
 
 		header figcaption {
@@ -133,7 +133,6 @@
 		#menu a {
 			color: #FFFFFF;
 			font-size: 1em;
-			font-family: Droid Sans;
 			text-decoration: none;
 		}
 	
