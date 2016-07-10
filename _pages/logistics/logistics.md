@@ -30,7 +30,7 @@ La nostra avventura terminerà {{ site.campo.fine.giorno }} per le ore {{ site.c
 </p>
 <h3>Note importanti</h3>
 <p>
-	La quota di partecipazione al campo è di 45,00 € da versare all’arrivo (oltre ai 15,00 € che hai già versato in precedenza). È necessario che tu abbia con te al campo la cartella medica rilasciata dal tuo Ufficio di Igiene o simile, con specificate le vaccinazioni fatte, in particolare l’antitetanica; dovrai avere inoltre il tuo tesserino sanitario o una sua fotocopia. Per ogni problema relativo al campo potrai telefonare ai capi campo.
+	La quota di partecipazione al campo è di 50,00 € da versare all’arrivo (oltre ai 15,00 € che hai già versato in precedenza). È necessario che tu abbia con te al campo la cartella medica rilasciata dal tuo Ufficio di Igiene o simile, con specificate le vaccinazioni fatte, in particolare l’antitetanica; dovrai avere inoltre il tuo tesserino sanitario o una sua fotocopia. Per ogni problema relativo al campo potrai telefonare ai capi campo.
 </p>
 <p>
 	Al campo è vietato l’uso del cellulare. Vi sarà chiesto di consegnarlo ai capi e vi sarà restituito alla fine del campo. Per eventuali telefonate si potrà usufruire del telefono della base.
