@@ -2,7 +2,7 @@
 layout: post
 title: Welcome to the Real World
 description: "Lettera di benvenuto"
-modified: 2015-06-28
+modified: 2016-06-28
 author: yoghi
 category: articles
 tags: []
@@ -14,12 +14,12 @@ comments: false
 share: true
 ---
 
-## Esploratori nella rete XXX° edizione
+## Esploratori nella rete XXXI° edizione
 
-Il ritrovo sarà martedì 25 agosto 2015 per le ore 10.30 all’esterno della stazione ferroviaria di Vicenza.
+Il ritrovo sarà martedì 23 agosto 2015 per le ore 10.30 all’esterno della stazione ferroviaria di Vicenza.
 Si raccomanda la massima puntualità in quanto dovremo prendere dei mezzi pubblici.
 Per chi avesse problemi di trasporto nel giorno di inizio campo ci può contattare alle email o numeri sotto elencati.
-La nostra avventura terminerà alle 14.30 di Sabato 29 agosto 2015 a Costigiola, dovremmo essere in stazione per le 15.00.
+La nostra avventura terminerà alle 14.30 di Sabato 27 agosto 2016 a Costigiola, dovremmo essere in stazione per le 15.00.
 Il campo si svolgerà presso la Base Scout Ugo Ferrarese. L’indirizzo è “Via Baden-Powell”, comune di Monteviale (località Costigiola).
 *ATTENZIONE*: Il nome della via è cambiato il 25 giugno 2009, era “Via Frà Mioli”, ovviamente sempre comune di Monteviale.
 
@@ -32,4 +32,4 @@ Il campo si svolgerà presso la Base Scout Ugo Ferrarese. L’indirizzo è “
 
 
 Buona Caccia da
-Luca Ricci, Elisa Azzoni, don Andrea Ferraroni
+Stefano Braggion, Elisa Azzoni, don Andrea Ferraroni

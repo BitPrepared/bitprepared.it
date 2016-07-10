@@ -20,16 +20,16 @@ lunr_search:
 
 
 campo:
-  anno: 2015
+  anno: 2016
   mese: agosto
-  dal: 25
-  al: 29 
+  dal: 23
+  al: 27 
   ritrovo:
-    giorno: 25 agosto 2015
+    giorno: 23 agosto 2015
     ore: "10:30"
     luogo: all’esterno della stazione ferroviaria di Vicenza (l’indirizzo è piazzale della stazione, Vicenza)
   fine:
-    giorno: 29 agosto 2015
+    giorno: 27 agosto 2015
     ore: "14:30"
     luogo: Base scout "Ugo Ferrarese" - Costigiola (chi ha bisogno verrà accompagnato in stazione)
   live: http://live.bitprepared.it  
