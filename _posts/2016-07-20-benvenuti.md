@@ -26,8 +26,8 @@ Il campo si svolgerà presso la Base Scout Ugo Ferrarese. L’indirizzo è “
 
 ## Importantissimo
 
-*È obbligatoria una tua conferma di partecipazione entro il 13 agosto. Puoi confermare via e-mai <a href="mailto:ccf@bitprepared.it" title="CCF"><i class="icon-envelope"></i>alla capo campo</a> o <a href="mailto:ccm@bitprepared.it" title="CCM"><i class="icon-envelope"></i>al capo campo</a>.
-Inoltre accedi all'<a href="/anagrafica">anagrafica</a> e completala!*
+*È obbligatoria una tua conferma di partecipazione entro il 13 agosto*. Puoi confermare via e-mai <a href="mailto:ccf@bitprepared.it" title="CCF"><i class="icon-envelope"></i>alla capo campo</a> o <a href="mailto:ccm@bitprepared.it" title="CCM"><i class="icon-envelope"></i>al capo campo</a>.
+Inoltre accedi all'<a href="/anagrafica">anagrafica</a> e completala!
 
 
 {% include video.html %}
