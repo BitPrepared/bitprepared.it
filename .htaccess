@@ -1,0 +1,7 @@
+Options +FollowSymLinks +ExecCGI
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_FILENAME}.html -f
+</IfModule>
