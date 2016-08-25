@@ -13,9 +13,9 @@ modified: 2015-08-28
 ### PRBMM (Mobile)
 disponibile sul Play Store di Android [(link)](https://play.google.com/store/apps/details?id=it.bitprepared.prbm.mobile) 
 
-Per scaricare la versione di PRBM utilizzata *fino* al campo 2015 decomprimere il file zip scaricabile al seguente link -> [scarica](https://github.com/BitPrepared/prbm/releases/download/release-0.6.11/prbm-0.6.11.zip).
-
 ### PRBM  (Desktop)
+
+Per scaricare la versione di PRBM utilizzata *fino* al campo 2015 decomprimere il file zip scaricabile al seguente link -> [scarica](https://github.com/BitPrepared/prbm/releases/download/release-0.6.11/prbm-0.6.11.zip).
 
 PRBM è disponibile per: 
  
