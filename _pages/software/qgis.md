@@ -20,7 +20,7 @@ QGIS è disponibile per:
 * BSD
 * Android (a breve)
 
-###Plugin utili: 
+### Plugin utili: 
 
 * Azimuth and Distance Plugin
 * OpenLayers Plugin 
