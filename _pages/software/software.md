@@ -32,7 +32,7 @@ image:
 
 * Gioco ambientato in Matrix (o anche Monkey Island) per sperimentare l'uso della riga di comando su Linux.
 
-![PRBM]({{ site.url }}/images/software/prbm.png) [PRBM]({{ site.url }}{{ page.permalink }}prbm)
+![PRBM]({{ site.url }}/images/software/prbmm.png) [PRBM]({{ site.url }}{{ page.permalink }}prbm)
 
 * Programma per realizzare un Percorso Rettificato Belga Multimediale. Dopo aver riportato i dati presi sul campo in missione può essere utile rivedere il percorso che si è fatto su un "sito" corredato di immagini, descrizioni, foto ecc...
 
