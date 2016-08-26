@@ -49,7 +49,7 @@ image:
 
 * Programma per riprodurre video
 
-[AppLab](https://code.org/educate/applab)
+[AppLab](https://code.org/educate/applab) 
 ![Code.org]({{ site.url }}/images/software/code.png)[Code.org]({{ site.url }}{{ page.permalink }}code) 
 
 * Siti utilizzati durante il workshop "App"
