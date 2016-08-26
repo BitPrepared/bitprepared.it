@@ -24,10 +24,14 @@ image:
 
 * Programma per la grafica e il fotoritocco.
 
-![QGIS]({{ site.url }}/images/software/qgis.png) [QGIS]({{ site.url }}{{ page.permalink }}qgis)
-![OSMTracker]({{ site.url }}/images/software/osmtracker.png) [OSMTracker](https://play.google.com/store/apps/details?id=me.guillaumin.android.osmtracker&hl=it)
+![QGIS]({{ site.url }}/images/software/qgis.png) [QGIS]({{ site.url }}{{ page.permalink }}qgis) 
 
 * Programma per la gestione, visualizzazione, modifica, analisi di dati geografici. Utile per disegnare una cartina del campo dopo il sopraluogo.
+
+
+![OSMTracker]({{ site.url }}/images/software/osmtracker.png) [OSMTracker](https://play.google.com/store/apps/details?id=me.guillaumin.android.osmtracker&hl=it)
+
+* Programma per il rilevamento dati geografici
 
 ![Mayalinux]({{ site.url }}/images/software/mayalinux.png) [Mayalinux]({{ site.url }}{{ page.permalink }}mayalinux)
 
