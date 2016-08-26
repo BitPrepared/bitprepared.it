@@ -44,3 +44,8 @@ image:
 
 * Programma per riprodurre video
 
+* Siti utilizzati durante il workshop "App"
+  * [AppLab](https://code.org/educate/applab)
+  * ![Code.org]({{ site.url }}/images/software/code.png)[Code.org]({{ site.url }}{{ page.permalink }}code)
+
+
