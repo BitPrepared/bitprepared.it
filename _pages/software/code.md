@@ -10,8 +10,8 @@ modified: 2016-08-26
   creditlink: http:// -->
 ---
 
-https://code.org/ 
+[https://code.org/](https://code.org/)
 
-* https://studio.code.org/s/starwars/
-* https://studio.code.org/flappy/1
-* https://studio.code.org/s/artist
+* [https://studio.code.org/s/starwars/](https://studio.code.org/s/starwars/)
+* [https://studio.code.org/flappy/1](https://studio.code.org/s/starwars/)
+* [https://studio.code.org/s/artist](https://studio.code.org/s/artist)
