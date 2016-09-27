@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 permalink: /software/libreoffice/
 title: Libreoffice
 tags: [bitprepared, programmi, libreoffice]

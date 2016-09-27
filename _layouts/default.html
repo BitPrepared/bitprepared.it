@@ -1,46 +1,78 @@
-<!doctype html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
-<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js" lang="en">
-<!--<![endif]-->
-
-<!-- default template -->
-
+<!DOCTYPE HTML>
 <!--
-
-    Hey, Stai cercando di fare Reverse Engineering?
-    Perche' non ti unisci a noi ?
-
-    Cercarci su https://github.com/BitPrepared :)
+Linear by TEMPLATED
+templated.co @templatedco
+Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
+<html>
+<head>
+	<title>BitPrepared - digito ergo sum</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700,500,900' rel='stylesheet' type='text/css'>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="/assets/js/skel.min.js"></script>
+	<script src="/assets/js/skel-panels.min.js"></script>
+	<script src="/assets/js/init.js"></script>
+	<noscript>
+		<link rel="stylesheet" href="/assets/css/skel-noscript.css" />
+		<link rel="stylesheet" href="/assets/css/style.css" />
+		<link rel="stylesheet" href="/assets/css/style-desktop.css" />
+	</noscript>
+</head>
+<body>
 
-  <head>
-    {% include head.html %}
-  </head>
+	<!-- Header -->
+	<div id="header">
+		{% include nav.html %}
+		<div class="container">
 
-  <body id="page">
+			<!-- Logo -->
+			<div id="logo">
+				<h1><a href="#">BitPrepared</a></h1>
+				<span class="tag">digito ergo sum</span>
+			</div>
+		</div>
+	</div>
+	<!-- Header -->
+	{{ content }}
+	
+	<!-- Tweet -->
+	<div id="tweet">
+		<div class="container">
+			<section>
+				<blockquote>&ldquo;In posuere eleifend odio. Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque viverra vulputate enim. Aliquam erat volutpat.&rdquo;</blockquote>
+			</section>
+		</div>
+	</div>
 
-    <div class="navigation-wrapper">
-      {% include navigation.html %}
-    </div>
 
-    <div id="main" role="main">
-      {{ content }}
-    </div><!-- /#main -->
+<!-- Footer -->
+<div id="footer">
+	<div class="container">
+		<section>
+			<header>
+				<h2>Get in touch</h2>
+				<span class="byline">Integer sit amet pede vel arcu aliquet pretium</span>
+			</header>
+			<ul class="contact">
+				<li><a href="#" class="fa fa-twitter"><span>Twitter</span></a></li>
+				<li class="active"><a href="#" class="fa fa-facebook"><span>Facebook</span></a></li>
+				<li><a href="#" class="fa fa-dribbble"><span>Pinterest</span></a></li>
+				<li><a href="#" class="fa fa-tumblr"><span>Google+</span></a></li>
+			</ul>
+		</section>
+	</div>
+</div>
 
-    <div id="sidebar">
-      <article class="entry-content">
-        {% include tweet.html %}
-      </article>
-    </div>
+<!-- Copyright -->
+<div id="copyright">
+	<div class="container">
+		Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
+		Jekyll Template: <a href="http://cloudcannon.com">Cloud Cannon</a>
+	</div>
+</div>
 
-    <div class="footer-wrapper">
-      <footer>
-        {% include footer.html %}
-      </footer>
-    </div>
-  </body>
-
+</body>
 </html>

@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 permalink: /software/code/
 title: Code.org
 tags: [bitprepared, programmi, app, workshop]

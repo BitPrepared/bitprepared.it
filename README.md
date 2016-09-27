@@ -1,33 +1,30 @@
-Bitprepared.it
-==============
+# Linear-Jekyll-Theme
+Fork of Linear Jekyll Theme - more themes available @ http://jekyll.tips
 
-Sito bitprepared con news ed articoli a gestione pubblica
+# Requirements
 
+[Jekyll](https://jekyllrb.com/) 
 
+$ apt-get install ruby-dev bundler
+$ gem install jekyll bundler jekyll-paginate
 
-### INSTALLAZIONE
- 
-dalla radice del progetto lanciare: 
+# Utilizzo [jekyllrb.com](https://jekyllrb.com/docs/structure/)
 
-`bundle` 						(gem install bundler)
+| index.html --> contiene il codice e la struttura della index   
+| _includes  
+|----------- nav.html --> contiene il codice del menu  
+| _layout --> contiene la struttura dei tre tipi di pagine (post, page, default)  
+|----------- post.html --> contiene la struttura degli articoli del blog  
+|----------- page.html --> contiene la struttura delle pagine (es software ecc..)  
+|----------- default.html --> contiene la struttura standard per le pagine del sito  
+| _post --> contiene le pagine del blog (con nome yyyy-mm-dd-titolo.md)  
+| _page --> contiene le pagine del sito che non sono ne home page ne pagine del blog  
+| _site --> contiene il sito generato da jekyll  
 
+# Build
 
-per effetturare dei test 
+$ jekyll build
 
-`jekyll server -w`
+# Test in locale su 127.0.0.1:4000 (di default)
 
-
-
-### BUG WORKAROUND
-
-mini_magick non viene correttamente installato? allora : 
-
-`gem install mini_magick`
-
-
-
-### PLUGIN UTILIZZATI
-
- * https://github.com/robwierzbowski/jekyll-picture-tag
- * https://github.com/slashdotdash/jekyll-lunr-js-search
- 
+$ jekyll serve --watch

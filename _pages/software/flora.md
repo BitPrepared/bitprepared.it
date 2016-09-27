@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 permalink: /software/flora/
 title: Flora
 tags: [bitprepared, programmi, flora]

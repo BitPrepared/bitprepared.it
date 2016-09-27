@@ -1,122 +1,17 @@
-<!doctype html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
-<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js" lang="en">
-<!--<![endif]-->
-
-<!-- post template -->
-
-<!--
-
-    Hey, Stai cercando di fare Reverse Engineering?
-    Perche' non ti unisci a noi ?
-
-    Cercarci su https://github.com/BitPrepared :)
--->
-
-  <head>
-    {% include head.html %}
-  </head>
-
-  <body id="page">
-
-    <div class="navigation-wrapper">
-      {% include navigation.html %}
-    </div>
-
-    <div id="main" role="main">
-      <article class="entry">
-        <div class="entry-wrapper"> <!-- style="border: 1px solid red;" -->
-          <header class="entry-header">
-            <span class="entry-tags">{% for tag in page.tags %}<a href="{{ site.url }}/tags/#{{ tag | cgi_encode }}" title="Pages tagged {{ tag }}">{{ tag }}</a>{% unless forloop.last %}&nbsp;&bull;&nbsp;{% endunless %}{% endfor %}</span>
-            
-            {% if page.image.feature %}
-
-              
-              <div class="entry-feature-image-wrapper">
-                {% if page.link %}
-                  <h1 class="entry-title"><span><a href="{{ page.link }}">{% if page.headline %}{{ page.headline }}{% else %}{{ page.title }}{% endif %} <span class="link-arrow">&rarr;</span></a></span></h1>
-                {% else %}
-                <h1 class="entry-title"><span>{% if page.headline %}{{ page.headline }}{% else %}{{ page.title }}{% endif %}</span></h1>
-                {% endif %}
-                
-                {% picture {{ page.image.feature }} alt="{{ page.title }}" class="entry-feature-image" style="margin-top:0;" %}
-
-                {% if page.image.credit %}
-                  <p class="image-credit">Photo Credit: <a href="{{ page.image.creditlink }}">{{ page.image.credit }}</a>
-                {% endif %}
-              </div>
-              
-
-            {% else %}   
-
-              {% if page.link %}
-                <h1 class="entry-title"><a href="{{ page.link }}">{% if page.headline %}{{ page.headline }}{% else %}{{ page.title }}{% endif %} <span class="link-arrow">&rarr;</span></a></h1>
-              {% else %}
-                <h1 class="entry-title">{% if page.headline %}{{ page.headline }}{% else %}{{ page.title }}{% endif %}</h1>
-              {% endif %}
-
-            {% endif %}
-            
-          </header>
-
-          <aside class="entry-meta">
-              {% if author.avatar %}
-              <img src="{{ site.url }}/images/{{ author.avatar }}" alt="{{ author.name }} photo" class="author-photo">
-              {% endif %}
-              <span class="author vcard">By <span class="fn"><a href="{{ site.url }}/about/" title="About {{ author.name }}">{{ author.name }}</a></span></span>
-              <span class="entry-date date published"><time datetime="{{ page.date | date_to_xmlschema }}"><i class="icon-calendar-empty"></i> {{ page.date | date: "%B %d, %Y" }}</time></span>
-              {% if page.modified %}<span class="entry-date date modified"><time datetime="{{ page.modified }}"><i class="icon-pencil"></i> {{ page.modified | date: "%B %d, %Y" }}</time></span>{% endif %}
-              {% if site.disqus_shortname and page.comments %}<span class="entry-comments"><i class="icon-comment-alt"></i> <a href="#disqus_thread">Comment</a></span>{% endif %}
-              <span><a href="{{ site.url }}{{ page.url }}" rel="bookmark" title="{{ page.title }}"><i class="icon-link"></i> Permalink</a></span>
-              {% if page.share %}
-                <span class="social-share-facebook">
-                <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ page.url }}" title="Share on Facebook" itemprop="Facebook"><i class="icon-facebook-sign"></i> Like</a></span>
-                <span class="social-share-twitter">
-                <a href="https://twitter.com/intent/tweet?hashtags={{ page.categories | join: ',' }}&text={{ page.title }}&url={{ site.url }}{{ page.url }}&via={{author.twitter}}" title="Share on Twitter" itemprop="Twitter"><i class="icon-twitter-sign"></i> Tweet</a></span>
-                <span class="social-share-googleplus">
-                <a href="https://plus.google.com/share?url={{ site.url }}{{ page.url }}" title="Share on Google Plus" itemprop="GooglePlus"><i class="icon-google-plus-sign"></i> +1</a></span>
-                <!-- /.social-share -->
-              {% endif %}
-            </aside>
-
-          <div class="entry-content">
-
-              {{ content }}
-
-          </div>
-
-          <footer>
-            {% if site.disqus_shortname and page.comments %}<div id="disqus_thread"></div><!-- /#disqus_thread -->{% endif %}
-          </footer>
-
-        </div>
-        
-<!--
-
-GRAFICA DA SISTEMARE
-
-        <nav class="pagination" role="navigation">
-          {% if page.previous %}
-            <a href="{{ site.url }}{{ page.previous.url }}" class="btn" title="{{ page.previous.title }}">Previous article</a>
-          {% endif %}
-          {% if page.next %}
-            <a href="{{ site.url }}{{ page.next.url }}" class="btn" title="{{ page.next.title }}">Next article</a>
-          {% endif %}
-        </nav>
--->
-
-      </article>
-    </div><!-- /#main -->
-
-    <div class="footer-wrapper">
-      <footer>
-        {% include footer.html %}
-      </footer>
-    </div>
-  </body>
-
-</html>
-
+---
+layout: default
+---
+<!-- Main -->
+	<div id="main">
+		<div id="content" class="container">
+			<div class="row">
+				<section class="8u -2u">
+					<a href="{{ site.prefix }}{{ page.url }}" class="image full"><img src="/assets/{{ page.featured }}" alt=""></a>
+					<header>
+						<h2>{{ page.title }}</h2>
+					</header>
+					{{ page.content }}
+				</section>
+			</div>
+		</div>
+	</div>

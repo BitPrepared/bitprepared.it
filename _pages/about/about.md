@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: post
 permalink: /about/
 title: About Bit Prepared Staff
 tags: [bitprepared, staff]
