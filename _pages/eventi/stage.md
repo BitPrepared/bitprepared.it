@@ -4,7 +4,7 @@ published: true
 layout: page
 description: Stage per capi 2016
 modified: 2016-09-24
-author: zuccamarghe
+author: bitprepared
 category: articles
 tags:
   - bitprepared
@@ -13,18 +13,18 @@ tags:
 featured: images/pages/stage.jpg
 permalink: /eventi/stage/
 ---
-Il 24 e il 25 Settembre nella splendida cornice della [base di Costigiona](costigiola.it) uno stage per capi sul tema delle tecnologie digitali applicate allo scautismo.
+Nella splendida cornice della [base di Costigiona](costigiola.it), da tre anni si tiene uno stage per capi sul tema delle tecnologie digitali applicate allo scautismo e sulla comunicazione 2.0. Il tema è sicuramente scottante all'interno della nostra associazione: come coniugare le nuove tecnologie con lo scautismo? Cosa attirra così tanto i ragazzi in questi mondi virtuali che ci sembrano così lontani? Cosa cambia nei rapporti personali? Tanti interrogativi e spunti che ci portano però al nocciolo della questione ben individuata dall'[articolo di PE](http://pe.agesci.it/digitale-uno-strumento-un-ambiente/) del mese scorso: come essere i loro fratelli maggiori in un mondo che noi neanche conosciamo bene?
 
-Il tema è sicuramente uno di quelli caldi all'interno della nostra associazione: come coniugare le nuove tecnologie con lo scautismo? Cosa attirra così tanto i nostri ragazzi in questi mondi virtuali che ci sembrano così lontani? Tanti interrogativi e spunti che ci portano però al nocciolo della problematica ben individuata dall'[articolo di PE](http://pe.agesci.it/digitale-uno-strumento-un-ambiente/) del mese scorso: come possiamo essere i loro fratelli maggiori in un mondo che noi neanche conosciamo bene?
+In questi tre anni in cui lo stage si è tenuto, abbiamo mostrato l'uso creativo della tecnologia nello scautismo, attraverso programmi ed applicazioni da utilizzare durante le attività, per specialità e brevetti e ... poerché no?.... anche per organizzare campi, route o hike. Ci siamo confrontati cercando insieme una strada in questi strani mondi digitali che i nostri ragazzi abitano con una naturalezza, mentre per noi sono sconosciuti e a volte ... siamo onesti... ci fanno anche un po'paura e tendiamo a demonizzarli.
 
-Nei tre anni in cui lo stage si è tenuto abbiamo portato avanti un uso creativo della tecnologia attraverso programmi ed applicazioni che si possono usare durante le attività. Ci siamo sempre confrontati cercando insieme una strada in questi strani mondi digitali che i nostri ragazzi abitano con una naturalezza a noi sconosciuta.
+La pattugli Bit Prepared con lo stage porta avanti una ricerca condivisa del significato di essere scout nell'era del Web 2.0. Esistono hardware che ci permettono di essere essenziali, laboriosi ed economi; cosi come esiste un modo di usare software e hardware in modo etico. Anche la nostra legge scout può essere riletta in chiave 2.0! 
 
-Lo stage porta avanti una ricerca condivisa di cosa voglia dire essere scout nell'era del Web 2.0 e dei suoi strumenti e delle sue applicazioni. La legge e il nostro rapporto con software liberi e proprietari, ma anche con i formati dei nostri documenti che allo stesso modo possono essere liberi o di proprietà di terzi. Abbiamo portata ad esempio diversi tipi di hardware che ci permettono di essere essenziali, laboriosi ed economi e al tempo stesso contrastare il digital divede all'interno dei nostri gruppi ed unità.
+Cosa ci fanno i ragazzi con quegli schermi onnipresenti? Cerchiamo una risposta nel più classico dei racconti giungla: [La caccia di Kaa](https://100giungla.wordpress.com/tag/la-caccia-di-kaa/); nel racconto ad attrarre Mowgli è la possibilità di vivere senza regole, sarà poi Kaa a ricondurlo nella strada più opportuna. A noi capi quindi spetta il compito di educare ad una libertà che nasce dalla condivisione delle conoscenze, facendo loro notare i rischi di un uso senza regole e senza etica.
 
-Di fronte al dubbio cruciale che ci attanaglia tutti noi capi scout: ma cosa ci fanno i ragazzi con quegli schermi omnipresenti? Abbiamo cercato una risposta nel più classico dei racconti giungla: [La caccia di Kaa](https://100giungla.wordpress.com/tag/la-caccia-di-kaa/). Nel racconto ad attrarre Mowgli è la possibilità di esprimersi senza regole mentre agli adulti spetta il compito di evitargli i rischi maggiori e proporgli una vita sì fatta di regole, ma anche di una libertà diversa che nasce dalla loro condivisione.
+Dobbiamo essere testimoni di cosa significa essere un cittadino attivo, essere al servizio degli altri e testimoni di fede all'interno di questo digitale/reale che i nostri ragazzi abitano consciamente o inconsciamente. 
 
-Tutti i temi che più ci interessano erano quindi lì ed è anche colpa nostra il non averli saputi valorizzare prima, promuovere la conoscenza dello stage e metterlo in un momento di minor carico per tutti noi capi.
+Per capi impegnati come noi, sarà certo uno sforzo in più partecipare da un ennesimo momento formativo, ma la responsabilità di tenersi al passo cone le esigenze educative è una sfida che ci viene proposta e come capi non possiamo ignorarla.
 
-Vi aspettiamo perciò numerosi l'anno prossimo certi che i temi non smetteranno di essere caldi e attendendovi proprio per quella formazione continua così importante per il nostro servizio.
+Vi aspettiamo perciò numerosi, certi che i temi non smetteranno di essere caldi e attendendovi proprio per quella formazione continua così importante per il nostro servizio.
 
 Be ready Bit Prepared
