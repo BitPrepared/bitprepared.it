@@ -1,6 +1,11 @@
-name: Linear
-description: Linear template for Jekyll
+title: Bit Prepared
+description: Digito ergo sum, per un uso consapevole del digitale
 paginate: 10
+
+email: info@bitprepared.it
+
+# output
+encoding: "utf-8"
 
 gems: [jekyll-paginate]
 
