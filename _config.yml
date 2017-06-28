@@ -7,7 +7,8 @@ email:            capicampo@bitprepared.it
 
 # Plugins
 whitelist: []
-gems:      ['jekyll-lunr-js-search']
+#gems:      ['jekyll-lunr-js-search']
+gems:      []
 
 # output 
 encoding:         "utf-8"
