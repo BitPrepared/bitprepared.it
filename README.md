@@ -27,6 +27,15 @@ mini_magick non viene correttamente installato? allora :
 
 `gem install mini_magick`
 
+### DOCKER
+
+`docker run --rm --volume=$PWD:/srv/jekyll -it jekyll/builder:3.5.0 /bin/bash`
+
+poi 
+
+`apk update`
+`apk add imagemagick`
+`jekyll build`
 
 
 ### PLUGIN UTILIZZATI
