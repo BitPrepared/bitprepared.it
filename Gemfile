@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'jekyll'
+gem 'jekyll', '3.3.0'
 gem 'kramdown'
 gem 'coderay'
 gem 'rake'
@@ -11,5 +11,4 @@ gem 'font-awesome-sass'
 gem 'sass'
 gem 'jekyll-sass-converter'
 gem 'mini_magick'
-gem 'jekyll-lunr-js-search'
 gem 'fastimage'
