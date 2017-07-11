@@ -24,13 +24,13 @@ tags: [agesci,bitprepared,scout,informatica,specializzazioni,eg]
 			<p>Benvenuto giovane Padawan!</p>
 			<p>Di tanto in tanto qui appariranno messaggi per te, e te soltanto. Torna a vedere cosa ti dice Luke!</p>
 			<p>
-			<p> Sei finalmente arrivato sul sito di supporto al Campo di Competenza in &quot;{{site.title}} - {{site.description}}&quot; per Esploratori e Guide dell'AGESCI, che si terr&agrave; dal <b>{{ site.campo.dal }} al {{ site.campo.al }} {{ site.campo.mese }} {{ site.campo.anno }}</b>. </p> 
-			<p>Qui potrai trovare informazioni utili per <a href="{{ site.url }}/where/">arrivare al campo</a>, 
-			o quella della <a href="{{ site.url }}/participant/">provenienza degli altri E/G,</a> ed informazioni per il campo stesso (<a href="{{ site.url }}/equip/">equipaggiamento</a>) , 
-			come la <a href="{{ site.url }}/logistics/">logistica </a>e<a href="{{ site.url }}/assets/files/lettera2016.pdf"> la lettera di presentazione</a>, 
-			oltre ad avere la possibilit&agrave; di scrivere direttamente ai <a href="mailto:{{ site.email }}" title="Contatti"><i class="icon-envelope"></i> capi campo</a></p> 
-			<p><strong>IMPORTANTE:</strong> Compila la tua <a href="/anagrafica">anagrafica</a>!!.</p>
-			<p>Infine ti ricordiamo che <strong>durante il campo</strong> contiamo di aggiornare frequentemente il sito (<a href="https://live.bitprepared.it">live.bitprepared.it</a>) in cui i tuoi parenti ed amici potranno seguire l'andamento delle attivit&agrave;.</p> 
+			<p> Sei finalmente arrivato sul sito di supporto al Campo di Competenza in &quot;{{site.title}} - {{site.description}}&quot; per Esploratori e Guide dell'AGESCI, che si terr&agrave; dal <b>{{ site.campo.dal }} al {{ site.campo.al }} {{ site.campo.mese }} {{ site.campo.anno }}</b>. </p>
+			<p>Qui potrai trovare informazioni utili per <a href="{{ site.url }}/where/index.html">arrivare al campo</a>,
+			o quella della <a href="{{ site.url }}/participant/">provenienza degli altri E/G,</a> ed informazioni per il campo stesso (<a href="{{ site.url }}/equip/index.html">equipaggiamento</a>) ,
+			come la <a href="{{ site.url }}/logistics/index.html">logistica </a>e<a href="{{ site.url }}/assets/files/lettera2017.pdf"> la lettera di presentazione</a>,
+			oltre ad avere la possibilit&agrave; di scrivere direttamente ai <a href="mailto:{{ site.email }}" title="Contatti"><i class="icon-envelope"></i> capi campo</a></p>
+			<p><strong>IMPORTANTE:</strong> Compila la tua <a href="/anagrafica/index.html">anagrafica</a>!!.</p>
+			<p>Infine ti ricordiamo che <strong>durante il campo</strong> contiamo di aggiornare frequentemente il sito (<a href="https://live.bitprepared.it">live.bitprepared.it</a>) in cui i tuoi parenti ed amici potranno seguire l'andamento delle attivit&agrave;.</p>
 
 			<p>Ciao e Buona Caccia.</p>
 		</div>
@@ -42,7 +42,7 @@ tags: [agesci,bitprepared,scout,informatica,specializzazioni,eg]
 		</header>
 		<div class="entry-content">
 			<ul class="post-list">
-				{% for post in site.posts limit:10 %} 
+				{% for post in site.posts limit:10 %}
 				  <li>
 				  	<article>
 				  		<a href="{{ site.url }}{{ post.url }}">{{ post.title }} <span class="entry-date"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time></span></a>

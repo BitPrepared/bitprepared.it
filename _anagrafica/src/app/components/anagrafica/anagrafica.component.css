@@ -1,0 +1,11 @@
+.input-full-width {
+  width: 100%;
+}
+
+label {
+  display: none;
+}
+
+.mat-checkbox {
+  padding-right: 3px;
+}

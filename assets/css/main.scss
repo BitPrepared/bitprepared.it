@@ -74,7 +74,7 @@ b, i, strong, em, blockquote, p, q, span, figure, img, h1, h2, header, input, a 
 body {
     font-family: 'source-sans-pro', sans-serif;
     color: #222;
-    background-image: url(/images/sfondo.gif);
+    /* background-image: url(/images/sfondo.gif); */
     margin: 0;
 }
 h1, h2, h3, h4, h5, h6 {
@@ -409,23 +409,23 @@ footer .social-icons a {
 /* ENTRY */
 
 .entry-feature-image-wrapper {
-    position: relative; 
+    position: relative;
     width: 100%; /* for IE 6 */
 }
 
-.entry-feature-image-wrapper h1 { 
-    position: absolute; 
-    top: -20px; 
-    left: 0; 
+.entry-feature-image-wrapper h1 {
+    position: absolute;
+    top: -20px;
+    left: 0;
     padding-left: 5px;
 }
 
-.entry-feature-image-wrapper h1 span { 
-   color: $backgroundColorBasic; 
-   letter-spacing: -1px;  
+.entry-feature-image-wrapper h1 span {
+   color: $backgroundColorBasic;
+   letter-spacing: -1px;
    background: rgb(0, 0, 0); /* fallback color */
    background: rgba(0, 0, 0, 0.7);
-   padding: 10px; 
+   padding: 10px;
    top: 5px;
 }
 

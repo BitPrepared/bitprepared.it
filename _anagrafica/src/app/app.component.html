@@ -1,0 +1,7 @@
+<!-- navbar -->
+<app-ui-navbar [valid]="showEg"></app-ui-navbar>
+
+<app-ui-login *ngIf="!showEg" (onSubmit)="tryLogin($event)"></app-ui-login>
+
+<app-ui-anagrafica *ngIf="showEg" [eg]="eg" (onValidSubmit)="submit($event)"></app-ui-anagrafica>
+

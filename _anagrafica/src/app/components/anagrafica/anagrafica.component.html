@@ -1,0 +1,214 @@
+<!-- anagrafica E/G -->
+<!--The whole content below can be removed with the new code.-->
+<div>
+  <h3>Anagrafica di Reparto</h3>
+  <p>I campi obbligatori sono contrassegnati da <abbr title="required">*</abbr>.</p>
+  <form class="anagrafica-form" [formGroup]="egForm" (ngSubmit)="save(egForm.value)">
+    <fieldset>
+      <legend>Me</legend>
+
+      <p>
+        <label for="sesso">
+          <strong><abbr title="required">*</abbr></strong>
+        </label>
+        <md-error *ngIf="invalidFieldSex">Selezionare uno dei due sessi</md-error>
+        <md-radio-group id="sesso" formControlName="sesso" name="sesso" aria-required="true">
+          <md-radio-button value="M" aria-label="Ragazzo">Ragazzo</md-radio-button>
+          <md-radio-button value="F" aria-label="Ragazza">Ragazza</md-radio-button>
+        </md-radio-group>
+      </p>
+
+      <p>
+      <label for="nome">
+        <strong><abbr title="required">*</abbr></strong>
+      </label>
+      <md-input-container class="input-full-width">
+        <input mdInput formControlName="nome" placeholder="nome" aria-required="true" required=true value="" id="nome" name="nome">
+      </md-input-container>
+      </p>
+
+
+      <p>
+        <label for="cognome">
+          <strong><abbr title="required">*</abbr></strong>
+        </label>
+        <md-input-container class="input-full-width">
+          <input mdInput placeholder="cognome" formControlName="cognome" aria-required="true" required=true value="" id="cognome" name="cognome">
+        </md-input-container>
+      </p>
+
+      <p>
+        <label for="dtnascita">
+          <strong><abbr title="required">*</abbr></strong>
+        </label>
+        <md-input-container>
+          <input mdInput formControlName="dtnascita" aria-required="true" required=true [mdDatepicker]="picker" [min]="minDate" [max]="maxDate" id="dtnascita" name="dtnascita" placeholder="Data nascita">
+          <button mdSuffix [mdDatepickerToggle]="picker"></button>
+        </md-input-container>
+        <md-datepicker #picker></md-datepicker>
+      </p>
+
+      <p>
+        <label for="telefono">
+          <strong><abbr title="required">*</abbr></strong>
+        </label>
+        <md-input-container id="telefono" name="telefono">
+          <span mdPrefix>+39 &nbsp;</span>
+          <input type="tel" mdInput placeholder="Telefono" aria-required="true" required=true formControlName="telefono">
+        </md-input-container>
+      </p>
+
+      <p>
+        <label for="specialita">
+          <span>Specialita: </span>
+          <strong><abbr title="required">*</abbr></strong>
+        </label>
+        <md-checkbox *ngFor="let specialita of elencospecialita" value="{{specialita}}" formControlName="specialita">{{specialita}}</md-checkbox>
+      </p>
+
+    </fieldset>
+    <fieldset formGroupName="indirizzo">
+      <legend>Indirizzo</legend>
+
+      <p>
+        <label for="via">
+          <strong><abbr title="required">*</abbr></strong>
+        </label>
+        <md-input-container class="input-full-width">
+          <input mdInput placeholder="via" aria-required="true" required=true value="" id="via" name="via" formControlName="via">
+        </md-input-container>
+      </p>
+
+      <p>
+        <label for="ncivico">
+          <strong><abbr title="required">*</abbr></strong>
+        </label>
+        <md-input-container class="input-full-width">
+          <input mdInput placeholder="ncivico" aria-required="true" required=true value="" id="ncivico" name="ncivico" formControlName="ncivico">
+        </md-input-container>
+      </p>
+
+      <p>
+        <label for="cap">
+          <strong></strong>
+        </label>
+        <md-input-container class="input-full-width">
+          <input mdInput placeholder="cap" value="" id="cap" name="cap" formControlName="cap">
+        </md-input-container>
+      </p>
+
+      <p>
+        <label for="citta">
+          <strong><abbr title="required">*</abbr></strong>
+        </label>
+        <md-input-container class="input-full-width">
+          <input mdInput placeholder="citta" aria-required="true" required=true value="" id="citta" name="citta" formControlName="citta">
+        </md-input-container>
+      </p>
+
+      <p>
+        <label for="provincia">
+          <strong></strong>
+        </label>
+        <md-input-container class="input-full-width">
+          <input mdInput placeholder="provincia" value="" id="provincia" name="provincia" formControlName="provincia">
+        </md-input-container>
+      </p>
+
+    </fieldset>
+    <fieldset formGroupName="social">
+      <legend>Social</legend>
+
+      <p>
+        <label for="nickname">
+          <strong></strong>
+        </label>
+        <md-input-container class="input-full-width">
+          <input mdInput placeholder="nickname" value="" id="nickname" name="nickname" formControlName="nickname">
+        </md-input-container>
+      </p>
+
+      <p>
+        <label for="facebook">
+          <strong></strong>
+        </label>
+        <md-input-container>
+          <span mdPrefix>https://facebook.com/ &nbsp;</span>
+          <input type="text" mdInput id="facebook" name="facebook" placeholder="" formControlName="facebook">
+          <md-icon mdSuffix>mode_edit</md-icon>
+        </md-input-container>
+      </p>
+
+      <p>
+        <label for="blog">
+          <strong></strong>
+        </label>
+        <md-input-container class="input-full-width">
+          <input mdInput placeholder="blog" value="" id="blog" name="blog" formControlName="blog">
+        </md-input-container>
+      </p>
+
+      <p>
+        <label for="instagram">
+          <strong></strong>
+        </label>
+        <md-input-container class="input-full-width">
+          <input mdInput placeholder="instagram" value="" id="instagram" name="instagram" formControlName="instagram">
+        </md-input-container>
+      </p>
+
+      <p>
+        <label for="email">
+          <strong></strong>
+        </label>
+        <md-input-container class="input-full-width">
+          <input mdInput placeholder="Email" id="email" name="email" formControlName="email">
+        </md-input-container>
+      </p>
+
+    </fieldset>
+    <fieldset formGroupName="reparto">
+      <legend>DatiReparto</legend>
+      <p>
+        <label for="nomereparto">
+          <strong><abbr title="required">*</abbr></strong>
+        </label>
+        <md-input-container class="input-full-width">
+          <input mdInput placeholder="Nome del Reparto" value="" aria-required="true" required=true id="nomereparto" name="nomereparto" formControlName="nomereparto">
+        </md-input-container>
+      </p>
+
+      <p>
+        <label for="nomesquadriglia">
+          <strong><abbr title="required">*</abbr></strong>
+        </label>
+        <md-input-container class="input-full-width">
+          <input mdInput placeholder="Nome della Squadriglia" value="" aria-required="true" required=true id="nomesquadriglia" name="nomesquadriglia" formControlName="nomesquadriglia">
+        </md-input-container>
+      </p>
+
+      <p>
+        <label for="nomegruppo">
+          <strong><abbr title="required">*</abbr></strong>
+        </label>
+        <md-input-container class="input-full-width">
+          <input mdInput placeholder="Nome del Gruppo (Es: RIMINI 9)" aria-required="true" required=true value="" id="nomegruppo" name="nomegruppo" formControlName="nomegruppo">
+        </md-input-container>
+      </p>
+
+      <p>
+        <label for="zona">
+          <strong><abbr title="required">*</abbr></strong>
+        </label>
+        <md-input-container class="input-full-width">
+          <input mdInput placeholder="Nome della Zona (Es: Vicenza Piccole Dolomiti)" aria-required="true" required=true value="" id="zona" name="zona" formControlName="zona">
+        </md-input-container>
+      </p>
+
+    </fieldset>
+
+    <button type="submit" md-raised-button>Salva</button>
+
+  </form>
+
+</div>
