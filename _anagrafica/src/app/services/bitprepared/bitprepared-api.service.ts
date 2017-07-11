@@ -42,6 +42,17 @@ export class BitPreparedAPIService {
     return this.http.put(environment.bitPreparedUrl + '/me', JSON.stringify(anagraficaDue), options);
   }
 
+  specialita() {
+    const header = new Headers();
+    header.append('Authorization', 'Basic  ' + btoa(this.username + ':' + this.password));
+    const options = new RequestOptions({ headers: header });
+    return this.http.get(environment.bitPreparedUrl + '/specialita', options)
+      .map( (res: Response) => res.json() )
+      .catch( (error: any) => {
+          return Observable.throw(new Error(error.status));
+      });
+  }
+
   pad(num: number, size: number): string {
     let s = num + '';
     while (s.length < size) {

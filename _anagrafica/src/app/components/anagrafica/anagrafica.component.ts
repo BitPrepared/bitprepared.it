@@ -1,8 +1,9 @@
 import { Component, Input, Output, OnInit, EventEmitter, } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/debounceTime';
-import { Indirizzo, Sesso, Social, Reparto, Eg, specialitaEsistenti } from './data-model';
+import { Indirizzo, Sesso, Social, Reparto, Eg, Specialita } from './data-model';
+import { MdCheckbox, MdCheckboxChange, MdCheckboxModule } from '@angular/material';
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -15,12 +16,12 @@ export class AnagraficaComponent implements OnInit {
   @Input() eg: Eg;
   @Output() onValidSubmit: EventEmitter<Eg> = new EventEmitter();
 
+
   invalidFieldSex = false;
   egForm: FormGroup;
   submitted = false;
   minDate = new Date(2001, 0, 1);
   maxDate = new Date(2003, 11, 31);
-  elencospecialita = specialitaEsistenti;
 
   constructor(private fb: FormBuilder) {
     // struttura, qui gli INPUT non sono validi!
@@ -74,6 +75,10 @@ export class AnagraficaComponent implements OnInit {
     this.eg.reparto = this.mapReparto(val.reparto);
   }
 
+  changeSpecialitaPosseduta(event: MdCheckboxChange, i: number) {
+    this.eg.specialita[i].selected = event.checked;
+  }
+
   mapSocial(social: any): Social {
     const result = new Social();
     result.nickname = social.nickname;
@@ -117,11 +122,11 @@ export class AnagraficaComponent implements OnInit {
       sesso: Sesso[this.eg.sesso],
       telefono: this.eg.telefono,
       dtnascita: this.eg.dtnascita,
-      // specialita: this.eg.
       indirizzo: this.eg.indirizzo || new Indirizzo(),
       social: this.eg.social || new Social(),
       reparto: this.eg.reparto || new Reparto()
     });
+    // specialita essendo fuori dal form control posso farlo direttamente in html
   }
 
   save(value: any) {

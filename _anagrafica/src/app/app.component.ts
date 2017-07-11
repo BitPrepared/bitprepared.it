@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Eg, Reparto, Indirizzo, Social, Sesso } from './components/anagrafica/data-model';
+import { Eg, Reparto, Indirizzo, Social, Sesso, Specialita } from './components/anagrafica/data-model';
 import { environment } from '../environments/environment';
 import { BitPreparedAPIService } from './services/bitprepared/bitprepared-api.service';
 import { MomentModule } from 'angular2-moment';
@@ -45,7 +45,24 @@ export class AppComponent implements OnInit {
     eg.reparto.nomesquadriglia = response.reparto.nomesquadriglia;
     eg.reparto.zona = response.reparto.zona;
     this.eg = eg;
-    this.showEg = true;
+
+    const elencoSpecialitaPossedute = new Array<String>();
+    response.specialita.forEach(element => {
+      elencoSpecialitaPossedute.push(element.slug);
+    });
+
+    this.hs.specialita().subscribe( data => {
+      this.eg.specialita = new Array<Specialita>();
+      data.forEach(element => {
+        const specialita = new Specialita();
+        specialita.nome = element.nome;
+        specialita.icona = element.icona;
+        specialita.slug = element.slug;
+        specialita.selected = elencoSpecialitaPossedute.includes(element.slug);
+        this.eg.specialita.push(specialita);
+      });
+      this.showEg = true;
+    });
   }
 
   logError(error: any) {

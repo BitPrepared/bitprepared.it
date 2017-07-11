@@ -1,5 +1,5 @@
 import { Component, Input} from '@angular/core';
-import { Indirizzo, Sesso, Social, Reparto, Eg, specialitaEsistenti } from './../anagrafica/data-model';
+import { Indirizzo, Sesso, Social, Reparto, Eg } from './../anagrafica/data-model';
 
 @Component({
   selector: 'app-ui-navbar',

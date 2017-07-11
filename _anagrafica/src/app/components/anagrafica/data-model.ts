@@ -10,6 +10,7 @@ export class Eg {
   indirizzo: Indirizzo;
   social: Social;
   reparto: Reparto;
+  specialita: Specialita[];
 }
 
 export class Indirizzo {
@@ -35,4 +36,9 @@ export class Reparto {
   nomesquadriglia = '';
 }
 
-export const specialitaEsistenti = ['Prima', 'Seconda', 'Terza', 'Quarta'];
+export class Specialita {
+  nome = '';
+  icona = '';
+  slug = '';
+  selected = false;
+}

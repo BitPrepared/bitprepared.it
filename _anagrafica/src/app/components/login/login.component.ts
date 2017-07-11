@@ -35,6 +35,9 @@ export class LoginComponent {
       password: [null, Validators.required ],
     });
 
+    // this.loginForm.controls['username'].setValue('Rachele.Grimiti');
+    // this.loginForm.controls['password'].setValue('19092002');
+
   }
 
   save(value: any) {

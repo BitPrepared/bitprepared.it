@@ -11,7 +11,19 @@ $app->get('/[{name}]', function ($request, $response, $args) {
 });
 
 $app->get('/api/specialita', function ($request, $response, $args) {
-    $me = ['attore', 'fotografo'];
+    $attore = new stdClass();
+    $attore->nome = 'attore';
+    $attore->icona = 'attore';
+    $attore->slug = 'attore';
+    $fotografo = new stdClass();
+    $fotografo->nome = 'fotografo';
+    $fotografo->icona = 'fotografo';
+    $fotografo->slug = 'fotografo';
+    $pioniere = new stdClass();
+    $pioniere->nome = 'pioniere';
+    $pioniere->icona = 'pioniere';
+    $pioniere->slug = 'pioniere';
+    $me = [$attore, $fotografo, $pioniere];
     $newResponse = $response->withHeader('Content-type', 'application/json')->withJson($me, 200);
 
     return $newResponse;
@@ -46,6 +58,15 @@ $app->put('/api/me', function ($request, $response, $args) {
     $user['nomereparto'] = $body['reparto']['nomereparto'];
     $user['nomesquadriglia'] = $body['reparto']['nomesquadriglia'];
 
+    $specialitaPossedute = array();
+    foreach ($body['specialita'] as $value) {
+        if ( $value['selected'] ) {
+            $specialitaPossedute[] = $value['nome'];
+        }
+    }
+
+    $user['specialitaPossedute'] = implode(',',$specialitaPossedute); //'attore,pioniere';
+
     $sth = $this->dbstore->prepare('UPDATE users SET
           nome = :nome,
           cognome = :cognome,
@@ -65,7 +86,8 @@ $app->put('/api/me', function ($request, $response, $args) {
           zona    = :zona,
           nomegruppo  = :nomegruppo,
           nomereparto = :nomereparto,
-          nomesquadriglia = :nomesquadriglia
+          nomesquadriglia = :nomesquadriglia,
+          specialita = :specialitaPossedute
           WHERE username = :id');
     try {
         if ($sth->execute($user) && $sth->rowCount()) {
@@ -116,6 +138,20 @@ $app->get('/api/me', function ($request, $response, $args) {
     $reparto->nomereparto = $user['nomereparto'];
     $reparto->nomesquadriglia = $user['nomesquadriglia'];
     $me->reparto = $reparto;
+
+    if ( null != $user['specialita'] ){
+        $elencoSpecialitaPossedute = explode(',',$user['specialita']); 
+        $specialitaPossedute = array();
+        foreach ($elencoSpecialitaPossedute as $specialitaNome) {
+            $specialita = new stdClass();
+            $specialita->nome = $specialitaNome; // superfluo
+            $specialita->slug = str_replace(' ','_',$specialitaNome);
+            $specialitaPossedute[] = $specialita;;
+        }
+    } else {
+        $specialitaPossedute = [];
+    }
+    $me->specialita = $specialitaPossedute;
 
     // Sample log message
     $this->logger->info("API '/api/me' route per utente: {$me->nome} {$me->cognome}");

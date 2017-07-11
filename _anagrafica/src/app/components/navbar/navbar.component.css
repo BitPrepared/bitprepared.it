@@ -8,16 +8,17 @@
 
 #navbarcontaier {
   text-align: center;
+  font-family: 'source-sans-pro', sans-serif;
 }
 
 .navbar {
   background-color: black !important;
-  color: yellow;
+  color: white;
 }
 
 .navbar a, a:visited, a:hover {
-  color: yellow;
+  color: white;
   text-decoration: none;
-  border: 1px solid yellow;
   padding: 3px;
+  font-size: 14px;
 }
