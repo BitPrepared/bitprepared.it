@@ -63,7 +63,13 @@
           <span>Specialita: </span>
           <strong><abbr title="required">*</abbr></strong>
         </label>
-        <md-checkbox *ngFor="let specialita of eg.specialita; let i=index" (change)="changeSpecialitaPosseduta($event, i)" [id]="specialita.slug" [checked]="specialita.selected" >{{specialita.nome}}</md-checkbox>
+        <md-grid-list cols="4" rowHeight="50px">
+          <md-grid-tile *ngFor="let specialita of eg.specialita; let i=index">
+            <div class="text-inside-grid"> 
+              <md-checkbox (change)="changeSpecialitaPosseduta($event, i)" [id]="specialita.slug" [checked]="specialita.selected" >{{specialita.nome}}</md-checkbox>
+            </div>
+          </md-grid-tile>
+        </md-grid-list>
       </p>
 
     </fieldset>

@@ -1,7 +1,7 @@
 version: '2'
 services:
     web:
-        image: nginx:latest
+        image: nginx:1.13.3-alpine
         ports:
             - "8000:80"
         restart: always
@@ -23,17 +23,17 @@ services:
         volumes:
             - ./web/app:/app
         command: install
-    myadmin:
-        image: phpmyadmin/phpmyadmin
-        container_name: phpmyadmin
-        ports:
-            - "7070:80"
-        environment:
-            - PMA_ARBITRARY=1
-            - PMA_HOST=mysql
-        restart: always
-        depends_on:
-            - "mysqldb"
+    # myadmin:
+    #     image: phpmyadmin/phpmyadmin
+    #     container_name: phpmyadmin
+    #     ports:
+    #         - "7070:80"
+    #     environment:
+    #         - PMA_ARBITRARY=1
+    #         - PMA_HOST=mysql
+    #     restart: always
+    #     depends_on:
+    #         - "mysqldb"
     mysqldb:
         image: mysql
         container_name: mysql
@@ -44,6 +44,6 @@ services:
             - MYSQL_USER=dev
             - MYSQL_PASSWORD=dev
         ports:
-            - 3306:3306
+            - 7306:3306
         volumes:
             - ./data/db/mysql:/var/lib/mysql

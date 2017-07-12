@@ -9,3 +9,8 @@ label {
 .mat-checkbox {
   padding-right: 3px;
 }
+
+.text-inside-grid{
+  position: absolute;
+  left: 5px;
+}

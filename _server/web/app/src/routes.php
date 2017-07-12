@@ -11,21 +11,19 @@ $app->get('/[{name}]', function ($request, $response, $args) {
 });
 
 $app->get('/api/specialita', function ($request, $response, $args) {
-    $attore = new stdClass();
-    $attore->nome = 'attore';
-    $attore->icona = 'attore';
-    $attore->slug = 'attore';
-    $fotografo = new stdClass();
-    $fotografo->nome = 'fotografo';
-    $fotografo->icona = 'fotografo';
-    $fotografo->slug = 'fotografo';
-    $pioniere = new stdClass();
-    $pioniere->nome = 'pioniere';
-    $pioniere->icona = 'pioniere';
-    $pioniere->slug = 'pioniere';
-    $me = [$attore, $fotografo, $pioniere];
-    $newResponse = $response->withHeader('Content-type', 'application/json')->withJson($me, 200);
-
+    $elenco = array();
+    $file = fopen(__DIR__."/../elencospecialita.txt", "r");
+    while(!feof($file))
+    {
+        $name = fgets($file);
+        $attore = new stdClass();
+        $attore->nome = $name;
+        $attore->icona = $name;
+        $attore->slug = str_replace(' ','_',strtolower($name));
+        $elenco[] = $attore;
+    }
+    fclose($file);
+    $newResponse = $response->withHeader('Content-type', 'application/json')->withJson($elenco, 200);
     return $newResponse;
 });
 
