@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  bitPreparedUrl: 'https://precampo.bitprepared.it/api/token'
+  bitPreparedUrl: 'https://precampo.bitprepared.it/api'
 };
