@@ -15,7 +15,7 @@ $app->get('/api/specialita', function ($request, $response, $args) {
     $file = fopen(__DIR__."/../elencospecialita.txt", "r");
     while(!feof($file))
     {
-        $name = fgets($file);
+        $name = str_replace("\n",'',trim(fgets($file)));
         $attore = new stdClass();
         $attore->nome = $name;
         $attore->icona = $name;
@@ -59,7 +59,7 @@ $app->put('/api/me', function ($request, $response, $args) {
     $specialitaPossedute = array();
     foreach ($body['specialita'] as $value) {
         if ( $value['selected'] ) {
-            $specialitaPossedute[] = $value['nome'];
+            $specialitaPossedute[] = $value['slug'];
         }
     }
 

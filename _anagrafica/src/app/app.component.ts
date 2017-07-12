@@ -76,7 +76,7 @@ export class AppComponent implements OnInit {
 
   tryLogin(credenziali) {
     // this.hs.login('Rachele.Grimiti', '19092002');
-    this.hs.login(credenziali.username, credenziali.password);
+    this.hs.login(credenziali.username.toLowerCase(), credenziali.password.toLowerCase());
     this.hs.me().subscribe(
       data => this.loadEg(data)
     );

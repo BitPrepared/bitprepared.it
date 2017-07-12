@@ -17,13 +17,8 @@ return [
         ],
 
         // database
-        'db' => 'sqlite:'.__DIR__.'/../users.sqlite',
-        'dbstore' => 'sqlite:'.__DIR__.'/../users.sqlite',
-        // 'dbstore' => [
-        //   'host' => '',
-        //   'dbname' => '',
-        //   'user' => '',
-        //   'pass' => ''
-        // ]
+        //'db' => 'sqlite:'.__DIR__.'/../users.sqlite',
+        //'dbstore' => 'sqlite:'.__DIR__.'/../users.sqlite',
+        'dbstore' => 'mysql:host=mysqldb;port=3306;dbname=test;charset=utf8mb4'
     ],
 ];

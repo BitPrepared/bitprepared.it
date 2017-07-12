@@ -5,12 +5,9 @@
 
 use \Slim\Middleware\HttpBasicAuthentication\PdoAuthenticator;
 
-$pdo = new \PDO($settings['settings']['db']);
-
 $container['dbstore'] = function ($c) {
   $db = $c['settings']['dbstore'];
-  $pdo = new \PDO($db);
-  //$pdo = new PDO("mysql:host=" . $db['host'] . ";dbname=" . $db['dbname'], $db['user'], $db['pass']);
+  $pdo = new \PDO($db,'dev','dev');
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
   return $pdo;
@@ -20,7 +17,7 @@ $app->add(new \Slim\Middleware\HttpBasicAuthentication([
     "path" => "/api",
     "realm" => "Protected",
     "authenticator" => new PdoAuthenticator([
-        "pdo" => $pdo,
+        "pdo" => $container['dbstore'],
         "table" => "users",
         "user" => "username",
         "hash" => "password"

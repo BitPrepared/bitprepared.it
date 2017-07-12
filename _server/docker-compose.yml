@@ -18,6 +18,8 @@ services:
         volumes:
             - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
             - ./web:/web
+        depends_on:
+            - "mysqldb"
     composer:
         image: composer/composer:1.1-alpine
         volumes:
