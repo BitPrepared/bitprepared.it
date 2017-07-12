@@ -14,3 +14,11 @@ label {
   position: absolute;
   left: 5px;
 }
+
+.mat-grid-list {
+  height: 100%;
+}
+
+/* .mat-grid-tile {
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.37);
+} */
