@@ -14,7 +14,9 @@ image:
 <ul>
 	<li> <strong>L&#8217;uniforme</strong>
 		<span>
-			indossata deve essere perfettamente in ordine secondo le norme associative (come tu certamente saprai l&#8217;uniforme è composta da:
+			indossata deve essere perfettamente in ordine secondo le norme associative; 
+<br /> <em><span style="text-decoration: underline;">
+come tu certamente saprai l&#8217;uniforme è composta da:
 		</span> <strong>camicia</strong>
 		<span>azzurra con tutti i</span>
 		<strong>distintivi</strong>
@@ -40,7 +42,7 @@ image:
 		<strong>scarponi</strong>
 		<span>idonei a camminate ed attività all&#8217;aperto, eventuale</span>
 		<strong>capellone</strong>
-		<span>);</span>
+		;</span>
 	</li>
 	<li>
 		<span>Alcuni</span>
@@ -72,7 +74,7 @@ image:
 			perfettamente funzionante (che ogni scout dovrebbe sapere usare);
 		</span>
 	</li>
-	<li>
+	<br /> <em><span style="text-decoration: underline;">
 		<strong>Ripassa</strong>
 		l’uso della bussola, l’azimut, il percorso rettificato belga, il morse, le piante più diffuse;
 	</li>
@@ -119,10 +121,10 @@ image:
 		<span>
 			<strong>Carta di Competenza</strong>
 			(se non la possiedi compila il modulo che puoi trovare
-			<a href="http://esterni.agesci.it/eventi/schede/cartadellacompetenza.pdf" onclick="javascript:_gaq.push(['_trackEvent','download','http://esterni.agesci.it/eventi/schede/cartadellacompetenza.pdf']);">
+			<a href="http://www.agesci.it/wp-content/uploads/2015/07/carta_della_competenza.pdf" onclick="javascript:_gaq.push(['_trackEvent','download','http://esterni.agesci.it/eventi/schede/cartadellacompetenza.pdf']);">
 				<strong>qui</strong>
 			</a>
-			con il tuo capo reparto).
+			con il tuo Capo Reparto).
 		</span>
 	</li>
 	<li>

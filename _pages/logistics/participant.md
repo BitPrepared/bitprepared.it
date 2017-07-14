@@ -20,7 +20,7 @@ di seguito elenchiamo le provenienze dei vari Esploratori e Guide, seguito dal n
 </p>
 
 <table>
-<tr><td>Pontecchio</td><td> Polesine	Rovigo</td></tr>
+<tr><td>Pontecchio Polesine</td><td>Rovigo</td></tr>
 <tr><td>Roma</td><td>	Roma</td></tr>
 <tr><td>Roma</td><td>	Roma</td></tr>
 <tr><td>Biella</td><td>	Biella</td></tr>
@@ -36,7 +36,7 @@ di seguito elenchiamo le provenienze dei vari Esploratori e Guide, seguito dal n
 <tr><td>San Vito al Tagliamente</td><td>	Pordenone</td></tr>
 <tr><td>Castel Maggiore</td><td>	Bologna</td></tr>
 <tr><td>Latina</td><td>	Latina</td></tr>
-<tr><td>Dusino</td><td> San Michele	Asti</td></tr>
+<tr><td>Dusino San Michele</td><td> Asti</td></tr>
 <tr><td>Pistoia</td><td>	Pistoia</td></tr>
 <tr><td>Bari</td><td>	Bari</td></tr>
 <tr><td>Padova</td><td>	Padova</td></tr>
