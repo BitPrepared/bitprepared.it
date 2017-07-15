@@ -15,9 +15,10 @@ image:
 	<li> <strong>L&#8217;uniforme</strong>
 		<span>
 			indossata deve essere perfettamente in ordine secondo le norme associative; 
-<br /> <em><span style="text-decoration: underline;">
-come tu certamente saprai l&#8217;uniforme è composta da:
-		</span> <strong>camicia</strong>
+		</span> 
+		<br /> 
+		<em>come tu certamente saprai l&#8217;uniforme è composta da:</em>
+		<strong>camicia</strong>
 		<span>azzurra con tutti i</span>
 		<strong>distintivi</strong>
 		<span>in ordine,</span>
@@ -41,8 +42,7 @@ come tu certamente saprai l&#8217;uniforme è composta da:
 		<span>e</span>
 		<strong>scarponi</strong>
 		<span>idonei a camminate ed attività all&#8217;aperto, eventuale</span>
-		<strong>capellone</strong>
-		;</span>
+		<strong>capellone</strong>;
 	</li>
 	<li>
 		<span>Alcuni</span>
@@ -73,10 +73,11 @@ come tu certamente saprai l&#8217;uniforme è composta da:
 		<span>
 			perfettamente funzionante (che ogni scout dovrebbe sapere usare);
 		</span>
-	</li>
-	<br /> <em><span style="text-decoration: underline;">
+		<br/>
+		<em>
 		<strong>Ripassa</strong>
 		l’uso della bussola, l’azimut, il percorso rettificato belga, il morse, le piante più diffuse;
+		</em>
 	</li>
 	<!--
 	<li>
