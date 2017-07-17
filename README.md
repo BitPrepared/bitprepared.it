@@ -12,12 +12,12 @@ Sito bitprepared con news ed articoli a gestione pubblica
  
 dalla radice del progetto lanciare: 
 
-`bundle` 						(gem install bundler)
+`bundler install --path vendor/bundle` 						(gem install bundler)
 
 
 per effetturare dei test 
 
-`jekyll server -w`
+`bundle exec jekyll server -w`
 
 
 
@@ -43,3 +43,8 @@ poi
  * https://github.com/robwierzbowski/jekyll-picture-tag
  * https://github.com/slashdotdash/jekyll-lunr-js-search
  
+#### CON BUNDLE 
+
+ricordarsi di usare il comando 
+
+`bundle exec jekyll build`

@@ -7,7 +7,7 @@ modified: 2017-07-10
 image:
   feature: logistics/participant.png 
   credit: BitPrepared
-  creditlink: http://
+  creditlink: https://bitprepared.it
 ---
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw==" crossorigin=""/>
 
@@ -24,7 +24,10 @@ di seguito elenchiamo le provenienze dei vari Esploratori e Guide, seguito dal n
 
 <div id='map'></div>
 
+<br/>
+
 <table>
+  <tr><th>Citta</th><th>Provincia</th></tr>
   <tr><td>Pontecchio Polesine</td><td>Rovigo</td></tr>
   <tr><td>Roma</td><td>	Roma</td></tr>
   <tr><td>Roma</td><td>	Roma</td></tr>
@@ -57,10 +60,22 @@ di seguito elenchiamo le provenienze dei vari Esploratori e Guide, seguito dal n
 
 <script>
 	var map = L.map('map').setView([44, 12], 6);
+  map.locate({setView: true, maxZoom: 6});
 
 	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 		attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 	}).addTo(map);
+
+  function onLocationFound(e) {
+    var radius = e.accuracy / 2;
+
+    L.marker(e.latlng).addTo(map)
+     .bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+    L.circle(e.latlng, radius).addTo(map);
+  }
+
+  map.on('locationfound', onLocationFound);
 
 	L.marker([45.0187717, 11.8119231]).bindPopup("Rachele").addTo(map);
     L.marker([41.8933203, 12.4829321]).bindPopup("Sara").addTo(map);
