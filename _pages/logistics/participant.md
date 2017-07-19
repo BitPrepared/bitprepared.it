@@ -78,13 +78,10 @@ di seguito elenchiamo le provenienze dei vari Esploratori e Guide, seguito dal n
   map.on('locationfound', onLocationFound);
 
 	L.marker([45.0187717, 11.8119231]).bindPopup("Rachele").addTo(map);
-    L.marker([41.8933203, 12.4829321]).bindPopup("Sara").addTo(map);
-    L.marker([41.8933203, 12.4829321]).bindPopup("Laura").addTo(map);
+    L.marker([41.8933203, 12.4829321]).bindPopup("Sara, Laura, Hawi").addTo(map);
     L.marker([45.56064035, 8.05324722772595]).bindPopup("Letizia").addTo(map);
-    L.marker([43.9098114, 12.9131228]).bindPopup("Margherita").addTo(map);
-    L.marker([43.9098114, 12.9131228]).bindPopup("Caterina").addTo(map);
-    L.marker([41.8933203, 12.4829321]).bindPopup("Hawi").addTo(map);
-    L.marker([45.4077172, 11.8734455]).bindPopup("Giulia").addTo(map);
+    L.marker([43.9098114, 12.9131228]).bindPopup("Margherita, Caterina").addTo(map);
+    L.marker([45.4077172, 11.8734455]).bindPopup("Giulia, Pietro").addTo(map);
     L.marker([45.6879136, 10.1837244]).bindPopup("Alessandra").addTo(map);
     L.marker([44.1352264, 12.1998157]).bindPopup("Claudia Marcella").addTo(map);
     L.marker([44.610951, 10.6934336]).bindPopup("Chiara").addTo(map);
@@ -92,17 +89,14 @@ di seguito elenchiamo le provenienze dei vari Esploratori e Guide, seguito dal n
     L.marker([45.2337438, 11.8740131]).bindPopup("Marina").addTo(map);
     L.marker([45.9151352, 12.8565956]).bindPopup("Francesca").addTo(map);
     L.marker([44.5769097, 11.3610124]).bindPopup("Edoardo").addTo(map);
-    L.marker([41.4672589, 12.9035737]).bindPopup("Walter").addTo(map);
+    L.marker([41.4672589, 12.9035737]).bindPopup("Walter,Giulio").addTo(map);
     L.marker([44.9261476, 7.9707338]).bindPopup("Samuele").addTo(map);
     L.marker([43.9336213, 10.9174238]).bindPopup("Matteo").addTo(map);
     L.marker([41.1257843, 16.8620293]).bindPopup("Federico").addTo(map);
-    L.marker([45.4077172, 11.8734455]).bindPopup("Pietro").addTo(map);
-    L.marker([44.7132091, 11.3065981]).bindPopup("Pietro").addTo(map);
-    L.marker([44.7132091, 11.3065981]).bindPopup("Enrico").addTo(map);
+    L.marker([44.7132091, 11.3065981]).bindPopup("Pietro, Enrico").addTo(map);
     L.marker([45.611508, 9.2750718]).bindPopup("Lorenzo").addTo(map);
     L.marker([45.6452121, 12.1664816]).bindPopup("Sachin").addTo(map);
     L.marker([45.0168524, 11.310498]).bindPopup("Matteo").addTo(map);
-    L.marker([41.4672589, 12.9035737]).bindPopup("Giulio").addTo(map);
     L.marker([45.4667971, 9.1904984]).bindPopup("Pietro").addTo(map);
     L.marker([42.4534556, 14.1409818]).bindPopup("Lorenzo").addTo(map);
 
