@@ -91,10 +91,6 @@ di seguito elenchiamo le provenienze dei vari Esploratori e Guide, seguito dal n
     L.marker([45.4741307, 10.8462482]).bindPopup("Rebecca").addTo(map);
     L.marker([45.2337438, 11.8740131]).bindPopup("Marina").addTo(map);
     L.marker([45.9151352, 12.8565956]).bindPopup("Francesca").addTo(map);
-    L.marker([43.1119613, 12.3890104]).bindPopup("Valentina").addTo(map);
-    L.marker([43.9380611, 10.3039553]).bindPopup("Valentina Grace").addTo(map);
-    L.marker([44.9494522, 8.6857406]).bindPopup("Misia").addTo(map);
-    L.marker([44.9044028, 10.6289846]).bindPopup("Lucia").addTo(map);
     L.marker([44.5769097, 11.3610124]).bindPopup("Edoardo").addTo(map);
     L.marker([41.4672589, 12.9035737]).bindPopup("Walter").addTo(map);
     L.marker([44.9261476, 7.9707338]).bindPopup("Samuele").addTo(map);
@@ -109,7 +105,5 @@ di seguito elenchiamo le provenienze dei vari Esploratori e Guide, seguito dal n
     L.marker([41.4672589, 12.9035737]).bindPopup("Giulio").addTo(map);
     L.marker([45.4667971, 9.1904984]).bindPopup("Pietro").addTo(map);
     L.marker([42.4534556, 14.1409818]).bindPopup("Lorenzo").addTo(map);
-    L.marker([42.4645837, 14.2138702]).bindPopup("Gianluca").addTo(map);
-    L.marker([43.6207132, 10.6308287]).bindPopup("Alberto").addTo(map);
 
 </script>
