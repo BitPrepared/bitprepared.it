@@ -8,7 +8,7 @@ layout: default
 				<section class="8u -2u">
 				<!--		<img src="/assets/{{ page.featured }}" class="image medium" alt="{{ page.title}}"> -->
 					<header>
-						<h2>{{ page.title }}</h2>
+						<h2>{% if page.subtitle %} &#8211; {{ page.subtitle }}{% endif %}</h2>
 					</header>
 					{{ content }}
 				</section>
