@@ -1,8 +1,9 @@
 ---
-title: Stage per capi
+title: Vivere ed educare nell'era digitale
+subtitle: digito ergo sum
 published: true
 layout: page
-description: Stage per capi 2016
+description: Stage per capi 2018
 modified: 2016-09-24
 author: bitprepared
 category: articles
