@@ -1,8 +1,8 @@
 ---
 layout: page
 permalink: /eventi/eppi/
-title: EPPI per R/S
-tags: [bitprepared, eppi, rs]
+title: Essere solidi in una società immateriale
+tags: [bitprepared, epppi, rs]
 modified: 2016-09-18
 # featured: wordpress.png
 ---
