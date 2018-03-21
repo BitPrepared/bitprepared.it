@@ -28,3 +28,5 @@ Siamo chiamati ad essere il lievito nel pane, cioè un agente di cambiamento sil
 
 
 Ti aspettiamo!!
+
+Iscriviti al seguente link: https://buonacaccia.net/event.aspx?e=8105
