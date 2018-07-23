@@ -21,24 +21,24 @@ lunr_search:
 
 
 campo:
-  anno: 2017
+  anno: 2018
   mese: agosto
-  dal: 22
-  al: 26
+  dal: 21
+  al: 25
   ritrovo:
-    giorno: 22 agosto 2017
+    giorno: 21 agosto 2018
     ore: "10:30"
     luogo: all’esterno della stazione ferroviaria di Vicenza (l’indirizzo è piazzale della stazione, Vicenza)
   fine:
-    giorno: 26 agosto 2017
+    giorno: 25 agosto 2018
     ore: "14:30"
     luogo: Base scout "Ugo Ferrarese" - Costigiola (chi ha bisogno verrà accompagnato in stazione)
   live: http://live.bitprepared.it
 
 # Change url to your domain. Leave localhost server or blank when working locally.
 # You don't need to specify the protocol if you want it available on http and https. Example: //localhost:4000
-url:              //localhost:8000
-#url:              //precampo.bitprepared.it/static
+#url:              //localhost:8000
+url:              //precampo.bitprepared.it
 
 # Owner del sito
 owner:

@@ -108,6 +108,9 @@ image:
 		<strong>frigo;</strong>
 	</li>
 	<li>
+		<span>Il tuo <strong>vestito</strong> tipico da allievo Jedi;</span>
+	</li>
+	<li>
 		<strong>Fotocamera digitale</strong>
 		, se vuoi, ma con la scheda vuota.
 	</li>
@@ -125,7 +128,7 @@ image:
 			<a href="http://www.agesci.it/wp-content/uploads/2015/07/carta_della_competenza.pdf" onclick="javascript:_gaq.push(['_trackEvent','download','http://esterni.agesci.it/eventi/schede/cartadellacompetenza.pdf']);">
 				<strong>qui</strong>
 			</a>
-			con il tuo Capo Reparto).
+			con il tuo Capo Reparto);
 		</span>
 	</li>
 	<li>

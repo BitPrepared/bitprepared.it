@@ -37,7 +37,7 @@ La nostra avventura terminerà {{ site.campo.fine.giorno }} per le ore {{ site.c
 </p>
 <p>Non sono previsti momenti di visita al campo.</p>
 <p>
-	Tu sarai con noi, ma i tuoi amici, genitori, parenti e assimilati vari che vogliono seguirci in tempo reale nelle attività giorno per giorno potranno accedere a questo <a href="{{ site.campo.ritrovo.live }}">indirizzo</a> dove troveranno il blog del campo con le foto e commenti.
+	Tu sarai con noi, ma i tuoi amici, genitori, parenti e assimilati vari che vogliono seguirci in tempo reale nelle attività giorno per giorno potranno accedere a questo <a href="{{ site.campo.live }}">sito web</a> dove troveranno il blog del campo con le foto e commenti.
 </p>
 <p>
 	Per i genitori che vengono a prendere i ragazzi alla fine del campo direttamente in base e non in stazione, non è possibile salire in base con l’automobile ma si deve parcheggiare alla fine della strada asfaltata, al parcheggio del maneggio.

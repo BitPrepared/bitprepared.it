@@ -6,3 +6,4 @@ node_modules
 vendor
 .DS_Store
 _server/data/
+_server/web/app/logs/app.log

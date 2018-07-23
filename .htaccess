@@ -1,5 +1,5 @@
 Options +FollowSymLinks +ExecCGI
-DirectoryIndex index.html
+#DirectoryIndex index.html
 
 <IfModule mod_rewrite.c>
   RewriteEngine On

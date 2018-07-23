@@ -27,7 +27,8 @@ di seguito elenchiamo le provenienze dei vari Esploratori e Guide, seguito dal n
 <br/>
 
 <table>
-  <tr><th>Citta</th><th>Provincia</th></tr>
+<tr><th>Consulta questa pagina di tanto in tanto per avere aggiornamenti!!</th></tr>
+<!--  <tr><th>Citta</th><th>Provincia</th></tr>
   <tr><td>Pontecchio Polesine</td><td>Rovigo</td></tr>
   <tr><td>Roma</td><td>	Roma</td></tr>
   <tr><td>Roma</td><td>	Roma</td></tr>
@@ -56,6 +57,7 @@ di seguito elenchiamo le provenienze dei vari Esploratori e Guide, seguito dal n
   <tr><td>Latina</td><td>	Latina</td></tr>
   <tr><td>Milano</td><td>	Milano</td></tr>
   <tr><td>Spoltore</td><td>	Pescara</td></tr>
+-->
 </table>
 
 <script>
@@ -76,7 +78,7 @@ di seguito elenchiamo le provenienze dei vari Esploratori e Guide, seguito dal n
   }
 
   map.on('locationfound', onLocationFound);
-
+/*
 	L.marker([45.0187717, 11.8119231]).bindPopup("Rachele").addTo(map);
     L.marker([41.8933203, 12.4829321]).bindPopup("Sara, Laura, Hawi").addTo(map);
     L.marker([45.56064035, 8.05324722772595]).bindPopup("Letizia").addTo(map);
@@ -99,5 +101,5 @@ di seguito elenchiamo le provenienze dei vari Esploratori e Guide, seguito dal n
     L.marker([45.0168524, 11.310498]).bindPopup("Matteo").addTo(map);
     L.marker([45.4667971, 9.1904984]).bindPopup("Pietro").addTo(map);
     L.marker([42.4534556, 14.1409818]).bindPopup("Lorenzo").addTo(map);
-
+*/
 </script>

@@ -7,7 +7,7 @@ use \Slim\Middleware\HttpBasicAuthentication\PdoAuthenticator;
 
 $container['dbstore'] = function ($c) {
   $db = $c['settings']['dbstore'];
-  $pdo = new \PDO($db,'dev','dev');
+  $pdo = new \PDO($db,'admin_scout','***REMOVED***');
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
   return $pdo;
