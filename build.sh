@@ -15,10 +15,12 @@ npm run buildprod
 cd ..
 
 #se serve aggiornare l'ambiente php
-#cd _server
-#phpbrew use 5.6.8
-#composer update
-#cd ..
+if [[ "$unamestr" == 'Linux' ]]; then
+    cd _server/web/app/
+    #phpbrew use 5.6.8
+    composer update
+    cd ../../../
+fi
 
 rm -rf _site
 
