@@ -7,6 +7,17 @@ Sito bitprepared con news ed articoli a gestione pubblica
 
 ### INSTALLAZIONE
  
+installare node > 8 , npm > 5 , rbenv
+
+```
+git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
+echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
+```
+
+assicurarsi che la gemma "bundler" sia stata installa con la versione giusta (2.4.2)
+
 dalla radice del progetto lanciare: 
 
 `bundler install --path vendor/bundle`                  (gem install bundler)

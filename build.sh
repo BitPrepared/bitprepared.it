@@ -1,3 +1,5 @@
+#!/bin/bash
+
 platform='unknown'
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
@@ -20,9 +22,9 @@ cd ..
 
 rm -rf _site
 
-if [[ $platform == 'freebsd' ]]; then
-    rbenv local 2.4.2
-fi
+rbenv local 2.4.2
+
+rm -rf vendor/
 
 bundler install --path vendor/bundle
 bundle exec jekyll build

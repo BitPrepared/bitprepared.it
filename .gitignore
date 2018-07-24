@@ -9,3 +9,4 @@ _server/data/
 _server/web/app/logs/app.log
 _anagrafica/dist/
 assets/js/anagrafica/
+/.ruby-version
