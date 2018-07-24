@@ -29,7 +29,7 @@ rm -rf vendor/
 bundler install --path vendor/bundle
 bundle exec jekyll build
 
-rm -rf mkdir -p assets/js/anagrafica/
+rm -rf assets/js/anagrafica/
 
 mkdir -p assets/js/anagrafica/
 
