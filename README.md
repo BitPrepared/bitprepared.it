@@ -5,21 +5,16 @@ Sito bitprepared con news ed articoli a gestione pubblica
 
 
 
-
-
-
 ### INSTALLAZIONE
  
 dalla radice del progetto lanciare: 
 
-`bundler install --path vendor/bundle` 						(gem install bundler)
+`bundler install --path vendor/bundle`                  (gem install bundler)
 
 
 per effetturare dei test 
 
 `bundle exec jekyll server -w`
-
-
 
 ### BUG WORKAROUND
 
