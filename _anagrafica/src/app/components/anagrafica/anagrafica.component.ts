@@ -21,7 +21,7 @@ export class AnagraficaComponent implements OnInit {
   egForm: FormGroup;
   submitted = false;
   minDate = new Date(2001, 0, 1);
-  maxDate = new Date(2003, 11, 31);
+  maxDate = new Date(2004, 11, 31);
 
   constructor(private fb: FormBuilder) {
     // struttura, qui gli INPUT non sono validi!
