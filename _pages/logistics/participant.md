@@ -25,10 +25,10 @@ di seguito elenchiamo le provenienze dei vari Esploratori e Guide, seguito dal n
 <div id='map'></div>
 
 <br/>
-
+<!--
 <table>
 <tr><th>Consulta questa pagina di tanto in tanto per avere aggiornamenti!!</th></tr>
-<!--  <tr><th>Citta</th><th>Provincia</th></tr>
+<tr><th>Citta</th><th>Provincia</th></tr>
   <tr><td>Pontecchio Polesine</td><td>Rovigo</td></tr>
   <tr><td>Roma</td><td>	Roma</td></tr>
   <tr><td>Roma</td><td>	Roma</td></tr>
@@ -57,8 +57,8 @@ di seguito elenchiamo le provenienze dei vari Esploratori e Guide, seguito dal n
   <tr><td>Latina</td><td>	Latina</td></tr>
   <tr><td>Milano</td><td>	Milano</td></tr>
   <tr><td>Spoltore</td><td>	Pescara</td></tr>
--->
 </table>
+-->
 
 <script>
 	var map = L.map('map').setView([44, 12], 6);
@@ -78,28 +78,32 @@ di seguito elenchiamo le provenienze dei vari Esploratori e Guide, seguito dal n
   }
 
   map.on('locationfound', onLocationFound);
-/*
-	L.marker([45.0187717, 11.8119231]).bindPopup("Rachele").addTo(map);
-    L.marker([41.8933203, 12.4829321]).bindPopup("Sara, Laura, Hawi").addTo(map);
-    L.marker([45.56064035, 8.05324722772595]).bindPopup("Letizia").addTo(map);
-    L.marker([43.9098114, 12.9131228]).bindPopup("Margherita, Caterina").addTo(map);
-    L.marker([45.4077172, 11.8734455]).bindPopup("Giulia, Pietro").addTo(map);
-    L.marker([45.6879136, 10.1837244]).bindPopup("Alessandra").addTo(map);
-    L.marker([44.1352264, 12.1998157]).bindPopup("Claudia Marcella").addTo(map);
-    L.marker([44.610951, 10.6934336]).bindPopup("Chiara").addTo(map);
-    L.marker([45.4741307, 10.8462482]).bindPopup("Rebecca").addTo(map);
-    L.marker([45.2337438, 11.8740131]).bindPopup("Marina").addTo(map);
-    L.marker([45.9151352, 12.8565956]).bindPopup("Francesca").addTo(map);
-    L.marker([44.5769097, 11.3610124]).bindPopup("Edoardo").addTo(map);
-    L.marker([41.4672589, 12.9035737]).bindPopup("Walter,Giulio").addTo(map);
-    L.marker([44.9261476, 7.9707338]).bindPopup("Samuele").addTo(map);
-    L.marker([43.9336213, 10.9174238]).bindPopup("Matteo").addTo(map);
-    L.marker([41.1257843, 16.8620293]).bindPopup("Federico").addTo(map);
-    L.marker([44.7132091, 11.3065981]).bindPopup("Pietro, Enrico").addTo(map);
-    L.marker([45.611508, 9.2750718]).bindPopup("Lorenzo").addTo(map);
-    L.marker([45.6452121, 12.1664816]).bindPopup("Sachin").addTo(map);
-    L.marker([45.0168524, 11.310498]).bindPopup("Matteo").addTo(map);
-    L.marker([45.4667971, 9.1904984]).bindPopup("Pietro").addTo(map);
-    L.marker([42.4534556, 14.1409818]).bindPopup("Lorenzo").addTo(map);
-*/
+
+	L.marker([45.0697151, 7.5176764]).bindPopup("vittoria").addTo(map);
+L.marker([40.7376788, 14.5722442]).bindPopup("beatrice").addTo(map);
+L.marker([43.7629956, 10.4410399]).bindPopup("sofia").addTo(map);
+L.marker([44.4760177, 11.2756857]).bindPopup("olivia").addTo(map);
+L.marker([45.7113511, 11.3553593]).bindPopup("beatrice").addTo(map);
+L.marker([44.5255217, 10.8663607]).bindPopup("anna").addTo(map);
+L.marker([45.1346168, 10.0251103]).bindPopup("carlotta").addTo(map);
+L.marker([45.9145042, 12.8565956]).bindPopup("bianca").addTo(map);
+L.marker([45.5139771, 11.1656408]).bindPopup("beatrice").addTo(map);
+L.marker([45.735097, 11.391791]).bindPopup("giulia").addTo(map);
+L.marker([45.1346168, 10.0251103]).bindPopup("chiara").addTo(map);
+L.marker([43.3113449, 10.5173443]).bindPopup("maria").addTo(map);
+L.marker([45.0677551, 7.6824892]).bindPopup("marta").addTo(map);
+L.marker([44.40726, 8.9338624]).bindPopup("lara").addTo(map);
+L.marker([45.9562503, 12.6597197]).bindPopup("marco").addTo(map);
+L.marker([46.0664228, 11.1257601]).bindPopup("pietro").addTo(map);
+L.marker([45.6628395, 11.8284875]).bindPopup("tommaso").addTo(map);
+L.marker([45.0534751, 9.6947461]).bindPopup("carlo").addTo(map);
+L.marker([40.7376788, 14.5722442]).bindPopup("massimiliano").addTo(map);
+L.marker([44.900542, 8.2068876]).bindPopup("enrico").addTo(map);
+L.marker([44.2226017, 12.0409384]).bindPopup("marcello").addTo(map);
+L.marker([45.5846274, 10.438237]).bindPopup("massimiliano").addTo(map);
+L.marker([45.218894, 12.2785805]).bindPopup("luca").addTo(map);
+L.marker([43.7148603, 13.217754]).bindPopup("alessandro").addTo(map);
+L.marker([46.1605087, 12.6621363]).bindPopup("davidegiovanni").addTo(map);
+L.marker([45.10955285, 10.7158422823227]).bindPopup("lorenzo").addTo(map);
+
 </script>
