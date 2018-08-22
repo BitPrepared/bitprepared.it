@@ -12,3 +12,7 @@ gem 'sass'
 gem 'jekyll-sass-converter'
 gem 'mini_magick'
 gem 'jekyll-lunr-js-search'
+
+group :jekyll_plugins do
+  gem 'jekyll-picture-tag', '~> 0.2.3'
+end
