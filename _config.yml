@@ -7,7 +7,7 @@ email:            info@bitprepared.it
 
 # Plugins
 whitelist: []
-gems:      ['jekyll-lunr-js-search']
+gems:      ['jekyll-lunr-js-search', 'jekyll-picture-tag']
 
 # output
 encoding:         "utf-8"
