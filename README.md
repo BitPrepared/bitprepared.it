@@ -19,12 +19,11 @@ dalla radice del progetto lanciare:
 
 `gem install bundler`
 `bundler install --path vendor/bundle --verbose`
-`gem install jekyll-lunr-js-search`
 
 
 per effetturare dei test 
 
-`jekyll server -w`
+`bundle exec jekyll server -w`
 
 
 

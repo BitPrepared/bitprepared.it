@@ -44,9 +44,9 @@ cp _anagrafica/dist/styles.*.bundle.css assets/css/anagrafica/styles.bundle.css
 
 if [[ $platform == 'linux' ]]; then
     # linux
-    chattr +i _server/web/public/index.php
+    sudo chattr +i _server/web/public/index.php
     rm -rf _server/web/public/*
-    chattr -i _server/web/public/index.php
+    sudo chattr -i _server/web/public/index.php
 elif [[ $platform == 'freebsd' ]]; then
     # macosx
     chflags uchg _server/web/public/index.php

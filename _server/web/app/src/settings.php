@@ -19,6 +19,6 @@ return [
         // database
         //'db' => 'sqlite:'.__DIR__.'/../users.sqlite',
         //'dbstore' => 'sqlite:'.__DIR__.'/../users.sqlite',
-        'dbstore' => 'mysql:host=localhost;dbname=precampo2018;charset=utf8'
+        'dbstore' => 'mysql:host=localhost;dbname=precampo2019;charset=utf8'
     ],
 ];
