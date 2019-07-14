@@ -44,7 +44,11 @@ cp _anagrafica/dist/styles.*.bundle.css assets/css/anagrafica/styles.bundle.css
 
 if [[ $platform == 'linux' ]]; then
     # linux
+    
     sudo chattr +i _server/web/public/index.php
+    
+    # FIXME: sudo funziona solo su alcuni linux e FS 
+    
     rm -rf _server/web/public/*
     sudo chattr -i _server/web/public/index.php
 elif [[ $platform == 'freebsd' ]]; then

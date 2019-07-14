@@ -79,31 +79,31 @@ di seguito elenchiamo le provenienze dei vari Esploratori e Guide, seguito dal n
 
   map.on('locationfound', onLocationFound);
 
-	L.marker([45.0697151, 7.5176764]).bindPopup("vittoria").addTo(map);
-L.marker([40.7376788, 14.5722442]).bindPopup("beatrice").addTo(map);
-L.marker([43.7629956, 10.4410399]).bindPopup("sofia").addTo(map);
-L.marker([44.4760177, 11.2756857]).bindPopup("olivia").addTo(map);
-L.marker([45.7113511, 11.3553593]).bindPopup("beatrice").addTo(map);
-L.marker([44.5255217, 10.8663607]).bindPopup("anna").addTo(map);
-L.marker([45.1346168, 10.0251103]).bindPopup("carlotta").addTo(map);
-L.marker([45.9145042, 12.8565956]).bindPopup("bianca").addTo(map);
-L.marker([45.5139771, 11.1656408]).bindPopup("beatrice").addTo(map);
-L.marker([45.735097, 11.391791]).bindPopup("giulia").addTo(map);
-L.marker([45.1346168, 10.0251103]).bindPopup("chiara").addTo(map);
-L.marker([43.3113449, 10.5173443]).bindPopup("maria").addTo(map);
-L.marker([45.0677551, 7.6824892]).bindPopup("marta").addTo(map);
-L.marker([44.40726, 8.9338624]).bindPopup("lara").addTo(map);
-L.marker([45.9562503, 12.6597197]).bindPopup("marco").addTo(map);
-L.marker([46.0664228, 11.1257601]).bindPopup("pietro").addTo(map);
-L.marker([45.6628395, 11.8284875]).bindPopup("tommaso").addTo(map);
-L.marker([45.0534751, 9.6947461]).bindPopup("carlo").addTo(map);
-L.marker([40.7376788, 14.5722442]).bindPopup("massimiliano").addTo(map);
-L.marker([44.900542, 8.2068876]).bindPopup("enrico").addTo(map);
-L.marker([44.2226017, 12.0409384]).bindPopup("marcello").addTo(map);
-L.marker([45.5846274, 10.438237]).bindPopup("massimiliano").addTo(map);
-L.marker([45.218894, 12.2785805]).bindPopup("luca").addTo(map);
-L.marker([43.7148603, 13.217754]).bindPopup("alessandro").addTo(map);
-L.marker([46.1605087, 12.6621363]).bindPopup("davidegiovanni").addTo(map);
-L.marker([45.10955285, 10.7158422823227]).bindPopup("lorenzo").addTo(map);
+  L.marker([45.0697151, 7.5176764]).bindPopup("vittoria").addTo(map);
+  L.marker([40.7376788, 14.5722442]).bindPopup("beatrice").addTo(map);
+  L.marker([43.7629956, 10.4410399]).bindPopup("sofia").addTo(map);
+  L.marker([44.4760177, 11.2756857]).bindPopup("olivia").addTo(map);
+  L.marker([45.7113511, 11.3553593]).bindPopup("beatrice").addTo(map);
+  L.marker([44.5255217, 10.8663607]).bindPopup("anna").addTo(map);
+  L.marker([45.1346168, 10.0251103]).bindPopup("carlotta").addTo(map);
+  L.marker([45.9145042, 12.8565956]).bindPopup("bianca").addTo(map);
+  L.marker([45.5139771, 11.1656408]).bindPopup("beatrice").addTo(map);
+  L.marker([45.735097, 11.391791]).bindPopup("giulia").addTo(map);
+  L.marker([45.1346168, 10.0251103]).bindPopup("chiara").addTo(map);
+  L.marker([43.3113449, 10.5173443]).bindPopup("maria").addTo(map);
+  L.marker([45.0677551, 7.6824892]).bindPopup("marta").addTo(map);
+  L.marker([44.40726, 8.9338624]).bindPopup("lara").addTo(map);
+  L.marker([45.9562503, 12.6597197]).bindPopup("marco").addTo(map);
+  L.marker([46.0664228, 11.1257601]).bindPopup("pietro").addTo(map);
+  L.marker([45.6628395, 11.8284875]).bindPopup("tommaso").addTo(map);
+  L.marker([45.0534751, 9.6947461]).bindPopup("carlo").addTo(map);
+  L.marker([40.7376788, 14.5722442]).bindPopup("massimiliano").addTo(map);
+  L.marker([44.900542, 8.2068876]).bindPopup("enrico").addTo(map);
+  L.marker([44.2226017, 12.0409384]).bindPopup("marcello").addTo(map);
+  L.marker([45.5846274, 10.438237]).bindPopup("massimiliano").addTo(map);
+  L.marker([45.218894, 12.2785805]).bindPopup("luca").addTo(map);
+  L.marker([43.7148603, 13.217754]).bindPopup("alessandro").addTo(map);
+  L.marker([46.1605087, 12.6621363]).bindPopup("davidegiovanni").addTo(map);
+  L.marker([45.10955285, 10.7158422823227]).bindPopup("lorenzo").addTo(map);
 
 </script>
