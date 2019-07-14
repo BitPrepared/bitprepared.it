@@ -14,7 +14,7 @@ comments: false
 share: true
 ---
 
-## Esploratori nella rete XXXIII° edizione
+## Esploratori nella rete XXXIV° edizione
 
 Il ritrovo sarà martedì 21 agosto 2019 per le ore 10.30 all’esterno della stazione ferroviaria di Vicenza.
 Si raccomanda la massima puntualità in quanto dovremo prendere dei mezzi pubblici.
