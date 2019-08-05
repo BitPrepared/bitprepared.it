@@ -1,8 +1,19 @@
 <?php
+/**
+ * Return array of settings
+ *
+ * @author Stefano Tamagnini <yoghi@sigmalab.net>
+ * @license GPLv3
+ *
+ */
 return [
     'settings' => [
-        'displayErrorDetails' => true, // set to false in production
-        'addContentLengthHeader' => false, // Allow the web server to send the content-length header
+
+        // set to false in production
+        'displayErrorDetails' => true,
+        
+        // Allow the web server to send the content-length header
+        'addContentLengthHeader' => false,
 
         // Renderer settings
         'renderer' => [

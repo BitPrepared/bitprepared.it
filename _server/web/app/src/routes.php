@@ -13,13 +13,12 @@ $app->get('/[{name}]', function ($request, $response, $args) {
 $app->get('/api/specialita', function ($request, $response, $args) {
     $elenco = array();
     $file = fopen(__DIR__."/../elencospecialita.txt", "r");
-    while(!feof($file))
-    {
-        $name = str_replace("\n",'',trim(fgets($file)));
+    while (!feof($file)) {
+        $name = str_replace("\n", '', trim(fgets($file)));
         $attore = new stdClass();
         $attore->nome = $name;
         $attore->icona = $name;
-        $attore->slug = str_replace(' ','_',strtolower($name));
+        $attore->slug = str_replace(' ', '_', strtolower($name));
         $elenco[] = $attore;
     }
     fclose($file);
@@ -58,12 +57,12 @@ $app->put('/api/me', function ($request, $response, $args) {
 
     $specialitaPossedute = array();
     foreach ($body['specialita'] as $value) {
-        if ( $value['selected'] ) {
+        if ($value['selected']) {
             $specialitaPossedute[] = $value['slug'];
         }
     }
 
-    $user['specialitaPossedute'] = implode(',',$specialitaPossedute); //'attore,pioniere';
+    $user['specialitaPossedute'] = implode(',', $specialitaPossedute); //'attore,pioniere';
 
     $sth = $this->dbstore->prepare('UPDATE users SET
           nome = :nome,
@@ -137,14 +136,15 @@ $app->get('/api/me', function ($request, $response, $args) {
     $reparto->nomesquadriglia = $user['nomesquadriglia'];
     $me->reparto = $reparto;
 
-    if ( null != $user['specialita'] ){
-        $elencoSpecialitaPossedute = explode(',',$user['specialita']); 
+    if (null != $user['specialita']) {
+        $elencoSpecialitaPossedute = explode(',', $user['specialita']);
         $specialitaPossedute = array();
         foreach ($elencoSpecialitaPossedute as $specialitaNome) {
             $specialita = new stdClass();
             $specialita->nome = $specialitaNome; // superfluo
-            $specialita->slug = str_replace(' ','_',$specialitaNome);
-            $specialitaPossedute[] = $specialita;;
+            $specialita->slug = str_replace(' ', '_', $specialitaNome);
+            $specialitaPossedute[] = $specialita;
+            ;
         }
     } else {
         $specialitaPossedute = [];
