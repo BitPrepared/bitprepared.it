@@ -3,12 +3,12 @@ import { Eg, Reparto, Indirizzo, Social, Sesso, Specialita } from './components/
 import { environment } from '../environments/environment';
 import { BitPreparedAPIService } from './services/bitprepared/bitprepared-api.service';
 import { MomentModule } from 'angular2-moment';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw';
+
+
 
 import {MatSnackBarModule} from '@angular/material/snack-bar'; 
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { debug } from 'util';
 
 @Component({

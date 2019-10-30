@@ -1,9 +1,10 @@
+
+import {throwError as observableThrowError,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers, Response } from '@angular/http';
 import { environment } from '../../../environments/environment';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+
+
 
 @Injectable()
 export class BitPreparedAPIService {
@@ -25,7 +26,7 @@ export class BitPreparedAPIService {
     return this.http.get(environment.bitPreparedUrl + '/me', options)
       .map( (res: Response) => res.json() )
       .catch( (error: any) => {
-          return Observable.throw(new Error(error.status));
+          return observableThrowError(new Error(error.status));
       });
   }
 
@@ -49,7 +50,7 @@ export class BitPreparedAPIService {
     return this.http.get(environment.bitPreparedUrl + '/specialita', options)
       .map( (res: Response) => res.json() )
       .catch( (error: any) => {
-          return Observable.throw(new Error(error.status));
+          return observableThrowError(new Error(error.status));
       });
   }
 

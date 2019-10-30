@@ -1,7 +1,7 @@
 import { Component, Input, Output, OnInit, EventEmitter, } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/debounceTime';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-ui-login',

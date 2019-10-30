@@ -1,7 +1,7 @@
 import { Component, Input, Output, OnInit, EventEmitter, } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/debounceTime';
+import { Observable } from 'rxjs';
+
 import { Indirizzo, Sesso, Social, Reparto, Eg, Specialita } from './data-model';
 import { MdCheckbox, MdCheckboxChange, MdCheckboxModule } from '@angular/material';
 
