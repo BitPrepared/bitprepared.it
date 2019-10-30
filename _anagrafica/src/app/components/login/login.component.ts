@@ -5,7 +5,7 @@ import 'rxjs/add/operator/debounceTime';
 
 @Component({
   selector: 'app-ui-login',
-  template: `
+  ng-template: `
     <div>
       <h3>Login</h3>
       <form class="login-form" [formGroup]="loginForm" (ngSubmit)="save(loginForm.value)">

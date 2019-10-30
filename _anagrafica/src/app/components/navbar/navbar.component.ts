@@ -3,7 +3,7 @@ import { Indirizzo, Sesso, Social, Reparto, Eg } from './../anagrafica/data-mode
 
 @Component({
   selector: 'app-ui-navbar',
-  template: `
+  ng-template: `
     <div id="navbarcontaier">
       <md-toolbar class="navbar">
         <a href="https://precampo.bitprepared.it">Home</a>

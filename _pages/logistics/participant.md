@@ -115,5 +115,6 @@ di seguito elenchiamo le provenienze dei vari Esploratori e Guide, seguito dal n
   L.marker([44.7835699, 10.8854523]).bindPopup("SIMONE").addTo(map);
   L.marker([44.7835699, 10.8854523]).bindPopup("LORENZO").addTo(map);
   L.marker([41.894802, 12.4853384]).bindPopup("EDOARDO MARIA").addTo(map);
+  L.marker([45.1805304, 10.8717887]).bindPopup("Filippo").addTo(map);
 
 </script>

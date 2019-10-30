@@ -10,7 +10,8 @@ $client = new Client([
     'timeout'  => 2.0,
 ]);
 
-function getGeoFromName($client, $name){
+function getGeoFromName($client, $name)
+{
     $response = $client->request('GET', 'search.php?city='.$name.'&format=json');
     $body = $response->getBody();
 
@@ -24,22 +25,22 @@ function getGeoFromName($client, $name){
 }
 
 $row = 1;
-if (($handle = fopen("partecipanti2019.csv", "r")) !== FALSE) {
-    while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-      if ( $row > 1 ){
-        $nome = trim($data[1]);
-        $citta = trim($data[3]);
-        if ( $citta != 'San Mauro in Valle' ){
-            $geo = getGeoFromName($client, $citta);
-        } else {
-            $geo = new stdClass();
-            $geo->lat = '44.1352264';
-            $geo->lon = '12.1998157';
+if (($handle = fopen("partecipanti-05-08-2019.csv", "r")) !== false) {
+    while (($data = fgetcsv($handle, 1000, ",")) !== false) {
+        if ($row > 1) {
+            $nome = trim($data[1]);
+            $citta = trim($data[3]);
+            if ($citta != 'San Mauro in Valle') {
+                $geo = getGeoFromName($client, $citta);
+            } else {
+                $geo = new stdClass();
+                $geo->lat = '44.1352264';
+                $geo->lon = '12.1998157';
+            }
+            // echo 'Citta '.$citta.' -> ('.$geo->lat.','.$geo->lon.')'."\n";
+            echo 'L.marker(['.$geo->lat.', '.$geo->lon.']).bindPopup("'.$nome.'").addTo(map);'."\n";
         }
-        // echo 'Citta '.$citta.' -> ('.$geo->lat.','.$geo->lon.')'."\n";
-        echo 'L.marker(['.$geo->lat.', '.$geo->lon.']).bindPopup("'.$nome.'").addTo(map);'."\n";
-      }
-      $row++;
+        $row++;
     }
     fclose($handle);
 }

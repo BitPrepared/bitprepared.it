@@ -3,6 +3,13 @@ import { Eg, Reparto, Indirizzo, Social, Sesso, Specialita } from './components/
 import { environment } from '../environments/environment';
 import { BitPreparedAPIService } from './services/bitprepared/bitprepared-api.service';
 import { MomentModule } from 'angular2-moment';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
+
+import {MatSnackBarModule} from '@angular/material/snack-bar'; 
+
+import { Observable } from 'rxjs/Observable';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-root',
@@ -78,7 +85,13 @@ export class AppComponent implements OnInit {
     // this.hs.login('Rachele.Grimiti', '19092002');
     this.hs.login(credenziali.username.toLowerCase(), credenziali.password.toLowerCase());
     this.hs.me().subscribe(
-      data => this.loadEg(data)
+      data => {
+        this.loadEg(data)
+      },
+      err => {
+        //console.error(err.message);
+        let snackBarRef = snackBar.open('Message archived');
+      }
     );
   }
 
