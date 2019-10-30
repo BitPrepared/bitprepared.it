@@ -3,13 +3,8 @@ import { Eg, Reparto, Indirizzo, Social, Sesso, Specialita } from './components/
 import { environment } from '../environments/environment';
 import { BitPreparedAPIService } from './services/bitprepared/bitprepared-api.service';
 import { MomentModule } from 'angular2-moment';
-
-
-
-import {MatSnackBarModule} from '@angular/material/snack-bar'; 
-
+import {MatSnackBarModule, MatSnackBar} from '@angular/material/snack-bar'; 
 import { Observable } from 'rxjs';
-import { debug } from 'util';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +16,7 @@ export class AppComponent implements OnInit {
   showEg = false;
   eg: Eg;
 
-  constructor(private hs: BitPreparedAPIService) { }
+  constructor(private hs: BitPreparedAPIService, private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
     // NOPE
@@ -58,9 +53,9 @@ export class AppComponent implements OnInit {
       elencoSpecialitaPossedute.push(element.slug);
     });
 
-    this.hs.specialita().subscribe( data => {
+    this.hs.specialita().subscribe( resp => {
       this.eg.specialita = new Array<Specialita>();
-      data.forEach(element => {
+      resp.body.forEach(element => {
         const specialita = new Specialita();
         specialita.nome = element.nome;
         specialita.icona = element.icona;
@@ -90,7 +85,7 @@ export class AppComponent implements OnInit {
       },
       err => {
         //console.error(err.message);
-        let snackBarRef = snackBar.open('Message archived');
+        let snackBarRef = this._snackBar.open('Message archived');
       }
     );
   }

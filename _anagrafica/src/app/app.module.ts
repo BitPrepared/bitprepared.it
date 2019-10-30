@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule, MdNativeDateModule } from '@angular/material';
+import { MatSnackBarModule, MatIconModule, MatToolbarModule, MatRippleModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule, MatGridListModule, MatRadioModule, MatInputModule, MatFormFieldModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
+import { HttpClientModule }    from '@angular/common/http';
 import { AnagraficaComponent } from './components/anagrafica/anagrafica.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavBarComponent } from './components/navbar/navbar.component';
@@ -31,19 +31,31 @@ export class MyHammerConfig extends HammerGestureConfig  {
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MaterialModule,
-    MdNativeDateModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
-    MomentModule
+    MomentModule,
+    HttpClientModule,
+    MatIconModule,
+    MatRippleModule,
+    MatDatepickerModule,
+    MatNativeDateModule, 
+    MatFormFieldModule,
+    MatRadioModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatGridListModule,
+    MatToolbarModule,
+    MatSnackBarModule
   ],
   providers: [
     {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: MyHammerConfig
     },
-    BitPreparedAPIService
+    BitPreparedAPIService,
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}
+    }
   ],
   bootstrap: [AppComponent]
 })

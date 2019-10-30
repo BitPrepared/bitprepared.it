@@ -11,20 +11,20 @@
         <label for="sesso">
           <strong><abbr title="required">*</abbr></strong>
         </label>
-        <md-error *ngIf="invalidFieldSex">Selezionare uno dei due sessi</md-error>
-        <md-radio-group id="sesso" formControlName="sesso" name="sesso" aria-required="true">
-          <md-radio-button value="M" aria-label="Ragazzo">Ragazzo</md-radio-button>
-          <md-radio-button value="F" aria-label="Ragazza">Ragazza</md-radio-button>
-        </md-radio-group>
+        <mat-error *ngIf="invalidFieldSex">Selezionare uno dei due sessi</mat-error>
+        <mat-radio-group id="sesso" formControlName="sesso" name="sesso" aria-required="true">
+          <mat-radio-button value="M" aria-label="Ragazzo">Ragazzo</mat-radio-button>
+          <mat-radio-button value="F" aria-label="Ragazza">Ragazza</mat-radio-button>
+        </mat-radio-group>
       </p>
 
       <p>
       <label for="nome">
         <strong><abbr title="required">*</abbr></strong>
       </label>
-      <md-input-container class="input-full-width">
-        <input mdInput formControlName="nome" placeholder="nome" aria-required="true" required=true value="" id="nome" name="nome">
-      </md-input-container>
+      <mat-form-field class="input-full-width">
+        <input matInput formControlName="nome" placeholder="nome" aria-required="true" required=true value="" id="nome" name="nome">
+      </mat-form-field>
       </p>
 
 
@@ -32,30 +32,30 @@
         <label for="cognome">
           <strong><abbr title="required">*</abbr></strong>
         </label>
-        <md-input-container class="input-full-width">
-          <input mdInput placeholder="cognome" formControlName="cognome" aria-required="true" required=true value="" id="cognome" name="cognome">
-        </md-input-container>
+        <mat-form-field class="input-full-width">
+          <input matInput placeholder="cognome" formControlName="cognome" aria-required="true" required=true value="" id="cognome" name="cognome">
+        </mat-form-field>
       </p>
 
       <p>
         <label for="dtnascita">
           <strong><abbr title="required">*</abbr></strong>
         </label>
-        <md-input-container>
-          <input mdInput formControlName="dtnascita" aria-required="true" required=true [mdDatepicker]="picker" [min]="minDate" [max]="maxDate" id="dtnascita" name="dtnascita" placeholder="Data nascita">
-          <button mdSuffix [mdDatepickerToggle]="picker"></button>
-        </md-input-container>
-        <md-datepicker #picker></md-datepicker>
+        <mat-form-field>
+          <!-- <input matInput formControlName="dtnascita" aria-required="true" required=true [mdDatepicker]="picker" [min]="minDate" [max]="maxDate" id="dtnascita" name="dtnascita" placeholder="Data nascita"> -->
+          <!-- <button mdSuffix [mdDatepickerToggle]="picker"></button> -->
+        </mat-form-field>
+        <mat-datepicker #picker></mat-datepicker>
       </p>
 
       <p>
         <label for="telefono">
           <strong><abbr title="required">*</abbr></strong>
         </label>
-        <md-input-container id="telefono" name="telefono">
+        <mat-form-field id="telefono" name="telefono">
           <span mdPrefix>+39 &nbsp;</span>
-          <input type="tel" mdInput placeholder="Telefono" aria-required="true" required=true formControlName="telefono">
-        </md-input-container>
+          <input type="tel" matInput placeholder="Telefono" aria-required="true" required=true formControlName="telefono">
+        </mat-form-field>
       </p>
 
       <p>
@@ -63,11 +63,11 @@
           <span>Specialita: </span>
           <strong><abbr title="required">*</abbr></strong>
         </label>
-        <md-grid-list md-gutter="8px" cols="2" rowHeight="50px">
-          <md-grid-tile *ngFor="let specialita of eg.specialita; let i=index">
-              <md-checkbox (change)="changeSpecialitaPosseduta($event, i)" [id]="specialita.slug" [checked]="specialita.selected" >{{specialita.nome}}</md-checkbox>
-          </md-grid-tile>
-        </md-grid-list>
+        <mat-grid-list mat-gutter="8px" cols="2" rowHeight="50px">
+          <mat-grid-tile *ngFor="let specialita of eg.specialita; let i=index">
+              <mat-checkbox (change)="changeSpecialitaPosseduta($event, i)" [id]="specialita.slug" [checked]="specialita.selected" >{{specialita.nome}}</mat-checkbox>
+          </mat-grid-tile>
+        </mat-grid-list>
       </p>
 
     </fieldset>
@@ -78,45 +78,45 @@
         <label for="via">
           <strong><abbr title="required">*</abbr></strong>
         </label>
-        <md-input-container class="input-full-width">
-          <input mdInput placeholder="via" aria-required="true" required=true value="" id="via" name="via" formControlName="via">
-        </md-input-container>
+        <mat-form-field class="input-full-width">
+          <input matInput placeholder="via" aria-required="true" required=true value="" id="via" name="via" formControlName="via">
+        </mat-form-field>
       </p>
 
       <p>
         <label for="ncivico">
           <strong><abbr title="required">*</abbr></strong>
         </label>
-        <md-input-container class="input-full-width">
-          <input mdInput placeholder="ncivico" aria-required="true" required=true value="" id="ncivico" name="ncivico" formControlName="ncivico">
-        </md-input-container>
+        <mat-form-field class="input-full-width">
+          <input matInput placeholder="ncivico" aria-required="true" required=true value="" id="ncivico" name="ncivico" formControlName="ncivico">
+        </mat-form-field>
       </p>
 
       <p>
         <label for="cap">
           <strong></strong>
         </label>
-        <md-input-container class="input-full-width">
-          <input mdInput placeholder="cap" value="" id="cap" name="cap" formControlName="cap">
-        </md-input-container>
+        <mat-form-field class="input-full-width">
+          <input matInput placeholder="cap" value="" id="cap" name="cap" formControlName="cap">
+        </mat-form-field>
       </p>
 
       <p>
         <label for="citta">
           <strong><abbr title="required">*</abbr></strong>
         </label>
-        <md-input-container class="input-full-width">
-          <input mdInput placeholder="citta" aria-required="true" required=true value="" id="citta" name="citta" formControlName="citta">
-        </md-input-container>
+        <mat-form-field class="input-full-width">
+          <input matInput placeholder="citta" aria-required="true" required=true value="" id="citta" name="citta" formControlName="citta">
+        </mat-form-field>
       </p>
 
       <p>
         <label for="provincia">
           <strong></strong>
         </label>
-        <md-input-container class="input-full-width">
-          <input mdInput placeholder="provincia" value="" id="provincia" name="provincia" formControlName="provincia">
-        </md-input-container>
+        <mat-form-field class="input-full-width">
+          <input matInput placeholder="provincia" value="" id="provincia" name="provincia" formControlName="provincia">
+        </mat-form-field>
       </p>
 
     </fieldset>
@@ -127,47 +127,47 @@
         <label for="nickname">
           <strong></strong>
         </label>
-        <md-input-container class="input-full-width">
-          <input mdInput placeholder="nickname" value="" id="nickname" name="nickname" formControlName="nickname">
-        </md-input-container>
+        <mat-form-field class="input-full-width">
+          <input matInput placeholder="nickname" value="" id="nickname" name="nickname" formControlName="nickname">
+        </mat-form-field>
       </p>
 
       <p>
         <label for="facebook">
           <strong></strong>
         </label>
-        <md-input-container>
+        <mat-form-field>
           <span mdPrefix>https://facebook.com/ &nbsp;</span>
-          <input type="text" mdInput id="facebook" name="facebook" placeholder="" formControlName="facebook">
-          <md-icon mdSuffix>mode_edit</md-icon>
-        </md-input-container>
+          <input type="text" matInput id="facebook" name="facebook" placeholder="" formControlName="facebook">
+          <mat-icon mdSuffix>mode_edit</mat-icon>
+        </mat-form-field>
       </p>
 
       <p>
         <label for="blog">
           <strong></strong>
         </label>
-        <md-input-container class="input-full-width">
-          <input mdInput placeholder="blog" value="" id="blog" name="blog" formControlName="blog">
-        </md-input-container>
+        <mat-form-field class="input-full-width">
+          <input matInput placeholder="blog" value="" id="blog" name="blog" formControlName="blog">
+        </mat-form-field>
       </p>
 
       <p>
         <label for="instagram">
           <strong></strong>
         </label>
-        <md-input-container class="input-full-width">
-          <input mdInput placeholder="instagram" value="" id="instagram" name="instagram" formControlName="instagram">
-        </md-input-container>
+        <mat-form-field class="input-full-width">
+          <input matInput placeholder="instagram" value="" id="instagram" name="instagram" formControlName="instagram">
+        </mat-form-field>
       </p>
 
       <p>
         <label for="email">
           <strong></strong>
         </label>
-        <md-input-container class="input-full-width">
-          <input mdInput placeholder="Email" id="email" name="email" formControlName="email">
-        </md-input-container>
+        <mat-form-field class="input-full-width">
+          <input matInput placeholder="Email" id="email" name="email" formControlName="email">
+        </mat-form-field>
       </p>
 
     </fieldset>
@@ -177,41 +177,41 @@
         <label for="nomereparto">
           <strong><abbr title="required">*</abbr></strong>
         </label>
-        <md-input-container class="input-full-width">
-          <input mdInput placeholder="Nome del Reparto" value="" aria-required="true" required=true id="nomereparto" name="nomereparto" formControlName="nomereparto">
-        </md-input-container>
+        <mat-form-field class="input-full-width">
+          <input matInput placeholder="Nome del Reparto" value="" aria-required="true" required=true id="nomereparto" name="nomereparto" formControlName="nomereparto">
+        </mat-form-field>
       </p>
 
       <p>
         <label for="nomesquadriglia">
           <strong><abbr title="required">*</abbr></strong>
         </label>
-        <md-input-container class="input-full-width">
-          <input mdInput placeholder="Nome della Squadriglia" value="" aria-required="true" required=true id="nomesquadriglia" name="nomesquadriglia" formControlName="nomesquadriglia">
-        </md-input-container>
+        <mat-form-field class="input-full-width">
+          <input matInput placeholder="Nome della Squadriglia" value="" aria-required="true" required=true id="nomesquadriglia" name="nomesquadriglia" formControlName="nomesquadriglia">
+        </mat-form-field>
       </p>
 
       <p>
         <label for="nomegruppo">
           <strong><abbr title="required">*</abbr></strong>
         </label>
-        <md-input-container class="input-full-width">
-          <input mdInput placeholder="Nome del Gruppo (Es: RIMINI 9)" aria-required="true" required=true value="" id="nomegruppo" name="nomegruppo" formControlName="nomegruppo">
-        </md-input-container>
+        <mat-form-field class="input-full-width">
+          <input matInput placeholder="Nome del Gruppo (Es: RIMINI 9)" aria-required="true" required=true value="" id="nomegruppo" name="nomegruppo" formControlName="nomegruppo">
+        </mat-form-field>
       </p>
 
       <p>
         <label for="zona">
           <strong><abbr title="required">*</abbr></strong>
         </label>
-        <md-input-container class="input-full-width">
-          <input mdInput placeholder="Nome della Zona (Es: Vicenza Piccole Dolomiti)" aria-required="true" required=true value="" id="zona" name="zona" formControlName="zona">
-        </md-input-container>
+        <mat-form-field class="input-full-width">
+          <input matInput placeholder="Nome della Zona (Es: Vicenza Piccole Dolomiti)" aria-required="true" required=true value="" id="zona" name="zona" formControlName="zona">
+        </mat-form-field>
       </p>
 
     </fieldset>
 
-    <button type="submit" md-raised-button>Salva</button>
+    <button type="submit" mat-raised-button>Salva</button>
 
   </form>
 

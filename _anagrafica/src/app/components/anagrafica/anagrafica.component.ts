@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, FormArray, Validators } from '@ang
 import { Observable } from 'rxjs';
 
 import { Indirizzo, Sesso, Social, Reparto, Eg, Specialita } from './data-model';
-import { MdCheckbox, MdCheckboxChange, MdCheckboxModule } from '@angular/material';
+import { MatCheckbox, MatCheckboxChange, MatCheckboxModule } from '@angular/material';
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -55,7 +55,8 @@ export class AnagraficaComponent implements OnInit {
       })
     });
 
-    this.egForm.valueChanges.debounceTime(3000).subscribe(val => {
+    // debounceTime(3000)
+    this.egForm.valueChanges.subscribe(val => {
       this.mapNewValue(val);
     });
   }
@@ -75,7 +76,7 @@ export class AnagraficaComponent implements OnInit {
     this.eg.reparto = this.mapReparto(val.reparto);
   }
 
-  changeSpecialitaPosseduta(event: MdCheckboxChange, i: number) {
+  changeSpecialitaPosseduta(event: MatCheckboxChange, i: number) {
     this.eg.specialita[i].selected = event.checked;
   }
 

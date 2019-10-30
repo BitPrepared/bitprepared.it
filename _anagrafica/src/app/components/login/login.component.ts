@@ -5,19 +5,19 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-ui-login',
-  ng-template: `
+  template: `
     <div>
       <h3>Login</h3>
       <form class="login-form" [formGroup]="loginForm" (ngSubmit)="save(loginForm.value)">
-        <md-input-container class="input-full-width">
-          <input mdInput formControlName="username" placeholder="username" aria-required="true"
+        <mat-form-field class="input-full-width">
+          <input matInput formControlName="username" placeholder="username" aria-required="true"
             required=true value="" id="username" name="username">
-        </md-input-container>
-        <md-input-container class="input-full-width">
-          <input mdInput type="password" formControlName="password" placeholder="password" aria-required="true"
+        </mat-form-field>
+        <mat-form-field class="input-full-width">
+          <input matInput type="password" formControlName="password" placeholder="password" aria-required="true"
             required=true value="" id="password" name="password">
-        </md-input-container>
-        <button type="submit" md-raised-button>Login</button>
+        </mat-form-field>
+        <button type="submit" mat-raised-button>Login</button>
       </form>
     </div>
   `,

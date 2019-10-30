@@ -3,13 +3,13 @@ import { Indirizzo, Sesso, Social, Reparto, Eg } from './../anagrafica/data-mode
 
 @Component({
   selector: 'app-ui-navbar',
-  ng-template: `
+  template: `
     <div id="navbarcontaier">
-      <md-toolbar class="navbar">
+      <mat-toolbar class="navbar">
         <a href="https://precampo.bitprepared.it">Home</a>
         <span class="example-spacer"></span>
-        <md-icon class="example-icon" *ngIf="valid">verified_user</md-icon>
-      </md-toolbar>
+        <mat-icon class="example-icon" *ngIf="valid">verified_user</mat-icon>
+      </mat-toolbar>
     </div>
   `,
   styleUrls: ['./navbar.component.css']
