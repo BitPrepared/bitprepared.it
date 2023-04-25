@@ -1,22 +1,22 @@
 name: Release Site
 
-on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
-
 # on:
+#   push:
+#     branches: [ "master" ]
 #   pull_request:
-#     branches:
-#       - master
-#     types:
-#       - closed
+#     branches: [ "master" ]
+
+on:
+  pull_request:
+    branches:
+      - master
+    types:
+      - closed
 
 
 jobs:
   release:
-    #if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     permissions:
       contents: write
