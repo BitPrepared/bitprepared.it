@@ -26,7 +26,9 @@ jobs:
     permissions:
       contents: write
     steps:
-    - env:
+    - name: Dump Precheck
+      run: echo $COMMIT_MESSAGE
+      env:
         COMMIT_MESSAGE: ${{ needs.precheck.outputs.head-commit-message }}
     - name: Get current date
       if: inputs.releaseVersion == ''
@@ -37,9 +39,6 @@ jobs:
     - name: Dump GitHub context
       id: github_context_step
       run: echo '${{ toJSON(github) }}'
-    - name: Dump Precheck
-      id: precheck_output
-      run: echo $COMMIT_MESSAGE
     - name: Test with environment variables
       run: echo $TAG_NAME - $RELEASE_NAME
       env:
