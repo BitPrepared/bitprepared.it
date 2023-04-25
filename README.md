@@ -25,4 +25,6 @@ Fork of Linear Jekyll Theme - more themes available @ http://jekyll.tips
 
 # BUILD WITH DOCKER
 
-`docker run --rm -it --mount type=bind,source=${PWD},target=/srv/jekyll -p 127.0.0.1:4000:4000 jekyll/jekyll:3 jekyll serve`
+`docker run --rm -it --mount type=bind,source=${PWD},target=/srv/jekyll --volume="$PWD/vendor/bundle:/usr/local/bundle:Z" -p 127.0.0.1:4000:4000 jekyll/jekyll:3 jekyll serve`
+
+ATTENZIONE jekyll 4 non e' compatibile

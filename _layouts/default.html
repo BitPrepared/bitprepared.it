@@ -6,9 +6,8 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
 -->
 <html>
 <head>
-	<title>{{ site.title }}{% if page.title %} &#8211; {{ page.title }}{% endif %}</title>
+	{% seo %}
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
 	
 	{% if page.tags %}
 		<meta name="keywords" content="{{ page.tags | join: ', ' }}">
@@ -61,8 +60,9 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
 				<span class="byline">be connected</span>
 			</header>
 			<ul class="contact">
-				<li><a href="https://www.twitter.com/BitPrepared" class="fa fa-twitter"><span>Twitter</span></a></li>
+				<li class="active"><a href="https://www.twitter.com/BitPrepared" class="fa fa-twitter"><span>Twitter</span></a></li>
 				<li class="active"><a href="https://www.facebook.com/bitprepared" class="fa fa-facebook"><span>Facebook</span></a></li>
+				<li class="active"><a href="https://www.instagram.com/bit.prepared/" class="fa fa-instagram"><span>Instagram</span></a></li>
 			</ul>
 		</section>
 	</div>
