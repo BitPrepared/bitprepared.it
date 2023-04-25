@@ -6,39 +6,24 @@ on:
   pull_request:
     branches: [ "master" ]
 
-jobs:
-  precheck:
-    runs-on: ubuntu-latest
-    outputs:
-      head-commit-message: ${{ steps.get_head_commit_message.outputs.headCommitMsg }}
-    steps:
-    - uses: actions/checkout@v3
-    - name: Print head git commit message
-      id: get_head_commit_message
-      run: echo "headCommitMsg=$(git show -s --format=%s)" >> $GITHUB_OUTPUT
-    - name: Dump get_head_commit_message
-      id: debug_head_commit_message
-      run: echo '${{ steps.get_head_commit_message.outputs.headCommitMsg }}'
+# on:
+#   push:
+#     branches:
+#       - master
 
+
+jobs:
   build:
     runs-on: ubuntu-latest
-    #if: ${{ contains(needs.precheck.outputs.head-commit-message, '[release]') }}
     permissions:
       contents: write
     steps:
-    - name: Dump Precheck
-      run: echo $COMMIT_MESSAGE
-      env:
-        COMMIT_MESSAGE: ${{ needs.precheck.outputs.head-commit-message }}
     - name: Get current date
       if: inputs.releaseVersion == ''
       id: date
       uses: Kaven-Universe/github-action-current-date-time@v1
       with:
         format: "YYYY-MM-DD"
-    - name: Dump GitHub context
-      id: github_context_step
-      run: echo '${{ toJSON(github) }}'
     - name: Test with environment variables
       run: echo $TAG_NAME - $RELEASE_NAME
       env:
@@ -59,4 +44,4 @@ jobs:
         replacesArtifacts: true
         makeLatest: true
         tag: "latest"
-        bodyFile: CHANGELOG.txt
+        bodyFile: "./CHANGELOG.txt"
