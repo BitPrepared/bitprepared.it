@@ -41,7 +41,7 @@ jobs:
       with:
         args: zip -qq -r release.zip _site
     - name: Test list file
-      run: echo $(ls)
+      run: cd ${{ github.workspace }} && echo $(ls)
     - uses: ncipollo/release-action@v1
       with:
         artifacts: "release.zip"
@@ -49,4 +49,4 @@ jobs:
         replacesArtifacts: true
         makeLatest: true
         tag: "latest"
-        bodyFile: "_site/CHANGELOG.txt"
+        bodyFile: "${{ github.workspace }}/CHANGELOG.txt"
