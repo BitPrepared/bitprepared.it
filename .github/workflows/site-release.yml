@@ -31,9 +31,12 @@ jobs:
         docker run \
         -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
         jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
+    - uses: montudor/action-zip@v1
+      with:
+        args: zip -qq -r release.zip _site
     - uses: ncipollo/release-action@v1
       with:
-        artifacts: "_site/*"
+        artifacts: "release.zip"
         makeLatest: true
-        tag: $TAG_NAME
+        tag: "$TAG_NAME"
         bodyFile: CHANGELOG.txt
