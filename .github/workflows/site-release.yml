@@ -26,7 +26,7 @@ jobs:
       id: date
       uses: josStorer/get-current-time@v2
       with:
-        format: YYYY-MM-DDTHH:mm:ssZ
+        format: YYYYMMDDTHHmmss
     - name: Test with environment variables
       run: echo $TAG_NAME - $RELEASE_NAME
       env:
