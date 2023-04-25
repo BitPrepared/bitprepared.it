@@ -7,13 +7,16 @@ on:
     branches: [ "master" ]
 
 # on:
-#   push:
+#   pull_request:
 #     branches:
 #       - master
+#     types:
+#       - closed
 
 
 jobs:
-  build:
+  release:
+    #if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -44,4 +47,4 @@ jobs:
         replacesArtifacts: true
         makeLatest: true
         tag: "latest"
-        bodyFile: "./CHANGELOG.txt"
+        bodyFile: "_site/CHANGELOG.txt"
