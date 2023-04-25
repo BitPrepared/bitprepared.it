@@ -1,13 +1,38 @@
 title: Bit Prepared
 description: Digito ergo sum, per un uso consapevole del digitale
+tagline: maestro delle tecnologie, esperto del compiuter, digital life
 paginate: 10
+language: 'it'
 
+url: https://www.bitprepared.it
 email: info@bitprepared.it
+
+twitter:
+  username: bitprepared
+  card: summary
 
 # output
 encoding: "utf-8"
 
-plugins: [jekyll-paginate]
+plugins: 
+  - jekyll-paginate
+  - jekyll-seo-tag
+
+gems:
+  - jekyll-seo-tag
+
+include: ['_pages']
 
 pages: ./_pages
 
+exclude:
+  - node_modules
+  - vendor
+  - .travis.yml
+  - .github
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - CHANGELOG.txt
+  - LICENSE.txt
+  - .git*
