@@ -7,7 +7,7 @@ email: info@bitprepared.it
 # output
 encoding: "utf-8"
 
-gems: [jekyll-paginate]
+plugins: [jekyll-paginate]
 
 pages: ./_pages
 

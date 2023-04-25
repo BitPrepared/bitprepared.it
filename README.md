@@ -5,8 +5,9 @@ Fork of Linear Jekyll Theme - more themes available @ http://jekyll.tips
 
 [Jekyll](https://jekyllrb.com/) 
 
-$ apt-get install ruby-dev bundler
-$ gem install jekyll bundler jekyll-paginate
+`$ apt-get install ruby-dev bundler`
+
+`$ gem install jekyll bundler jekyll-paginate`
 
 # Utilizzo [jekyllrb.com](https://jekyllrb.com/docs/structure/)
 
@@ -21,10 +22,7 @@ $ gem install jekyll bundler jekyll-paginate
 | _page --> contiene le pagine del sito che non sono ne home page ne pagine del blog  
 | _site --> contiene il sito generato da jekyll  
 
-# Build
 
-$ jekyll build
+# BUILD WITH DOCKER
 
-# Test in locale su 127.0.0.1:4000 (di default)
-
-$ jekyll serve --watch
+`docker run --rm -it --mount type=bind,source=${PWD},target=/srv/jekyll -p 127.0.0.1:4000:4000 jekyll/jekyll:3 jekyll serve`
