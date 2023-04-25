@@ -21,6 +21,7 @@ jobs:
     permissions:
       contents: write
     steps:
+    - uses: actions/checkout@v3
     - name: Get current date
       if: inputs.releaseVersion == ''
       id: date
@@ -32,8 +33,6 @@ jobs:
       env:
         TAG_NAME: tag-${{ steps.date.outputs.time }}
         RELEASE_NAME: release-${{ steps.date.outputs.time }}
-    - name: Test list file before zip
-      run: cd ${{ github.workspace }} && echo $(ls)
     - name: Build the site in the jekyll/builder container
       run: |
         docker run \
@@ -42,8 +41,6 @@ jobs:
     - uses: montudor/action-zip@v1
       with:
         args: zip -qq -r release.zip _site
-    - name: Test list file
-      run: cd ${{ github.workspace }} && echo $(ls)
     - uses: ncipollo/release-action@v1
       with:
         artifacts: "release.zip"
@@ -51,4 +48,4 @@ jobs:
         replacesArtifacts: true
         makeLatest: true
         tag: "latest"
-        bodyFile: "${{ github.workspace }}/CHANGELOG.txt"
+        bodyFile: "CHANGELOG.txt"
