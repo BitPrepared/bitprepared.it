@@ -40,6 +40,8 @@ jobs:
     - uses: montudor/action-zip@v1
       with:
         args: zip -qq -r release.zip _site
+    - name: Test list file
+      run: echo $(ls)
     - uses: ncipollo/release-action@v1
       with:
         artifacts: "release.zip"
