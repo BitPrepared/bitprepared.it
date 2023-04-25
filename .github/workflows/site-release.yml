@@ -15,7 +15,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Print head git commit message
       id: get_head_commit_message
-      run: echo "{headCommitMsg}={$(git show -s --format=%s)}" >> $GITHUB_OUTPUT
+      run: echo "headCommitMsg=$(git show -s --format=%s)" >> $GITHUB_OUTPUT
 
   build:
     runs-on: ubuntu-latest
