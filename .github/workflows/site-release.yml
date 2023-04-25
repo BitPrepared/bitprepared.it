@@ -1,17 +1,17 @@
 name: Release Site
 
-# on:
-#   push:
-#     branches: [ "master" ]
-#   pull_request:
-#     branches: [ "master" ]
-
 on:
+  push:
+    branches: [ "master" ]
   pull_request:
-    branches:
-      - master
-    types:
-      - closed
+    branches: [ "master" ]
+
+# on:
+#   pull_request:
+#     branches:
+#       - master
+#     types:
+#       - closed
 
 
 jobs:
@@ -44,8 +44,7 @@ jobs:
     - uses: ncipollo/release-action@v1
       with:
         artifacts: "release.zip"
-        allowUpdates: true
-        replacesArtifacts: true
+        removeArtifacts: true
         makeLatest: true
-        tag: "latest"
+        tag: ${{ steps.date.outputs.time }}
         bodyFile: "CHANGELOG.txt"
