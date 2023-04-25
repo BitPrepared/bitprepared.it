@@ -1,0 +1,9 @@
+Changelog BitPrepared.it
+-------------------
+
+HEAD   (2023-04-25)
+  * fixed buonacaccia link epppi
+  * create github workflow for release
+
+1.0.0   (2019-06-01)
+  * aggiornamento software list

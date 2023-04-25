@@ -1,0 +1,51 @@
+name: Release Site
+
+# on:
+#   push:
+#     branches: [ "master" ]
+#   pull_request:
+#     branches: [ "master" ]
+
+on:
+  pull_request:
+    branches:
+      - master
+    types:
+      - closed
+
+
+jobs:
+  release:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@v3
+    - name: Get current date
+      if: inputs.releaseVersion == ''
+      id: date
+      uses: Kaven-Universe/github-action-current-date-time@v1
+      with:
+        format: "YYYY-MM-DD"
+    - name: Test with environment variables
+      run: echo $TAG_NAME - $RELEASE_NAME
+      env:
+        TAG_NAME: tag-${{ steps.date.outputs.time }}
+        RELEASE_NAME: release-${{ steps.date.outputs.time }}
+    - name: Build the site in the jekyll/builder container
+      run: |
+        docker run \
+        -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
+        jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
+    - uses: montudor/action-zip@v1
+      with:
+        args: zip -qq -r release.zip _site
+    - uses: ncipollo/release-action@v1
+      with:
+        artifacts: "release.zip"
+        allowUpdates: true
+        replacesArtifacts: true
+        makeLatest: true
+        tag: "latest"
+        bodyFile: "CHANGELOG.txt"
