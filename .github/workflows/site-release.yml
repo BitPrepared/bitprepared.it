@@ -14,8 +14,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Print head git commit message
-        id: get_head_commit_message
-        run: echo "::set-output name=headCommitMsg::$(git show -s --format=%s)"
+      id: get_head_commit_message
+      run: echo "::set-output name=headCommitMsg::$(git show -s --format=%s)"
   build:
     runs-on: ubuntu-latest
     if: ${{ contains(needs.precheck.outputs.head-commit-message, '[release]') }}
