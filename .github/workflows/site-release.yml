@@ -36,4 +36,4 @@ jobs:
         artifacts: "_site/*"
         makeLatest: true
         tag: $TAG_NAME
-        bodyFile: ${{ github.workspace }}-CHANGELOG.txt
+        bodyFile: CHANGELOG.txt
