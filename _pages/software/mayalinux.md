@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 permalink: /software/mayalinux/
 title: Mayalinux
 tags: [bitprepared, programmi, mayalinux]

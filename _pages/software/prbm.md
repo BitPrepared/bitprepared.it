@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 permalink: /software/prbm/
 title: PRBMM
 tags: [bitprepared, programmi, prbm]

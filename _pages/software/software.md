@@ -12,47 +12,59 @@ image:
 
 ### Programmi Utili per una scout digitale "leale"
 
-![Libreoffice]({{ site.url }}/images/software/libreoffice.png) [Libreoffice]({{ site.url }}{{ page.permalink }}libreoffice)
+![Debian]({{ site.url }}/assets/images/pages/software/debian.png) [Debian](https://www.debian.org/)
+
+* Distribuzione linux utilizzata sui computer al campo
+
+![Libreoffice]({{ site.url }}/assets/images/pages/software/libreoffice.png) [Libreoffice]({{ site.url }}{{ page.permalink }}libreoffice)
 
 * Programma per l'editing di testi, calcolo, presentazioni. Utile per scrivere un canzoniere oppure un bansiere.
 
-![Wordrpess]({{ site.url }}/images/software/wordpress.png) [Wordpress]({{ site.url }}{{ page.permalink }}wordpress)
+![Wordrpess]({{ site.url }}/assets/images/pages/software/wordpress.png) [Wordpress](https://wordpress.org)
 
 * Piattaforma per la creazione di un sito o blog. Utile per scrivere un giornalino del campo online
 
-![Gimp]({{ site.url }}/images/software/gimp.png) [Gimp]({{ site.url }}{{ page.permalink }}gimp)
+![Gimp]({{ site.url }}/assets/images/pages/software/gimp.png) [Gimp](https://www.gimp.org)
 
 * Programma per la grafica e il fotoritocco.
 
-![QGIS]({{ site.url }}/images/software/qgis.png) [QGIS]({{ site.url }}{{ page.permalink }}qgis) 
+![QGIS]({{ site.url }}/assets/images/pages/software/qgis.png) [QGIS](https://www.qgis.org/it/site/) 
 
 * Programma per la gestione, visualizzazione, modifica, analisi di dati geografici. Utile per disegnare una cartina del campo dopo il sopraluogo.
 
+![OsmAnd]({{ site.url }}/assets/images/pages/software/osmand.png) [OsmAnd](https://play.google.com/store/apps/details?id=net.osmand&hl=it)
 
-![OSMTracker]({{ site.url }}/images/software/osmtracker.png) [OSMTracker](https://play.google.com/store/apps/details?id=me.guillaumin.android.osmtracker&hl=it)
+* Applicazione Android per la navigazione e visualizzazione mappe con accesso ai dati liberi, mondiali e di gran qualita' OpenStreetMap (OSM)
+
+![OSMTracker]({{ site.url }}/assets/images/pages/software/osmtracker.png) [OSMTracker](https://play.google.com/store/apps/details?id=me.guillaumin.android.osmtracker&hl=it)
 
 * Programma per il rilevamento dati geografici
 
-![Mayalinux]({{ site.url }}/images/software/mayalinux.png) [Mayalinux]({{ site.url }}{{ page.permalink }}mayalinux)
+![Mayalinux]({{ site.url }}/assets/images/pages/software/mayalinux.png) [Mayalinux](https://github.com/BitPrepared/Mayalinux)
 
-* Gioco ambientato in Matrix (o anche Monkey Island) per sperimentare l'uso della riga di comando su Linux.
+* Gioco ambientato in Star Wars (o anche Monkey Island e Matrix) per sperimentare l'uso della riga di comando su Linux
 
-![PRBMM]({{ site.url }}/images/software/prbmm.png) [PRBMM]({{ site.url }}{{ page.permalink }}prbm)
+![PRBMM]({{ site.url }}/assets/images/pages/software/prbmm.png) [PRBMM](https://play.google.com/store/apps/details?id=it.bitprepared.prbm.mobile&hl=it)
 
-* Programma per realizzare un Percorso Rettificato Belga Multimediale. Dopo aver riportato i dati presi sul campo in missione può essere utile rivedere il percorso che si è fatto su un "sito" corredato di immagini, descrizioni, foto ecc...
+* Programma per realizzare un Percorso Rettificato Belga Multimediale. Dopo aver riportato i dati presi sul campo in missione puo' essere utile rivedere il percorso che si e' fatto su un "sito" corredato di immagini, descrizioni, foto ecc...
 
-[Flora]({{ site.url }}{{ page.permalink }}flora)
+[Flora](http://www.bitprepared.it/flora/flora.php)
 
 * Sito per la ricerca dicotomica di fiori e piante. Utile per scoprire informazioni dettagliate sulla flora che abbiamo trovato al campo.
 
-![VLC]({{ site.url }}/images/software/vlc.png) [Vlc]({{ site.url }}{{ page.permalink }}vlc)
+![VLC]({{ site.url }}/assets/images/pages/software/vlc.png) [Vlc](https://www.videolan.org/vlc/index.it.html)
 
 * Programma per riprodurre video
 
 [AppLab](https://code.org/educate/applab) 
 
-![Code.org]({{ site.url }}/images/software/code.png)[Code.org]({{ site.url }}{{ page.permalink }}code) 
+![Scribus]({{ site.url }}/assets/images/pages/software/scribus.png)[Scribus](https://www.scribus.net/) 
 
-* Siti utilizzati durante il workshop "App"
+* Programma per l'editoria e l'impaginazione
+
+![qStopmotion]({{ site.url }}/assets/images/pages/software/qstopmotion.png)[qStopmotion](http://www.qstopmotion.org/) 
+
+* Programma per la realizzazione di stopmotion
+
 
 

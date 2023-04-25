@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 permalink: /software/qgis/
 title: QGIS
 tags: [bitprepared, programmi, qgis]

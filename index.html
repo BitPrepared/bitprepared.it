@@ -1,34 +1,59 @@
 ---
-title: digito ergo sum
+title: benvenuti
 layout: default
 tags: [agesci,bitprepared,scout,informatica,specializzazioni]
 ---
-
-<header class="masthead">
-	<div class="wrap">
-		<a href="{{ site.url }}/" class="site-logo" rel="home" title="{{ site.title }}">
-			<img src="{{ site.url }}/images/{{ site.logo }}" width="200" height="200" alt="{{ site.title }} logo" class="animated bounceInDown"/>
-		</a>
-		<h1 class="site-title animated fadeIn">{{site.title}}</h1>
-		<h2 class="site-description animated fadeIn">{{site.description}}</h2>
-	</div>
-</header>
-
-<article class="entry">
-    <div class="entry-wrapper">
-		<header class="entry-header">
-			<h4 class="entry-title">News</h4>
+<!-- Featured -->
+<div id="featured">
+	<div class="container">
+<!--		<header>
+			<h2>Welcome to Linear</h2>
 		</header>
-		<div class="entry-content">
-			<ul class="post-list">
-				{% for post in site.posts limit:10 %} 
-				  <li>
-				  	<article>
-				  		<a href="{{ site.url }}{{ post.url }}">{{ post.title }} <span class="entry-date"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time></span></a>
-				  	</article>
-				  </li>
-				{% endfor %}
-			</ul>
+		<p>This is <strong>Linear</strong>, a responsive HTML5 site template freebie by <a href="http://templated.co">TEMPLATED</a>. Released for free under the <a href="http://templated.co/license">Creative Commons Attribution</a> license, so use it for whatever (personal or commercial) &ndash; just give us credit! Check out more of our stuff at <a href="http://templated.co">our site</a> or follow us on <a href="http://twitter.com/templatedco">Twitter</a>.</p>
+		<hr />
+-->		<div class="row">
+			<section class="4u">
+				<span class="pennant"><span class="fa fa-eg"></span></span>
+				<h3>Campo di competenza EG</h3>
+				<p>Google, social network, blog, connessioni wireless al campo, come anche fotoritocco, video editing e tanto altro!<br/>mantenendo comunque lo stile scout che ci contraddistingue!</p>
+				<a href="/eventi/campo-eg" class="button button-style1">Read More</a>
+			</section>
+			<section class="4u">
+				<span class="pennant"><span class="fa fa-rs"></span></span>
+				<h3>EPPPI per RS</h3>
+				<p>La scelta politica nelle nostre società iperconnesse cosa vuol dire? Come possiamo sfruttare i social network per agire?<br/>
+Queste le principali domande del primo Workshop per RS di Bit Prepared</p>
+				<a href="/eventi/epppi" class="button button-style1">Read More</a>
+			</section>
+			<section class="4u">
+				<span class="pennant"><span class="fa fa-coca"></span></span>
+				<h3>Stage per capi</h3>
+				<p>Lo stage è pensato come strumento per portare avanti una ricerca condivisa di cosa voglia significa essere scout nell'era del Web 2.0. La legge scout riletta in ottica del sempre connesso e del tutto adesso, qui e subito.</p>
+				<a href="/eventi/stage" class="button button-style1">Read More</a>
+			</section>
+
 		</div>
 	</div>
-</article>
+</div>
+
+<!-- Main -->
+	<div id="main">
+		<div id="content" class="container">
+	
+			{% for post in site.posts offset: 0 limit: 4 %}
+                        <div class="row">
+                                <section class="8u -2u">
+                                        <a href="{{ site.prefix }}{{ post.url }}" class="image full"><img src="/assets/{{ post.featured }}" alt=""></a>
+                                        <header>
+                                                <h2>{{ post.title }}</h2>
+                                        </header>
+                                        {{ post.excerpt }}
+                                        <a href="{{ site.prefix }}{{ post.url }}" class="button button-style1">Read More</a>
+                                </section>
+                        </div>
+                        {% endfor %}
+
+		</div>
+	
+	</div>
+

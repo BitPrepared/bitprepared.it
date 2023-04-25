@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 permalink: /software/gimp/ 
 title: Gimp
 tags: [bitprepared, programmi, gimp]

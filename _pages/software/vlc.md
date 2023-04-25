@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 permalink: /software/vlc/
 title: Vlc
 tags: [bitprepared, programmi, vlc]
