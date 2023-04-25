@@ -24,8 +24,8 @@ jobs:
     - name: Test with environment variables
       run: echo $TAG_NAME - $RELEASE_NAME
       env:
-        TAG_NAME: tag-${{ steps.date.outputs.date }}
-        RELEASE_NAME: release-${{ steps.date.outputs.date }}
+        TAG_NAME: tag-${{ steps.date.outputs }}
+        RELEASE_NAME: release-${{ steps.date.outputs }}
     - name: Build the site in the jekyll/builder container
       run: |
         docker run \
@@ -35,4 +35,5 @@ jobs:
       with:
         artifacts: "_site/*"
         makeLatest: true
+        tag: $TAG_NAME
         bodyFile: ${{ github.workspace }}-CHANGELOG.txt
