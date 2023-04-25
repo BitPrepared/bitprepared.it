@@ -19,7 +19,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    if: ${{ contains(needs.precheck.outputs.head-commit-message, '[release]') }}
+    #if: ${{ contains(needs.precheck.outputs.head-commit-message, '[release]') }}
     permissions:
       contents: write
     steps:
@@ -32,6 +32,9 @@ jobs:
     - name: Dump GitHub context
       id: github_context_step
       run: echo '${{ toJSON(github) }}'
+    - name: Dump Precheck
+      id: precheck_output
+      run: echo '${{ needs.precheck.outputs.head-commit-message }}'
     - name: Test with environment variables
       run: echo $TAG_NAME - $RELEASE_NAME
       env:
