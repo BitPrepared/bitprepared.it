@@ -3,7 +3,7 @@ layout: page
 permalink: /eventi/epppi/
 title: Essere solidi in una società immateriale
 tags: [bitprepared, epppi, rs]
-modified: 2019-03-08
+modified: 2023-04-25
 # featured: wordpress.png
 ---
 
@@ -29,4 +29,4 @@ Siamo chiamati ad essere il lievito nel pane, cioè un agente di cambiamento sil
 
 Ti aspettiamo!!
 
-Iscriviti al seguente link: [https://buonacaccia.net/event.aspx?e=9562](https://buonacaccia.net/event.aspx?e=9562)
+Iscriviti al seguente link: [https://buonacaccia.net/event.aspx?e=16724](https://buonacaccia.net/event.aspx?e=16724)
