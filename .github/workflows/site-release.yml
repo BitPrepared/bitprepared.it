@@ -24,8 +24,8 @@ jobs:
     - name: Test with environment variables
       run: echo $TAG_NAME - $RELEASE_NAME
       env:
-        TAG_NAME: tag-${{ steps.date.outputs }}
-        RELEASE_NAME: release-${{ steps.date.outputs }}
+        TAG_NAME: tag-${{ steps.date.outputs.time }}
+        RELEASE_NAME: release-${{ steps.date.outputs.time }}
     - name: Build the site in the jekyll/builder container
       run: |
         docker run \
