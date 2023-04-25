@@ -5,6 +5,7 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+  if: ${{ contains(github.event.head_commit.message, '[release]') }}
 
 jobs:
   build:
@@ -37,6 +38,8 @@ jobs:
     - uses: ncipollo/release-action@v1
       with:
         artifacts: "release.zip"
+        allowUpdates: true
+        replacesArtifacts: true
         makeLatest: true
-        tag: "$TAG_NAME"
+        tag: "latest"
         bodyFile: CHANGELOG.txt
