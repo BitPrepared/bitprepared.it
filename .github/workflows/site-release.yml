@@ -32,6 +32,8 @@ jobs:
       env:
         TAG_NAME: tag-${{ steps.date.outputs.time }}
         RELEASE_NAME: release-${{ steps.date.outputs.time }}
+    - name: Test list file before zip
+      run: cd ${{ github.workspace }} && echo $(ls)
     - name: Build the site in the jekyll/builder container
       run: |
         docker run \
