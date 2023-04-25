@@ -1,4 +1,4 @@
-name: Jekyll site CI
+name: Release Site
 
 on:
   push:
@@ -10,6 +10,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
     - uses: actions/checkout@v3
@@ -18,3 +20,8 @@ jobs:
         docker run \
         -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
         jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
+    - uses: ncipollo/release-action@v1
+      with:
+        artifacts: "_site/*"
+        makeLatest: true
+        bodyFile: ${{ github.workspace }}-CHANGELOG.txt
