@@ -7,8 +7,66 @@ layout: default
 		<div class="row">
 			<section class="12u">
 				<link rel="stylesheet" href="/assets/css/epppi-custom.css" />
+				<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-				{{ content }}
+				<div style="position: relative;">
+					<button id="edit-btn" class="epppi-edit-icon" onclick="openMarkText()" title="Modifica con MarkText">
+						<i class="fas fa-edit"></i>
+					</button>
+					{{ content }}
+				</div>
+
+					<script>
+						// Path del progetto host (iniettato da plugin env_vars.rb)
+						const HOST_PROJECT_PATH = '{{ site.project_path }}';
+
+						// Fallback per sviluppo locale senza Docker
+						if (!HOST_PROJECT_PATH || HOST_PROJECT_PATH === '{{ site.project_path }}') {
+							console.warn('[Editor] HOST_PROJECT_PATH non impostato, usa fallback');
+							// Tenta di rilevare path dall'URL corrente
+							const currentPath = window.location.pathname;
+							HOST_PROJECT_PATH = '/workspace' + currentPath.split('/').slice(0, -1).join('/');
+						}
+
+					// Funzione per aprire l'editor con URI scheme
+					function openMarkText() {
+						console.log('[Editor] Cliccato icona modifica');
+
+						try {
+							// Path del file markdown sul host
+							const markdownPath = HOST_PROJECT_PATH + '/_pages/eventi/epppi_rs.md';
+							console.log('[Editor] File path:', markdownPath);
+
+							// Genera URI scheme per MarkText
+							const editorUri = 'marktext://file/' + markdownPath;
+							console.log('[Editor] URI scheme:', editorUri);
+
+							// Apri l'URI scheme
+							window.location.href = editorUri;
+
+							showNotification('✅ Apertura MarkText...');
+						} catch (error) {
+							console.error('[Editor] Errore:', error);
+							showNotification('❌ Errore apertura editor', 'error');
+						}
+					}
+
+					// Mostra notifica temporanea
+					function showNotification(message, type = 'success') {
+						const existing = document.querySelector('.epppi-temp-notification');
+						if (existing) existing.remove();
+
+						const notification = document.createElement('div');
+						notification.className = 'epppi-temp-notification';
+						notification.textContent = message;
+						notification.style.cssText = 'position: fixed; top: 20px; right: 20px; background: ' +
+							(type === 'error' ? '#ef4444' : '#10b981') +
+							'; color: white; padding: 15px 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 10001; font-weight: 500;';
+						document.body.appendChild(notification);
+
+						setTimeout(() => notification.remove(), 3000);
+					}
+				</script>
 
 			</section>
 		</div>

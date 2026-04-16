@@ -1,5 +1,39 @@
 /* EPPPI Custom Styles */
 
+/* Edit icon for local development */
+.epppi-edit-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: white;
+    border: 2px solid #667eea;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #667eea;
+    padding: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.epppi-edit-icon:hover {
+    background: #667eea;
+    border-color: #667eea;
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.epppi-edit-icon i {
+    pointer-events: none;
+    font-size: 18px;
+}
+
 .epppi-hero {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     padding: 60px 40px;
