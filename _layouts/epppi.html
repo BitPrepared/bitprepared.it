@@ -34,36 +34,6 @@ layout: default
 						</ul>
 					</div>
 
-					<!-- Info Pratiche -->
-					<div class="epppi-box">
-						<h2>📋 Info Pratiche</h2>
-						<div class="epppi-info-grid">
-							<div class="epppi-info-item">
-								<strong>📅 Quando</strong>
-								<p>{{ page.info_pratiche.quando.date }}<br>
-								Arrivo: {{ page.info_pratiche.quando.arrivo }}<br>
-								Partenza: {{ page.info_pratiche.quando.partenza }}</p>
-							</div>
-							<div class="epppi-info-item">
-								<strong>📍 Dove</strong>
-								<p>{{ page.info_pratiche.dove.citta }}<br>{{ page.info_pratiche.dove.luogo }}</p>
-							</div>
-							<div class="epppi-info-item">
-								<strong>👥 Per chi</strong>
-								<p>{{ page.info_pratiche.per_chi }}</p>
-							</div>
-							<div class="epppi-info-item">
-								<strong>🎯 Posti</strong>
-								<p>{{ page.info_pratiche.posti.max }} massimo<br>
-								{{ page.info_pratiche.posti.min }} minimo per confermare<br>
-								Waiting list: {{ page.info_pratiche.posti.waiting }} persone</p>
-							</div>
-						</div>
-						<div style="text-align: center; margin-top: 30px;">
-							<a href="{{ page.cta.secondary.url }}" class="epppi-cta epppi-cta-secondary">{{ page.cta.secondary.text }}</a>
-						</div>
-					</div>
-
 					<!-- Target Audience -->
 					<div class="epppi-box">
 						<h2>🎯 Ti ritrovi?</h2>
@@ -107,17 +77,39 @@ layout: default
 					<!-- Logistica -->
 					<div class="epppi-box">
 						<h2>🚀 Logistica</h2>
-						<p><strong>Come arrivare</strong></p>
-						<p>{{ page.logistica.come_arrivare }}</p>
-
-						<p><strong>Cosa portare</strong></p>
-						<ul>
-							{% for item in page.logistica.cosa_portare %}
-							<li>{{ item }}</li>
-							{% endfor %}
-						</ul>
-
-						<p><strong>Alloggio</strong><br>{{ page.logistica.alloggio }}</p>
+						<div class="epppi-info-grid">
+							<div class="epppi-info-item">
+								<strong>{{ page.logistica.quando.icon }} {{ page.logistica.quando.label }}</strong>
+								<p>{{ page.logistica.quando.date }}<br>
+								Arrivo: {{ page.logistica.quando.arrivo }}<br>
+								Partenza: {{ page.logistica.quando.partenza }}</p>
+							</div>
+							<div class="epppi-info-item">
+								<strong>{{ page.logistica.dove.icon }} {{ page.logistica.dove.label }}</strong>
+								<p>{{ page.logistica.dove.citta }}<br>{{ page.logistica.dove.luogo }}</p>
+							</div>
+							<div class="epppi-info-item">
+								<strong>{{ page.logistica.per_chi.icon }} {{ page.logistica.per_chi.label }}</strong>
+								<p>{{ page.logistica.per_chi.text }}</p>
+							</div>
+							<div class="epppi-info-item">
+								<strong>{{ page.logistica.posti.icon }} {{ page.logistica.posti.label }}</strong>
+								<p>{{ page.logistica.posti.max }} massimo<br>
+								{{ page.logistica.posti.min }} minimo per confermare<br>
+								Waiting list: {{ page.logistica.posti.waiting }} persone</p>
+							</div>
+							<div class="epppi-info-item">
+								<strong>{{ page.logistica.come_arrivare.icon }} {{ page.logistica.come_arrivare.label }}</strong>
+								<p>{{ page.logistica.come_arrivare.text }}</p>
+							</div>
+							<div class="epppi-info-item">
+								<strong>{{ page.logistica.cosa_portare.icon }} {{ page.logistica.cosa_portare.label }}</strong>
+								<p>{{ page.logistica.cosa_portare.items }}</p>
+							</div>
+						</div>
+						<div style="text-align: center; margin-top: 30px;">
+							<a href="{{ page.cta.secondary.url }}" class="epppi-cta epppi-cta-secondary">{{ page.cta.secondary.text }}</a>
+						</div>
 					</div>
 
 					<!-- FAQ -->

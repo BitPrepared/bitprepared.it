@@ -36,20 +36,6 @@ benefits:
     title: "Come costruire una democrazia partecipativa"
     desc: "Simulazione Parlamento Europeo e World Café"
 
-info_pratiche:
-  quando:
-    date: "8-10 Maggio 2026"
-    arrivo: "8/5 mattina"
-    partenza: "10/5 pomeriggio"
-  dove:
-    citta: "Bologna"
-    luogo: "Chiesa San Vincenzo de Paoli"
-  per_chi: "Rover e Scolte AGESCI"
-  posti:
-    max: 24
-    min: 8
-    waiting: 8
-
 target_audience:
   - icon: "📱"
     text: "Vivi in un mondo sempre più connesso, ma ti senti spesso"
@@ -99,13 +85,35 @@ outcomes:
   - "Comunità di rover/scolte che condividono le tue domande"
 
 logistica:
-  come_arrivare: "Info dettagliate verranno inviate agli iscritti"
+  quando:
+    icon: "📅"
+    label: "Quando"
+    date: "8-10 Maggio 2026"
+    arrivo: "8/5 mattina"
+    partenza: "10/5 pomeriggio"
+  dove:
+    icon: "📍"
+    label: "Dove"
+    citta: "Bologna"
+    luogo: "Chiesa San Vincenzo de Paoli"
+  per_chi:
+    icon: "👥"
+    label: "Per chi"
+    text: "Rover e Scolte AGESCI"
+  posti:
+    icon: "🎯"
+    label: "Posti"
+    max: 24
+    min: 8
+    waiting: 8
+  come_arrivare:
+    icon: "🚗"
+    label: "Come arrivare"
+    text: "Info dettagliate verranno inviate agli iscritti"
   cosa_portare:
-    - "Sacco a pelo"
-    - "Abbigliamento comodo"
-    - "Quaderno e penna"
-    - "Buona volontà :)"
-  alloggio: "Chiesa San Vincenzo de Paoli"
+    icon: "🎒"
+    label: "Cosa portare"
+    items: "Sacco a pelo, Abbigliamento comodo, Quaderno e penna, Buona volontà :)"
 
 faq:
   - q: "L'evento è solo per AGESCI?"
