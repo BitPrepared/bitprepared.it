@@ -1,32 +1,217 @@
 ---
-layout: page
+layout: epppi
 permalink: /eventi/epppi/
-title: Essere solidi in una società immateriale
-tags: [bitprepared, epppi, rs]
-modified: 2023-04-25
-# featured: wordpress.png
+title: EPPPI Esseri Solidi 2026 | Bologna 8-10 Maggio
+subtitle: Come essere persone concrete in un mondo digitale?
+tags: [bitprepared, epppi, rs, esseri solidi, società digitale, rover, scolte, bologna, 2026]
+modified: 2026-04-15
+image: /assets/images/locandina_epppi_2026.jpg
 ---
 
-Essere sale della terra. Che cosa significa? 
+<div class="epppi-hero" markdown="0">
 
-E’ la missione di ognuno di noi ed ha a che fare con il nostro agire politico. 
+<h2>Esseri solidi nella società immateriale</h2>
 
-Politica? No basta! Ne ho abbastanza e non mi interessa. I nostri politici non sanno niente della vita di noi cittadini… non sanno niente della nostra terra. 
+<h3>Come essere persone concrete in un mondo sempre più digitale?</h3>
 
-Ma si deve andare oltre a questo, e scoprire il vero significato delle cose. Scelta politica significa prendersi cura con responsabilità del proprio territorio, non solo (ma perché no, anche) attraverso l’appartenenza ad un partito. Ed allora ecco: essere sale della terra vuol dire cambiare il mondo un pezzo alla volta, partendo dal nostro piccolo pezzettino di giardino. 
-Scelta politica è ad esempio un campo di servizio che porta un clan milanese a  Pozzallo, per conoscere la realtà dell’immigrazione clandestina, tornando a casa con lo spirito di accoglienza siciliano … e cercare di diffonderlo nella grigia e fredda Milano. 
+<p><strong>📍 Bologna | 📅 8-10 Maggio 2026 | 👥 Rover e Scolte in cammino</strong></p>
 
-Essere sale della terra vuol dire mettere in piedi una cooperativa che aiuta le donne ad uscire dalla disoccupazione: non si promettono sussidi, ma si insegna un lavoro, riciclando materiali di scarto dal Festival del Cinema di Venezia. Oppure un’associazione che si occupa delle carcerate, dando loro una ragione di credere nel futuro e nel riscatto. Non è altro che … lasciare il posto dove si vive migliore di come lo abbiamo trovato. Frase scontata, ma il vecchio B.P. ci aveva visto lungo e per voi RS questa è una delle “parole maestre” che può guidarvi lontano nelle vostre strade.
+<a href="https://buonacaccia.net/Event.aspx?e=24768" class="epppi-cta">🎯 ISCRIVITI SUBITO - SOLO 24 POSTI</a>
 
-Anche il Papa ci ha esortati a vivere il nostro mondo con quella responsabilità che noi scout ormai conosciamo bene. 
+</div>
 
-Ma la conosci veramente? Magari ci hai pensato, magari sai di cosa si tratta, magari hai capito benissimo … ma hai mai toccato con mano cosa vuol dire essere sale della terra?
+<div class="epppi-benefits" markdown="0">
 
-Con il nostro evento vogliamo darti l’opportunità di essere sale della vita, attraverso l’incontro e il confronto con chi questa scelta l’ha fatta e la porta avanti a testa alta, come stile di vita e profonda vocazione.
+<h3>⚡ In 3 giorni scoprirai:</h3>
 
-Siamo chiamati ad essere il lievito nel pane, cioè un agente di cambiamento silenzioso che trasforma ogni cosa con cui viene a contatto in qualcosa che nutre e rinfranca.
+<ul>
+<li>🎮 <strong>Come il digitale influenza la tua vita</strong> - Dalle fake news ai social media, dall'AI alla percezione della realtà</li>
+<li>📰 <strong>Come riconoscere le fake news</strong> - Sviluppa pensiero critico e verifica delle fonti</li>
+<li>🌍 <strong>Come fare scelte etiche nella società</strong> - Economia solidale, democrazia partecipativa, impegno concreto</li>
+<li>🤝 <strong>Come costruire una democrazia partecipativa</strong> - Simulazione Parlamento Europeo e World Café</li>
+</ul>
 
+</div>
 
-Ti aspettiamo!!
+<div class="epppi-box" markdown="0">
 
-Iscriviti al seguente link: [https://buonacaccia.net/event.aspx?e=16724](https://buonacaccia.net/event.aspx?e=16724)
+<h2>📋 Info Pratiche</h2>
+
+<div class="epppi-info-grid">
+
+<div class="epppi-info-item">
+<strong>📅 Quando</strong>
+<p>8-10 Maggio 2026<br>Arrivo: 8/5 mattina<br>Partenza: 10/5 pomeriggio</p>
+</div>
+
+<div class="epppi-info-item">
+<strong>📍 Dove</strong>
+<p>Bologna<br>Chiesa San Vincenzo de Paoli</p>
+</div>
+
+<div class="epppi-info-item">
+<strong>👥 Per chi</strong>
+<p>Rover e Scolte AGESCI</p>
+</div>
+
+<div class="epppi-info-item">
+<strong>🎯 Posti</strong>
+<p>24 massimo<br>8 minimo per confermare<br>Waiting list: 8 persone</p>
+</div>
+
+</div>
+
+<div style="text-align: center; margin-top: 30px;">
+<a href="https://buonacaccia.net/Event.aspx?e=24768" class="epppi-cta epppi-cta-secondary">📯 PRENOTA IL TUO POSTO SU BUONACACCIA.NET</a>
+</div>
+
+</div>
+
+<div class="epppi-box" markdown="0">
+
+<h2>🎯 Ti ritrovi?</h2>
+
+<ul>
+<li>📱 Vivi in un mondo sempre più connesso, ma ti senti spesso <strong>"disconnesso"</strong> dalla realtà?</li>
+<li>🤔 Ti chiedi <strong>come essere una persona concreta</strong> quando tutto sembra immateriale?</li>
+<li>😔 Non hai spazi dove <strong>riflettere su etica digitale</strong> con coetanei?</li>
+<li>🌍 Cerchi <strong>modelli concreti di impegno civile</strong>, non teoria?</li>
+</ul>
+
+<p><strong>Questo EPPPI è fatto per te.</strong></p>
+
+</div>
+
+<div class="epppi-box" markdown="0">
+
+<h2>📚 Programma</h2>
+
+<div class="epppi-program-item">
+<h4>🔍 ESPLORAZIONE DEL MONDO DIGITALE</h4>
+<p>Giochi e attività per comprendere come la tecnologia influenza le nostre relazioni, le nostre scelte e la nostra percezione della realtà. Dalle fake news all'etica dell'informazione, dai social media all'intelligenza artificiale.</p>
+</div>
+
+<div class="epppi-program-item">
+<h4>🤝 INCONTRO CON REALTÀ CONCRETE</h4>
+<p>Hike urbano alla scoperta di esperienze di economia solidale, sostenibilità e impegno nel territorio. <strong>Banca Etica</strong>, cooperative sociali, comunità che costruiscono alternative possibili.</p>
+</div>
+
+<div class="epppi-program-item">
+<h4>🏛️ SPERIMENTAZIONE DEMOCRATICA</h4>
+<p>Simulazione del <strong>Parlamento Europeo</strong> per comprendere come funziona la democrazia rappresentativa e quali spazi di partecipazione esistono nella società attuale.</p>
+</div>
+
+<div class="epppi-program-item">
+<h4>🌊 WORLD CAFÉ</h4>
+<p>Metodologia partecipativa per elaborare collettivamente cosa significa per noi fare una "scelta politica" in chiave scout, e come tradurla in impegno concreto.</p>
+</div>
+
+<div class="epppi-program-item">
+<h4>📯 VERIFICA PERSONALE</h4>
+<p>Momenti di riflessione spirituale e personale per elaborare un impegno concreto da portare nella propria comunità e nella propria vita quotidiana.</p>
+</div>
+
+<div class="epppi-program-item">
+<h4>✨ VEGLIA ROVER</h4>
+<p>Momento di sintesi e comunicazione con il territorio, per condividere le riflessioni maturate e i messaggi che vogliamo portare nel mondo.</p>
+</div>
+
+</div>
+
+<div class="epppi-highlight" markdown="0">
+
+<h2>🌟 Perché questo EPPPI è diverso</h2>
+
+<p><strong>L'unico evento che unisce POLITICA e TECNOLOGIA</strong></p>
+
+<p>Nessun altro EPPPI affronta insieme etica digitale e impegno civile, fake news e democrazia partecipativa, social media ed economia solidale.</p>
+
+<p>Non solo teoria: <strong>tocchi con mano realtà che funzionano</strong>.<br>
+Banca Etica, cooperative sociali, simulazioni democratiche.<br>
+Porti a casa strumenti concreti, non solo idee.</p>
+
+<p><strong>Evento 10 anni di storia, staff rodata, metodologia AGESCI testata.</strong></p>
+
+</div>
+
+<div class="epppi-box" markdown="0">
+
+<h2>🎓 Cosa porterai a casa</h2>
+
+<ul>
+<li>✅ <strong>Consapevolezza</strong> su come il digitale influenza le tue scelte</li>
+<li>✅ <strong>Strumenti pratici</strong> per riconoscere fake news e verificare informazioni</li>
+<li>✅ <strong>Reti reali</strong> - Banca Etica, cooperative, comunità di impegno civile</li>
+<li>✅ <strong>Impegno concreto</strong> elaborato durante World Café e verifica personale</li>
+<li>✅ <strong>Esperienza democratica</strong> attraverso simulazione Parlamento Europeo</li>
+<li>✅ <strong>Comunità</strong> di rover/scolte che condividono le tue domande</li>
+</ul>
+
+</div>
+
+<div class="epppi-box" markdown="0">
+
+<h2>🚀 Logistica</h2>
+
+<p><strong>Come arrivare</strong></p>
+<p>Info dettagliate verranno inviate agli iscritti</p>
+
+<p><strong>Cosa portare</strong></p>
+<ul>
+<li>Sacco a pelo</li>
+<li>Abbigliamento comodo</li>
+<li>Quaderno e penna</li>
+<li>Buona volontà :)</li>
+</ul>
+
+<p><strong>Alloggio</strong><br>
+Chiesa San Vincenzo de Paoli</p>
+
+</div>
+
+<div class="epppi-box" markdown="0">
+
+<h2>❓ FAQ</h2>
+
+<div class="epppi-faq-item">
+<p><strong>L'evento è solo per AGESCI?</strong><br>
+Sì, riservato a Rover e Scolte AGESCI.</p>
+</div>
+
+<div class="epppi-faq-item">
+<p><strong>Posso partecipare se ho appena iniziato il percorso RS?</strong><br>
+Sì, l'evento è aperto a chi ha INIZIATO il percorso di progressione personale.</p>
+</div>
+
+<div class="epppi-faq-item">
+<p><strong>Cosa include la quota?</strong><br>
+Vitto, alloggio, materiali, assicurazione, attività con partner esterni.</p>
+</div>
+
+<div class="epppi-faq-item">
+<p><strong>Ci sono requisiti fisici particolari?</strong><br>
+No, l'evento prevede attività leggere e hike urbano accessibile a tutti.</p>
+</div>
+
+<div class="epppi-faq-item">
+<p><strong>Posso annullare?</strong><br>
+Rimborsi possibili fino a 7 giorni prima dell'evento. Dopo, solo per motivi gravi documentati.</p>
+</div>
+
+<div class="epppi-faq-item">
+<p><strong>Ho altre domande?</strong><br>
+Scrivi a [inserire email] o chiama [inserire numero]</p>
+</div>
+
+</div>
+
+<div class="epppi-social" markdown="0">
+
+<h3>📱 Condividi con i tuoi rover</h3>
+
+<p>Condividi questo evento con il tuo clan!<br>
+Passaparola tra rover e scolte. Più siamo, più ricca l'esperienza.</p>
+
+<p>#AGESCI #BrancaRS #EPPPI #EsseriSolidi #SocietàDigitale #FakeNews #Democrazia #Bologna</p>
+
+</div>
