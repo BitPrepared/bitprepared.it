@@ -130,7 +130,7 @@ faq:
     a: "Scrivi a [inserire email] o chiama [inserire numero]"
 
 social:
-  title: "Condividi con i tuoi rover"
-  description: "Condividi questo evento con il tuo clan! Passaparola tra rover e scolte. Più siamo, più ricca l'esperienza."
+  title: "Condividi con la tua comunità"
+  description: "Passaparola tra rover, scolte e capi. Più siamo, più ricca l'esperienza."
   hashtags: "#AGESCI #BrancaRS #EPPPI #EsseriSolidi #SocietàDigitale #FakeNews #Democrazia #Bologna"
 ---

@@ -35,15 +35,50 @@ layout: default
 					</div>
 
 					<!-- Target Audience -->
-					<div class="epppi-box">
-						<h2>🎯 Ti ritrovi?</h2>
-						<ul>
+					<div class="epppi-box" itemscope itemtype="https://schema.org/Event">
+						<meta itemprop="name" content="{{ page.title }}" />
+						<meta itemprop="startDate" content="{{ page.logistica.quando.date }}" />
+						<meta itemprop="location" content="{{ page.logistica.dove.citta }}, {{ page.logistica.dove.luogo }}" />
+						<meta itemprop="attendeeCount" content="{{ page.logistica.posti.max }}" />
+
+						<h2>🎯 Questo evento è per te se...</h2>
+						<ul itemprop="audience" itemscope itemtype="https://schema.org/PeopleAudience">
 							{% for item in page.target_audience %}
-							<li>{{ item.icon }} {{ item.text }} <strong>"{{ item.highlight }}"</strong> {{ item.tail }}</li>
+							<li itemprop="description">{{ item.icon }} {{ item.text }} <strong>"{{ item.highlight }}"</strong> {{ item.tail }}</li>
 							{% endfor %}
 						</ul>
-						<p><strong>Questo EPPPI è fatto per te.</strong></p>
+						<p itemprop="description"><strong>🔥 Solo {{ page.logistica.posti.max }} posti disponibili - Prenota ora!</strong></p>
 					</div>
+
+					<!-- Schema.org JSON-LD -->
+					<script type="application/ld+json">
+					{
+						"@context": "https://schema.org",
+						"@type": "Event",
+						"name": "{{ page.title }}",
+						"startDate": "{{ page.logistica.quando.date }}",
+						"endDate": "{{ page.logistica.quando.date }}",
+						"location": {
+							"@type": "Place",
+							"name": "{{ page.logistica.dove.luogo }}",
+							"address": {
+								"@type": "PostalAddress",
+								"addressLocality": "{{ page.logistica.dove.citta }}"
+							}
+						},
+						"audience": {
+							"@type": "PeopleAudience",
+							"name": "{{ page.hero.target }}"
+						},
+						"maximumAttendeeCapacity": {{ page.logistica.posti.max }},
+						"remainingAttendeeCapacity": {{ page.logistica.posti.max }},
+						"offers": {
+							"@type": "Offer",
+							"url": "{{ page.cta.primary.url }}",
+							"availability": "https://schema.org/InStock"
+						}
+					}
+					</script>
 
 					<!-- Programma -->
 					<div class="epppi-box">
