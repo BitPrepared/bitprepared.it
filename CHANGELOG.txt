@@ -1,7 +1,17 @@
-Changelog BitPrepared.it
+kChangelog BitPrepared.it
 -------------------
 
-HEAD   (2023-04-25)
+HEAD (2026-04-20)
+  * EPPPI 2026: nuovo layout con grafica migliorata
+    - Pulsante edit MarkText: solo in development, position fixed
+    - Icone Font Ashley colorate al posto di emoji
+    - Sezione "9 motivi per cui questo EPPPI è diverso" numerata
+    - Sezione "Cosa porterai a casa": testo discorsivo con enfasi colorate
+    - Allineamento "Read more" homepage con flexbox
+    - Unificazione include edit-button per tutti i layout
+    - Configurazione environment: JEKYLL_ENV=production in build
+
+HEAD (2023-04-25)
   * fixed buonacaccia link epppi
   * create github workflow for release
   * script per l'autoaggiornamento
