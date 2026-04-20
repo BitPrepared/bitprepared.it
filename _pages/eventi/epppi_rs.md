@@ -127,7 +127,7 @@ faq:
   - q: "Posso annullare?"
     a: "Rimborsi possibili fino a 7 giorni prima dell'evento. Dopo, solo per motivi gravi documentati."
   - q: "Ho altre domande?"
-    a: "Scrivi a [inserire email] o chiama [inserire numero]"
+    a: "Scrivi a info@bitprepared.it"
 
 social:
   title: "Condividi con la tua comunità"
