@@ -27,6 +27,7 @@ build:
 	docker run --rm -it \
 		--mount type=bind,source=${PWD},target=/srv/jekyll \
 		--volume="${PWD}/vendor/bundle:/usr/local/bundle:Z" \
+		-e JEKYLL_ENV=production \
 		$(DOCKER_IMAGE) \
 		jekyll build
 
