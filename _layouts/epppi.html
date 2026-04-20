@@ -45,7 +45,7 @@ layout: default
 					<h2>{{ page.hero.title }}</h2>
 					<h3>{{ page.hero.subtitle }}</h3>
 					<p>
-						<strong>📍 {{ page.hero.location }} | 📅 {{ page.hero.date }} | 👥 {{ page.hero.target }}</strong>
+						<strong><i class="fas fa-map-marker" style="color: #e74c3c;"></i> {{ page.hero.location }} | <i class="fas fa-calendar" style="color: #3498db;"></i> {{ page.hero.date }} | <i class="fas fa-users" style="color: #2ecc71;"></i> {{ page.hero.target }}</strong>
 					</p>
 					<a href="{{ page.cta.primary.url }}" class="epppi-cta">{{ page.cta.primary.text }}</a>
 				</div>
@@ -107,7 +107,7 @@ layout: default
 
 				<!-- Programma -->
 				<div class="epppi-box">
-					<h2>📚 Programma</h2>
+					<h2>⚡ Se vieni, vivrai...</h2>
 					{% for item in page.programma %}
 					<div class="epppi-program-item">
 						<h4>{{ item.title }}</h4>
@@ -118,9 +118,9 @@ layout: default
 
 				<!-- Highlights -->
 				<div class="epppi-highlight">
-					<h2>🌟 Perché questo EPPPI è diverso</h2>
+					<h2><i class="fas fa-star" style="color: #f39c12;"></i> 10 motivi per cui questo EPPPI è diverso</h2>
 					{% for highlight in page.highlights %}
-					<p><strong>{{ highlight }}</strong></p>
+					<p><strong>{{ forloop.index }}.</strong> {{ highlight }}</p>
 					{% endfor %}
 				</div>
 
