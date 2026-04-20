@@ -1,0 +1,403 @@
+/* EPPPI Custom Styles */
+
+/* Edit icon for local development */
+.epppi-edit-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: white;
+    border: 2px solid #667eea;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #667eea;
+    padding: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.epppi-edit-icon:hover {
+    background: #667eea;
+    border-color: #667eea;
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.epppi-edit-icon i {
+    pointer-events: none;
+    font-size: 18px;
+}
+
+.epppi-hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 60px 40px;
+    border-radius: 12px;
+    color: white;
+    text-align: center;
+    margin: 40px 0;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+.epppi-hero h2 {
+    color: #ffffff !important;
+    font-size: 2.2em;
+    margin-bottom: 20px;
+    line-height: 1.4;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: none;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.epppi-hero h3 {
+    color: #ffffff !important;
+    font-size: 1.6em;
+    margin-bottom: 15px;
+    line-height: 1.4;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.epppi-hero p {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.2em;
+    line-height: 1.6;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.epppi-hero strong {
+    color: #ffffff !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.epppi-cta {
+    display: inline-block;
+    background: #ff6b6b;
+    color: white !important;
+    padding: 18px 36px;
+    border-radius: 50px;
+    text-decoration: none !important;
+    font-weight: bold;
+    font-size: 1.15em;
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+    transition: all 0.3s ease;
+    margin: 20px 10px;
+    border: 3px solid #ff6b6b;
+}
+
+.epppi-cta:hover {
+    background: #ff5252;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
+    text-decoration: none !important;
+}
+
+.epppi-cta-secondary {
+    background: #80BA8E;
+    border-color: #80BA8E;
+}
+
+.epppi-cta-secondary:hover {
+    background: #6ea87d;
+}
+
+.epppi-benefits {
+    background: #f8f9fa;
+    padding: 40px;
+    border-radius: 12px;
+    margin: 40px 0;
+    border-left: 5px solid #667eea;
+}
+
+.epppi-benefits h3 {
+    color: #667eea !important;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.epppi-benefits ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.epppi-benefits li {
+    padding: 15px 0;
+    border-bottom: 1px solid #e9ecef;
+    font-size: 1.1em;
+    line-height: 1.7;
+    color: #333;
+}
+
+.epppi-benefits li:last-child {
+    border-bottom: none;
+}
+
+.epppi-benefits strong {
+    color: #667eea;
+}
+
+.epppi-box {
+    background: white;
+    padding: 50px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    margin: 50px 0;
+    border: 1px solid #e9ecef;
+}
+
+.epppi-box h2 {
+    color: #667eea !important;
+    font-size: 2em;
+    margin-bottom: 25px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.epppi-box h3 {
+    color: #667eea !important;
+    font-size: 1.8em;
+    margin-bottom: 25px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.epppi-box h4 {
+    color: #764ba2 !important;
+}
+
+.epppi-box p {
+    color: #333;
+}
+
+.epppi-box ul {
+    color: #333;
+}
+
+.epppi-box li {
+    color: #333;
+}
+
+.epppi-highlight {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 50px;
+    border-radius: 12px;
+    text-align: center;
+    margin: 50px 0;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+.epppi-highlight h2 {
+    color: #ffffff !important;
+    font-size: 2.2em;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.epppi-highlight h3 {
+    color: #ffffff !important;
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.epppi-highlight p {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.15em;
+    line-height: 1.8;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.epppi-highlight strong {
+    color: #ffffff !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.epppi-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+    margin: 40px 0;
+}
+
+.epppi-info-item {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    border: 2px solid #e9ecef;
+    transition: all 0.3s ease;
+    color: #333;
+}
+
+.epppi-info-item p {
+    color: #333;
+}
+
+.epppi-info-item:hover {
+    border-color: #667eea;
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.2);
+}
+
+.epppi-info-item strong {
+    display: block;
+    color: #667eea;
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.epppi-program-item {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    padding: 30px;
+    margin: 25px 0;
+    border-radius: 10px;
+    border-left: 5px solid #764ba2;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.epppi-program-item:hover {
+    transform: translateX(10px);
+    box-shadow: 0 6px 20px rgba(118, 75, 162, 0.15);
+}
+
+.epppi-program-item h4 {
+    color: #764ba2 !important;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.epppi-program-item p {
+    color: #333;
+    line-height: 1.6;
+}
+
+.epppi-faq-item {
+    background: #f8f9fa;
+    padding: 25px;
+    margin: 20px 0;
+    border-radius: 10px;
+    border-left: 4px solid #80BA8E;
+    color: #333;
+}
+
+.epppi-faq-item p {
+    color: #333;
+    line-height: 1.6;
+}
+
+.epppi-faq-item strong {
+    color: #80BA8E;
+    font-size: 1.2em;
+    display: block;
+    margin-bottom: 10px;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.epppi-urgency {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
+    color: white;
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    margin: 50px 0;
+    box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+.epppi-urgency h3 {
+    color: #ffffff !important;
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.epppi-urgency p {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.2em;
+    margin: 15px 0;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.epppi-urgency strong {
+    color: #ffffff !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.epppi-social {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    margin: 40px 0;
+    border: 2px dashed #80BA8E;
+    color: #333;
+}
+
+.epppi-social p {
+    color: #667eea;
+    font-size: 1.1em;
+    margin: 10px 0;
+}
+
+.epppi-social h3 {
+    color: #667eea !important;
+    font-size: 1.6em;
+    margin-bottom: 15px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .epppi-hero {
+        padding: 40px 20px;
+    }
+
+    .epppi-hero h2 {
+        font-size: 1.8em;
+    }
+
+    .epppi-cta {
+        padding: 16px 28px;
+        font-size: 1em;
+        display: block;
+        margin: 15px 0;
+    }
+
+    .epppi-box,
+    .epppi-benefits,
+    .epppi-highlight,
+    .epppi-urgency {
+        padding: 30px 20px;
+    }
+
+    .epppi-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .epppi-program-item {
+        padding: 20px;
+    }
+}

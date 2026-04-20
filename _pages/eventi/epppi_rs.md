@@ -1,32 +1,140 @@
 ---
-layout: page
+layout: epppi
 permalink: /eventi/epppi/
-title: Essere solidi in una società immateriale
-tags: [bitprepared, epppi, rs]
-modified: 2023-04-25
-# featured: wordpress.png
+title: Essere solidi in una società immateriale | Bologna 8-10 Maggio
+subtitle: Come essere persone concrete in un mondo digitale?
+tags: [bitprepared, epppi, rs, esseri solidi, società digitale, rover, scolte, bologna, 2026]
+modified: 2026-04-15
+image: /assets/images/locandina_epppi_2026.jpg
+
+hero:
+  title: "Essere solidi in una società immateriale"
+  subtitle: "Come essere persone concrete in un mondo sempre più digitale?"
+  location: "Bologna"
+  date: "8-10 Maggio 2026"
+  target: "Rover e Scolte in cammino"
+
+cta:
+  primary:
+    url: "https://buonacaccia.net/Event.aspx?e=24768"
+    text: "ISCRIVITI SUBITO - SOLO 24 POSTI"
+  secondary:
+    url: "https://buonacaccia.net/Event.aspx?e=24768"
+    text: "PRENOTA IL TUO POSTO SU BUONACACCIA.NET"
+
+benefits:
+  - icon: "fa-gamepad"
+    title: "Come il digitale influenza la tua vita"
+    desc: "Dalle fake news ai social media, dall'AI alla percezione della realtà"
+  - icon: "fa-newspaper"
+    title: "Come riconoscere le fake news"
+    desc: "Sviluppa pensiero critico e verifica delle fonti"
+  - icon: "fa-globe"
+    title: "Come fare scelte etiche nella società"
+    desc: "Economia solidale, democrazia partecipativa, impegno concreto"
+  - icon: "fa-handshake"
+    title: "Come costruire una democrazia partecipativa"
+    desc: "Simulazione Parlamento Europeo e World Café"
+
+target_audience:
+  - icon: "fa-mobile-alt"
+    text: "Vivi in un mondo sempre più connesso, ma ti senti spesso"
+    highlight: "disconnesso"
+    tail: "dalla realtà"
+  - icon: "fa-question-circle"
+    text: "Ti domandi"
+    highlight: "come essere una persona concreta"
+    tail: "in un mondo tutto immateriale"
+  - icon: "fa-frown"
+    text: "Non hai spazi per"
+    highlight: "riflettere su etica digitale"
+    tail: "con i tuoi coetanei"
+  - icon: "fa-globe"
+    text: "Vuoi"
+    highlight: "modelli concreti di impegno civile"
+    tail: ", non teoria"
+
+programma:
+  - title: "ESPLORAZIONE DEL MONDO DIGITALE"
+    desc: "Giochi e attività per comprendere come la tecnologia influenza le nostre relazioni, le nostre scelte e la nostra percezione della realtà. Dalle fake news all'etica dell'informazione, dai social media all'intelligenza artificiale."
+  - title: "INCONTRO CON REALTÀ CONCRETE"
+    desc: "Hike urbano alla scoperta di esperienze di economia solidale, sostenibilità e impegno nel territorio. Banca Etica, cooperative sociali, comunità che costruiscono alternative possibili."
+  - title: "SPERIMENTAZIONE DEMOCRATICA"
+    desc: "Simulazione del Parlamento Europeo per comprendere come funziona la democrazia rappresentativa e quali spazi di partecipazione esistono nella società attuale."
+  - title: "WORLD CAFÉ"
+    desc: "Metodologia partecipativa per elaborare collettivamente cosa significa per noi fare una 'scelta politica' in chiave scout, e come tradurla in impegno concreto."
+  - title: "VERIFICA PERSONALE"
+    desc: "Momenti di riflessione spirituale e personale per elaborare un impegno concreto da portare nella propria comunità e nella propria vita quotidiana."
+  - title: "VEGLIA ROVER"
+    desc: "Momento di sintesi e comunicazione con il territorio, per condividere le riflessioni maturate e i messaggi che vogliamo portare nel mondo."
+
+highlights:
+  - "L'unico evento che unisce POLITICA e TECNOLOGIA"
+  - "Nessun altro EPPPI affronta insieme etica digitale e impegno civile, fake news e democrazia partecipativa, social media ed economia solidale."
+  - "Non solo teoria: tocchi con mano realtà che funzionano."
+  - "Banca Etica, cooperative sociali, simulazioni democratiche."
+  - "Porti a casa strumenti concreti, non solo idee."
+  - "Evento 10 anni di storia, staff rodata."
+  - "World Café: metodologia partecipativa per elaborare insieme la tua scelta politica scout."
+  - "Hike urbano a Bologna: scopri cooperative sociali ed economia solidale sul campo."
+  - "Simulazione Parlamento Europeo: sperimenta come funziona davvero la democrazia."
+  - "Veglia rover: momento unico di condivisione e sintesi con il territorio."
+
+outcomes:
+  - "Consapevolezza su come il digitale influenza le tue scelte"
+  - "Strumenti pratici per riconoscere fake news e verificare informazioni"
+  - "Reti reali - Banca Etica, cooperative, comunità di impegno civile"
+  - "Impegno concreto elaborato durante World Café e verifica personale"
+  - "Esperienza democratica attraverso simulazione Parlamento Europeo"
+  - "Comunità di rover/scolte che condividono le tue domande"
+
+logistica:
+  quando:
+    icon: "fa-calendar"
+    label: "Quando"
+    date: "8-10 Maggio 2026"
+    arrivo: "8/5 mattina"
+    partenza: "10/5 pomeriggio"
+  dove:
+    icon: "fa-map-marker"
+    label: "Dove"
+    citta: "Bologna"
+    luogo: "Chiesa San Vincenzo de Paoli"
+  per_chi:
+    icon: "fa-users"
+    label: "Per chi"
+    text: "Rover e Scolte AGESCI"
+  posti:
+    icon: "fa-bullseye"
+    label: "Posti"
+    max: 24
+    min: 8
+    waiting: 8
+  come_arrivare:
+    icon: "fa-car"
+    label: "Come arrivare"
+    text: "Info dettagliate verranno inviate agli iscritti"
+  cosa_portare:
+    icon: "fa-backpack"
+    label: "Cosa portare"
+    items: "Sacco a pelo, Abbigliamento comodo, Quaderno e penna, Buona volontà :)"
+
+faq:
+  - q: "L'evento è solo per AGESCI?"
+    a: "Sì, riservato a Rover e Scolte AGESCI."
+  - q: "Posso partecipare se ho appena iniziato il percorso RS?"
+    a: "L'evento è aperto a chi ha INIZIATO il percorso in clan, possibilmente con una route alle spalle."
+  - q: "Cosa include la quota?"
+    a: "Vitto, alloggio, materiali, assicurazione, attività con partner esterni."
+  - q: "Ci sono requisiti fisici particolari?"
+    a: "No, l'evento prevede attività leggere e hike urbano accessibile a tutti."
+  - q: "Posso annullare? Dubbi su buonacaccia?"
+    a: "https://buonacaccia.net/problem.aspx?Issue=Refunds"
+  - q: "Ho altre domande?"
+    a: "Scrivi a info@bitprepared.it"
+
+social:
+  title: "Condividi con la tua comunità"
+  description: "Passaparola tra rover, scolte e capi. Più siamo, più ricca l'esperienza."
+  hashtags: "#AGESCI #BrancaRS #EPPPI #EsseriSolidi #SocietàDigitale #FakeNews #Democrazia #Bologna"
 ---
-
-Essere sale della terra. Che cosa significa? 
-
-E’ la missione di ognuno di noi ed ha a che fare con il nostro agire politico. 
-
-Politica? No basta! Ne ho abbastanza e non mi interessa. I nostri politici non sanno niente della vita di noi cittadini… non sanno niente della nostra terra. 
-
-Ma si deve andare oltre a questo, e scoprire il vero significato delle cose. Scelta politica significa prendersi cura con responsabilità del proprio territorio, non solo (ma perché no, anche) attraverso l’appartenenza ad un partito. Ed allora ecco: essere sale della terra vuol dire cambiare il mondo un pezzo alla volta, partendo dal nostro piccolo pezzettino di giardino. 
-Scelta politica è ad esempio un campo di servizio che porta un clan milanese a  Pozzallo, per conoscere la realtà dell’immigrazione clandestina, tornando a casa con lo spirito di accoglienza siciliano … e cercare di diffonderlo nella grigia e fredda Milano. 
-
-Essere sale della terra vuol dire mettere in piedi una cooperativa che aiuta le donne ad uscire dalla disoccupazione: non si promettono sussidi, ma si insegna un lavoro, riciclando materiali di scarto dal Festival del Cinema di Venezia. Oppure un’associazione che si occupa delle carcerate, dando loro una ragione di credere nel futuro e nel riscatto. Non è altro che … lasciare il posto dove si vive migliore di come lo abbiamo trovato. Frase scontata, ma il vecchio B.P. ci aveva visto lungo e per voi RS questa è una delle “parole maestre” che può guidarvi lontano nelle vostre strade.
-
-Anche il Papa ci ha esortati a vivere il nostro mondo con quella responsabilità che noi scout ormai conosciamo bene. 
-
-Ma la conosci veramente? Magari ci hai pensato, magari sai di cosa si tratta, magari hai capito benissimo … ma hai mai toccato con mano cosa vuol dire essere sale della terra?
-
-Con il nostro evento vogliamo darti l’opportunità di essere sale della vita, attraverso l’incontro e il confronto con chi questa scelta l’ha fatta e la porta avanti a testa alta, come stile di vita e profonda vocazione.
-
-Siamo chiamati ad essere il lievito nel pane, cioè un agente di cambiamento silenzioso che trasforma ogni cosa con cui viene a contatto in qualcosa che nutre e rinfranca.
-
-
-Ti aspettiamo!!
-
-Iscriviti al seguente link: [https://buonacaccia.net/event.aspx?e=16724](https://buonacaccia.net/event.aspx?e=16724)

@@ -1,14 +1,16 @@
 JEKYLL_VERSION ?= 3
 PORT ?= 4000
+PROJECT_PATH ?= /workspace/bitprepared.it
 DOCKER_IMAGE = jekyll/jekyll:$(JEKYLL_VERSION)
 
-.PHONY: serve build clean install help
+.PHONY: serve build clean install help open
 
 help:
 	@echo "Uso: make [target]"
 	@echo ""
 	@echo "Target disponibili:"
 	@echo "  serve      - Avvia server di sviluppo (porta 4000)"
+	@echo "  open       - Apri sito locale nel browser (http://localhost:4000/)"
 	@echo "  build      - Genera sito statico"
 	@echo "  clean      - Rimuove _site/"
 	@echo "  install    - Installa dipendenze bundle (Docker)"
@@ -20,12 +22,13 @@ serve:
 		--volume="${PWD}/vendor/bundle:/usr/local/bundle:Z" \
 		-p $(PORT):4000 \
 		$(DOCKER_IMAGE) \
-		jekyll serve
+		jekyll serve --config _config.yml,_config_dev.yml
 
 build:
 	docker run --rm -it \
 		--mount type=bind,source=${PWD},target=/srv/jekyll \
 		--volume="${PWD}/vendor/bundle:/usr/local/bundle:Z" \
+		-e JEKYLL_ENV=production \
 		$(DOCKER_IMAGE) \
 		jekyll build
 
@@ -38,3 +41,7 @@ install:
 		--volume="${PWD}/vendor/bundle:/usr/local/bundle:Z" \
 		$(DOCKER_IMAGE) \
 		bundle install
+
+open:
+	@echo "Apertura sito locale: http://localhost:$(PORT)/"
+	@xdg-open http://localhost:$(PORT)/

@@ -1,0 +1,200 @@
+---
+layout: default
+---
+<!-- Main Page.html -->
+<div id="main">
+	<div id="content" class="container">
+		<div class="row">
+			<section class="12u">
+				{% include edit-button.html %}
+
+				<style>
+					.epppi-box ul[itemprop="audience"] {
+						list-style: none !important;
+						padding: 0 !important;
+					}
+					.epppi-box ul[itemprop="audience"] li {
+						font-size: 1.2em !important;
+						line-height: 1.8 !important;
+						margin-bottom: 25px !important;
+						padding: 20px !important;
+						background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%) !important;
+						border-radius: 12px !important;
+						border-left: 5px solid #3498db !important;
+						transition: all 0.3s ease !important;
+					}
+					.epppi-box ul[itemprop="audience"] li:hover {
+						transform: translateX(10px) !important;
+						box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3) !important;
+					}
+					.epppi-box ul[itemprop="audience"] li i {
+						font-size: 1.5em !important;
+						color: #3498db !important;
+						margin-right: 12px !important;
+						width: 40px !important;
+						text-align: center !important;
+						display: inline-block !important;
+					}
+					.epppi-box ul[itemprop="audience"] li strong {
+						color: #e74c3c !important;
+						font-size: 1.15em !important;
+						font-weight: 700 !important;
+					}
+				</style>
+
+				<!-- Hero Section -->
+				<div class="epppi-hero">
+					<h2>{{ page.hero.title }}</h2>
+					<h3>{{ page.hero.subtitle }}</h3>
+					<p>
+						<strong><i class="fas fa-map-marker" style="color: #e74c3c;"></i> {{ page.hero.location }} | <i class="fas fa-calendar" style="color: #3498db;"></i> {{ page.hero.date }} | <i class="fas fa-users" style="color: #2ecc71;"></i> {{ page.hero.target }}</strong>
+					</p>
+					<a href="{{ page.cta.primary.url }}" class="epppi-cta">{{ page.cta.primary.text }}</a>
+				</div>
+
+				<!-- Benefits Section -->
+				<div class="epppi-highlight">
+					<h3><i class="fas fa-star" style="color: #f39c12;"></i> 9 motivi per cui questo EPPPI è diverso</h3>
+					{% for highlight in page.highlights %}
+					<p><strong>{{ forloop.index }}.</strong> {{ highlight }}</p>
+					{% endfor %}
+				</div>
+
+				<!-- Target Audience -->
+				<div class="epppi-box" itemscope itemtype="https://schema.org/Event">
+					<meta itemprop="name" content="{{ page.title }}" />
+					<meta itemprop="startDate" content="{{ page.logistica.quando.date }}" />
+					<meta itemprop="location" content="{{ page.logistica.dove.citta }}, {{ page.logistica.dove.luogo }}" />
+					<meta itemprop="attendeeCount" content="{{ page.logistica.posti.max }}" />
+
+					<h2>🎯 Questo evento è per te se...</h2>
+					<ul itemprop="audience" itemscope itemtype="https://schema.org/PeopleAudience">
+						{% for item in page.target_audience %}
+						<li itemprop="description">{% if item.icon contains 'fa-' %}<i class="fa {{ item.icon }}"></i>{% else %}{{ item.icon }}{% endif %} {{ item.text }} <strong>"{{ item.highlight }}"</strong> {{ item.tail }}</li>
+						{% endfor %}
+					</ul>
+				</div>
+
+				<!-- Schema.org JSON-LD -->
+				<script type="application/ld+json">
+				{
+					"@context": "https://schema.org",
+					"@type": "Event",
+					"name": "{{ page.title }}",
+					"startDate": "{{ page.logistica.quando.date }}",
+					"endDate": "{{ page.logistica.quando.date }}",
+					"location": {
+						"@type": "Place",
+						"name": "{{ page.logistica.dove.luogo }}",
+						"address": {
+							"@type": "PostalAddress",
+							"addressLocality": "{{ page.logistica.dove.citta }}"
+						}
+					},
+					"audience": {
+						"@type": "PeopleAudience",
+						"name": "{{ page.hero.target }}"
+					},
+					"maximumAttendeeCapacity": {{ page.logistica.posti.max }},
+					"remainingAttendeeCapacity": {{ page.logistica.posti.max }},
+					"offers": {
+						"@type": "Offer",
+						"url": "{{ page.cta.primary.url }}",
+						"availability": "https://schema.org/InStock"
+					}
+				}
+				</script>
+
+				<!-- Programma -->
+				<div class="epppi-box">
+					<h2>⚡ Se vieni, vivrai...</h2>
+					{% for item in page.programma %}
+					<div class="epppi-program-item">
+						<h4>{{ item.title }}</h4>
+						<p>{{ item.desc }}</p>
+					</div>
+					{% endfor %}
+				</div>
+
+				<!-- Outcomes -->
+				<div class="epppi-box" style="background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%); padding: 40px; border-radius: 20px; position: relative; overflow: hidden; border: 3px solid #667eea;">
+					<div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); opacity: 0.1; border-radius: 50%;"></div>
+					<div style="position: absolute; bottom: -30px; left: -30px; width: 150px; height: 150px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); opacity: 0.1; border-radius: 50%;"></div>
+					<h2 style="color: #2c3e50; font-size: 2em; margin-bottom: 25px; position: relative; z-index: 1;">🎓 Cosa porterai a casa</h2>
+					<div style="position: relative; z-index: 1; line-height: 1.8; color: #2c3e50; font-size: 1.15em;">
+						<p style="margin-bottom: 20px;">
+							<strong style="font-size: 1.2em; color: #667eea;">Dopo 3 giorni intensivi</strong>, non porterai a casa solo idee teoriche. Avrai <strong style="font-size: 1.2em; color: #667eea;">strumenti concreti</strong> per navigare il mondo digitale con consapevolezza.
+						</p>
+						<p style="margin-bottom: 20px;">
+							Saprai <strong style="font-size: 1.2em; color: #667eea;">riconoscere le fake news</strong>, verificare le fonti, e capire come l'AI influenza le tue decisioni. Ma soprattutto, avrai <strong style="font-size: 1.2em; color: #667eea;">reti reali</strong>: Banca Etica, cooperative sociali, comunità che costruiscono ogni giorno alternative possibili.
+						</p>
+						<p style="margin-bottom: 20px;">
+							Hai partecipato a una <strong style="font-size: 1.2em; color: #667eea;">simulazione del Parlamento Europeo</strong>, sperimentando come funziona davvero la democrazia. Hai elaborato un <strong style="font-size: 1.2em; color: #667eea;">impegno concreto</strong> durante il World Café e la verifica personale - non solo buoni propositi.
+						</p>
+						<p style="margin: 0;">
+							E soprattutto, ora fai parte di una <strong style="font-size: 1.2em; color: #667eea;">comunità di rover e scolte</strong> che condividono le tue stesse domande. Non sei più solo nella ricerca di come essere una persona concreta in un mondo sempre più digitale.
+						</p>
+					</div>
+				</div>
+
+				<!-- Logistica -->
+				<div class="epppi-box">
+					<h2>🚀 Logistica</h2>
+					<div class="epppi-info-grid">
+						<div class="epppi-info-item">
+							<strong>{% if page.logistica.quando.icon contains 'fa-' %}<i class="fa {{ page.logistica.quando.icon }}"></i>{% else %}{{ page.logistica.quando.icon }}{% endif %} {{ page.logistica.quando.label }}</strong>
+							<p>{{ page.logistica.quando.date }}<br>
+							Arrivo: {{ page.logistica.quando.arrivo }}<br>
+							Partenza: {{ page.logistica.quando.partenza }}</p>
+						</div>
+						<div class="epppi-info-item">
+							<strong>{% if page.logistica.dove.icon contains 'fa-' %}<i class="fa {{ page.logistica.dove.icon }}"></i>{% else %}{{ page.logistica.dove.icon }}{% endif %} {{ page.logistica.dove.label }}</strong>
+							<p>{{ page.logistica.dove.citta }}<br>{{ page.logistica.dove.luogo }}</p>
+						</div>
+						<div class="epppi-info-item">
+							<strong>{% if page.logistica.per_chi.icon contains 'fa-' %}<i class="fa {{ page.logistica.per_chi.icon }}"></i>{% else %}{{ page.logistica.per_chi.icon }}{% endif %} {{ page.logistica.per_chi.label }}</strong>
+							<p>{{ page.logistica.per_chi.text }}</p>
+						</div>
+						<div class="epppi-info-item">
+							<strong>{% if page.logistica.posti.icon contains 'fa-' %}<i class="fa {{ page.logistica.posti.icon }}"></i>{% else %}{{ page.logistica.posti.icon }}{% endif %} {{ page.logistica.posti.label }}</strong>
+							<p>{{ page.logistica.posti.max }} massimo<br>
+							{{ page.logistica.posti.min }} minimo per confermare<br>
+							Waiting list: {{ page.logistica.posti.waiting }} persone</p>
+						</div>
+						<div class="epppi-info-item">
+							<strong>{% if page.logistica.come_arrivare.icon contains 'fa-' %}<i class="fa {{ page.logistica.come_arrivare.icon }}"></i>{% else %}{{ page.logistica.come_arrivare.icon }}{% endif %} {{ page.logistica.come_arrivare.label }}</strong>
+							<p>{{ page.logistica.come_arrivare.text }}</p>
+						</div>
+						<div class="epppi-info-item">
+							<strong>{% if page.logistica.cosa_portare.icon contains 'fa-' %}<i class="fa {{ page.logistica.cosa_portare.icon }}"></i>{% else %}{{ page.logistica.cosa_portare.icon }}{% endif %} {{ page.logistica.cosa_portare.label }}</strong>
+							<p>{{ page.logistica.cosa_portare.items }}</p>
+						</div>
+					</div>
+					<div style="text-align: center; margin-top: 30px;">
+						<a href="{{ page.cta.secondary.url }}" class="epppi-cta epppi-cta-secondary">{{ page.cta.secondary.text }}</a>
+					</div>
+				</div>
+
+				<!-- FAQ -->
+				<div class="epppi-box">
+					<h2>❓ FAQ</h2>
+					{% for faq in page.faq %}
+					<div class="epppi-faq-item">
+						<p><strong>{{ faq.q }}</strong><br>{{ faq.a }}</p>
+					</div>
+					{% endfor %}
+				</div>
+
+				<!-- Social -->
+				<div class="epppi-social">
+					<h3>📱 {{ page.social.title }}</h3>
+					<p>{{ page.social.description }}<br>{{ page.social.hashtags }}</p>
+				</div>
+
+				<!-- Content markdown originale -->
+				{{ content }}
+
+			</section>
+		</div>
+	</div>
+</div>
