@@ -52,9 +52,10 @@ layout: default
 					<a href="{{ page.cta.primary.url }}" class="epppi-cta">{{ page.cta.primary.text }}</a>
 				</div>
 
+
 				<!-- Benefits Section -->
 				<div class="epppi-highlight">
-					<h3><i class="fas fa-star" style="color: #f39c12;"></i> 9 motivi per cui questo EPPPI è diverso</h3>
+					<h3><i class="fas fa-star" style="color: #f39c12;"></i> 10 motivi per cui questo EPPPI è diverso</h3>
 					{% for highlight in page.highlights %}
 					<p><strong>{{ forloop.index }}.</strong> {{ highlight }}</p>
 					{% endfor %}
@@ -183,6 +184,11 @@ layout: default
 						<p><strong>{{ faq.q }}</strong><br>{{ faq.a }}</p>
 					</div>
 					{% endfor %}
+				</div>
+
+				<!-- Locandina -->
+				<div style="text-align: center; margin: 30px 0;">
+					<img src="{{ page.image }}" alt="Locandina EPPPI 2026" style="max-width: 50%; height: auto; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.15);">
 				</div>
 
 				<!-- Social -->
