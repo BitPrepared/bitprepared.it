@@ -1,5 +1,6 @@
 JEKYLL_VERSION ?= 3
 PORT ?= 4000
+PROJECT_PATH ?= /workspace/bitprepared.it
 DOCKER_IMAGE = jekyll/jekyll:$(JEKYLL_VERSION)
 
 .PHONY: serve build clean install help open
@@ -21,7 +22,7 @@ serve:
 		--volume="${PWD}/vendor/bundle:/usr/local/bundle:Z" \
 		-p $(PORT):4000 \
 		$(DOCKER_IMAGE) \
-		jekyll serve
+		jekyll serve --config _config.yml,_config_dev.yml
 
 build:
 	docker run --rm -it \
