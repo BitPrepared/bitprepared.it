@@ -17,55 +17,55 @@ hero:
 cta:
   primary:
     url: "https://buonacaccia.net/Event.aspx?e=24768"
-    text: "🎯 ISCRIVITI SUBITO - SOLO 24 POSTI"
+    text: "ISCRIVITI SUBITO - SOLO 24 POSTI"
   secondary:
     url: "https://buonacaccia.net/Event.aspx?e=24768"
-    text: "📯 PRENOTA IL TUO POSTO SU BUONACACCIA.NET"
+    text: "PRENOTA IL TUO POSTO SU BUONACACCIA.NET"
 
 benefits:
-  - icon: "🎮"
+  - icon: "fa-gamepad"
     title: "Come il digitale influenza la tua vita"
     desc: "Dalle fake news ai social media, dall'AI alla percezione della realtà"
-  - icon: "📰"
+  - icon: "fa-newspaper"
     title: "Come riconoscere le fake news"
     desc: "Sviluppa pensiero critico e verifica delle fonti"
-  - icon: "🌍"
+  - icon: "fa-globe"
     title: "Come fare scelte etiche nella società"
     desc: "Economia solidale, democrazia partecipativa, impegno concreto"
-  - icon: "🤝"
+  - icon: "fa-handshake"
     title: "Come costruire una democrazia partecipativa"
     desc: "Simulazione Parlamento Europeo e World Café"
 
 target_audience:
-  - icon: "📱"
+  - icon: "fa-mobile-alt"
     text: "Vivi in un mondo sempre più connesso, ma ti senti spesso"
     highlight: "disconnesso"
     tail: "dalla realtà"
-  - icon: "🤔"
+  - icon: "fa-question-circle"
     text: "Ti domandi"
     highlight: "come essere una persona concreta"
     tail: "in un mondo tutto immateriale"
-  - icon: "😔"
+  - icon: "fa-frown"
     text: "Non hai spazi per"
     highlight: "riflettere su etica digitale"
     tail: "con i tuoi coetanei"
-  - icon: "🌍"
+  - icon: "fa-globe"
     text: "Vuoi"
     highlight: "modelli concreti di impegno civile"
     tail: ", non teoria"
 
 programma:
-  - title: "🔍 ESPLORAZIONE DEL MONDO DIGITALE"
+  - title: "ESPLORAZIONE DEL MONDO DIGITALE"
     desc: "Giochi e attività per comprendere come la tecnologia influenza le nostre relazioni, le nostre scelte e la nostra percezione della realtà. Dalle fake news all'etica dell'informazione, dai social media all'intelligenza artificiale."
-  - title: "🤝 INCONTRO CON REALTÀ CONCRETE"
+  - title: "INCONTRO CON REALTÀ CONCRETE"
     desc: "Hike urbano alla scoperta di esperienze di economia solidale, sostenibilità e impegno nel territorio. Banca Etica, cooperative sociali, comunità che costruiscono alternative possibili."
-  - title: "🏛️ SPERIMENTAZIONE DEMOCRATICA"
+  - title: "SPERIMENTAZIONE DEMOCRATICA"
     desc: "Simulazione del Parlamento Europeo per comprendere come funziona la democrazia rappresentativa e quali spazi di partecipazione esistono nella società attuale."
-  - title: "🌊 WORLD CAFÉ"
+  - title: "WORLD CAFÉ"
     desc: "Metodologia partecipativa per elaborare collettivamente cosa significa per noi fare una 'scelta politica' in chiave scout, e come tradurla in impegno concreto."
-  - title: "📯 VERIFICA PERSONALE"
+  - title: "VERIFICA PERSONALE"
     desc: "Momenti di riflessione spirituale e personale per elaborare un impegno concreto da portare nella propria comunità e nella propria vita quotidiana."
-  - title: "✨ VEGLIA ROVER"
+  - title: "VEGLIA ROVER"
     desc: "Momento di sintesi e comunicazione con il territorio, per condividere le riflessioni maturate e i messaggi che vogliamo portare nel mondo."
 
 highlights:
@@ -74,7 +74,7 @@ highlights:
   - "Non solo teoria: tocchi con mano realtà che funzionano."
   - "Banca Etica, cooperative sociali, simulazioni democratiche."
   - "Porti a casa strumenti concreti, non solo idee."
-  - "Evento 10 anni di storia, staff rodata, metodologia AGESCI testata."
+  - "Evento 10 anni di storia, staff rodata."
 
 outcomes:
   - "Consapevolezza su come il digitale influenza le tue scelte"
@@ -86,32 +86,32 @@ outcomes:
 
 logistica:
   quando:
-    icon: "📅"
+    icon: "fa-calendar"
     label: "Quando"
     date: "8-10 Maggio 2026"
     arrivo: "8/5 mattina"
     partenza: "10/5 pomeriggio"
   dove:
-    icon: "📍"
+    icon: "fa-map-marker"
     label: "Dove"
     citta: "Bologna"
     luogo: "Chiesa San Vincenzo de Paoli"
   per_chi:
-    icon: "👥"
+    icon: "fa-users"
     label: "Per chi"
     text: "Rover e Scolte AGESCI"
   posti:
-    icon: "🎯"
+    icon: "fa-bullseye"
     label: "Posti"
     max: 24
     min: 8
     waiting: 8
   come_arrivare:
-    icon: "🚗"
+    icon: "fa-car"
     label: "Come arrivare"
     text: "Info dettagliate verranno inviate agli iscritti"
   cosa_portare:
-    icon: "🎒"
+    icon: "fa-backpack"
     label: "Cosa portare"
     items: "Sacco a pelo, Abbigliamento comodo, Quaderno e penna, Buona volontà :)"
 

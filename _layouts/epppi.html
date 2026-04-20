@@ -7,6 +7,39 @@ layout: default
 		<div class="row">
 			<section class="12u">
 				{% include edit-button-epppi.html %}
+				<style>
+					.epppi-box ul[itemprop="audience"] {
+						list-style: none !important;
+						padding: 0 !important;
+					}
+					.epppi-box ul[itemprop="audience"] li {
+						font-size: 1.2em !important;
+						line-height: 1.8 !important;
+						margin-bottom: 25px !important;
+						padding: 20px !important;
+						background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%) !important;
+						border-radius: 12px !important;
+						border-left: 5px solid #3498db !important;
+						transition: all 0.3s ease !important;
+					}
+					.epppi-box ul[itemprop="audience"] li:hover {
+						transform: translateX(10px) !important;
+						box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3) !important;
+					}
+					.epppi-box ul[itemprop="audience"] li i {
+						font-size: 1.5em !important;
+						color: #3498db !important;
+						margin-right: 12px !important;
+						width: 40px !important;
+						text-align: center !important;
+						display: inline-block !important;
+					}
+					.epppi-box ul[itemprop="audience"] li strong {
+						color: #e74c3c !important;
+						font-size: 1.15em !important;
+						font-weight: 700 !important;
+					}
+				</style>
 				<!-- Hero Section -->
 				<div class="epppi-hero">
 					<h2>{{ page.hero.title }}</h2>
@@ -22,7 +55,7 @@ layout: default
 					<h3>⚡ In 3 giorni scoprirai:</h3>
 					<ul>
 						{% for benefit in page.benefits %}
-						<li>{{ benefit.icon }} <strong>{{ benefit.title }}</strong> - {{ benefit.desc }}</li>
+						<li>{% if benefit.icon contains 'fa-' %}<i class="fa {{ benefit.icon }}"></i>{% else %}{{ benefit.icon }}{% endif %} <strong>{{ benefit.title }}</strong> - {{ benefit.desc }}</li>
 						{% endfor %}
 					</ul>
 				</div>
@@ -37,7 +70,7 @@ layout: default
 					<h2>🎯 Questo evento è per te se...</h2>
 					<ul itemprop="audience" itemscope itemtype="https://schema.org/PeopleAudience">
 						{% for item in page.target_audience %}
-						<li itemprop="description">{{ item.icon }} {{ item.text }} <strong>"{{ item.highlight }}"</strong> {{ item.tail }}</li>
+						<li itemprop="description">{% if item.icon contains 'fa-' %}<i class="fa {{ item.icon }}"></i>{% else %}{{ item.icon }}{% endif %} {{ item.text }} <strong>"{{ item.highlight }}"</strong> {{ item.tail }}</li>
 						{% endfor %}
 					</ul>
 				</div>
@@ -106,31 +139,31 @@ layout: default
 					<h2>🚀 Logistica</h2>
 					<div class="epppi-info-grid">
 						<div class="epppi-info-item">
-							<strong>{{ page.logistica.quando.icon }} {{ page.logistica.quando.label }}</strong>
+							<strong>{% if page.logistica.quando.icon contains 'fa-' %}<i class="fa {{ page.logistica.quando.icon }}"></i>{% else %}{{ page.logistica.quando.icon }}{% endif %} {{ page.logistica.quando.label }}</strong>
 							<p>{{ page.logistica.quando.date }}<br>
 							Arrivo: {{ page.logistica.quando.arrivo }}<br>
 							Partenza: {{ page.logistica.quando.partenza }}</p>
 						</div>
 						<div class="epppi-info-item">
-							<strong>{{ page.logistica.dove.icon }} {{ page.logistica.dove.label }}</strong>
+							<strong>{% if page.logistica.dove.icon contains 'fa-' %}<i class="fa {{ page.logistica.dove.icon }}"></i>{% else %}{{ page.logistica.dove.icon }}{% endif %} {{ page.logistica.dove.label }}</strong>
 							<p>{{ page.logistica.dove.citta }}<br>{{ page.logistica.dove.luogo }}</p>
 						</div>
 						<div class="epppi-info-item">
-							<strong>{{ page.logistica.per_chi.icon }} {{ page.logistica.per_chi.label }}</strong>
+							<strong>{% if page.logistica.per_chi.icon contains 'fa-' %}<i class="fa {{ page.logistica.per_chi.icon }}"></i>{% else %}{{ page.logistica.per_chi.icon }}{% endif %} {{ page.logistica.per_chi.label }}</strong>
 							<p>{{ page.logistica.per_chi.text }}</p>
 						</div>
 						<div class="epppi-info-item">
-							<strong>{{ page.logistica.posti.icon }} {{ page.logistica.posti.label }}</strong>
+							<strong>{% if page.logistica.posti.icon contains 'fa-' %}<i class="fa {{ page.logistica.posti.icon }}"></i>{% else %}{{ page.logistica.posti.icon }}{% endif %} {{ page.logistica.posti.label }}</strong>
 							<p>{{ page.logistica.posti.max }} massimo<br>
 							{{ page.logistica.posti.min }} minimo per confermare<br>
 							Waiting list: {{ page.logistica.posti.waiting }} persone</p>
 						</div>
 						<div class="epppi-info-item">
-							<strong>{{ page.logistica.come_arrivare.icon }} {{ page.logistica.come_arrivare.label }}</strong>
+							<strong>{% if page.logistica.come_arrivare.icon contains 'fa-' %}<i class="fa {{ page.logistica.come_arrivare.icon }}"></i>{% else %}{{ page.logistica.come_arrivare.icon }}{% endif %} {{ page.logistica.come_arrivare.label }}</strong>
 							<p>{{ page.logistica.come_arrivare.text }}</p>
 						</div>
 						<div class="epppi-info-item">
-							<strong>{{ page.logistica.cosa_portare.icon }} {{ page.logistica.cosa_portare.label }}</strong>
+							<strong>{% if page.logistica.cosa_portare.icon contains 'fa-' %}<i class="fa {{ page.logistica.cosa_portare.icon }}"></i>{% else %}{{ page.logistica.cosa_portare.icon }}{% endif %} {{ page.logistica.cosa_portare.label }}</strong>
 							<p>{{ page.logistica.cosa_portare.items }}</p>
 						</div>
 					</div>
