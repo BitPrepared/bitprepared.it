@@ -7,6 +7,7 @@ layout: default
 		<div class="row">
 			<section class="12u">
 				{% include edit-button-epppi.html %}
+
 				<style>
 					.epppi-box ul[itemprop="audience"] {
 						list-style: none !important;
@@ -40,6 +41,7 @@ layout: default
 						font-weight: 700 !important;
 					}
 				</style>
+
 				<!-- Hero Section -->
 				<div class="epppi-hero">
 					<h2>{{ page.hero.title }}</h2>
@@ -51,13 +53,11 @@ layout: default
 				</div>
 
 				<!-- Benefits Section -->
-				<div class="epppi-benefits">
-					<h3>⚡ In 3 giorni scoprirai:</h3>
-					<ul>
-						{% for benefit in page.benefits %}
-						<li>{% if benefit.icon contains 'fa-' %}<i class="fa {{ benefit.icon }}"></i>{% else %}{{ benefit.icon }}{% endif %} <strong>{{ benefit.title }}</strong> - {{ benefit.desc }}</li>
-						{% endfor %}
-					</ul>
+				<div class="epppi-highlight">
+					<h3><i class="fas fa-star" style="color: #f39c12;"></i> 9 motivi per cui questo EPPPI è diverso</h3>
+					{% for highlight in page.highlights %}
+					<p><strong>{{ forloop.index }}.</strong> {{ highlight }}</p>
+					{% endfor %}
 				</div>
 
 				<!-- Target Audience -->
@@ -113,14 +113,6 @@ layout: default
 						<h4>{{ item.title }}</h4>
 						<p>{{ item.desc }}</p>
 					</div>
-					{% endfor %}
-				</div>
-
-				<!-- Highlights -->
-				<div class="epppi-highlight">
-					<h2><i class="fas fa-star" style="color: #f39c12;"></i> 10 motivi per cui questo EPPPI è diverso</h2>
-					{% for highlight in page.highlights %}
-					<p><strong>{{ forloop.index }}.</strong> {{ highlight }}</p>
 					{% endfor %}
 				</div>
 

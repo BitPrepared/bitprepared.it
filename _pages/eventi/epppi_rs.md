@@ -74,7 +74,7 @@ highlights:
   - "Non solo teoria: tocchi con mano realtà che funzionano."
   - "Banca Etica, cooperative sociali, simulazioni democratiche."
   - "Porti a casa strumenti concreti, non solo idee."
-  - "Evento 10 anni di storia, staff rodata, metodologia AGESCI testata."
+  - "Evento 10 anni di storia, staff rodata."
   - "World Café: metodologia partecipativa per elaborare insieme la tua scelta politica scout."
   - "Hike urbano a Bologna: scopri cooperative sociali ed economia solidale sul campo."
   - "Simulazione Parlamento Europeo: sperimenta come funziona davvero la democrazia."
