@@ -2,105 +2,35 @@ Changelog BitPrepared.it
 -------------------
 
 ### 2026-04-21
-  * FIX: Homepage blog post titles - spacing per titoli su due righe
-    - Applicato line-height: 1.2em !important a selettore: #content .row section header h2
-    - Titolo mantiene testo completo, può andare a capo con spazio corretto
-    - Nota: .homepage classe non usata in HTML, rimosso dai selettori
-  * FIX: Homepage featured h3 titles - allineamento orizzontale
-    - Aggiunto height: 1.4em a #featured .pennant in tutti i CSS
-    - Icone pennant ora hanno altezza fissa, h3 titles allineati
-  * FIX: Blog post markdown non processato - layout post.html
-    - Problema: layout usava {{ page.content }} invece di {{ content }}
-    - page.content = markdown grezzo, content = markdown → HTML
-    - Fix: cambiato {{ page.content }} → {{ content }} in _layouts/post.html
-    - Aggiunto wrapper <article> attorno a {{ content }} per struttura corretta
-  * FIX: Blog post h2 styling - article h2 sembrava testo normale
-    - Aggiunto CSS article h2 in tutti i file: font-size, font-weight, color, margins
-    - Article headings ora stilizzati correttamente come veri h2
-  * FEAT: Blog post link rapido a pagina evento
-    - Aggiunto link "📄 Maggiori informazioni sull'evento →" dopo descrizione
-    - Link punta a permalink dell'evento (es: /eventi/epppi)
-    - Aggiunto in post EPPPI e script generate-blog-post.rb
-  * FIX: Blog post markdown link syntax - grassetto dentro link
-    - Problema: [**testo**](url) non valido in markdown standard
-    - Fix: rimosso ** dal link CTA in post EPPPI e script generate-blog-post.rb
-  * FIX: Path asset duplicato - rimosso /assets/ da featured in post EPPPI
-    - Cambiato featured: /assets/images/... → featured: images/...
-    - File: _posts/2026-05-08-essere-solidi-in-una-societ-immateriale.md
-  * FEAT: Generatore automatico blog post per eventi
+  * FEATURE: Generatore automatico blog post per eventi
     - Script Ruby: scripts/generate-blog-post.rb
-    - Parse evento YAML → genera blog post Jekyll
-    - Frontmatter automatico con dati evento (title, tags, image, CTA)
-    - Template con sezioni commentate per descrizione personalizzata
-    - YAML parsing con require 'date' + permitted_classes [Date, Time, Symbol]
-    - Makefile: make generate-blog-post (esegue in Docker)
-    - Apertura automatica MarkText dopo generazione (host locale, non Docker)
-    - Per EPPPI 2026: 80% automatico, 20% manuale
-  * DOCS: Workflow aggiornato per blog post generation
-    - Scenario 5: Nuovo Blog Post in docs/WORKFLOW.md
-    - Sezione 📝 Nuovo Blog Post in docs/CHECKLIST.md
-    - Guida completa: generazione → personalizzazione → commit
-  * FIX: CSS mismatch evento-hero - aggiunte classi .evento-* mancanti
-    - Fixato: HTML usava .evento-*, CSS solo .epppi-*
-    - Pulito CSS: rimosso alias .epppi-* inutilizzati
-    - Aggiunto link evento-custom.css in default.html
-  * FIX: Homepage blog post titles - troppi lunghi, si sovrapponevano
-    - Problema: Titoli completi con "|" troppo lunghi per homepage (font-size 2.2em)
-    - Soluzione: index.html usa {{ post.title | split: "|" | first }}
-    - Mostra solo prima parte del titolo, più pulito e leggibile
-  * FEATURE: Makefile - aggiunto target serve-static
-    - `make serve-static`: build + Python HTTP server porta 8000
-    - Configurabile: STATIC_PORT env var
-  * FEATURE: Visual Regression Testing skill in Docker
-    - Container Docker con Playwright + Jekyll + Ruby
-    - Gestione automatica server Jekyll + static
+    - Parse evento YAML → genera blog post Jekyll con frontmatter completo
+    - Target: make generate-blog-post (Docker)
+  * FEATURE: Visual Regression Testing in Docker
+    - Container con Playwright + Jekyll + Ruby
     - Screenshot multi-viewport (19 pagine × 3 viewports)
-    - Confronto pixel-by-pixel con threshold 1%
-    - Report HTML automatico con diff images
-    - Target: validate-graphics (Docker), visual-baseline, visual-clean
-    - NOTE: Richiede Docker installato
-  * UPDATE: Visual regression scripts semplificati
-    - Rimozione gestione server (ora gestita da Docker)
-    - capture.js: solo screenshot, server già attivi
-    - create-baseline.js: usa make serve esterno
-    - Nuovo: docker-entrypoint.sh per orchestrazione container
-  * DOCS: Workflow reminder system per visual regression
-    - WORKFLOW.md: guida completa workflow sviluppo
-    - CHECKLIST.md: checklist rapida pre-commit
-    - CLAUDE.md: memoria persistente per Claude AI
-    - README.md: sezione workflow aggiornata
-    - Makefile: nuovo target 'make workflow'
-    - Scenari: nuova pagina, modifica grafica, bug fix, PR/merge
-  * REFACTOR: Documentazione spostata in docs/
-    - Spostati: WORKFLOW.md, CHECKLIST.md, VISUAL_REGRESSION_DOCS.md → docs/
-    - Mantenuti in radice: README.md, CLAUDE.md
-    - Aggiornati tutti i riferimenti incrociati
-  * REFACTOR: CLAUDE.md semplificato (focus operative)
-    - Ridotto da 257 a 85 righe (67%)
-    - Rimosso: panoramaprogetto, dettagli tecnici, troubleshooting
-    - Mantenuto: trigger visual regression, pattern, file critici, query standard
-    - Focus: Solo info per implementare nuove features
+    - Report HTML con diff images
+    - Target: make validate-graphics
+  * REFACTOR: Template epppi → evento (standard per tutti i nuovi eventi)
+    - Layout: _layouts/evento.html
+    - CSS: assets/css/evento-custom.css
+    - Generalizzati contenuti: highlights, outcomes dinamici
+  * DOCS: Workflow system completo
+    - docs/WORKFLOW.md: guida completa sviluppo
+    - docs/CHECKLIST.md: checklist pre-commit
+    - Makefile: target 'make workflow'
+  * IMAGE: Nuova locandina EPPPI 2026
+    - assets/images/locandina_epppi_2026.jpg
+    - Design aggiornato per evento "Essere solidi in una società immateriale"
 
 ### 2026-04-20
-  * REFACTOR: template `epppi` → `evento` (standard per tutti i nuovi eventi)
-    - Rinominati: _layouts/epppi.html → evento.html
-    - Rinominati: assets/css/epppi-custom.css → evento-custom.css
-    - Aggiornate tutte le classi CSS: .epppi-* → .evento-*
-    - Generalizzati contenuti: highlights_title, outcomes_title dinamici
-    - Sezione outcomes condizionale (mostra solo se definita)
-    - Aggiornato _includes/edit-button.html con nuovi riferimenti
-    - Creata documentazione: _pages/eventi/README_EVENTO.md
-    - Aggiornato README.md con nuova struttura
   * EPPPI 2026: nuovo layout con grafica migliorata
-  * EPPPI 2026: nuovo layout con grafica migliorata
-    - Pulsante edit MarkText: solo in development, position fixed
-    - Icone Font Ashley colorate al posto di emoji
-    - Sezione "10 motivi per cui questo EPPPI è diverso" numerata
-    - Sezione "Cosa porterai a casa": testo discorsivo con enfasi colorate
-    - Allineamento "Read more" homepage con flexbox
-    - Unificazione include edit-button per tutti i layout
-    - Locandina posizionata prima di sezione Social
-    - Configurazione environment: JEKYLL_ENV=production in build
+    - Pulsante edit MarkText (solo development)
+    - Icone Font Ashley colorate
+    - Sezione "10 motivi per cui questo EPPPI è diverso"
+    - Sezione "Cosa porterai a casa"
+    - Locandina prima sezione Social
+    - Configurazione JEKYLL_ENV=production
 
 ### 2023-04-25
   * fixed buonacaccia link epppi
