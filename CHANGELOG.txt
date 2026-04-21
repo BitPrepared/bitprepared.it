@@ -7,8 +7,11 @@ Changelog BitPrepared.it
     - Parse evento YAML → genera blog post Jekyll
     - Frontmatter automatico con dati evento (title, tags, image, CTA)
     - Template con sezioni commentate per descrizione personalizzata
-    - Makefile: make generate-blog-post
+    - Makefile: make generate-blog-post (esegue in Docker)
     - Per EPPPI 2026: 80% automatico, 20% manuale
+  * FIX: Blog post generator eseguito in Docker
+    - Problema: Ruby non disponibile fuori Docker
+    - Soluzione: make generate-blog-post usa container Jekyll
   * DOCS: Workflow aggiornato per blog post generation
     - Scenario 5: Nuovo Blog Post in docs/WORKFLOW.md
     - Sezione 📝 Nuovo Blog Post in docs/CHECKLIST.md
