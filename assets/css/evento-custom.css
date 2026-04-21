@@ -1,42 +1,7 @@
-/* Evento Custom Styles - Supports both evento-* and epppi-* class names */
-
-/* Edit icon for local development */
-.epppi-edit-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: white;
-    border: 2px solid #667eea;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    color: #667eea;
-    padding: 0;
-    z-index: 100;
-    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
-}
-
-.epppi-edit-icon:hover {
-    background: #667eea;
-    border-color: #667eea;
-    color: white;
-    transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-}
-
-.epppi-edit-icon i {
-    pointer-events: none;
-    font-size: 18px;
-}
+/* Evento Custom Styles */
 
 /* Hero Section */
-.evento-hero,
-.epppi-hero {
+.evento-hero {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     padding: 60px 40px;
     border-radius: 12px;
@@ -46,8 +11,7 @@
     box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
 }
 
-.evento-hero h2,
-.epppi-hero h2 {
+.evento-hero h2 {
     color: #ffffff !important;
     font-size: 2.2em;
     margin-bottom: 20px;
@@ -61,8 +25,7 @@
     text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
-.evento-hero h3,
-.epppi-hero h3 {
+.evento-hero h3 {
     color: #ffffff !important;
     font-size: 1.6em;
     margin-bottom: 15px;
@@ -73,23 +36,20 @@
     text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
-.evento-hero p,
-.epppi-hero p {
+.evento-hero p {
     color: rgba(255, 255, 255, 0.95);
     font-size: 1.2em;
     line-height: 1.6;
     text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
-.evento-hero strong,
-.epppi-hero strong {
+.evento-hero strong {
     color: #ffffff !important;
     text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
 /* CTA Button */
-.evento-cta,
-.epppi-cta {
+.evento-cta {
     display: inline-block;
     background: #ff6b6b;
     color: white !important;
@@ -104,28 +64,24 @@
     border: 3px solid #ff6b6b;
 }
 
-.evento-cta:hover,
-.epppi-cta:hover {
+.evento-cta:hover {
     background: #ff5252;
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
     text-decoration: none !important;
 }
 
-.evento-cta-secondary,
-.epppi-cta-secondary {
+.evento-cta-secondary {
     background: #80BA8E;
     border-color: #80BA8E;
 }
 
-.evento-cta-secondary:hover,
-.epppi-cta-secondary:hover {
+.evento-cta-secondary:hover {
     background: #6ea87d;
 }
 
 /* Benefits Section */
-.evento-highlight,
-.epppi-benefits {
+.evento-highlight {
     background: #f8f9fa;
     padding: 40px;
     border-radius: 12px;
@@ -133,22 +89,19 @@
     border-left: 5px solid #667eea;
 }
 
-.evento-highlight h3,
-.epppi-benefits h3 {
+.evento-highlight h3 {
     color: #667eea !important;
     font-size: 1.8em;
     margin-bottom: 20px;
     text-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
-.evento-highlight ul,
-.epppi-benefits ul {
+.evento-highlight ul {
     list-style: none;
     padding-left: 0;
 }
 
-.evento-highlight li,
-.epppi-benefits li {
+.evento-highlight li {
     padding: 15px 0;
     border-bottom: 1px solid #e9ecef;
     font-size: 1.1em;
@@ -156,19 +109,16 @@
     color: #333;
 }
 
-.evento-highlight li:last-child,
-.epppi-benefits li:last-child {
+.evento-highlight li:last-child {
     border-bottom: none;
 }
 
-.evento-highlight strong,
-.epppi-benefits strong {
+.evento-highlight strong {
     color: #667eea;
 }
 
 /* Box Section */
-.evento-box,
-.epppi-box {
+.evento-box {
     background: white;
     padding: 50px;
     border-radius: 12px;
@@ -177,53 +127,45 @@
     border: 1px solid #e9ecef;
 }
 
-.evento-box h2,
-.epppi-box h2 {
+.evento-box h2 {
     color: #667eea !important;
     font-size: 2em;
     margin-bottom: 25px;
     text-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
-.evento-box h3,
-.epppi-box h3 {
+.evento-box h3 {
     color: #667eea !important;
     font-size: 1.8em;
     margin-bottom: 25px;
     text-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
-.evento-box h4,
-.epppi-box h4 {
+.evento-box h4 {
     color: #764ba2 !important;
 }
 
-.evento-box p,
-.epppi-box p {
+.evento-box p {
     color: #333;
 }
 
-.evento-box ul,
-.epppi-box ul {
+.evento-box ul {
     color: #333;
 }
 
-.evento-box li,
-.epppi-box li {
+.evento-box li {
     color: #333;
 }
 
 /* Info Grid */
-.evento-info-grid,
-.epppi-info-grid {
+.evento-info-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 25px;
     margin: 40px 0;
 }
 
-.evento-info-item,
-.epppi-info-item {
+.evento-info-item {
     background: #f8f9fa;
     padding: 25px;
     border-radius: 10px;
@@ -233,20 +175,17 @@
     color: #333;
 }
 
-.evento-info-item p,
-.epppi-info-item p {
+.evento-info-item p {
     color: #333;
 }
 
-.evento-info-item:hover,
-.epppi-info-item:hover {
+.evento-info-item:hover {
     border-color: #667eea;
     transform: translateY(-5px);
     box-shadow: 0 6px 20px rgba(102, 126, 234, 0.2);
 }
 
-.evento-info-item strong,
-.epppi-info-item strong {
+.evento-info-item strong {
     display: block;
     color: #667eea;
     font-size: 1.3em;
@@ -255,8 +194,7 @@
 }
 
 /* Program Item */
-.evento-program-item,
-.epppi-program-item {
+.evento-program-item {
     background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
     padding: 30px;
     margin: 25px 0;
@@ -266,29 +204,25 @@
     transition: all 0.3s ease;
 }
 
-.evento-program-item:hover,
-.epppi-program-item:hover {
+.evento-program-item:hover {
     transform: translateX(10px);
     box-shadow: 0 6px 20px rgba(118, 75, 162, 0.15);
 }
 
-.evento-program-item h4,
-.epppi-program-item h4 {
+.evento-program-item h4 {
     color: #764ba2 !important;
     font-size: 1.5em;
     margin-bottom: 15px;
     text-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
-.evento-program-item p,
-.epppi-program-item p {
+.evento-program-item p {
     color: #333;
     line-height: 1.6;
 }
 
 /* FAQ Item */
-.evento-faq-item,
-.epppi-faq-item {
+.evento-faq-item {
     background: #f8f9fa;
     padding: 25px;
     margin: 20px 0;
@@ -297,14 +231,12 @@
     color: #333;
 }
 
-.evento-faq-item p,
-.epppi-faq-item p {
+.evento-faq-item p {
     color: #333;
     line-height: 1.6;
 }
 
-.evento-faq-item strong,
-.epppi-faq-item strong {
+.evento-faq-item strong {
     color: #80BA8E;
     font-size: 1.2em;
     display: block;
@@ -313,8 +245,7 @@
 }
 
 /* Social Section */
-.evento-social,
-.epppi-social {
+.evento-social {
     background: #f8f9fa;
     padding: 30px;
     border-radius: 12px;
@@ -324,15 +255,13 @@
     color: #333;
 }
 
-.evento-social p,
-.epppi-social p {
+.evento-social p {
     color: #667eea;
     font-size: 1.1em;
     margin: 10px 0;
 }
 
-.evento-social h3,
-.epppi-social h3 {
+.evento-social h3 {
     color: #667eea !important;
     font-size: 1.6em;
     margin-bottom: 15px;
@@ -341,18 +270,15 @@
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
-    .evento-hero,
-    .epppi-hero {
+    .evento-hero {
         padding: 40px 20px;
     }
 
-    .evento-hero h2,
-    .epppi-hero h2 {
+    .evento-hero h2 {
         font-size: 1.8em;
     }
 
-    .evento-cta,
-    .epppi-cta {
+    .evento-cta {
         padding: 16px 28px;
         font-size: 1em;
         display: block;
@@ -360,21 +286,15 @@
     }
 
     .evento-box,
-    .epppi-box,
-    .evento-highlight,
-    .epppi-benefits,
-    .epppi-highlight,
-    .epppi-urgency {
+    .evento-highlight {
         padding: 30px 20px;
     }
 
-    .evento-info-grid,
-    .epppi-info-grid {
+    .evento-info-grid {
         grid-template-columns: 1fr;
     }
 
-    .evento-program-item,
-    .epppi-program-item {
+    .evento-program-item {
         padding: 20px;
     }
 }
