@@ -6,7 +6,7 @@ modified: 2026-04-20
 author: bitprepared
 category: eventi
 tags: bitprepared, epppi, rs, esseri solidi, società digitale, rover, scolte, bologna, 2026, blog
-featured: images/locandina_epppi_2026.jpg
+featured: images/essere-solidi.png
 comments: true
 share: true
 permalink: /blog/2026/essere-solidi-in-una-societ-immateriale-bologna-8-10-maggio/
