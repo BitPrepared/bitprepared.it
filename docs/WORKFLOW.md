@@ -263,8 +263,8 @@ make clean                # Pulisci _site/
 
 Per problemi o domande:
 
-1. Controlla `CHECKLIST.md` per checklist rapida
-2. Leggi `VISUAL_REGRESSION_DOCS.md` per dettagli tecnici
+1. Controlla `docs/CHECKLIST.md` per checklist rapida
+2. Leggi `docs/VISUAL_REGRESSION_DOCS.md` per dettagli tecnici
 3. Usa `make help` per comandi disponibili
 4. Review `screenshots/report/index.html` per debug
 

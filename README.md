@@ -118,9 +118,9 @@ make validate-graphics
 - ⚪ Modifiche contenuto testuale (opzionale)
 
 **Documentazione completa**:
-- [WORKFLOW.md](WORKFLOW.md) - Guida workflow dettagliata
-- [CHECKLIST.md](CHECKLIST.md) - Checklist rapida pre-commit
-- [VISUAL_REGRESSION_DOCS.md](VISUAL_REGRESSION_DOCS.md) - Docs tecniche
+- [docs/WORKFLOW.md](docs/WORKFLOW.md) - Guida workflow dettagliata
+- [docs/CHECKLIST.md](docs/CHECKLIST.md) - Checklist rapida pre-commit
+- [docs/VISUAL_REGRESSION_DOCS.md](docs/VISUAL_REGRESSION_DOCS.md) - Docs tecniche
 
 ### Comandi Utili
 

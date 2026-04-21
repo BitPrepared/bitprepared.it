@@ -177,7 +177,7 @@ make serve             # Jekyll server (porta 4000)
 make serve-static      # Python static server (porta 8000)
 make build             # Build sito statico
 make clean             # Pulisci _site/
-make workflow          # Mostra WORKFLOW.md
+make workflow          # Mostra docs/WORKFLOW.md
 ```
 
 ## Pattern da Notare
@@ -220,9 +220,9 @@ title: Titolo Pagina
 
 ## Riferimenti
 
-- **Workflow completo**: `WORKFLOW.md`
-- **Checklist rapida**: `CHECKLIST.md`
-- **Documentazione visual regression**: `VISUAL_REGRESSION_DOCS.md`
+- **Workflow completo**: `docs/WORKFLOW.md`
+- **Checklist rapida**: `docs/CHECKLIST.md`
+- **Documentazione visual regression**: `docs/VISUAL_REGRESSION_DOCS.md`
 - **README progetto**: `README.md`
 
 ## Query Comuni per Claude

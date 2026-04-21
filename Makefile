@@ -98,4 +98,4 @@ docker-build-visual:
 workflow:
 	@echo "📋 Workflow Sviluppo BitPrepared"
 	@echo ""
-	@cat WORKFLOW.md
+	@cat docs/WORKFLOW.md

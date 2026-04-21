@@ -176,11 +176,11 @@ make validate-graphics      # Valida
 make visual-baseline        # Aggiorna baseline
 make visual-clean          # Pulisci
 
-# Mostra questo documento
+# Mostra workflow completo
 make workflow
 
-# Mostra checklist
-cat CHECKLIST.md
+# Mostra questa checklist
+cat docs/CHECKLIST.md
 ```
 
 ---
