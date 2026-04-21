@@ -6,6 +6,24 @@ Changelog BitPrepared.it
     - Applicato line-height: 1.2em !important a selettore: #content .row section header h2
     - Titolo mantiene testo completo, può andare a capo con spazio corretto
     - Nota: .homepage classe non usata in HTML, rimosso dai selettori
+  * FIX: Homepage featured h3 titles - allineamento orizzontale
+    - Aggiunto height: 1.4em a #featured .pennant in tutti i CSS
+    - Icone pennant ora hanno altezza fissa, h3 titles allineati
+  * FIX: Blog post markdown non processato - layout post.html
+    - Problema: layout usava {{ page.content }} invece di {{ content }}
+    - page.content = markdown grezzo, content = markdown → HTML
+    - Fix: cambiato {{ page.content }} → {{ content }} in _layouts/post.html
+    - Aggiunto wrapper <article> attorno a {{ content }} per struttura corretta
+  * FIX: Blog post h2 styling - article h2 sembrava testo normale
+    - Aggiunto CSS article h2 in tutti i file: font-size, font-weight, color, margins
+    - Article headings ora stilizzati correttamente come veri h2
+  * FEAT: Blog post link rapido a pagina evento
+    - Aggiunto link "📄 Maggiori informazioni sull'evento →" dopo descrizione
+    - Link punta a permalink dell'evento (es: /eventi/epppi)
+    - Aggiunto in post EPPPI e script generate-blog-post.rb
+  * FIX: Blog post markdown link syntax - grassetto dentro link
+    - Problema: [**testo**](url) non valido in markdown standard
+    - Fix: rimosso ** dal link CTA in post EPPPI e script generate-blog-post.rb
   * FIX: Path asset duplicato - rimosso /assets/ da featured in post EPPPI
     - Cambiato featured: /assets/images/... → featured: images/...
     - File: _posts/2026-05-08-essere-solidi-in-una-societ-immateriale.md

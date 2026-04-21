@@ -235,6 +235,12 @@
 		font-size: 1.4em;
 	}
 
+	#featured .pennant
+	{
+		font-size: 4em;
+		height: 1.4em;
+	}
+
 /*********************************************************************************/
 /* Welcome                                                                       */
 /*********************************************************************************/
@@ -265,4 +271,14 @@
 #content .row section header h2
 {
 	line-height: 1.2em !important;
+}
+
+/* Article headings */
+article h2
+{
+	font-size: 1.8em;
+	font-weight: 300;
+	color: #777;
+	margin-top: 1.5em;
+	margin-bottom: 0.8em;
 }

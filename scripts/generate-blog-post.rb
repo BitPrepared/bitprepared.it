@@ -93,6 +93,7 @@ class BlogPostGenerator
       event_target: hero['target'],
       cta_text: cta.dig('primary', 'text'),
       cta_url: cta.dig('primary', 'url'),
+      event_url: frontmatter['permalink'] || '',
       posti_max: logistica.dig('posti', 'max'),
       posti_min: logistica.dig('posti', 'min'),
       posti_waiting: logistica.dig('posti', 'waiting'),
@@ -149,6 +150,8 @@ permalink: #{data[:permalink]}
 **#{data[:event_subtitle]}**
 
 Un evento imperdibile per #{data[:event_target]} a #{data[:event_location]}, dal #{data[:event_date]}.
+
+[**📄 Maggiori informazioni sull'evento →**](#{data[:event_url]})
 
 ## 📋 Quando e Dove
 
@@ -212,7 +215,7 @@ Waiting list: #{data[:posti_waiting]} posti
 
 Posti limitati! Non perdere l'opportunità di partecipare a questo evento unico.
 
-[**#{data[:cta_text]}**](#{data[:cta_url]})
+[#{data[:cta_text]}](#{data[:cta_url]})
 
 ## ❓ Domande Frequenti
 
