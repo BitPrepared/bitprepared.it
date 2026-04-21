@@ -2,25 +2,34 @@ Changelog BitPrepared.it
 -------------------
 
 ### 2026-04-21
+  * FIX: Homepage blog post titles - spacing per titoli su due righe
+    - Applicato line-height: 1.2em !important a selettore: #content .row section header h2
+    - Titolo mantiene testo completo, può andare a capo con spazio corretto
+    - Nota: .homepage classe non usata in HTML, rimosso dai selettori
+  * FIX: Path asset duplicato - rimosso /assets/ da featured in post EPPPI
+    - Cambiato featured: /assets/images/... → featured: images/...
+    - File: _posts/2026-05-08-essere-solidi-in-una-societ-immateriale.md
   * FEAT: Generatore automatico blog post per eventi
     - Script Ruby: scripts/generate-blog-post.rb
     - Parse evento YAML → genera blog post Jekyll
     - Frontmatter automatico con dati evento (title, tags, image, CTA)
     - Template con sezioni commentate per descrizione personalizzata
+    - YAML parsing con require 'date' + permitted_classes [Date, Time, Symbol]
     - Makefile: make generate-blog-post (esegue in Docker)
+    - Apertura automatica MarkText dopo generazione (host locale, non Docker)
     - Per EPPPI 2026: 80% automatico, 20% manuale
-  * FIX: Blog post generator eseguito in Docker
-    - Problema: Ruby non disponibile fuori Docker
-    - Soluzione: make generate-blog-post usa container Jekyll
   * DOCS: Workflow aggiornato per blog post generation
     - Scenario 5: Nuovo Blog Post in docs/WORKFLOW.md
     - Sezione 📝 Nuovo Blog Post in docs/CHECKLIST.md
     - Guida completa: generazione → personalizzazione → commit
   * FIX: CSS mismatch evento-hero - aggiunte classi .evento-* mancanti
-  * FIX: CSS mismatch evento-hero - aggiunte classi .evento-* mancanti
     - Fixato: HTML usava .evento-*, CSS solo .epppi-*
     - Pulito CSS: rimosso alias .epppi-* inutilizzati
     - Aggiunto link evento-custom.css in default.html
+  * FIX: Homepage blog post titles - troppi lunghi, si sovrapponevano
+    - Problema: Titoli completi con "|" troppo lunghi per homepage (font-size 2.2em)
+    - Soluzione: index.html usa {{ post.title | split: "|" | first }}
+    - Mostra solo prima parte del titolo, più pulito e leggibile
   * FEATURE: Makefile - aggiunto target serve-static
     - `make serve-static`: build + Python HTTP server porta 8000
     - Configurabile: STATIC_PORT env var

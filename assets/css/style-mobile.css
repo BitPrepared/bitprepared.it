@@ -261,3 +261,8 @@
 		padding: 1em 1em;
 		font-size: 1.2em;
 	}		
+
+#content .row section header h2
+{
+	line-height: 1.2em !important;
+}

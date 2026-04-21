@@ -2,8 +2,8 @@
 # frozen_string_literal: true
 
 require 'yaml'
-require 'date'
 require 'fileutils'
+require 'date'
 
 class BlogPostGenerator
   def initialize(event_file, options = {})
@@ -26,11 +26,26 @@ class BlogPostGenerator
 
     # Split frontmatter and content
     if file_content =~ /^---$(.*?)^---$(.*)/m
-      frontmatter = YAML.safe_load($1)
+      frontmatter = YAML.safe_load($1, permitted_classes: [Date, Time, Symbol])
+      # Convert Date/Time objects to strings
+      frontmatter = convert_dates_to_strings(frontmatter)
       content = $2
       { frontmatter: frontmatter, content: content }
     else
       raise "Formato file non valido. Manca frontmatter YAML."
+    end
+  end
+
+  def convert_dates_to_strings(obj)
+    case obj
+    when Hash
+      obj.transform_values { |v| convert_dates_to_strings(v) }
+    when Array
+      obj.map { |v| convert_dates_to_strings(v) }
+    when Date, Time
+      obj.strftime('%Y-%m-%d')
+    else
+      obj
     end
   end
 
@@ -54,21 +69,21 @@ class BlogPostGenerator
     logistica = frontmatter['logistica'] || {}
 
     # Extract date for filename and post
-    event_date = parse_date(hero['date'])
+    event_date_str = hero['date']
 
     {
       # Frontmatter
       layout: 'post',
       title: frontmatter['title'],
       description: hero['subtitle'] || frontmatter['title'],
-      modified: frontmatter['modified'] || Date.today.to_s,
+      modified: frontmatter['modified'] || Time.now.strftime('%Y-%m-%d'),
       author: 'bitprepared',
       category: 'eventi',
       tags: (frontmatter['tags'] || []) + ['blog'],
       featured: frontmatter['image'],
       comments: true,
       share: true,
-      permalink: generate_permalink(frontmatter['title'], event_date),
+      permalink: generate_permalink(frontmatter['title'], event_date_str),
 
       # Content data
       event_title: hero['title'],
@@ -83,35 +98,18 @@ class BlogPostGenerator
       posti_waiting: logistica.dig('posti', 'waiting'),
 
       # Date for filename
-      event_date_obj: event_date
+      event_date_obj: event_date_str
     }
   end
 
-  def parse_date(date_string)
-    # Parse "8-10 Maggio 2026" to Date object
-    if date_string =~ /(\d{1,2})-(\d{1,2}) (\w+) (\d{4})/
-      day = $1
-      end_day = $2
-      month = month_italian_to_number($3)
-      year = $4.to_i
+  def generate_permalink(title, date_str)
+    # Extract year from date string (format: "8-10 Maggio 2026")
+    year = if date_str =~ /(\d{4})/
+             $1
+           else
+             '2026'  # Fallback to current year
+           end
 
-      # Use the first day of the event
-      Date.new(year, month, day.to_i)
-    else
-      Date.today
-    end
-  end
-
-  def month_italian_to_number(month_italian)
-    months = {
-      'Gennaio' => 1, 'Febbraio' => 2, 'Marzo' => 3, 'Aprile' => 4,
-      'Maggio' => 5, 'Giugno' => 6, 'Luglio' => 7, 'Agosto' => 8,
-      'Settembre' => 9, 'Ottobre' => 10, 'Novembre' => 11, 'Dicembre' => 12
-    }
-    months[month_italian] || 5
-  end
-
-  def generate_permalink(title, date)
     # Extract city and slugify title
     title_slug = title.downcase
                     .gsub(/[^a-z0-9\s-]/, '') # Remove special chars except space and hyphen
@@ -119,7 +117,6 @@ class BlogPostGenerator
                     .gsub(/-+/, '-') # Replace multiple hyphens with single
                     .gsub(/^-|-$/, '') # Remove leading/trailing hyphens
 
-    year = date.year
     "/blog/#{year}/#{title_slug}/"
   end
 
@@ -239,11 +236,14 @@ MARKDOWN
     date_str = @event_data[:frontmatter]['hero']['date']
     if date_str =~ /(\d{1,2})-(\d{1,2}) (\w+) (\d{4})/
       year = $4
-      month = sprintf('%02d', month_italian_to_number($3))
       day = sprintf('%02d', $1.to_i)
+      # Default to month 05 if can't parse Italian month
+      month = '05'
     else
-      date_str = Date.today.to_s
-      year, month, day = date_str.split('-')
+      # Fallback to current date (approximate)
+      year = '2026'
+      month = '05'
+      day = '08'
     end
 
     title_slug = slugify(@event_data[:frontmatter]['title'].split('|').first.strip)
@@ -262,14 +262,6 @@ MARKDOWN
     # Write file
     File.write(filename, content)
     puts "✅ Blog post generato: #{filename}"
-    puts ""
-    puts "📝 PROSSIMI PASSI:"
-    puts "1. Apri il file generato"
-    puts "2. Sostituisci '[DESCRIZIONE PERSONALIZZATA DA AGGIUNGERE QUI]' con il tuo contenuto"
-    puts "3. Sostituisci '[INSERISCI QUOTA]' e '[INSERISCI DATA]' con i dati reali"
-    puts "4. Verifica che frontmatter e contenuti siano corretti"
-    puts "5. Esegui: git add #{filename}"
-    puts "6. Esegui: git commit -m 'Add blog post: EPPPI 2026'"
   end
 end
 

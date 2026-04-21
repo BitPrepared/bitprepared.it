@@ -1042,3 +1042,8 @@
 			font-weight: 300;
 			color: rgba(255,255,255,.6);
 		}	
+
+#content .row section header h2
+{
+	line-height: 1.2em !important;
+}

@@ -109,9 +109,11 @@ generate-blog-post:
 		$(DOCKER_IMAGE) \
 		ruby /srv/jekyll/scripts/generate-blog-post.rb "$$event_path"
 	@echo ""
-	@echo "✅ Blog post generato in _posts/"
+	@echo "🚀 Apertura MarkText con il file generato..."
+	@ls -t _posts/*.md 2>/dev/null | head -1 | xargs -r marktext 2>/dev/null &
+	@echo ""
 	@echo "📝 PROSSIMI PASSI:"
-	@echo "1. Apri il file generato"
-	@echo "2. Sostituisci i placeholder con contenuti personalizzati"
-	@echo "3. Verifica frontmatter e contenuti"
+	@echo "1. Modifica il file in MarkText (sostituisci placeholder)"
+	@echo "2. Verifica frontmatter e contenuti"
+	@echo "3. Salva e chiudi MarkText"
 	@echo "4. Git add e commit"

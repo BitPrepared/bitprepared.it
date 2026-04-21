@@ -62,3 +62,8 @@
 	{
 		font-size: 1.6em;
 	}	
+
+#content .row section header h2
+{
+	line-height: 1.2em !important;
+}
