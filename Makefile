@@ -4,7 +4,7 @@ STATIC_PORT ?= 8000
 PROJECT_PATH ?= /workspace/bitprepared.it
 DOCKER_IMAGE = jekyll/jekyll:$(JEKYLL_VERSION)
 
-.PHONY: serve serve-static build clean install help open validate-graphics visual-baseline visual-clean docker-build-visual
+.PHONY: serve serve-static build clean install help open validate-graphics visual-baseline visual-clean docker-build-visual workflow
 
 help:
 	@echo "Uso: make [target]"
@@ -20,6 +20,7 @@ help:
 	@echo "  visual-baseline  - Crea baseline immagini (richiede make serve attivo)"
 	@echo "  visual-clean      - Rimuovi screenshot temp"
 	@echo "  docker-build-visual- Build immagine Docker visual regression"
+	@echo "  workflow         - Mostra guida workflow sviluppo"
 	@echo "  help             - Mostra questo messaggio"
 
 serve:
@@ -93,3 +94,8 @@ visual-clean:
 docker-build-visual:
 	@echo "🐳 Building visual regression Docker image..."
 	docker build -t bitprepared-visual-regression:latest -f scripts/visual-regression/Dockerfile .
+
+workflow:
+	@echo "📋 Workflow Sviluppo BitPrepared"
+	@echo ""
+	@cat WORKFLOW.md

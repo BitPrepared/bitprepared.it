@@ -92,6 +92,45 @@ bitprepared.it/
 
 ---
 
+## Workflow Sviluppo
+
+### Visual Regression Testing ⚠️ IMPORTANTE
+
+Il progetto usa **Visual Regression Testing** automatico. Prima di commit di modifiche grafiche:
+
+```bash
+# 1. Avvia server (2 terminali)
+make serve           # Terminal 1: Jekyll (porta 4000)
+make serve-static    # Terminal 2: Python (porta 8000)
+
+# 2. Valida grafica (Terminal 3)
+make validate-graphics
+
+# 3. Se fallisce:
+#    - Review: xdg-open screenshots/report/index.html
+#    - Fix bug OR aggiorna baseline: make visual-baseline
+```
+
+**Quando eseguire**:
+- ✅ Modifiche CSS/layout
+- ✅ Nuove pagine
+- ✅ Modifiche template Jekyll
+- ⚪ Modifiche contenuto testuale (opzionale)
+
+**Documentazione completa**:
+- [WORKFLOW.md](WORKFLOW.md) - Guida workflow dettagliata
+- [CHECKLIST.md](CHECKLIST.md) - Checklist rapida pre-commit
+- [VISUAL_REGRESSION_DOCS.md](VISUAL_REGRESSION_DOCS.md) - Docs tecniche
+
+### Comandi Utili
+
+```bash
+make workflow          # Mostra guida workflow
+make help              # Tutti i comandi disponibili
+```
+
+---
+
 ## Deployment
 
 Il deployment è automatico tramite **GitHub Actions**:
