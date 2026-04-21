@@ -4,7 +4,7 @@ STATIC_PORT ?= 8000
 PROJECT_PATH ?= /workspace/bitprepared.it
 DOCKER_IMAGE = jekyll/jekyll:$(JEKYLL_VERSION)
 
-.PHONY: serve serve-static build clean install help open validate-graphics visual-baseline visual-clean docker-build-visual workflow
+.PHONY: serve serve-static build clean install help open validate-graphics visual-baseline visual-clean docker-build-visual workflow generate-blog-post
 
 help:
 	@echo "Uso: make [target]"
@@ -21,6 +21,7 @@ help:
 	@echo "  visual-clean      - Rimuovi screenshot temp"
 	@echo "  docker-build-visual- Build immagine Docker visual regression"
 	@echo "  workflow         - Mostra guida workflow sviluppo"
+	@echo "  generate-blog-post- Genera blog post da file evento"
 	@echo "  help             - Mostra questo messaggio"
 
 serve:
@@ -99,3 +100,15 @@ workflow:
 	@echo "📋 Workflow Sviluppo BitPrepared"
 	@echo ""
 	@cat docs/WORKFLOW.md
+
+generate-blog-post:
+	@echo "📝 Generazione blog post da evento..."
+	@read -p "Path file evento (es: _pages/eventi/epppi_rs.md): " event_path; \
+	bundle exec ruby scripts/generate-blog-post.rb "$$event_path"
+	@echo ""
+	@echo "✅ Blog post generato!"
+	@echo "📝 PROSSIMI PASSI:"
+	@echo "1. Apri il file generato"
+	@echo "2. Sostituisci i placeholder con contenuti personalizzati"
+	@echo "3. Verifica frontmatter e contenuti"
+	@echo "4. Git add e commit"
