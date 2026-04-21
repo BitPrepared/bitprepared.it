@@ -1,4 +1,4 @@
-/* EPPPI Custom Styles */
+/* Evento Custom Styles - Supports both evento-* and epppi-* class names */
 
 /* Edit icon for local development */
 .epppi-edit-icon {
@@ -34,6 +34,8 @@
     font-size: 18px;
 }
 
+/* Hero Section */
+.evento-hero,
 .epppi-hero {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     padding: 60px 40px;
@@ -44,6 +46,7 @@
     box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
 }
 
+.evento-hero h2,
 .epppi-hero h2 {
     color: #ffffff !important;
     font-size: 2.2em;
@@ -58,6 +61,7 @@
     text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
+.evento-hero h3,
 .epppi-hero h3 {
     color: #ffffff !important;
     font-size: 1.6em;
@@ -69,6 +73,7 @@
     text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
+.evento-hero p,
 .epppi-hero p {
     color: rgba(255, 255, 255, 0.95);
     font-size: 1.2em;
@@ -76,11 +81,14 @@
     text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
+.evento-hero strong,
 .epppi-hero strong {
     color: #ffffff !important;
     text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
+/* CTA Button */
+.evento-cta,
 .epppi-cta {
     display: inline-block;
     background: #ff6b6b;
@@ -96,6 +104,7 @@
     border: 3px solid #ff6b6b;
 }
 
+.evento-cta:hover,
 .epppi-cta:hover {
     background: #ff5252;
     transform: translateY(-3px);
@@ -103,15 +112,19 @@
     text-decoration: none !important;
 }
 
+.evento-cta-secondary,
 .epppi-cta-secondary {
     background: #80BA8E;
     border-color: #80BA8E;
 }
 
+.evento-cta-secondary:hover,
 .epppi-cta-secondary:hover {
     background: #6ea87d;
 }
 
+/* Benefits Section */
+.evento-highlight,
 .epppi-benefits {
     background: #f8f9fa;
     padding: 40px;
@@ -120,6 +133,7 @@
     border-left: 5px solid #667eea;
 }
 
+.evento-highlight h3,
 .epppi-benefits h3 {
     color: #667eea !important;
     font-size: 1.8em;
@@ -127,11 +141,13 @@
     text-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
+.evento-highlight ul,
 .epppi-benefits ul {
     list-style: none;
     padding-left: 0;
 }
 
+.evento-highlight li,
 .epppi-benefits li {
     padding: 15px 0;
     border-bottom: 1px solid #e9ecef;
@@ -140,14 +156,18 @@
     color: #333;
 }
 
+.evento-highlight li:last-child,
 .epppi-benefits li:last-child {
     border-bottom: none;
 }
 
+.evento-highlight strong,
 .epppi-benefits strong {
     color: #667eea;
 }
 
+/* Box Section */
+.evento-box,
 .epppi-box {
     background: white;
     padding: 50px;
@@ -157,6 +177,7 @@
     border: 1px solid #e9ecef;
 }
 
+.evento-box h2,
 .epppi-box h2 {
     color: #667eea !important;
     font-size: 2em;
@@ -164,6 +185,7 @@
     text-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
+.evento-box h3,
 .epppi-box h3 {
     color: #667eea !important;
     font-size: 1.8em;
@@ -171,58 +193,28 @@
     text-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
+.evento-box h4,
 .epppi-box h4 {
     color: #764ba2 !important;
 }
 
+.evento-box p,
 .epppi-box p {
     color: #333;
 }
 
+.evento-box ul,
 .epppi-box ul {
     color: #333;
 }
 
+.evento-box li,
 .epppi-box li {
     color: #333;
 }
 
-.epppi-highlight {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 50px;
-    border-radius: 12px;
-    text-align: center;
-    margin: 50px 0;
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-}
-
-.epppi-highlight h2 {
-    color: #ffffff !important;
-    font-size: 2.2em;
-    margin-bottom: 20px;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-}
-
-.epppi-highlight h3 {
-    color: #ffffff !important;
-    font-size: 2em;
-    margin-bottom: 20px;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-}
-
-.epppi-highlight p {
-    color: rgba(255, 255, 255, 0.95);
-    font-size: 1.15em;
-    line-height: 1.8;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-}
-
-.epppi-highlight strong {
-    color: #ffffff !important;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-}
-
+/* Info Grid */
+.evento-info-grid,
 .epppi-info-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -230,6 +222,7 @@
     margin: 40px 0;
 }
 
+.evento-info-item,
 .epppi-info-item {
     background: #f8f9fa;
     padding: 25px;
@@ -240,16 +233,19 @@
     color: #333;
 }
 
+.evento-info-item p,
 .epppi-info-item p {
     color: #333;
 }
 
+.evento-info-item:hover,
 .epppi-info-item:hover {
     border-color: #667eea;
     transform: translateY(-5px);
     box-shadow: 0 6px 20px rgba(102, 126, 234, 0.2);
 }
 
+.evento-info-item strong,
 .epppi-info-item strong {
     display: block;
     color: #667eea;
@@ -258,6 +254,8 @@
     text-shadow: 0 1px 1px rgba(0,0,0,0.1);
 }
 
+/* Program Item */
+.evento-program-item,
 .epppi-program-item {
     background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
     padding: 30px;
@@ -268,11 +266,13 @@
     transition: all 0.3s ease;
 }
 
+.evento-program-item:hover,
 .epppi-program-item:hover {
     transform: translateX(10px);
     box-shadow: 0 6px 20px rgba(118, 75, 162, 0.15);
 }
 
+.evento-program-item h4,
 .epppi-program-item h4 {
     color: #764ba2 !important;
     font-size: 1.5em;
@@ -280,11 +280,14 @@
     text-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
+.evento-program-item p,
 .epppi-program-item p {
     color: #333;
     line-height: 1.6;
 }
 
+/* FAQ Item */
+.evento-faq-item,
 .epppi-faq-item {
     background: #f8f9fa;
     padding: 25px;
@@ -294,11 +297,13 @@
     color: #333;
 }
 
+.evento-faq-item p,
 .epppi-faq-item p {
     color: #333;
     line-height: 1.6;
 }
 
+.evento-faq-item strong,
 .epppi-faq-item strong {
     color: #80BA8E;
     font-size: 1.2em;
@@ -307,45 +312,8 @@
     text-shadow: 0 1px 1px rgba(0,0,0,0.1);
 }
 
-.epppi-urgency {
-    background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
-    color: white;
-    padding: 40px;
-    border-radius: 12px;
-    text-align: center;
-    margin: 50px 0;
-    box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.02);
-    }
-}
-
-.epppi-urgency h3 {
-    color: #ffffff !important;
-    font-size: 2em;
-    margin-bottom: 20px;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-}
-
-.epppi-urgency p {
-    color: rgba(255, 255, 255, 0.95);
-    font-size: 1.2em;
-    margin: 15px 0;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-}
-
-.epppi-urgency strong {
-    color: #ffffff !important;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-}
-
+/* Social Section */
+.evento-social,
 .epppi-social {
     background: #f8f9fa;
     padding: 30px;
@@ -356,12 +324,14 @@
     color: #333;
 }
 
+.evento-social p,
 .epppi-social p {
     color: #667eea;
     font-size: 1.1em;
     margin: 10px 0;
 }
 
+.evento-social h3,
 .epppi-social h3 {
     color: #667eea !important;
     font-size: 1.6em;
@@ -371,14 +341,17 @@
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
+    .evento-hero,
     .epppi-hero {
         padding: 40px 20px;
     }
 
+    .evento-hero h2,
     .epppi-hero h2 {
         font-size: 1.8em;
     }
 
+    .evento-cta,
     .epppi-cta {
         padding: 16px 28px;
         font-size: 1em;
@@ -386,17 +359,21 @@
         margin: 15px 0;
     }
 
+    .evento-box,
     .epppi-box,
+    .evento-highlight,
     .epppi-benefits,
     .epppi-highlight,
     .epppi-urgency {
         padding: 30px 20px;
     }
 
+    .evento-info-grid,
     .epppi-info-grid {
         grid-template-columns: 1fr;
     }
 
+    .evento-program-item,
     .epppi-program-item {
         padding: 20px;
     }
