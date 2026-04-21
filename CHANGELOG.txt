@@ -9,6 +9,10 @@ Changelog BitPrepared.it
     - Template con sezioni commentate per descrizione personalizzata
     - Makefile: make generate-blog-post
     - Per EPPPI 2026: 80% automatico, 20% manuale
+  * DOCS: Workflow aggiornato per blog post generation
+    - Scenario 5: Nuovo Blog Post in docs/WORKFLOW.md
+    - Sezione 📝 Nuovo Blog Post in docs/CHECKLIST.md
+    - Guida completa: generazione → personalizzazione → commit
   * FIX: CSS mismatch evento-hero - aggiunte classi .evento-* mancanti
   * FIX: CSS mismatch evento-hero - aggiunte classi .evento-* mancanti
     - Fixato: HTML usava .evento-*, CSS solo .epppi-*
