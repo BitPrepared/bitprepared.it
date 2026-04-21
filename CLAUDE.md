@@ -2,10 +2,9 @@
 
 ## Panorama Progetto
 
-**Tipo**: Sito statico Jekyll per associazione scout BitPrepared
+**Tipo**: Sito statico Jekyll per BitPrepared
 **Stack**: Jekyll 3, Docker, GitHub Actions, Visual Regression (Playwright)
 **Linguaggio**: Italiano
-**Owner**: Stefano Tamagnini (yoghi)
 
 ## Sistema Visual Regression
 
@@ -255,4 +254,3 @@ title: Titolo Pagina
 
 **Versione**: 1.0.0
 **Ultimo aggiornamento**: 2026-04-21
-**Maintainer**: Claude AI + Stefano Tamagnini
