@@ -2,6 +2,14 @@ Changelog BitPrepared.it
 -------------------
 
 ### 2026-04-21
+  * FEAT: Generatore automatico blog post per eventi
+    - Script Ruby: scripts/generate-blog-post.rb
+    - Parse evento YAML → genera blog post Jekyll
+    - Frontmatter automatico con dati evento (title, tags, image, CTA)
+    - Template con sezioni commentate per descrizione personalizzata
+    - Makefile: make generate-blog-post
+    - Per EPPPI 2026: 80% automatico, 20% manuale
+  * FIX: CSS mismatch evento-hero - aggiunte classi .evento-* mancanti
   * FIX: CSS mismatch evento-hero - aggiunte classi .evento-* mancanti
     - Fixato: HTML usava .evento-*, CSS solo .epppi-*
     - Pulito CSS: rimosso alias .epppi-* inutilizzati
