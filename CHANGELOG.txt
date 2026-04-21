@@ -9,13 +9,19 @@ Changelog BitPrepared.it
   * FEATURE: Makefile - aggiunto target serve-static
     - `make serve-static`: build + Python HTTP server porta 8000
     - Configurabile: STATIC_PORT env var
-  * FEATURE: Visual Regression Testing skill
-    - Playwright + pixelmatch per screenshot multi-viewport
-    - 19 pagine × 3 viewports (desktop/tablet/mobile)
+  * FEATURE: Visual Regression Testing skill in Docker
+    - Container Docker con Playwright + Jekyll + Ruby
+    - Gestione automatica server Jekyll + static
+    - Screenshot multi-viewport (19 pagine × 3 viewports)
     - Confronto pixel-by-pixel con threshold 1%
     - Report HTML automatico con diff images
-    - Target make: validate-graphics, visual-baseline, visual-clean
-    - Dipendenze Node.js in scripts/visual-regression/
+    - Target: validate-graphics (Docker), visual-baseline, visual-clean
+    - NOTE: Richiede Docker installato
+  * UPDATE: Visual regression scripts semplificati
+    - Rimozione gestione server (ora gestita da Docker)
+    - capture.js: solo screenshot, server già attivi
+    - create-baseline.js: usa make serve esterno
+    - Nuovo: docker-entrypoint.sh per orchestrazione container
 
 ### 2026-04-20
   * REFACTOR: template `epppi` → `evento` (standard per tutti i nuovi eventi)

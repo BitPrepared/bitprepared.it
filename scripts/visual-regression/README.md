@@ -8,11 +8,20 @@ Verifica che il sito sia graficamente identico tra:
 - `make serve` (Jekyll dev server, porta 4000)
 - `make serve-static` (Python static server, porta 8000)
 
+## Requisiti
+
+**Docker obbligatorio** per `make validate-graphics`
+
+```bash
+# Verifica Docker installato
+docker --version
+```
+
 ## Setup Iniziale
 
 ```bash
-cd scripts/visual-regression
-npm install
+# Build immagine Docker (prima volta solo)
+make docker-build-visual
 ```
 
 ## Creazione Baseline
@@ -20,6 +29,10 @@ npm install
 Prima esecuzione: crea baseline images.
 
 ```bash
+# Terminal 1: avvia server
+make serve
+
+# Terminal 2: crea baseline
 make visual-baseline
 ```
 
@@ -39,8 +52,8 @@ make validate-graphics
 ```
 
 **Output**:
-- ✅ Se OK: `Validazione completata`
-- ❌ Se differenze > 1%: `Validazione fallita` + report
+- ✅ Se OK: `Visual regression PASSED`
+- ❌ Se differenze > 1%: `Visual regression FAILED` + report
 
 **Report**: `screenshots/report/index.html`
 
@@ -50,13 +63,13 @@ make validate-graphics
 # 1. Sviluppi feature
 git checkout -b feature/new-layout
 
-# 2. Valida graficamente
+# 2. Valida graficamente (Docker gestisce tutto)
 make validate-graphics
 
 # 3. Se ci sono differenze:
 # - Apri screenshots/report/index.html
 # - Se differenze accettabili (fix bug):
-make visual-baseline
+make visual-baseline  # Richiede make serve attivo
 git add tests/visual-baseline/
 git commit -m "Update baseline after fix"
 
@@ -94,16 +107,37 @@ Altre:
 
 ## Comandi
 
-- `make validate-graphics` - Valida grafica
-- `make visual-baseline` - Crea baseline
+- `make validate-graphics` - Valida grafica in Docker
+- `make visual-baseline` - Crea baseline (richiede make serve attivo)
 - `make visual-clean` - Rimuovi screenshot temp
+- `make docker-build-visual` - Build immagine Docker
 
 ## Troubleshooting
 
-**Dipendenze non installate**:
+**Docker non installato**:
 ```bash
-cd scripts/visual-regression
-npm install
+# Ubuntu/Debian
+sudo apt-get install docker.io
+
+# Avvia Docker
+sudo systemctl start docker
+sudo usermod -aG docker $USER
+```
+
+**Build Docker fallita**:
+```bash
+# Verifica connessione internet
+ping google.com
+
+# Rebuild pulito
+make docker-build-visual
+```
+
+**make visual-baseline fallisce**:
+```bash
+# Assicurati che make serve sia attivo in altro terminale
+make serve  # Terminal 1
+make visual-baseline  # Terminal 2
 ```
 
 **Baseline mancante**:
@@ -114,4 +148,14 @@ make visual-baseline
 **Report non si apre**:
 ```bash
 xdg-open screenshots/report/index.html
+```
+
+**Container non parte**:
+```bash
+# Verifica porte libere
+netstat -tuln | grep -E '4000|8000'
+
+# Kill processi sulle porte
+sudo lsof -ti:4000 | xargs kill -9
+sudo lsof -ti:8000 | xargs kill -9
 ```
