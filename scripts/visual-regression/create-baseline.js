@@ -41,14 +41,13 @@ async function createBaseline() {
       headless: true
     });
 
-    const context = await browser.newContext({
-      viewport: null
-    });
-
     for (const [viewportName, viewport] of Object.entries(viewports)) {
       console.log(`\n  📱 Viewport: ${viewportName} (${viewport.width}x${viewport.height})`);
 
-      await context.setViewportSize(viewport);
+      // Create context with viewport
+      const context = await browser.newContext({
+        viewport: viewport
+      });
 
       for (const pageUrl of pages) {
         try {
@@ -80,6 +79,8 @@ async function createBaseline() {
           console.error(`    ❌ Error capturing ${pageUrl}: ${error.message}`);
         }
       }
+
+      await context.close();
     }
 
     await browser.close();
