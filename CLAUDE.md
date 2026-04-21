@@ -1,195 +1,35 @@
 # BitPrepared.it - Memoria Persistente per Claude
 
-## Panorama Progetto
+## Visual Regression - Quando Ricordare
 
-**Tipo**: Sito statico Jekyll per BitPrepared
-**Stack**: Jekyll 3, Docker, GitHub Actions, Visual Regression (Playwright)
-**Linguaggio**: Italiano
+**Trigger principali**:
+- Utente aggiunge nuove pagine
+- Utente modifica CSS/layout
+- Utente modifica template Jekyll
+- Utente apre PR per merge
 
-## Sistema Visual Regression
-
-### Cos'è
-Sistema automatizzato di testing grafico che compara:
-- Jekyll dev server (porta 4000)
-- Static Python server (porta 8000)
-
-### Tecnologia
-- **Screenshot**: Playwright (Chromium headless)
-- **Confronto**: pixelmatch (pixel-by-pixel)
-- **Container**: Docker con Playwright v1.59.1
-- **Test**: 57 screenshot (19 pagine × 3 viewports)
-- **Threshold**: 1% differenza pixel
-
-### Comandi Chiave
-```bash
-make docker-build-visual    # Build immagine Docker
-make validate-graphics      # Valida grafica (Docker, richiede 2 server)
-make visual-baseline        # Crea baseline (Docker, richiede make serve)
-make visual-clean          # Pulisci temp
-```
-
-### Quando Ricordare All'Utente
-
-**✅ RICORDA SEMPRE** quando utente:
-1. Aggiunge nuove pagine
-2. Modifica CSS/layout
-3. Modifica template Jekyll (_layouts/)
-4. Modifica file in assets/css/
-5. Apre PR per merge
-
-**🟢 CHIEDI**:
+**Domande standard**:
 - "Hai eseguito make validate-graphics?"
 - "Vuoi aggiornare la baseline con make visual-baseline?"
 - "Vuoi revieware il report in screenshots/report/index.html?"
 
-**❌ NON RICORDARE** per:
+**Quando NON ricordare**:
 - Modifica contenuto testuale solo
 - Fix bug logici non grafici
 - Aggiornamento documentazione
 
-### File Critici Visual Regression
-
-- **`scripts/visual-regression/capture.js`**
-  - Contiene array `const pages` con URL da testare
-  - Se utente aggiunge pagina, RICORDA di aggiornare questo file
-  - Aggiungi nuovo URL: `const pages = [..., '/nuova-pagina/']`
-
-- **`tests/visual-baseline/`**
-  - Contiene baseline images per tutti i test
-  - Diviso in `desktop/`, `mobile/`, `tablet/`
-  - Git tracked - committare quando aggiornato
-
-- **`screenshots/report/index.html`**
-  - Report HTML generato dopo ogni validate-graphics
-  - Mostra differenze pixel-by-pixel
-  - Strumento principale per debug grafico
-
-## Struttura Progetto
-
-```
-bitprepared.it/
-├── _pages/              # Pagine statiche (eventi, software, about)
-├── _posts/              # Blog posts
-├── _layouts/            # Template Jekyll (default.html, evento.html)
-├── assets/css/          # Fogli stile (style.css, evento-custom.css)
-├── scripts/visual-regression/  # Sistema visual regression
-├── tests/visual-baseline/      # Baseline images
-└── Makefile             # Comandi sviluppo
-```
-
-## Workflow Sviluppo Standard
-
-### 1. Nuova Feature
-```bash
-git checkout -b feature/new-feature
-# Sviluppo feature
-make validate-graphics  # RICORDATI
-git commit
-```
-
-### 2. Modifica Grafica
-```bash
-# Modifica CSS
-make validate-graphics  # RICORDATI
-# Se fail → review screenshots/report/index.html
-# Se bug → fix, ripeti
-# Se ok → make visual-baseline, commit baseline
-git commit
-```
-
-### 3. Prima di Merge
-```bash
-git rebase main
-make validate-graphics  # RICORDATI
-git push
-```
-
-## Pagina da Testare (19)
-
-**Critical**:
-- `/` Homepage
-- `/eventi/epppi/` Layout evento speciale
-- `/about/`
-- `/software/`
-- `/blog/`
-
-**Eventi**:
-- `/eventi/campo-eg/`
-- `/eventi/stage/`
-
-**Software** (10 pagine):
-- `/software/libreoffice/`
-- `/software/gimp/`
-- `/software/qgis/`
-- `/software/mayalinux/`
-- `/software/vlc/`
-- `/software/wordpress/`
-- `/software/flora/`
-- `/software/code/`
-- `/software/prbm/`
-
-**Altro**:
-- `/articles/`
-- `/project/github/`
-
-## Viewports
-
-- **Desktop**: 1920×1080
-- **Tablet**: 768×1024
-- **Mobile**: 375×667
-
-## Troubleshooting Comune
-
-### Utente: "validate-graphics fallisce"
-**Risposta**:
-1. Controlla che `make serve` e `make serve-static` siano attivi
-2. Review `screenshots/report/index.html`
-3. Se bug grafico → fix
-4. Se nuovo design ok → `make visual-baseline`
-
-### Utente: "Nuova pagina non compare nei test"
-**Risposta**:
-Aggiorna `scripts/visual-regression/capture.js`:
-```javascript
-const pages = [
-  '/',
-  '/nuova-pagina/',  // Aggiungi qui
-  // ...
-];
-```
-
-Poi esegui `make visual-baseline`.
-
-### Utente: "Docker non parte"
-**Risposta**:
-Verifica Docker installato e attivo:
-```bash
-docker --version
-docker ps
-```
-
-## Comandi Make Utili
-
-```bash
-make help              # Mostra tutti i comandi
-make serve             # Jekyll server (porta 4000)
-make serve-static      # Python static server (porta 8000)
-make build             # Build sito statico
-make clean             # Pulisci _site/
-make workflow          # Mostra docs/WORKFLOW.md
-```
-
-## Pattern da Notare
+## Pattern Progetto
 
 ### Layout Eventi
-- Layout speciale: `_layouts/evento.html`
+- Layout: `_layouts/evento.html` (NON `_layouts/epppi.html`)
 - Classi CSS: `.evento-*` (NON `.epppi-*`)
-- CSS file: `assets/css/evento-custom.css`
+- CSS: `assets/css/evento-custom.css`
 
-### CSS Organization
-- Main CSS: `assets/css/style.css`
-- Event CSS: `assets/css/evento-custom.css`
-- Responsive: `assets/css/style-*.css`
+### Struttura File
+- Pagine: `_pages/*.md` o `*.html`
+- Blog: `_posts/YYYY-MM-DD-titolo.md`
+- Template: `_layouts/*.html` (default, page, post, evento)
+- Assets: `assets/css/*.css`, `assets/js/*`
 
 ### Frontmatter Jekyll
 ```yaml
@@ -199,58 +39,66 @@ title: Titolo Pagina
 ---
 ```
 
-## Note Importanti
+## File Critici da Aggiornare
 
-### Visual Regression
-- **Non automatica**: Utente deve eseguirla manualmente
-- **Docker based**: Tutto gira in container
-- **Server host**: Container si connette a server sull'host machine
-- **3 terminali**: serve (T1), serve-static (T2), validate (T3)
+Quando utente aggiunge/modifica features:
 
-### Jekyll
-- **Versione**: 3.x (vecchia, non aggiornare)
-- **Plugins**: Custom in `_plugins/`
-- **Config**: `_config.yml` e `_config_dev.yml`
+- **`scripts/visual-regression/capture.js`**
+  - Aggiungi nuove pagine all'array `const pages`
+  - Esempio: `const pages = [..., '/nuova-pagina/']`
 
-### Docker
-- **Immagine**: `mcr.microsoft.com/playwright:v1.59.1-jammy`
-- **Container name**: `bitprepared-visual-regression:latest`
-- **Network**: `--add-host=host.docker.internal:host-gateway`
+- **`tests/visual-baseline/`**
+  - Committa baseline quando aggiornata
+  - Diviso in `desktop/`, `mobile/`, `tablet/`
 
-## Riferimenti
+- **`docs/CHECKLIST.md`**
+  - Riferimento per workflow completo
+  - Consulta per scenari nuovi
 
-- **Workflow completo**: `docs/WORKFLOW.md`
-- **Checklist rapida**: `docs/CHECKLIST.md`
-- **Documentazione visual regression**: `docs/VISUAL_REGRESSION_DOCS.md`
-- **README progetto**: `README.md`
-
-## Query Comuni per Claude
+## Query Standard
 
 ### "Sto aggiungendo una nuova pagina"
 ```bash
 # Ricorda di dire:
-1. Aggiungi a scripts/visual-regression/capture.js
-2. Esegui make visual-baseline (con make serve attivo)
+1. Aggiungi URL a scripts/visual-regression/capture.js (const pages array)
+2. Esegui make visual-baseline (make serve deve essere attivo)
 3. Committa tests/visual-baseline/
 ```
 
 ### "Ho modificato il CSS"
 ```bash
 # Ricorda di dire:
-1. Esegui make validate-graphics (3 terminali)
-2. Review screenshots/report/index.html
-3. Fix OR make visual-baseline
+1. Esegui make validate-graphics (richiede 3 terminali: serve, serve-static, validate)
+2. Review screenshots/report/index.html se fallisce
+3. Fix bug grafici OR aggiorna baseline con make visual-baseline
 ```
 
 ### "Prima di fare il commit"
 ```bash
 # Ricorda di chiedere:
 1. Hai eseguito make validate-graphics?
-2. Il report è ok?
+2. Il report è ok (sotto 1% differenze)?
 3. Hai aggiornato la baseline se necessario?
 ```
 
+### "Sto modificando un template Jekyll"
+```bash
+# Ricorda di dire:
+1. Esegui make validate-graphics dopo modifiche
+2. Controlla che tutte le pagine con quel template siano ok
+3. Aggiorna baseline se modifiche grafiche accettabili
+```
+
+## Riferimenti
+
+Per dettagli completi:
+- **Workflow**: `docs/WORKFLOW.md`
+- **Checklist**: `docs/CHECKLIST.md`
+- **Docs tecnici**: `docs/VISUAL_REGRESSION_DOCS.md`
+- **Comandi**: `make help`
+
 ---
 
-**Versione**: 1.0.0
+**Versione**: 2.0.0 (semplificato)
+**Focus**: Operativo per implementazione features
 **Ultimo aggiornamento**: 2026-04-21
