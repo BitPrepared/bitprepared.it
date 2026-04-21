@@ -32,7 +32,7 @@ Prima esecuzione: crea baseline images.
 # Terminal 1: avvia server
 make serve
 
-# Terminal 2: crea baseline
+# Terminal 2: crea baseline (Docker)
 make visual-baseline
 ```
 
@@ -54,7 +54,7 @@ make serve
 # Terminal 2: avvia static server
 make serve-static
 
-# Terminal 3: valida
+# Terminal 3: valida (Docker)
 make validate-graphics
 ```
 
@@ -81,7 +81,8 @@ make validate-graphics
 # 3. Se ci sono differenze:
 # - Apri screenshots/report/index.html
 # - Se differenze accettabili (fix bug):
-make visual-baseline  # Terminal 3 (richiede make serve attivo)
+# Terminal 1: make serve (se non già attivo)
+# Terminal 2: make visual-baseline
 git add tests/visual-baseline/
 git commit -m "Update baseline after fix"
 

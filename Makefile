@@ -70,18 +70,19 @@ validate-graphics: docker-build-visual
 		--add-host=host.docker.internal:host-gateway \
 		bitprepared-visual-regression:latest
 
-visual-baseline:
+visual-baseline: docker-build-visual
 	@echo "📸 Creazione baseline images..."
 	@echo "⚠️  Assicurati che 'make serve' sia attivo su porta 4000"
 	@echo "   In un altro terminale esegui: make serve"
 	@echo ""
 	@read -p "Premi ENTER quando server è pronto..."
-	@if [ ! -d "scripts/visual-regression/node_modules" ]; then \
-		echo "⚠️  Dipendenze non installate. Eseguire:"; \
-		echo "   cd scripts/visual-regression && npm install"; \
-		exit 1; \
-	fi
-	@cd scripts/visual-regression && node create-baseline.js
+	@echo ""
+	docker run --rm \
+		--mount type=bind,source=${PWD},target=/app \
+		--add-host=host.docker.internal:host-gateway \
+		-e HOST_IP=host.docker.internal \
+		bitprepared-visual-regression:latest \
+		node /app/scripts/visual-regression/create-baseline.js
 	@echo "✅ Baseline creata in tests/visual-baseline/"
 	@echo "📝 Commit now: git add tests/visual-baseline/ && git commit -m 'Add visual baseline'"
 

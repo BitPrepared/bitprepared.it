@@ -31,7 +31,9 @@ const pages = [
 
 async function createBaseline() {
   console.log('=== Creating Visual Baseline ===\n');
-  console.log('Using http://localhost:4000 as baseline source\n');
+
+  const hostIp = process.env.HOST_IP || 'localhost';
+  console.log(`Using http://${hostIp}:4000 as baseline source\n`);
   console.log('⚠️  Make sure "make serve" is running on port 4000\n');
 
   try {
@@ -52,7 +54,7 @@ async function createBaseline() {
       for (const pageUrl of pages) {
         try {
           const page = await context.newPage();
-          const fullUrl = `http://localhost:4000${pageUrl}`;
+          const fullUrl = `http://${hostIp}:4000${pageUrl}`;
 
           console.log(`    🔗 ${pageUrl}`);
 
