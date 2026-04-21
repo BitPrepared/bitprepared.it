@@ -4,7 +4,7 @@ STATIC_PORT ?= 8000
 PROJECT_PATH ?= /workspace/bitprepared.it
 DOCKER_IMAGE = jekyll/jekyll:$(JEKYLL_VERSION)
 
-.PHONY: serve serve-static build clean install help open validate-graphics visual-baseline visual-clean
+.PHONY: serve serve-static build clean install help open validate-graphics visual-baseline visual-clean docker-build-visual
 
 help:
 	@echo "Uso: make [target]"
@@ -16,9 +16,10 @@ help:
 	@echo "  build            - Genera sito statico"
 	@echo "  clean            - Rimuove _site/"
 	@echo "  install          - Installa dipendenze bundle (Docker)"
-	@echo "  validate-graphics- Valida grafica serve vs serve-static"
-	@echo "  visual-baseline  - Crea baseline immagini per visual regression"
+	@echo "  validate-graphics- Valida grafica serve vs serve-static (Docker)"
+	@echo "  visual-baseline  - Crea baseline immagini (richiede make serve attivo)"
 	@echo "  visual-clean      - Rimuovi screenshot temp"
+	@echo "  docker-build-visual- Build immagine Docker visual regression"
 	@echo "  help             - Mostra questo messaggio"
 
 serve:
@@ -55,18 +56,20 @@ open:
 	@echo "Apertura sito locale: http://localhost:$(PORT)/"
 	@xdg-open http://localhost:$(PORT)/
 
-validate-graphics:
-	@echo "🔍 Avvio validazione grafica..."
-	@if [ ! -d "scripts/visual-regression/node_modules" ]; then \
-		echo "⚠️  Dipendenze non installate. Eseguire:"; \
-		echo "   cd scripts/visual-regression && npm install"; \
-		exit 1; \
-	fi
-	@cd scripts/visual-regression && npm test
-	@echo "✅ Validazione completata - Report in screenshots/report/index.html"
+validate-graphics: docker-build-visual
+	@echo "🔍 Avvio validazione grafica in Docker..."
+	docker run --rm \
+		--mount type=bind,source=${PWD},target=/app \
+		-p 4000:4000 \
+		-p 8000:8000 \
+		bitprepared-visual-regression:latest
 
 visual-baseline:
 	@echo "📸 Creazione baseline images..."
+	@echo "⚠️  Assicurati che 'make serve' sia attivo su porta 4000"
+	@echo "   In un altro terminale esegui: make serve"
+	@echo ""
+	@read -p "Premi ENTER quando server è pronto..."
 	@if [ ! -d "scripts/visual-regression/node_modules" ]; then \
 		echo "⚠️  Dipendenze non installate. Eseguire:"; \
 		echo "   cd scripts/visual-regression && npm install"; \
@@ -79,3 +82,7 @@ visual-baseline:
 visual-clean:
 	@rm -rf screenshots/
 	@echo "🧹 Screenshots temp rimossi"
+
+docker-build-visual:
+	@echo "🐳 Building visual regression Docker image..."
+	docker build -t bitprepared-visual-regression:latest -f scripts/visual-regression/Dockerfile .

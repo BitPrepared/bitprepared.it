@@ -1,5 +1,4 @@
 const { chromium } = require('@playwright/test');
-const { spawn } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
@@ -30,52 +29,13 @@ const pages = [
   '/project/github/'
 ];
 
-let serverProcess = null;
-
-async function startServer(command, port) {
-  return new Promise((resolve, reject) => {
-    console.log(`🚀 Avvio server: ${command} (porta ${port})`);
-
-    serverProcess = spawn('sh', ['-c', command], {
-      cwd: path.join(__dirname, '../..'),
-      stdio: 'pipe'
-    });
-
-    serverProcess.stdout.on('data', (data) => {
-      const output = data.toString();
-      if (output.includes('Server address') || output.includes('Serving')) {
-        console.log(`✅ Server ready on port ${port}`);
-        setTimeout(resolve, 2000);
-      }
-    });
-
-    serverProcess.on('error', (error) => {
-      reject(error);
-    });
-
-    setTimeout(resolve, 5000);
-  });
-}
-
-async function stopServer() {
-  if (serverProcess) {
-    console.log('🛑 Terminazione server...');
-    serverProcess.kill('SIGTERM');
-    setTimeout(() => {
-      if (serverProcess) serverProcess.kill('SIGKILL');
-      serverProcess = null;
-    }, 2000);
-  }
-}
-
 async function createBaseline() {
   console.log('=== Creating Visual Baseline ===\n');
-  console.log('Using make serve (Jekyll dev server) as baseline source\n');
+  console.log('Using http://localhost:4000 as baseline source\n');
+  console.log('⚠️  Make sure "make serve" is running on port 4000\n');
 
   try {
-    await startServer('make serve', 4000);
-
-    console.log('\n📸 Capturing baseline images...');
+    console.log('📸 Capturing baseline images...');
 
     const browser = await chromium.launch({
       headless: true
@@ -123,14 +83,12 @@ async function createBaseline() {
     }
 
     await browser.close();
-    await stopServer();
 
     console.log('\n✅ Baseline created successfully in tests/visual-baseline/');
     console.log('📝 Commit these files to git to save the baseline');
 
   } catch (error) {
     console.error('\n❌ Error:', error.message);
-    await stopServer();
     process.exit(1);
   }
 }

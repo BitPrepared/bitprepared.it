@@ -1,5 +1,4 @@
 const { chromium } = require('@playwright/test');
-const { spawn } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
@@ -29,48 +28,6 @@ const pages = [
   '/articles/',
   '/project/github/'
 ];
-
-let serverProcess = null;
-
-async function startServer(command, port) {
-  return new Promise((resolve, reject) => {
-    console.log(`🚀 Avvio server: ${command} (porta ${port})`);
-
-    serverProcess = spawn('sh', ['-c', command], {
-      cwd: path.join(__dirname, '../..'),
-      stdio: 'pipe'
-    });
-
-    serverProcess.stdout.on('data', (data) => {
-      const output = data.toString();
-      if (output.includes('Server address') || output.includes('Serving')) {
-        console.log(`✅ Server ready on port ${port}`);
-        setTimeout(resolve, 2000);
-      }
-    });
-
-    serverProcess.stderr.on('data', (data) => {
-      console.error(` stderr: ${data}`);
-    });
-
-    serverProcess.on('error', (error) => {
-      reject(error);
-    });
-
-    setTimeout(resolve, 5000);
-  });
-}
-
-async function stopServer() {
-  if (serverProcess) {
-    console.log('🛑 Terminazione server...');
-    serverProcess.kill('SIGTERM');
-    setTimeout(() => {
-      if (serverProcess) serverProcess.kill('SIGKILL');
-      serverProcess = null;
-    }, 2000);
-  }
-}
 
 async function captureScreenshots(serverType, baseUrl) {
   console.log(`\n📸 Capturing screenshots from ${serverType}...`);
@@ -128,18 +85,13 @@ async function main() {
   console.log('=== Visual Regression Capture ===\n');
 
   try {
-    await startServer('make serve', 4000);
+    // Servers gia avviati dal container Docker
     await captureScreenshots('serve', 'http://localhost:4000');
-    await stopServer();
-
-    await startServer('make serve-static', 8000);
     await captureScreenshots('static', 'http://localhost:8000');
-    await stopServer();
 
     console.log('\n✅ All screenshots captured successfully!');
   } catch (error) {
     console.error('\n❌ Error:', error.message);
-    await stopServer();
     process.exit(1);
   }
 }
