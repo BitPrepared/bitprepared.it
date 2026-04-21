@@ -1,6 +1,22 @@
 Changelog BitPrepared.it
 -------------------
 
+### 2026-04-21
+  * FIX: CSS mismatch evento-hero - aggiunte classi .evento-* mancanti
+    - Fixato: HTML usava .evento-*, CSS solo .epppi-*
+    - Pulito CSS: rimosso alias .epppi-* inutilizzati
+    - Aggiunto link evento-custom.css in default.html
+  * FEATURE: Makefile - aggiunto target serve-static
+    - `make serve-static`: build + Python HTTP server porta 8000
+    - Configurabile: STATIC_PORT env var
+  * FEATURE: Visual Regression Testing skill
+    - Playwright + pixelmatch per screenshot multi-viewport
+    - 19 pagine × 3 viewports (desktop/tablet/mobile)
+    - Confronto pixel-by-pixel con threshold 1%
+    - Report HTML automatico con diff images
+    - Target make: validate-graphics, visual-baseline, visual-clean
+    - Dipendenze Node.js in scripts/visual-regression/
+
 ### 2026-04-20
   * REFACTOR: template `epppi` → `evento` (standard per tutti i nuovi eventi)
     - Rinominati: _layouts/epppi.html → evento.html
