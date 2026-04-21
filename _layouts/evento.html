@@ -52,8 +52,40 @@ layout: default
 					<a href="{{ page.cta.primary.url }}" class="evento-cta">{{ page.cta.primary.text }}</a>
 				</div>
 
+				<!-- Event Status Badge -->
+				{% if page.event_status == 'upcoming' %}
+				<div class="evento-badge evento-badge-upcoming">
+					<i class="fas fa-calendar-check"></i> PROSSIMO EVENTO
+				</div>
+				{% elsif page.event_status == 'soldout' %}
+				<div class="evento-badge evento-badge-soldout">
+					<i class="fas fa-ban"></i> SOLD OUT
+				</div>
+				{% elsif page.event_status == 'last_chance' %}
+				<div class="evento-badge evento-badge-lastchance">
+					<i class="fas fa-clock"></i> ULTIMI POSTI
+				</div>
+				{% endif %}
 
+				{% if page.benefits %}
 				<!-- Benefits Section -->
+				<div class="evento-benefits-section">
+					<h2>{{ page.benefits_title | default: 'Perché partecipare' }}</h2>
+					<div class="evento-benefits-grid">
+						{% for benefit in page.benefits %}
+						<div class="evento-benefit-card">
+							<div class="evento-benefit-icon">
+								<i class="fa {{ benefit.icon }}"></i>
+							</div>
+							<h3>{{ benefit.title }}</h3>
+							<p>{{ benefit.desc }}</p>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+				{% endif %}
+
+				<!-- Highlights Section -->
 				<div class="evento-highlight">
 					<h3><i class="fas fa-star" style="color: #f39c12;"></i> {{ page.highlights_title | default: '10 motivi per cui questo evento è unico' }}</h3>
 					{% for highlight in page.highlights %}
