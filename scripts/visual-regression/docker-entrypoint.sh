@@ -3,50 +3,42 @@ set -e
 
 echo "=== Visual Regression Docker Container ==="
 
-# Function cleanup
-cleanup() {
-  echo "Cleaning up..."
-  if [ -n "$SERVE_PID" ]; then
-    kill $SERVE_PID 2>/dev/null || true
-  fi
-  if [ -n "$STATIC_PID" ]; then
-    kill $STATIC_PID 2>/dev/null || true
-  fi
+# Detect host IP
+if [ -z "$HOST_IP" ]; then
+    # Try host.docker.internal (Docker Desktop)
+    if ping -c 1 host.docker.internal &> /dev/null; then
+        HOST_IP="host.docker.internal"
+    else
+        # Linux Docker: use gateway IP
+        HOST_IP=$(ip route | awk '/default/ {print $3}')
+    fi
+fi
+
+echo "🌐 Using host IP: $HOST_IP"
+echo "⚠️  Make sure servers are running on HOST:"
+echo "   Terminal 1: make serve"
+echo "   Terminal 2: make serve-static"
+echo ""
+echo "Waiting for servers..."
+
+# Wait for Jekyll server on host
+timeout 60 bash -c "until curl -s http://$HOST_IP:4000 > /dev/null; do sleep 1; done" || {
+    echo "❌ Cannot connect to Jekyll server on $HOST_IP:4000"
+    echo "❌ Make sure 'make serve' is running on HOST"
+    exit 1
 }
+echo "✅ Jekyll ready on $HOST_IP:4000"
 
-trap cleanup EXIT
-
-cd /app
-
-# Avvia Jekyll serve in background
-echo "🚀 Starting Jekyll serve (port 4000)..."
-bundle exec jekyll serve --host 0.0.0.0 --port 4000 --config _config.yml,_config_dev.yml &
-SERVE_PID=$!
-
-# Wait for server ready
-echo "⏳ Waiting for Jekyll server..."
-timeout 120 bash -c 'until curl -s http://localhost:4000 > /dev/null; do sleep 1; done' || {
-  echo "❌ Jekyll server failed to start"
-  exit 1
+# Wait for static server on host
+timeout 60 bash -c "until curl -s http://$HOST_IP:8000 > /dev/null; do sleep 1; done" || {
+    echo "❌ Cannot connect to static server on $HOST_IP:8000"
+    echo "❌ Make sure 'make serve-static' is running on HOST"
+    exit 1
 }
-echo "✅ Jekyll ready on port 4000"
+echo "✅ Static server ready on $HOST_IP:8000"
 
-# Build e avvia static server
-echo "🔨 Building static site..."
-bundle exec jekyll build --config _config.yml
-
-echo "🚀 Starting Python static server (port 8000)..."
-cd _site && python3 -m http.server 8000 &
-STATIC_PID=$!
-cd ..
-
-# Wait for static server ready
-echo "⏳ Waiting for static server..."
-timeout 30 bash -c 'until curl -s http://localhost:8000 > /dev/null; do sleep 1; done' || {
-  echo "❌ Static server failed to start"
-  exit 1
-}
-echo "✅ Static server ready on port 8000"
+# Export host IP for Node scripts
+export HOST_IP
 
 # Esegue test visual regression
 echo ""

@@ -84,10 +84,13 @@ async function captureScreenshots(serverType, baseUrl) {
 async function main() {
   console.log('=== Visual Regression Capture ===\n');
 
+  const hostIp = process.env.HOST_IP || 'localhost';
+  console.log(`Using host: ${hostIp}\n`);
+
   try {
-    // Servers gia avviati dal container Docker
-    await captureScreenshots('serve', 'http://localhost:4000');
-    await captureScreenshots('static', 'http://localhost:8000');
+    // Servers gia avviati sul host
+    await captureScreenshots('serve', `http://${hostIp}:4000`);
+    await captureScreenshots('static', `http://${hostIp}:8000`);
 
     console.log('\n✅ All screenshots captured successfully!');
   } catch (error) {

@@ -58,10 +58,16 @@ open:
 
 validate-graphics: docker-build-visual
 	@echo "🔍 Avvio validazione grafica in Docker..."
+	@echo ""
+	@echo "⚠️  Richiede server attivi in terminali separati:"
+	@echo "   Terminal 1: make serve"
+	@echo "   Terminal 2: make serve-static"
+	@echo ""
+	@read -p "Premi ENTER quando server sono pronti..."
+	@echo ""
 	docker run --rm \
 		--mount type=bind,source=${PWD},target=/app \
-		-p 4000:4000 \
-		-p 8000:8000 \
+		--add-host=host.docker.internal:host-gateway \
 		bitprepared-visual-regression:latest
 
 visual-baseline:

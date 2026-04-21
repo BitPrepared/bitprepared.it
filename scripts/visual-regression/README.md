@@ -48,6 +48,13 @@ git commit -m "Add visual baseline"
 Esegui prima di ogni release:
 
 ```bash
+# Terminal 1: avvia Jekyll server
+make serve
+
+# Terminal 2: avvia static server
+make serve-static
+
+# Terminal 3: valida
 make validate-graphics
 ```
 
@@ -63,13 +70,18 @@ make validate-graphics
 # 1. Sviluppi feature
 git checkout -b feature/new-layout
 
-# 2. Valida graficamente (Docker gestisce tutto)
+# 2. Valida graficamente (3 terminali)
+# Terminal 1:
+make serve
+# Terminal 2:
+make serve-static
+# Terminal 3:
 make validate-graphics
 
 # 3. Se ci sono differenze:
 # - Apri screenshots/report/index.html
 # - Se differenze accettabili (fix bug):
-make visual-baseline  # Richiede make serve attivo
+make visual-baseline  # Terminal 3 (richiede make serve attivo)
 git add tests/visual-baseline/
 git commit -m "Update baseline after fix"
 
