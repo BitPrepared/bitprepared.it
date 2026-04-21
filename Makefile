@@ -1,20 +1,22 @@
 JEKYLL_VERSION ?= 3
 PORT ?= 4000
+STATIC_PORT ?= 8000
 PROJECT_PATH ?= /workspace/bitprepared.it
 DOCKER_IMAGE = jekyll/jekyll:$(JEKYLL_VERSION)
 
-.PHONY: serve build clean install help open
+.PHONY: serve serve-static build clean install help open
 
 help:
 	@echo "Uso: make [target]"
 	@echo ""
 	@echo "Target disponibili:"
-	@echo "  serve      - Avvia server di sviluppo (porta 4000)"
-	@echo "  open       - Apri sito locale nel browser (http://localhost:4000/)"
-	@echo "  build      - Genera sito statico"
-	@echo "  clean      - Rimuove _site/"
-	@echo "  install    - Installa dipendenze bundle (Docker)"
-	@echo "  help       - Mostra questo messaggio"
+	@echo "  serve        - Avvia server di sviluppo (porta 4000, Docker)"
+	@echo "  serve-static - Avvia server statico (porta 8000, Python)"
+	@echo "  open         - Apri sito locale nel browser (http://localhost:4000/)"
+	@echo "  build        - Genera sito statico"
+	@echo "  clean        - Rimuove _site/"
+	@echo "  install      - Installa dipendenze bundle (Docker)"
+	@echo "  help         - Mostra questo messaggio"
 
 serve:
 	docker run --rm -it \
@@ -23,6 +25,10 @@ serve:
 		-p $(PORT):4000 \
 		$(DOCKER_IMAGE) \
 		jekyll serve --config _config.yml,_config_dev.yml
+
+serve-static: build
+	@echo "Server statico avviato su http://localhost:$(STATIC_PORT)/"
+	@cd _site && python3 -m http.server $(STATIC_PORT)
 
 build:
 	docker run --rm -it \
