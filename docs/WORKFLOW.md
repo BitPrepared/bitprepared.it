@@ -164,6 +164,42 @@ git push origin feature-branch
 
 ---
 
+### Scenario 5: Nuovo Blog Post
+
+**Obiettivo**: Generare blog post Jekyll da file evento
+
+```bash
+# 1. Genera blog post automatico
+make generate-blog-post
+# Prompt: _pages/eventi/epppi_rs.md
+
+# 2. Personalizza contenuti
+# Il file generato ha sezioni commentate da completare:
+# - [DESCRIZIONE PERSONALIZZATA DA AGGIUNGERE QUI]
+# - [INSERISCI QUOTA]
+# - [INSERISCI DATA]
+
+# 3. Verifica frontmatter
+# Apri il file generato in _posts/
+# Controlla titolo, descrizione, tags, permalink
+
+# 4. Esegui git add e commit
+git add _posts/2026-*.md
+git commit -m "Add blog post: EPPPI 2026"
+
+# 5. (Opzionale) Visual regression
+# Se hai modificato template blog post
+make validate-graphics
+```
+
+**Nota**: Lo script genera 80% automaticamente:
+- ✅ Frontmatter completo
+- ✅ Struttura Markdown
+- ✅ Sezioni commented placeholder
+- 📝 Tu aggiungi: descrizione personalizzata, quota, deadline
+
+---
+
 ## Troubleshooting
 
 ### "Validazione fallita: differenze > 1%"

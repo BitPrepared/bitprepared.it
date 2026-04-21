@@ -127,6 +127,39 @@ Checklist rapida per verificare passi prima di commit/merge.
 
 ---
 
+## 📝 Nuovo Blog Post
+
+- [ ] **Generazione automatica**
+  - [ ] `make generate-blog-post` eseguito
+  - [ ] File evento corretto specificato
+  - [ ] Blog post generato in _posts/
+
+- [ ] **Personalizzazione contenuti**
+  - [ ] Descrizione personalizzata aggiunta (sostituisci placeholder)
+  - [ ] Quota partecipazione inserita
+  - [ ] Deadline iscrizioni inserita
+  - [ ] Eventuali dettagli specifici aggiunti
+
+- [ ] **Verifica frontmatter**
+  - [ ] Titolo corretto
+  - [ ] Descrizione accattivante
+  - [ ] Tags appropriate (eventi, epppi, etc.)
+  - [ ] Permalink corretto
+  - [ ] Featured image corretta
+
+- [ ] **Contenuto quality check**
+  - [ ] Nessun errore grammaticale
+  - [ ] Link CTA funzionante
+  - [ ] Formattazione Markdown corretta
+  - [ ] Sezioni placeholder rimosse o completate
+
+- [ ] **Commit**
+  - [ ] Blog post aggiunto a git
+  - [ ] Commit message chiaro
+  - [ ] Pronto per PR/merge
+
+---
+
 ## 🚨 Modifiche Critiche (Produzione)
 
 ⚠️ **Richiede attenzione extra**
