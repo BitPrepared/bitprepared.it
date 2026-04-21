@@ -33,6 +33,11 @@ Changelog BitPrepared.it
     - Spostati: WORKFLOW.md, CHECKLIST.md, VISUAL_REGRESSION_DOCS.md → docs/
     - Mantenuti in radice: README.md, CLAUDE.md
     - Aggiornati tutti i riferimenti incrociati
+  * REFACTOR: CLAUDE.md semplificato (focus operative)
+    - Ridotto da 257 a 85 righe (67%)
+    - Rimosso: panoramaprogetto, dettagli tecnici, troubleshooting
+    - Mantenuto: trigger visual regression, pattern, file critici, query standard
+    - Focus: Solo info per implementare nuove features
 
 ### 2026-04-20
   * REFACTOR: template `epppi` → `evento` (standard per tutti i nuovi eventi)
