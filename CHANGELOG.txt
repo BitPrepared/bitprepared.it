@@ -2,6 +2,16 @@ Changelog BitPrepared.it
 -------------------
 
 ### 2026-04-20
+  * REFACTOR: template `epppi` → `evento` (standard per tutti i nuovi eventi)
+    - Rinominati: _layouts/epppi.html → evento.html
+    - Rinominati: assets/css/epppi-custom.css → evento-custom.css
+    - Aggiornate tutte le classi CSS: .epppi-* → .evento-*
+    - Generalizzati contenuti: highlights_title, outcomes_title dinamici
+    - Sezione outcomes condizionale (mostra solo se definita)
+    - Aggiornato _includes/edit-button.html con nuovi riferimenti
+    - Creata documentazione: _pages/eventi/README_EVENTO.md
+    - Aggiornato README.md con nuova struttura
+  * EPPPI 2026: nuovo layout con grafica migliorata
   * EPPPI 2026: nuovo layout con grafica migliorata
     - Pulsante edit MarkText: solo in development, position fixed
     - Icone Font Ashley colorate al posto di emoji
