@@ -104,9 +104,12 @@ workflow:
 generate-blog-post:
 	@echo "📝 Generazione blog post da evento..."
 	@read -p "Path file evento (es: _pages/eventi/epppi_rs.md): " event_path; \
-	bundle exec ruby scripts/generate-blog-post.rb "$$event_path"
+	docker run --rm \
+		--mount type=bind,source=${PWD},target=/srv/jekyll \
+		$(DOCKER_IMAGE) \
+		ruby /srv/jekyll/scripts/generate-blog-post.rb "$$event_path"
 	@echo ""
-	@echo "✅ Blog post generato!"
+	@echo "✅ Blog post generato in _posts/"
 	@echo "📝 PROSSIMI PASSI:"
 	@echo "1. Apri il file generato"
 	@echo "2. Sostituisci i placeholder con contenuti personalizzati"

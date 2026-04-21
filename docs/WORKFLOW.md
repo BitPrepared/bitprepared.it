@@ -172,6 +172,7 @@ git push origin feature-branch
 # 1. Genera blog post automatico
 make generate-blog-post
 # Prompt: _pages/eventi/epppi_rs.md
+# Script eseguito in Docker (non richiede Ruby locale)
 
 # 2. Personalizza contenuti
 # Il file generato ha sezioni commentate da completare:
