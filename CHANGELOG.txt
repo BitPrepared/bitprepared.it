@@ -1,16 +1,36 @@
 Changelog BitPrepared.it
 -------------------
 
+### 2026-04-21
+  * FEATURE: Generatore automatico blog post per eventi
+    - Script Ruby: scripts/generate-blog-post.rb
+    - Parse evento YAML → genera blog post Jekyll con frontmatter completo
+    - Target: make generate-blog-post (Docker)
+  * FEATURE: Visual Regression Testing in Docker
+    - Container con Playwright + Jekyll + Ruby
+    - Screenshot multi-viewport (19 pagine × 3 viewports)
+    - Report HTML con diff images
+    - Target: make validate-graphics
+  * REFACTOR: Template epppi → evento (standard per tutti i nuovi eventi)
+    - Layout: _layouts/evento.html
+    - CSS: assets/css/evento-custom.css
+    - Generalizzati contenuti: highlights, outcomes dinamici
+  * DOCS: Workflow system completo
+    - docs/WORKFLOW.md: guida completa sviluppo
+    - docs/CHECKLIST.md: checklist pre-commit
+    - Makefile: target 'make workflow'
+  * IMAGE: Nuova locandina EPPPI 2026
+    - assets/images/locandina_epppi_2026.jpg
+    - Design aggiornato per evento "Essere solidi in una società immateriale"
+
 ### 2026-04-20
   * EPPPI 2026: nuovo layout con grafica migliorata
-    - Pulsante edit MarkText: solo in development, position fixed
-    - Icone Font Ashley colorate al posto di emoji
-    - Sezione "10 motivi per cui questo EPPPI è diverso" numerata
-    - Sezione "Cosa porterai a casa": testo discorsivo con enfasi colorate
-    - Allineamento "Read more" homepage con flexbox
-    - Unificazione include edit-button per tutti i layout
-    - Locandina posizionata prima di sezione Social
-    - Configurazione environment: JEKYLL_ENV=production in build
+    - Pulsante edit MarkText (solo development)
+    - Icone Font Ashley colorate
+    - Sezione "10 motivi per cui questo EPPPI è diverso"
+    - Sezione "Cosa porterai a casa"
+    - Locandina prima sezione Social
+    - Configurazione JEKYLL_ENV=production
 
 ### 2023-04-25
   * fixed buonacaccia link epppi

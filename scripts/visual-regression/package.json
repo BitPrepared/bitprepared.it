@@ -1,0 +1,16 @@
+{
+  "name": "visual-regression",
+  "version": "1.0.0",
+  "description": "Visual regression testing for bitprepared.it Jekyll site",
+  "scripts": {
+    "capture": "node capture.js",
+    "compare": "node compare.js",
+    "test": "node capture.js && node compare.js",
+    "create-baseline": "node create-baseline.js"
+  },
+  "dependencies": {
+    "@playwright/test": "^1.40.0",
+    "pixelmatch": "^5.3.0",
+    "pngjs": "^7.0.0"
+  }
+}
