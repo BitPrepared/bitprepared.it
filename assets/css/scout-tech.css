@@ -263,6 +263,26 @@ main {
   transition: transform var(--transition-base);
 }
 
+.card-image-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.post-date {
+  position: absolute;
+  top: var(--spacing-sm);
+  right: var(--spacing-sm);
+  background: var(--color-accent);
+  color: var(--color-dark);
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: var(--font-display);
+  z-index: 1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
 .evento-card:hover img {
   transform: scale(1.05);
 }
