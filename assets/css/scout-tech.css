@@ -404,11 +404,13 @@ footer a::after {
   background: var(--color-secondary);
   border-radius: 50%;
   transition: all var(--transition-fast);
+  color: var(--color-white);
 }
 
 .footer-social a:hover {
   background: var(--color-accent);
   transform: scale(1.1);
+  color: var(--color-white);
 }
 
 .footer-social a span {
