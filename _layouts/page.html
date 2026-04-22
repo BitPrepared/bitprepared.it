@@ -2,17 +2,21 @@
 layout: default
 ---
 
+<!-- Hero Section -->
+<header class="hero">
+	<div class="hero-content">
+		<h1 class="hero-title">{{ page.title }}</h1>
+		{% if page.subtitle %}
+		<p class="hero-subtitle">{{ page.subtitle }}</p>
+		{% endif %}
+	</div>
+</header>
+
 <!-- Page Content -->
 <main class="page-section">
 	<div class="container">
 		<article class="page-content">
 			{% include edit-button.html %}
-			<header class="page-header">
-				<h1>{{ page.title }}</h1>
-				{% if page.subtitle %}
-				<p class="page-subtitle">{{ page.subtitle }}</p>
-				{% endif %}
-			</header>
 			<div class="page-body">
 				{{ content }}
 			</div>
@@ -23,29 +27,12 @@ layout: default
 <style>
 	.page-section {
 		padding: var(--spacing-xl) var(--spacing-md);
-		min-height: 60vh;
+		min-height: 50vh;
 	}
 
 	.page-content {
 		max-width: 800px;
 		margin: 0 auto;
-	}
-
-	.page-header {
-		text-align: center;
-		margin-bottom: var(--spacing-lg);
-	}
-
-	.page-header h1 {
-		font-size: 2.5rem;
-		color: var(--color-light);
-		margin-bottom: var(--spacing-sm);
-	}
-
-	.page-subtitle {
-		font-size: 1.25rem;
-		color: var(--color-accent);
-		font-family: var(--font-display);
 	}
 
 	.page-body {
@@ -82,14 +69,6 @@ layout: default
 	}
 
 	@media (max-width: 768px) {
-		.page-header h1 {
-			font-size: 2rem;
-		}
-
-		.page-subtitle {
-			font-size: 1.1rem;
-		}
-
 		.page-body {
 			font-size: 1rem;
 		}

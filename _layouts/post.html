@@ -2,6 +2,16 @@
 layout: default
 ---
 
+<!-- Hero Section -->
+<header class="hero">
+	<div class="hero-content">
+		<h1 class="hero-title">{{ page.title }}</h1>
+		{% if page.date %}
+		<p class="hero-subtitle">{{ page.date | date: "%d %B %Y" }}</p>
+		{% endif %}
+	</div>
+</header>
+
 <!-- Post Content -->
 <main class="page-section">
 	<div class="container">
@@ -13,13 +23,6 @@ layout: default
 			{% endif %}
 
 			{% include edit-button.html %}
-
-			<header class="page-header">
-				<h1>{{ page.title }}</h1>
-				{% if page.date %}
-				<p class="post-meta">{{ page.date | date: "%d %B %Y" }}</p>
-				{% endif %}
-			</header>
 
 			<div class="page-body">
 				{{ content }}
@@ -42,7 +45,7 @@ layout: default
 <style>
 	.page-section {
 		padding: var(--spacing-xl) var(--spacing-md);
-		min-height: 60vh;
+		min-height: 50vh;
 	}
 
 	.page-content {
@@ -61,23 +64,6 @@ layout: default
 		width: 100%;
 		height: auto;
 		display: block;
-	}
-
-	.page-header {
-		text-align: center;
-		margin-bottom: var(--spacing-lg);
-	}
-
-	.page-header h1 {
-		font-size: 2.5rem;
-		color: var(--color-light);
-		margin-bottom: var(--spacing-sm);
-	}
-
-	.post-meta {
-		font-size: 0.9rem;
-		color: var(--color-text-muted);
-		font-family: var(--font-display);
 	}
 
 	.page-body {
@@ -130,10 +116,6 @@ layout: default
 	}
 
 	@media (max-width: 768px) {
-		.page-header h1 {
-			font-size: 2rem;
-		}
-
 		.page-body {
 			font-size: 1rem;
 		}
