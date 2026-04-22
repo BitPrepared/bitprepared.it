@@ -10,7 +10,7 @@ image:
   creditlink: http://www.bitprepared.it
 ---
 
-### Programmi Utili per una scout digitale "leale"
+### Programmi Utili per una scout digitale leale
 
 ![Debian]({{ site.url }}/assets/images/pages/software/debian.png) [Debian](https://www.debian.org/)
 
