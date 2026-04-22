@@ -96,7 +96,9 @@ body {
   font-weight: 400;
   line-height: 1.6;
   color: var(--color-text);
-  background: #161616;
+  background: #161616 url(../images/header.jpg) no-repeat center top;
+  background-attachment: fixed;
+  background-size: cover;
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -164,9 +166,6 @@ main {
 .hero {
   text-align: center;
   padding: var(--spacing-xl) var(--spacing-md);
-  background: url(../images/header.jpg) no-repeat bottom center;
-  background-attachment: fixed;
-  background-size: cover;
   position: relative;
   overflow: hidden;
 }
