@@ -235,6 +235,9 @@ main {
   opacity: 0;
   transform: translateY(30px);
   animation: fadeUp 0.6s ease-out forwards;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .evento-card:nth-child(1) { animation-delay: 0.1s; }
@@ -266,6 +269,9 @@ main {
 
 .evento-content {
   padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .evento-card h2 {
@@ -278,6 +284,11 @@ main {
   color: var(--color-text-muted);
   margin-bottom: var(--spacing-md);
   line-height: 1.5;
+  flex-grow: 1;
+}
+
+.evento-card .btn-primary {
+  margin-top: auto;
 }
 
 /* ===== BUTTONS ===== */
