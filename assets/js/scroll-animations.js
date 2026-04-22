@@ -46,6 +46,8 @@
 	});
 
 	// ===== PARALLAX EFFECT FOR HERO =====
+	// DISABILITATO - Causa scatti durante lo scroll
+	/*
 	let ticking = false;
 	window.addEventListener('scroll', () => {
 		if (!ticking) {
@@ -61,6 +63,7 @@
 			ticking = true;
 		}
 	}, { passive: true });
+	*/
 
 	// ===== TYPING EFFECT CHECK =====
 	// Note: The typing effect is now pure CSS in hero-subtitle
