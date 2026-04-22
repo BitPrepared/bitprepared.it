@@ -5,6 +5,9 @@
  */
 
 /* ===== FONT AWESOME ===== */
+/* Powered by Font Awesome by Dave Gandy | http://fontawesome.io                 */
+/* Licensed under the SIL OFL 1.1 (font), MIT (CSS)                              */
+
 @font-face {
   font-family: 'FontAwesome';
   src: url('font/fontawesome-webfont.eot?v=4.0.1');
@@ -15,6 +18,27 @@
   font-weight: normal;
   font-style: normal;
 }
+
+.fa {
+  text-decoration: none;
+}
+
+.fa:before {
+  display: inline-block;
+  font-family: FontAwesome;
+  font-size: 1.25em;
+  text-decoration: none;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fa-twitter:before { content: "\f099"; }
+.fa-facebook:before { content: "\f09a"; }
+.fa-instagram:before { content: "\f16d"; }
+.fa-envelope:before { content: "\f0e0"; }
 
 /* ===== CSS VARIABLES ===== */
 :root {
