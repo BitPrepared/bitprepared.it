@@ -223,7 +223,7 @@ tags: [bitprepared, eventi, campi, stage]
     <!-- Tappa 3: Capi -->
     <article class="percorso-tappa">
       <div class="tappa-icon">
-        <img src="/assets/images/stage.jpg" alt="Capi" style="border-radius: 50%;">
+        <img src="/assets/images/loghi_branche/coca.png" alt="Capi">
       </div>
       <p class="tappa-label">Capi</p>
       <p class="tappa-eta">Adulti</p>
