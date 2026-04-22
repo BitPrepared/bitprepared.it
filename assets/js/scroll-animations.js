@@ -7,6 +7,34 @@
 (function() {
 	'use strict';
 
+	// ===== MOBILE MENU TOGGLE =====
+	const navbarToggle = document.getElementById('navbar-toggle');
+	const navbarNav = document.getElementById('navbar-nav');
+
+	if (navbarToggle && navbarNav) {
+		navbarToggle.addEventListener('click', () => {
+			navbarToggle.classList.toggle('active');
+			navbarNav.classList.toggle('active');
+		});
+
+		// Close menu when clicking a link
+		const navLinks = navbarNav.querySelectorAll('a');
+		navLinks.forEach(link => {
+			link.addEventListener('click', () => {
+				navbarToggle.classList.remove('active');
+				navbarNav.classList.remove('active');
+			});
+		});
+
+		// Close menu when clicking outside
+		document.addEventListener('click', (e) => {
+			if (!navbarToggle.contains(e.target) && !navbarNav.contains(e.target)) {
+				navbarToggle.classList.remove('active');
+				navbarNav.classList.remove('active');
+			}
+		});
+	}
+
 	// ===== INTERSECTION OBSERVER FOR SCROLL REVEAL =====
 	const observerOptions = {
 		root: null, // viewport

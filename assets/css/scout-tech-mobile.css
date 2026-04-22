@@ -4,6 +4,49 @@
  */
 
 @media (max-width: 768px) {
+  /* ===== NAVIGATION - HAMBURGER ===== */
+  .navbar-toggle {
+    display: flex;
+  }
+
+  .navbar-nav {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: rgba(10, 31, 10, 0.98);
+    backdrop-filter: blur(10px);
+    padding: var(--spacing-md);
+    gap: 0;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-base);
+    border-bottom: var(--border-width) solid var(--color-secondary);
+  }
+
+  .navbar-nav.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .navbar-nav li {
+    width: 100%;
+    border-bottom: 1px solid rgba(26, 127, 26, 0.2);
+  }
+
+  .navbar-nav li:last-child {
+    border-bottom: none;
+  }
+
+  .navbar-nav a {
+    display: block;
+    padding: var(--spacing-md);
+    width: 100%;
+    text-align: center;
+  }
   /* ===== TYPOGRAPHY ===== */
   h1 { font-size: 2rem; }
   h2 { font-size: 1.75rem; }
@@ -26,36 +69,7 @@
     max-width: 200px;
   }
 
-  /* ===== NAVIGATION - BOTTOM BAR ===== */
-  .navbar {
-    position: fixed;
-    bottom: 0;
-    top: auto;
-    border-top: var(--border-width) solid var(--color-secondary);
-    border-bottom: none;
-    padding: var(--spacing-sm);
-  }
-
-  .navbar-content {
-    justify-content: center;
-  }
-
-  .navbar-brand {
-    display: none;
-  }
-
-  .navbar-nav {
-    gap: var(--spacing-sm);
-    width: 100%;
-    justify-content: space-around;
-  }
-
-  .navbar-nav a {
-    font-size: 0.875rem;
-    padding: var(--spacing-xs);
-    flex-direction: column;
-    align-items: center;
-  }
+  /* ===== EVENTS GRID - SINGLE COLUMN ===== */
 
   /* ===== EVENTS GRID - SINGLE COLUMN ===== */
   .events-grid {
