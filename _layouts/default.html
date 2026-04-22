@@ -1,81 +1,62 @@
 <!DOCTYPE HTML>
-<!--
-Linear by TEMPLATED
-templated.co @templatedco
-Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
-<html>
+<html lang="it">
 <head>
 	{% seo %}
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
 	{% if page.tags %}
 		<meta name="keywords" content="{{ page.tags | join: ', ' }}">
 	{% endif %}
-	
-	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700,500,900' rel='stylesheet' type='text/css'>
-	<script src="/assets/js/jquery.min.js"></script>
-	<script src="/assets/js/skel.min.js"></script>
-	<script src="/assets/js/skel-panels.min.js"></script>
-	<script src="/assets/js/init.js"></script>
-	<noscript>
-		<link rel="stylesheet" href="/assets/css/skel-noscript.css" />
-		<link rel="stylesheet" href="/assets/css/style.css" />
-		<link rel="stylesheet" href="/assets/css/style-desktop.css" />
-	</noscript>
-	<link rel="stylesheet" href="/assets/css/evento-custom.css" />
+
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+
+	<!-- Scout Tech Modern CSS -->
+	<link rel="stylesheet" href="/assets/css/scout-tech.css" />
+	<link rel="stylesheet" href="/assets/css/scout-tech-mobile.css" />
 </head>
 <body>
 
-	<!-- Header -->
-	<div id="header">
-		{% include nav.html %}
-		<div class="container">
-
-			<!-- Logo -->
-			<div id="logo">
-				<h1><a href="#">BitPrepared</a></h1>
-				<span class="tag">{{ page.title }}</span>
-			</div>
-		</div>
-	</div>
-	<!-- Header -->
-	{{ content }}
-	
-	<!-- Tweet -->
-	<div id="tweet">
-		<div class="container">
-			<section>
-				<blockquote>#buoncittadino #servizio #fede</blockquote>
-			</section>
-		</div>
-	</div>
-
-
-<!-- Footer -->
-<div id="footer">
-	<div class="container">
-		<section>
-			<header>
-				<h2>Get in touch</h2>
-				<span class="byline">be connected</span>
-			</header>
-			<ul class="contact">
-				<li class="active"><a href="https://www.twitter.com/BitPrepared" class="fa fa-twitter"><span>Twitter</span></a></li>
-				<li class="active"><a href="https://www.facebook.com/bitprepared" class="fa fa-facebook"><span>Facebook</span></a></li>
-				<li class="active"><a href="https://www.instagram.com/bit.prepared/" class="fa fa-instagram"><span>Instagram</span></a></li>
+	<!-- Navigation -->
+	<nav class="navbar">
+		<div class="navbar-content">
+			<a href="/" class="navbar-brand">BitPrepared</a>
+			<ul class="navbar-nav">
+				<li><a href="/">Home</a></li>
+				<li><a href="/about/">Chi siamo</a></li>
+				<li><a href="/eventi/">Eventi</a></li>
+				<li><a href="/software/">Software</a></li>
 			</ul>
-		</section>
-	</div>
-</div>
+		</div>
+	</nav>
 
-<!-- Copyright -->
-<div id="copyright">
-	<div class="container">
-		Design: <a href="http://templated.co">TEMPLATED</a> 
-		Jekyll Template: <a href="http://cloudcannon.com">Cloud Cannon</a>
-	</div>
-</div>
+	<!-- Main Content -->
+	{{ content }}
+
+	<!-- Footer -->
+	<footer>
+		<div class="footer-social">
+			<a href="https://twitter.com/bitprepared" target="_blank" rel="noopener">Twitter</a>
+			<a href="https://www.facebook.com/bitprepared" target="_blank" rel="noopener">Facebook</a>
+			<a href="https://www.instagram.com/bit.prepared/" target="_blank" rel="noopener">Instagram</a>
+			<a href="mailto:info@bitprepared.it">Email</a>
+		</div>
+		<div class="footer-links">
+			<a href="/about/">Chi siamo</a> |
+			<a href="/eventi/campo_eg/">Campo EG</a> |
+			<a href="/software/">Software</a>
+		</div>
+		<div class="footer-copy">
+			&copy; {{ site.time | date: "%Y" }} Bit Prepared - Associazione AGESCI<br>
+			"Digito ergo sum" - Per un uso consapevole del digitale
+		</div>
+	</footer>
+
+	<!-- Scroll Animations (Optional) -->
+	<script src="/assets/js/scroll-animations.js"></script>
 
 </body>
 </html>
