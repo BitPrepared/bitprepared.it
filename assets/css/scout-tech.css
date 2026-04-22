@@ -60,7 +60,7 @@ body {
   font-weight: 400;
   line-height: 1.6;
   color: var(--color-text);
-  background: linear-gradient(135deg, var(--color-dark) 0%, #000 100%);
+  background: #161616;
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -128,7 +128,9 @@ main {
 .hero {
   text-align: center;
   padding: var(--spacing-xl) var(--spacing-md);
-  background: radial-gradient(circle at center, var(--color-primary) 0%, var(--color-dark) 70%);
+  background: url(../images/header.jpg) no-repeat bottom center;
+  background-attachment: fixed;
+  background-size: cover;
   position: relative;
   overflow: hidden;
 }
@@ -170,20 +172,6 @@ main {
   color: var(--color-accent);
   font-family: var(--font-display);
   font-weight: 500;
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: 3px solid var(--color-accent);
-  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-}
-
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
-}
-
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: var(--color-accent) }
 }
 
 /* ===== EVENTS GRID ===== */
@@ -351,8 +339,32 @@ footer {
 }
 
 footer a {
-  color: var(--color-accent);
+  color: var(--color-light);
   margin: 0 var(--spacing-sm);
+}
+
+footer a::after {
+  display: none;
+}
+
+.footer-social a {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background: var(--color-secondary);
+  border-radius: 50%;
+  transition: all var(--transition-fast);
+}
+
+.footer-social a:hover {
+  background: var(--color-accent);
+  transform: scale(1.1);
+}
+
+.footer-social a span {
+  display: none;
 }
 
 .footer-social {
