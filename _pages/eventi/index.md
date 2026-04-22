@@ -86,9 +86,36 @@ tags: [bitprepared, eventi, campi, stage]
   transition: transform var(--transition-base);
 }
 
+/* Colori specifici per branca */
+.percorso-tappa:nth-child(1) .tappa-icon {
+  background: #1a7f1a; /* Verde - EG */
+  border-color: #00d9ff;
+}
+
+.percorso-tappa:nth-child(2) .tappa-icon {
+  background: #cc0000; /* Rosso - RS */
+  border-color: #ff6b6b;
+}
+
+.percorso-tappa:nth-child(3) .tappa-icon {
+  background: #8b008b; /* Viola - Coca */
+  border-color: #da70d6;
+}
+
 .percorso-tappa:hover .tappa-icon {
   transform: scale(1.1);
+}
+
+.percorso-tappa:nth-child(1):hover .tappa-icon {
   box-shadow: 0 0 30px rgba(0, 217, 255, 0.5);
+}
+
+.percorso-tappa:nth-child(2):hover .tappa-icon {
+  box-shadow: 0 0 30px rgba(255, 107, 107, 0.5);
+}
+
+.percorso-tappa:nth-child(3):hover .tappa-icon {
+  box-shadow: 0 0 30px rgba(218, 112, 214, 0.5);
 }
 
 .tappa-icon img {
