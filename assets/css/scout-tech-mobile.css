@@ -106,12 +106,24 @@
   /* ===== FOOTER ===== */
   footer {
     padding: var(--spacing-md) var(--spacing-sm);
-    padding-bottom: 100px; /* Extra space for bottom nav */
+    padding-bottom: 80px;
+  }
+
+  .footer-social {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
   }
 
   .footer-social a {
-    display: block;
-    margin: var(--spacing-xs) 0;
+    display: inline-flex;
+    margin: 0;
+  }
+
+  .footer-links {
+    font-size: 0.875rem;
   }
 
   /* ===== CONTAINER ===== */
