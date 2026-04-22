@@ -162,6 +162,7 @@ main {
 .hero-title {
   font-size: 3rem;
   color: var(--color-light);
+  margin-top: var(--spacing-xl);
   margin-bottom: var(--spacing-sm);
   font-family: var(--font-display);
   font-weight: 700;
