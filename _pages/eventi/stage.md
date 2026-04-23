@@ -81,7 +81,7 @@ hero:
   subtitle: "Come essere fratelli maggiori in un mondo che non conosciamo bene?"
   location: "Costigiola"
   date: "15-17 Settembre 2018"
-  target: "Capi Unità AGESCI"
+  target: "Capi AGESCI"
 
 cta:
   primary:
@@ -106,7 +106,7 @@ logistica:
   per_chi:
     icon: "fa-users"
     label: "Per chi"
-    text: "Capi Unità AGESCI"
+    text: "Capi AGESCI"
   posti:
     icon: "fa-bullseye"
     label: "Posti"
@@ -124,7 +124,7 @@ logistica:
 
 faq:
   - q: "L'evento è solo per AGESCI?"
-    a: "Sì, riservato a Capi Unità AGESCI."
+    a: "Sì, riservato a Capi AGESCI."
   - q: "Servono competenze informatiche?"
     a: "No, il focus è pedagogico ed educativo, non tecnico."
   - q: "Cosa include la quota?"
