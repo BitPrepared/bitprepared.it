@@ -15,7 +15,7 @@ hero:
   subtitle: "Come essere persone concrete in un mondo sempre più digitale?"
   location: "Bologna"
   date: "8-10 Maggio 2026"
-  target: "Rover e Scolte in cammino"
+  target: "Rover e Scolte AGESCI"
 
 cta:
   primary:
