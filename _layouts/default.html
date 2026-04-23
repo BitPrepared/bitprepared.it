@@ -17,14 +17,31 @@
 	<!-- Scout Tech Modern CSS -->
 	<link rel="stylesheet" href="/assets/css/scout-tech.css" />
 	<link rel="stylesheet" href="/assets/css/scout-tech-mobile.css" />
+	<style>
+		.skip-link {
+			position: absolute;
+			top: -40px;
+			left: 0;
+			background: var(--color-accent);
+			color: var(--color-dark);
+			padding: 8px;
+			z-index: 100;
+			text-decoration: none;
+			font-weight: 600;
+		}
+		.skip-link:focus { top: 0; }
+	</style>
 </head>
 <body>
+
+	<!-- Skip Link for Accessibility -->
+	<a href="#main-content" class="skip-link">Vai al contenuto principale</a>
 
 	<!-- Navigation -->
 	<nav class="navbar">
 		<div class="navbar-content">
 			<a href="/" class="navbar-brand">BitPrepared</a>
-			<button class="navbar-toggle" id="navbar-toggle" aria-label="Toggle navigation">
+			<button class="navbar-toggle" id="navbar-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navbar-nav">
 				<span></span>
 				<span></span>
 				<span></span>
@@ -39,7 +56,9 @@
 	</nav>
 
 	<!-- Main Content -->
-	{{ content }}
+	<main id="main-content">
+		{{ content }}
+	</main>
 
 	<!-- Footer -->
 	<footer>

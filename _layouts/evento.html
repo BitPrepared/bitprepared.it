@@ -309,16 +309,11 @@ layout: default
   </div>
 
   <!-- Target Audience -->
-  <div class="evento-box" itemscope itemtype="https://schema.org/Event">
-    <meta itemprop="name" content="{{ page.title }}" />
-    <meta itemprop="startDate" content="{{ page.logistica.quando.date }}" />
-    <meta itemprop="location" content="{{ page.logistica.dove.citta }}, {{ page.logistica.dove.luogo }}" />
-    <meta itemprop="attendeeCount" content="{{ page.logistica.posti.max }}" />
-
+  <div class="evento-box">
     <h2>🎯 Questo evento è per te se...</h2>
-    <ul itemprop="audience" itemscope itemtype="https://schema.org/PeopleAudience">
+    <ul>
       {% for item in page.target_audience %}
-      <li itemprop="description">
+      <li>
         <i class="fa {{ item.icon }}" style="margin-right: var(--spacing-xs);"></i>
         {{ item.text }} <strong>"{{ item.highlight }}"</strong> {{ item.tail }}
       </li>

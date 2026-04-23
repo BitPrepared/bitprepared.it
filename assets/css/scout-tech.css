@@ -95,7 +95,7 @@ body {
   font-family: var(--font-body);
   font-weight: 400;
   line-height: 1.6;
-  color: var(--color-text);
+  color: var(--color-light);
   background: #161616;
   min-height: 100vh;
   overflow-x: hidden;

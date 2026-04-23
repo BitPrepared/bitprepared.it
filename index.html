@@ -4,6 +4,22 @@ layout: default
 tags: [agesci,bitprepared,scout,informatica,specializzazioni,competenza,maestro delle tecnologie, esperto del compiuter, digital life]
 ---
 
+<!-- Schema.org JSON-LD Organization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Bit Prepared",
+  "url": "https://www.bitprepared.it",
+  "description": "Digito ergo sum, per un uso consapevole del digitale",
+  "sameAs": [
+    "https://twitter.com/bitprepared",
+    "https://www.facebook.com/bitprepared",
+    "https://www.instagram.com/bit.prepared/"
+  ]
+}
+</script>
+
 <!-- Hero Section -->
 <header class="hero">
 	<div class="hero-content">
@@ -13,13 +29,14 @@ tags: [agesci,bitprepared,scout,informatica,specializzazioni,competenza,maestro 
 </header>
 
 <!-- Events Section -->
-<main class="events-section">
+<section class="events-section" aria-labelledby="events-title">
+	<h2 id="events-title" class="text-center" style="margin-bottom: var(--spacing-lg);">Eventi e Attività</h2>
 	<div class="events-grid">
 
 		<!-- Card 1: Campo EG -->
 		<article class="evento-card">
 			<div class="card-image-wrapper">
-				<img src="/assets/images/loghi_branche/eg.png" alt="Campo di Competenza EG" loading="lazy">
+				<img src="/assets/images/loghi_branche/eg.png" alt="Campo di Competenza EG" width="400" height="300" loading="lazy">
 				<span class="post-date">2023</span>
 			</div>
 			<div class="evento-content">
@@ -32,7 +49,7 @@ tags: [agesci,bitprepared,scout,informatica,specializzazioni,competenza,maestro 
 		<!-- Card 2: EPPPI -->
 		<article class="evento-card">
 			<div class="card-image-wrapper">
-				<img src="/assets/images/loghi_branche/rs.png" alt="EPPPI per Rover/Scolte" loading="lazy">
+				<img src="/assets/images/loghi_branche/rs.png" alt="EPPPI per Rover/Scolte" width="400" height="300" loading="lazy">
 				<span class="post-date">2026</span>
 			</div>
 			<div class="evento-content">
@@ -45,7 +62,7 @@ tags: [agesci,bitprepared,scout,informatica,specializzazioni,competenza,maestro 
 		<!-- Card 3: Stage -->
 		<article class="evento-card">
 			<div class="card-image-wrapper">
-				<img src="/assets/images/loghi_branche/coca.png" alt="Stage per Capi" loading="lazy">
+				<img src="/assets/images/loghi_branche/coca.png" alt="Stage per Capi" width="400" height="300" loading="lazy">
 				<span class="post-date">2018</span>
 			</div>
 			<div class="evento-content">
@@ -56,18 +73,18 @@ tags: [agesci,bitprepared,scout,informatica,specializzazioni,competenza,maestro 
 		</article>
 
 	</div>
-</main>
+</section>
 
 <!-- Recent Posts (Optional, keeping Jekyll integration) -->
 {% if site.posts.size > 0 %}
-<section class="blog-section" style="max-width: var(--container-max-width); margin: 0 auto; padding: var(--spacing-xl) var(--spacing-md);">
-	<h2 class="text-center" style="margin-bottom: var(--spacing-lg);">Ultimi Articoli</h2>
+<section class="blog-section" style="max-width: var(--container-max-width); margin: 0 auto; padding: var(--spacing-xl) var(--spacing-md);" aria-labelledby="blog-title">
+	<h2 id="blog-title" class="text-center" style="margin-bottom: var(--spacing-lg);">Ultimi Articoli</h2>
 	<div class="events-grid">
 		{% for post in site.posts limit: 3 %}
 		<article class="evento-card reveal">
 			{% if post.featured %}
 			<div class="card-image-wrapper">
-				<img src="/assets/{{ post.featured }}" alt="{{ post.title }}" loading="lazy">
+				<img src="/assets/{{ post.featured }}" alt="{{ post.title }}" width="400" height="300" loading="lazy">
 				<span class="post-date">{{ post.date | date: "%d %b %Y" }}</span>
 			</div>
 			{% endif %}
