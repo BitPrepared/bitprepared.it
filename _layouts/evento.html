@@ -1,232 +1,436 @@
 ---
 layout: default
 ---
-<!-- Main Page.html -->
-<div id="main">
-	<div id="content" class="container">
-		<div class="row">
-			<section class="12u">
-				{% include edit-button.html %}
 
-				<style>
-					.evento-box ul[itemprop="audience"] {
-						list-style: none !important;
-						padding: 0 !important;
-					}
-					.evento-box ul[itemprop="audience"] li {
-						font-size: 1.2em !important;
-						line-height: 1.8 !important;
-						margin-bottom: 25px !important;
-						padding: 20px !important;
-						background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%) !important;
-						border-radius: 12px !important;
-						border-left: 5px solid #3498db !important;
-						transition: all 0.3s ease !important;
-					}
-					.evento-box ul[itemprop="audience"] li:hover {
-						transform: translateX(10px) !important;
-						box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3) !important;
-					}
-					.evento-box ul[itemprop="audience"] li i {
-						font-size: 1.5em !important;
-						color: #3498db !important;
-						margin-right: 12px !important;
-						width: 40px !important;
-						text-align: center !important;
-						display: inline-block !important;
-					}
-					.evento-box ul[itemprop="audience"] li strong {
-						color: #e74c3c !important;
-						font-size: 1.15em !important;
-						font-weight: 700 !important;
-					}
-				</style>
+<style>
+/* Evento Page Styles */
+.evento-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-md);
+}
 
-				<!-- Hero Section -->
-				<div class="evento-hero">
-					<h2>{{ page.hero.title }}</h2>
-					<h3>{{ page.hero.subtitle }}</h3>
-					<p>
-						<strong><i class="fas fa-map-marker" style="color: #e74c3c;"></i> {{ page.hero.location }} | <i class="fas fa-calendar" style="color: #3498db;"></i> {{ page.hero.date }} | <i class="fas fa-users" style="color: #2ecc71;"></i> {{ page.hero.target }}</strong>
-					</p>
-					<a href="{{ page.cta.primary.url }}" class="evento-cta">{{ page.cta.primary.text }}</a>
-				</div>
+.evento-hero {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-xl) var(--spacing-md);
+  background: var(--color-dark);
+  border-radius: var(--border-radius);
+  border: 2px solid var(--color-secondary);
+}
 
-				<!-- Event Status Badge -->
-				{% if page.event_status == 'upcoming' %}
-				<div class="evento-badge evento-badge-upcoming">
-					<i class="fas fa-calendar-check"></i> PROSSIMO EVENTO
-				</div>
-				{% elsif page.event_status == 'soldout' %}
-				<div class="evento-badge evento-badge-soldout">
-					<i class="fas fa-ban"></i> SOLD OUT
-				</div>
-				{% elsif page.event_status == 'last_chance' %}
-				<div class="evento-badge evento-badge-lastchance">
-					<i class="fas fa-clock"></i> ULTIMI POSTI
-				</div>
-				{% endif %}
+.evento-hero h2 {
+  font-size: 2rem;
+  color: var(--color-light);
+  margin-bottom: var(--spacing-sm);
+}
 
-				{% if page.benefits %}
-				<!-- Benefits Section -->
-				<div class="evento-benefits-section">
-					<h2>{{ page.benefits_title | default: 'Perché partecipare' }}</h2>
-					<div class="evento-benefits-grid">
-						{% for benefit in page.benefits %}
-						<div class="evento-benefit-card">
-							<div class="evento-benefit-icon">
-								<i class="fa {{ benefit.icon }}"></i>
-							</div>
-							<h3>{{ benefit.title }}</h3>
-							<p>{{ benefit.desc }}</p>
-						</div>
-						{% endfor %}
-					</div>
-				</div>
-				{% endif %}
+.evento-hero h3 {
+  font-size: 1.25rem;
+  color: var(--color-accent);
+  margin-bottom: var(--spacing-md);
+  font-family: var(--font-display);
+}
 
-				<!-- Highlights Section -->
-				<div class="evento-highlight">
-					<h3><i class="fas fa-star" style="color: #f39c12;"></i> {{ page.highlights_title | default: '10 motivi per cui questo evento è unico' }}</h3>
-					{% for highlight in page.highlights %}
-					<p><strong>{{ forloop.index }}.</strong> {{ highlight }}</p>
-					{% endfor %}
-				</div>
+.evento-hero p {
+  font-size: 1rem;
+  color: var(--color-light);
+  margin-bottom: var(--spacing-md);
+}
 
-				<!-- Target Audience -->
-				<div class="evento-box" itemscope itemtype="https://schema.org/Event">
-					<meta itemprop="name" content="{{ page.title }}" />
-					<meta itemprop="startDate" content="{{ page.logistica.quando.date }}" />
-					<meta itemprop="location" content="{{ page.logistica.dove.citta }}, {{ page.logistica.dove.luogo }}" />
-					<meta itemprop="attendeeCount" content="{{ page.logistica.posti.max }}" />
+.evento-cta {
+  display: inline-block;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background: var(--color-accent);
+  color: var(--color-dark);
+  border: none;
+  border-radius: 2rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
 
-					<h2>🎯 Questo evento è per te se...</h2>
-					<ul itemprop="audience" itemscope itemtype="https://schema.org/PeopleAudience">
-						{% for item in page.target_audience %}
-						<li itemprop="description">{% if item.icon contains 'fa-' %}<i class="fa {{ item.icon }}"></i>{% else %}{{ item.icon }}{% endif %} {{ item.text }} <strong>"{{ item.highlight }}"</strong> {{ item.tail }}</li>
-						{% endfor %}
-					</ul>
-				</div>
+.evento-cta:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 217, 255, 0.4);
+}
 
-				<!-- Schema.org JSON-LD -->
-				<script type="application/ld+json">
-				{
-					"@context": "https://schema.org",
-					"@type": "Event",
-					"name": "{{ page.title }}",
-					"startDate": "{{ page.logistica.quando.date }}",
-					"endDate": "{{ page.logistica.quando.date }}",
-					"location": {
-						"@type": "Place",
-						"name": "{{ page.logistica.dove.luogo }}",
-						"address": {
-							"@type": "PostalAddress",
-							"addressLocality": "{{ page.logistica.dove.citta }}"
-						}
-					},
-					"audience": {
-						"@type": "PeopleAudience",
-						"name": "{{ page.hero.target }}"
-					},
-					"maximumAttendeeCapacity": {{ page.logistica.posti.max }},
-					"remainingAttendeeCapacity": {{ page.logistica.posti.max }},
-					"offers": {
-						"@type": "Offer",
-						"url": "{{ page.cta.primary.url }}",
-						"availability": "https://schema.org/InStock"
-					}
-				}
-				</script>
+.evento-badge {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: 2rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-bottom: var(--spacing-md);
+}
 
-				<!-- Programma -->
-				<div class="evento-box">
-					<h2>⚡ Se vieni, vivrai...</h2>
-					{% for item in page.programma %}
-					<div class="evento-program-item">
-						<h4>{{ item.title }}</h4>
-						<p>{{ item.desc }}</p>
-					</div>
-					{% endfor %}
-				</div>
+.evento-badge-upcoming {
+  background: var(--color-secondary);
+  color: var(--color-white);
+}
 
-					{% if page.outcomes %}
-				<!-- Outcomes -->
-				<div class="evento-box" style="background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%); padding: 40px; border-radius: 20px; position: relative; overflow: hidden; border: 3px solid #667eea;">
-					<div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); opacity: 0.1; border-radius: 50%;"></div>
-					<div style="position: absolute; bottom: -30px; left: -30px; width: 150px; height: 150px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); opacity: 0.1; border-radius: 50%;"></div>
-					<h2 style="color: #2c3e50; font-size: 2em; margin-bottom: 25px; position: relative; z-index: 1;">🎓 {{ page.outcomes_title | default: 'Cosa porterai a casa' }}</h2>
-								<ul style="list-style: none; padding: 0;">
-								{% for outcome in page.outcomes %}
-									<li style="margin-bottom: 15px;">✓ <strong>{{ outcome }}</strong></li>
-								{% endfor %}
-								</ul>
-					{% endif %}
-					</div>
-				</div>
+.evento-box {
+  background: var(--color-dark);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-lg);
+  border: 1px solid var(--color-secondary);
+}
 
-				<!-- Logistica -->
-				<div class="evento-box">
-					<h2>🚀 Logistica</h2>
-					<div class="evento-info-grid">
-						<div class="evento-info-item">
-							<strong>{% if page.logistica.quando.icon contains 'fa-' %}<i class="fa {{ page.logistica.quando.icon }}"></i>{% else %}{{ page.logistica.quando.icon }}{% endif %} {{ page.logistica.quando.label }}</strong>
-							<p>{{ page.logistica.quando.date }}<br>
-							Arrivo: {{ page.logistica.quando.arrivo }}<br>
-							Partenza: {{ page.logistica.quando.partenza }}</p>
-						</div>
-						<div class="evento-info-item">
-							<strong>{% if page.logistica.dove.icon contains 'fa-' %}<i class="fa {{ page.logistica.dove.icon }}"></i>{% else %}{{ page.logistica.dove.icon }}{% endif %} {{ page.logistica.dove.label }}</strong>
-							<p>{{ page.logistica.dove.citta }}<br>{{ page.logistica.dove.luogo }}</p>
-						</div>
-						<div class="evento-info-item">
-							<strong>{% if page.logistica.per_chi.icon contains 'fa-' %}<i class="fa {{ page.logistica.per_chi.icon }}"></i>{% else %}{{ page.logistica.per_chi.icon }}{% endif %} {{ page.logistica.per_chi.label }}</strong>
-							<p>{{ page.logistica.per_chi.text }}</p>
-						</div>
-						<div class="evento-info-item">
-							<strong>{% if page.logistica.posti.icon contains 'fa-' %}<i class="fa {{ page.logistica.posti.icon }}"></i>{% else %}{{ page.logistica.posti.icon }}{% endif %} {{ page.logistica.posti.label }}</strong>
-							<p>{{ page.logistica.posti.max }} massimo<br>
-							{{ page.logistica.posti.min }} minimo per confermare<br>
-							Waiting list: {{ page.logistica.posti.waiting }} persone</p>
-						</div>
-						<div class="evento-info-item">
-							<strong>{% if page.logistica.come_arrivare.icon contains 'fa-' %}<i class="fa {{ page.logistica.come_arrivare.icon }}"></i>{% else %}{{ page.logistica.come_arrivare.icon }}{% endif %} {{ page.logistica.come_arrivare.label }}</strong>
-							<p>{{ page.logistica.come_arrivare.text }}</p>
-						</div>
-						<div class="evento-info-item">
-							<strong>{% if page.logistica.cosa_portare.icon contains 'fa-' %}<i class="fa {{ page.logistica.cosa_portare.icon }}"></i>{% else %}{{ page.logistica.cosa_portare.icon }}{% endif %} {{ page.logistica.cosa_portare.label }}</strong>
-							<p>{{ page.logistica.cosa_portare.items }}</p>
-						</div>
-					</div>
-					<div style="text-align: center; margin-top: 30px;">
-						<a href="{{ page.cta.secondary.url }}" class="evento-cta evento-cta-secondary">{{ page.cta.secondary.text }}</a>
-					</div>
-				</div>
+.evento-box h2 {
+  color: var(--color-light);
+  margin-bottom: var(--spacing-md);
+  font-size: 1.5rem;
+}
 
-				<!-- FAQ -->
-				<div class="evento-box">
-					<h2>❓ FAQ</h2>
-					{% for faq in page.faq %}
-					<div class="evento-faq-item">
-						<p><strong>{{ faq.q }}</strong><br>{{ faq.a }}</p>
-					</div>
-					{% endfor %}
-				</div>
+.evento-box h3 {
+  color: var(--color-accent);
+  margin-bottom: var(--spacing-sm);
+  font-size: 1.25rem;
+}
 
-				<!-- Locandina -->
-				<div style="text-align: center; margin: 30px 0;">
-					<img src="{{ page.image }}" alt="{{ page.hero.title }}" style="max-width: 50%; height: auto; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.15);">
-				</div>
+.evento-box h4 {
+  color: var(--color-secondary);
+  margin-bottom: var(--spacing-xs);
+  font-size: 1.1rem;
+}
 
-				<!-- Social -->
-				<div class="evento-social">
-					<h3>📱 {{ page.social.title }}</h3>
-					<p>{{ page.social.description }}<br>{{ page.social.hashtags }}</p>
-				</div>
+.evento-box p,
+.evento-box li {
+  color: var(--color-light);
+  line-height: 1.6;
+}
 
-				<!-- Content markdown originale -->
-				{{ content }}
+/* Benefits Grid */
+.evento-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
 
-			</section>
-		</div>
-	</div>
+.evento-benefit-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-secondary);
+  text-align: center;
+}
+
+.evento-benefit-icon {
+  font-size: 2rem;
+  color: var(--color-accent);
+  margin-bottom: var(--spacing-sm);
+}
+
+.evento-benefit-card h3 {
+  font-size: 1.1rem;
+  color: var(--color-light);
+  margin-bottom: var(--spacing-xs);
+}
+
+.evento-benefit-card p {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+/* Audience List */
+.evento-box ul[itemprop="audience"] {
+  list-style: none;
+  padding: 0;
+}
+
+.evento-box ul[itemprop="audience"] li {
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  background: rgba(0, 217, 255, 0.1);
+  border-left: 4px solid var(--color-accent);
+  border-radius: var(--border-radius);
+  color: var(--color-light);
+  transition: all var(--transition-fast);
+}
+
+.evento-box ul[itemprop="audience"] li:hover {
+  transform: translateX(4px);
+  background: rgba(0, 217, 255, 0.15);
+}
+
+.evento-box ul[itemprop="audience"] li strong {
+  color: var(--color-accent);
+}
+
+/* Program Items */
+.evento-program-item {
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--border-radius);
+  border-left: 3px solid var(--color-secondary);
+}
+
+/* Info Grid */
+.evento-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.evento-info-item {
+  padding: var(--spacing-md);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--border-radius);
+}
+
+.evento-info-item strong {
+  display: block;
+  color: var(--color-accent);
+  margin-bottom: var(--spacing-xs);
+}
+
+.evento-info-item p {
+  margin: 0;
+  color: var(--color-light);
+}
+
+/* FAQ */
+.evento-faq-item {
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--border-radius);
+}
+
+.evento-faq-item strong {
+  color: var(--color-accent);
+}
+
+/* Outcomes */
+.evento-outcomes {
+  background: linear-gradient(135deg, rgba(26, 127, 26, 0.2) 0%, rgba(0, 217, 255, 0.1) 100%) !important;
+  border: 2px solid var(--color-accent) !important;
+}
+
+.evento-outcomes ul {
+  list-style: none;
+  padding: 0;
+}
+
+.evento-outcomes li {
+  padding: var(--spacing-xs) 0;
+  color: var(--color-light);
+}
+
+.evento-outcomes li strong {
+  color: var(--color-accent);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .evento-page {
+    padding: var(--spacing-md) var(--spacing-sm);
+  }
+
+  .evento-hero {
+    padding: var(--spacing-md) var(--spacing-sm);
+  }
+
+  .evento-hero h2 {
+    font-size: 1.5rem;
+  }
+
+  .evento-benefits-grid,
+  .evento-info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<div class="evento-page">
+  {% include edit-button.html %}
+
+  <!-- Hero Section -->
+  <div class="evento-hero">
+    <h2>{{ page.hero.title }}</h2>
+    <h3>{{ page.hero.subtitle }}</h3>
+    <p>
+      <i class="fa fa-map-marker" style="color: var(--color-accent);"></i> {{ page.hero.location }}
+      | <i class="fa fa-calendar" style="color: var(--color-accent);"></i> {{ page.hero.date }}
+      | <i class="fa fa-users" style="color: var(--color-accent);"></i> {{ page.hero.target }}
+    </p>
+    <a href="{{ page.cta.primary.url }}" class="evento-cta">{{ page.cta.primary.text }}</a>
+  </div>
+
+  <!-- Event Status Badge -->
+  {% if page.event_status == 'upcoming' %}
+  <div class="evento-badge evento-badge-upcoming">
+    <i class="fa fa-calendar-check"></i> PROSSIMO EVENTO
+  </div>
+  {% elsif page.event_status == 'soldout' %}
+  <div class="evento-badge" style="background: #e74c3c; color: white;">
+    <i class="fa fa-ban"></i> SOLD OUT
+  </div>
+  {% elsif page.event_status == 'last_chance' %}
+  <div class="evento-badge" style="background: #f39c12; color: white;">
+    <i class="fa fa-clock"></i> ULTIMI POSTI
+  </div>
+  {% endif %}
+
+  {% if page.benefits %}
+  <!-- Benefits Section -->
+  <div class="evento-box">
+    <h2>{{ page.benefits_title | default: 'Perché partecipare' }}</h2>
+    <div class="evento-benefits-grid">
+      {% for benefit in page.benefits %}
+      <div class="evento-benefit-card">
+        <div class="evento-benefit-icon">
+          <i class="fa {{ benefit.icon }}"></i>
+        </div>
+        <h3>{{ benefit.title }}</h3>
+        <p>{{ benefit.desc }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Highlights Section -->
+  <div class="evento-box">
+    <h2><i class="fa fa-star" style="color: #f39c12;"></i> {{ page.highlights_title | default: '10 motivi per cui questo evento è unico' }}</h2>
+    {% for highlight in page.highlights %}
+    <p><strong>{{ forloop.index }}.</strong> {{ highlight }}</p>
+    {% endfor %}
+  </div>
+
+  <!-- Target Audience -->
+  <div class="evento-box" itemscope itemtype="https://schema.org/Event">
+    <meta itemprop="name" content="{{ page.title }}" />
+    <meta itemprop="startDate" content="{{ page.logistica.quando.date }}" />
+    <meta itemprop="location" content="{{ page.logistica.dove.citta }}, {{ page.logistica.dove.luogo }}" />
+    <meta itemprop="attendeeCount" content="{{ page.logistica.posti.max }}" />
+
+    <h2>🎯 Questo evento è per te se...</h2>
+    <ul itemprop="audience" itemscope itemtype="https://schema.org/PeopleAudience">
+      {% for item in page.target_audience %}
+      <li itemprop="description">
+        <i class="fa {{ item.icon }}" style="margin-right: var(--spacing-xs);"></i>
+        {{ item.text }} <strong>"{{ item.highlight }}"</strong> {{ item.tail }}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "{{ page.title }}",
+    "startDate": "{{ page.logistica.quando.date }}",
+    "endDate": "{{ page.logistica.quando.date }}",
+    "location": {
+      "@type": "Place",
+      "name": "{{ page.logistica.dove.luogo }}",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "{{ page.logistica.dove.citta }}"
+      }
+    },
+    "audience": {
+      "@type": "PeopleAudience",
+      "name": "{{ page.hero.target }}"
+    },
+    "maximumAttendeeCapacity": {{ page.logistica.posti.max }},
+    "remainingAttendeeCapacity": {{ page.logistica.posti.max }},
+    "offers": {
+      "@type": "Offer",
+      "url": "{{ page.cta.primary.url }}",
+      "availability": "https://schema.org/InStock"
+    }
+  }
+  </script>
+
+  <!-- Programma -->
+  <div class="evento-box">
+    <h2>⚡ Se vieni, vivrai...</h2>
+    {% for item in page.programma %}
+    <div class="evento-program-item">
+      <h4>{{ item.title }}</h4>
+      <p>{{ item.desc }}</p>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% if page.outcomes %}
+  <!-- Outcomes -->
+  <div class="evento-box evento-outcomes">
+    <h2>🎓 {{ page.outcomes_title | default: 'Cosa porterai a casa' }}</h2>
+    <ul>
+      {% for outcome in page.outcomes %}
+      <li>✓ <strong>{{ outcome }}</strong></li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  <!-- Logistica -->
+  <div class="evento-box">
+    <h2>🚀 Logistica</h2>
+    <div class="evento-info-grid">
+      <div class="evento-info-item">
+        <strong><i class="fa {{ page.logistica.quando.icon }}"></i> {{ page.logistica.quando.label }}</strong>
+        <p>{{ page.logistica.quando.date }}<br>
+        Arrivo: {{ page.logistica.quando.arrivo }}<br>
+        Partenza: {{ page.logistica.quando.partenza }}</p>
+      </div>
+      <div class="evento-info-item">
+        <strong><i class="fa {{ page.logistica.dove.icon }}"></i> {{ page.logistica.dove.label }}</strong>
+        <p>{{ page.logistica.dove.citta }}<br>{{ page.logistica.dove.luogo }}</p>
+      </div>
+      <div class="evento-info-item">
+        <strong><i class="fa {{ page.logistica.per_chi.icon }}"></i> {{ page.logistica.per_chi.label }}</strong>
+        <p>{{ page.logistica.per_chi.text }}</p>
+      </div>
+      <div class="evento-info-item">
+        <strong><i class="fa {{ page.logistica.posti.icon }}"></i> {{ page.logistica.posti.label }}</strong>
+        <p>{{ page.logistica.posti.max }} massimo<br>
+        {{ page.logistica.posti.min }} minimo per confermare<br>
+        Waiting list: {{ page.logistica.posti.waiting }} persone</p>
+      </div>
+      <div class="evento-info-item">
+        <strong><i class="fa {{ page.logistica.come_arrivare.icon }}"></i> {{ page.logistica.come_arrivare.label }}</strong>
+        <p>{{ page.logistica.come_arrivare.text }}</p>
+      </div>
+      <div class="evento-info-item">
+        <strong><i class="fa {{ page.logistica.cosa_portare.icon }}"></i> {{ page.logistica.cosa_portare.label }}</strong>
+        <p>{{ page.logistica.cosa_portare.items }}</p>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: var(--spacing-md);">
+      <a href="{{ page.cta.secondary.url }}" class="evento-cta">{{ page.cta.secondary.text }}</a>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="evento-box">
+    <h2>❓ FAQ</h2>
+    {% for faq in page.faq %}
+    <div class="evento-faq-item">
+      <p><strong>{{ faq.q }}</strong><br>{{ faq.a }}</p>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Locandina -->
+  <div style="text-align: center; margin: var(--spacing-xl) 0;">
+    <img src="{{ page.image }}" alt="{{ page.hero.title }}" style="max-width: 100%; height: auto; border-radius: var(--border-radius); border: 2px solid var(--color-secondary);">
+  </div>
+
+  <!-- Social -->
+  <div class="evento-box">
+    <h3>📱 {{ page.social.title }}</h3>
+    <p>{{ page.social.description }}<br>{{ page.social.hashtags }}</p>
+  </div>
+
+  <!-- Content markdown originale -->
+  {{ content }}
 </div>
