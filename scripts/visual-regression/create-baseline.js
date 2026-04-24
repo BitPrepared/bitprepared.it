@@ -64,12 +64,11 @@ async function createBaseline() {
             timeout: 30000
           });
 
-          // Wait for visual regression marker (indicates page fully loaded)
+          // Wait for visual regression marker (DOM ready indicator)
+          // If not found, falls back to networkidle which is sufficient
           await page.waitForSelector('[data-visual-regression-marker="ready"]', {
-            timeout: 5000
-          }).catch(() => {
-            console.log('    ⚠️  Marker not found, using networkidle only');
-          });
+            timeout: 10000
+          }).catch(() => {}); // Silent fail - networkidle is enough
 
           const filename = pageUrl.replace(/^\//, '').replace(/\/$/, '').replace(/\//g, '_') || 'index';
           const baselinePath = path.join(__dirname, `../../tests/visual-baseline/${viewportName}/${filename}.png`);
