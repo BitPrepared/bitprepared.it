@@ -209,7 +209,7 @@ permalink: /tags/
   }
 
   .tag-post-card {
-    background: var(--color-white);
+    background: rgba(26, 31, 26, 0.8);
     border-radius: var(--border-radius);
     padding: var(--spacing-md);
     border: 2px solid var(--color-secondary);
@@ -220,6 +220,7 @@ permalink: /tags/
     transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
     border-color: var(--color-accent);
+    background: rgba(26, 31, 26, 0.95);
   }
 
   .tag-post-card h2 {
@@ -227,7 +228,7 @@ permalink: /tags/
   }
 
   .tag-post-card h2 a {
-    color: var(--color-primary);
+    color: var(--color-light);
     text-decoration: none;
   }
 
