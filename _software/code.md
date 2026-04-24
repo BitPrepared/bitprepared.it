@@ -1,6 +1,5 @@
 ---
 layout: default
-permalink: /software/code/
 title: Code.org
 tags: [bitprepared, programmi, app, workshop]
 modified: 2016-08-26

@@ -12,7 +12,6 @@ Crea un nuovo file in `_pages/eventi/nome-evento.md` con questo frontmatter mini
 ```yaml
 ---
 layout: evento
-permalink: /eventi/nome-evento/
 title: Titolo evento | Città Date
 subtitle: Sottotitolo descrittivo
 tags: [bitprepared, evento, tag1, tag2]
@@ -199,7 +198,7 @@ Per customizzazioni specifiche di un evento, puoi usare inline styles nel frontm
 
 ## Esempio Completo
 
-Vedi `_pages/eventi/epppi_rs.md` per un esempio completo di tutti i campi utilizzati.
+Vedi `_eventi/epppi.md` per un esempio completo di tutti i campi utilizzati.
 
 ---
 

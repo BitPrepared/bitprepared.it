@@ -1,9 +1,9 @@
 ---
 layout: page
-permalink: /software/
 title: Programmi
 tags: [bitprepared, programmi]
 modified: 2015-08-28
+permalink: /software/
 image:
   feature: software/software.jpg
   credit: Bit Prepared

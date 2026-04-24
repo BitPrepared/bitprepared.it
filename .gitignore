@@ -4,3 +4,4 @@ Gemfile.lock
 vendor/
 screenshots/
 scripts/visual-regression/node_modules/
+/.config

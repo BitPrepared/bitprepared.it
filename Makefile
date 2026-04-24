@@ -1,4 +1,4 @@
-JEKYLL_VERSION ?= 3
+JEKYLL_VERSION ?= 4
 PORT ?= 4000
 STATIC_PORT ?= 8000
 PROJECT_PATH ?= /workspace/bitprepared.it

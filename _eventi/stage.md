@@ -1,6 +1,5 @@
 ---
 layout: evento
-permalink: /eventi/stage/
 title: Stage per Capi - Vivere ed educare nell'era digitale
 subtitle: digito ergo sum
 tags: [bitprepared, stage, specializzazioni, formazione capi, digitale]

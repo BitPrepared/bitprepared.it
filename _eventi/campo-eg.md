@@ -1,6 +1,5 @@
 ---
 layout: evento
-permalink: /eventi/campo-eg/
 title: Campo di Competenza Esploratori e Guide
 subtitle: Tecnologia scout per il digitale
 tags: [bitprepared, eg, specializzazioni, campo competenza, esploratori, guide]

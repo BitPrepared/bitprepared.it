@@ -52,7 +52,7 @@ tags: [bitprepared, eventi, campi, stage]
 .percorso-timeline::before {
   content: '';
   position: absolute;
-  top: 120px;
+  top: 100px;
   left: 15%;
   right: 15%;
   height: 4px;

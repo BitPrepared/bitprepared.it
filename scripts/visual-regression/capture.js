@@ -25,8 +25,7 @@ const pages = [
   '/software/flora/',
   '/software/code/',
   '/software/prbm/',
-  '/articles/',
-  '/project/github/'
+  '/articles/'
 ];
 
 async function captureScreenshots(serverType, baseUrl) {

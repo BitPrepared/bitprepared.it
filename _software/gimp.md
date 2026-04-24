@@ -1,6 +1,5 @@
 ---
 layout: default
-permalink: /software/gimp/ 
 title: Gimp
 tags: [bitprepared, programmi, gimp]
 modified: 2015-08-28

@@ -1,6 +1,5 @@
 ---
 layout: default
-permalink: /software/prbm/
 title: PRBMM
 tags: [bitprepared, programmi, prbm]
 modified: 2015-08-28

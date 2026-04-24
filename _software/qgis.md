@@ -1,6 +1,5 @@
 ---
 layout: default
-permalink: /software/qgis/
 title: QGIS
 tags: [bitprepared, programmi, qgis]
 modified: 2015-08-28
