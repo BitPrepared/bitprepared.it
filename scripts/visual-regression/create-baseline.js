@@ -64,7 +64,7 @@ async function createBaseline() {
             timeout: 30000
           });
 
-          const filename = pageUrl.replace(/\//g, '_').replace(/^_/, '') || 'index';
+          const filename = pageUrl.replace(/^\//, '').replace(/\/$/, '').replace(/\//g, '_') || 'index';
           const baselinePath = path.join(__dirname, `../../tests/visual-baseline/${viewportName}/${filename}.png`);
 
           const dir = path.dirname(baselinePath);

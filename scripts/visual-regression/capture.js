@@ -57,7 +57,7 @@ async function captureScreenshots(serverType, baseUrl) {
           timeout: 30000
         });
 
-        const filename = pageUrl.replace(/\//g, '_').replace(/^_/, '') || 'index';
+        const filename = pageUrl.replace(/^\//, '').replace(/\/$/, '').replace(/\//g, '_') || 'index';
         const screenshotPath = path.join(__dirname, `../../screenshots/${serverType}/${viewportName}/${filename}.png`);
 
         const dir = path.dirname(screenshotPath);
