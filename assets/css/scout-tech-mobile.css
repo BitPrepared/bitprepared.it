@@ -1,0 +1,206 @@
+/*
+ * Scout Tech Modern - Mobile Overrides
+ * Breakpoints: Mobile < 768px, Tablet 768-1024px
+ */
+
+@media (max-width: 768px) {
+  /* ===== NAVIGATION - HAMBURGER ===== */
+  .navbar-toggle {
+    display: flex;
+  }
+
+  .navbar-nav {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: rgba(10, 31, 10, 0.98);
+    backdrop-filter: blur(10px);
+    padding: var(--spacing-md);
+    gap: 0;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-base);
+    border-bottom: var(--border-width) solid var(--color-secondary);
+  }
+
+  .navbar-nav.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .navbar-nav li {
+    width: 100%;
+    border-bottom: 1px solid rgba(26, 127, 26, 0.2);
+  }
+
+  .navbar-nav li:last-child {
+    border-bottom: none;
+  }
+
+  .navbar-nav a {
+    display: block;
+    padding: var(--spacing-md);
+    width: 100%;
+    text-align: center;
+  }
+  /* ===== TYPOGRAPHY ===== */
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.5rem; }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+  }
+
+  /* ===== HERO SECTION ===== */
+  .hero {
+    padding: var(--spacing-lg) var(--spacing-sm);
+  }
+
+  .hero-logo {
+    max-width: 200px;
+  }
+
+  /* ===== EVENTS GRID - SINGLE COLUMN ===== */
+
+  /* ===== EVENTS GRID - SINGLE COLUMN ===== */
+  .events-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+    padding-bottom: 80px; /* Space for bottom nav */
+  }
+
+  /* ===== EVENT CARDS ===== */
+  .evento-card {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .evento-card img {
+    height: 180px;
+  }
+
+  .evento-content {
+    padding: var(--spacing-sm);
+  }
+
+  .evento-card h2 {
+    font-size: 1.25rem;
+  }
+
+  /* ===== BUTTONS ===== */
+  .btn-primary {
+    width: 100%;
+    padding: var(--spacing-sm);
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    padding: var(--spacing-md) var(--spacing-sm);
+    padding-bottom: 80px;
+  }
+
+  .footer-social {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .footer-social a {
+    display: inline-flex;
+    margin: 0;
+  }
+
+  .footer-links {
+    font-size: 0.875rem;
+  }
+
+  /* ===== CONTAINER ===== */
+  .container {
+    padding: 0 var(--spacing-sm);
+  }
+
+  /* ===== SPACING ADJUSTMENTS ===== */
+  main {
+    padding-top: 0;
+  }
+}
+
+/* ===== TABLET TWEAKS (768px - 1024px) ===== */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .events-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+
+  .hero-title {
+    font-size: 2.25rem;
+  }
+
+  .navbar {
+    position: fixed;
+    top: 0;
+    bottom: auto;
+  }
+
+  .navbar-brand {
+    display: block;
+  }
+
+  footer {
+    padding-bottom: var(--spacing-lg);
+  }
+}
+
+/* ===== TOUCH TARGETS ===== */
+@media (hover: none) and (pointer: coarse) {
+  .btn-primary,
+  .navbar-nav a,
+  a {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .evento-card:hover {
+    transform: none;
+  }
+
+  .evento-card:active {
+    transform: scale(0.98);
+  }
+}
+
+/* ===== PREFERENCES ===== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .evento-card {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero-subtitle {
+    animation: none;
+  }
+}

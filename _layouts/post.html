@@ -1,20 +1,123 @@
 ---
 layout: default
 ---
-<!-- Main Post.html -->
-	<div id="main">
-		<div id="content" class="container">
-			<div class="row">
-				<section class="8u -2u">
-					<a href="{{ site.prefix }}{{ page.url }}" class="image full"><img src="/assets/{{ page.featured }}" alt=""></a>
-					{% include edit-button.html %}
-					<header>
-						<h2>{{ page.title }}</h2>
-					</header>
-						<article>
-					{{ content }}
-						</article>
-				</section>
-			</div>
-		</div>
+
+<!-- Hero Section -->
+<header class="hero">
+	<div class="hero-content">
+		<h1 class="hero-title">{{ page.title }}</h1>
+		{% if page.date %}
+		<p class="hero-subtitle">{{ page.date | date: "%d %B %Y" }}</p>
+		{% endif %}
 	</div>
+</header>
+
+<!-- Post Content -->
+<main class="page-section">
+	<div class="container">
+		<article class="page-content">
+			{% if page.featured %}
+			<div class="post-featured-image">
+				<img src="/assets/{{ page.featured }}" alt="{{ page.title }}" loading="lazy">
+			</div>
+			{% endif %}
+
+			{% include edit-button.html %}
+
+			<div class="page-body">
+				{{ content }}
+			</div>
+
+			{% if page.tags %}
+			<footer class="post-footer">
+				<p class="post-tags">
+					<strong>Tag:</strong>
+					{% for tag in page.tags %}
+					<a href="/tags/{{ tag }}/" class="tag">#{{ tag }}</a>
+					{% endfor %}
+				</p>
+			</footer>
+			{% endif %}
+		</article>
+	</div>
+</main>
+
+<style>
+	.page-section {
+		padding: var(--spacing-xl) var(--spacing-md);
+		min-height: 50vh;
+	}
+
+	.page-content {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.post-featured-image {
+		margin-bottom: var(--spacing-lg);
+		border-radius: var(--border-radius);
+		overflow: hidden;
+		border: var(--border-width) solid var(--color-secondary);
+	}
+
+	.post-featured-image img {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	.page-body {
+		color: var(--color-light);
+		line-height: 1.8;
+		font-size: 1.1rem;
+	}
+
+	.page-body h2,
+	.page-body h3,
+	.page-body h4 {
+		color: var(--color-accent);
+		margin-top: var(--spacing-lg);
+		margin-bottom: var(--spacing-sm);
+	}
+
+	.page-body p {
+		margin-bottom: var(--spacing-sm);
+	}
+
+	.page-body a {
+		color: var(--color-accent);
+		text-decoration: underline;
+	}
+
+	.post-footer {
+		margin-top: var(--spacing-xl);
+		padding-top: var(--spacing-md);
+		border-top: 1px solid var(--color-secondary);
+	}
+
+	.post-tags {
+		text-align: center;
+		color: var(--color-light);
+	}
+
+	.tag {
+		display: inline-block;
+		background: var(--color-secondary);
+		color: var(--color-white);
+		padding: 0.25rem 0.75rem;
+		border-radius: 1rem;
+		margin: 0.25rem;
+		font-size: 0.875rem;
+		text-decoration: none !important;
+	}
+
+	.tag:hover {
+		background: var(--color-accent);
+	}
+
+	@media (max-width: 768px) {
+		.page-body {
+			font-size: 1rem;
+		}
+	}
+</style>
