@@ -108,8 +108,8 @@ visual-baseline: docker-build-visual
 	@echo "📝 Commit now: git add tests/visual-baseline/ && git commit -m 'Add visual baseline'"
 
 visual-clean:
-	@rm -rf screenshots/
-	@echo "🧹 Screenshots temp rimossi"
+	@-rm -rf screenshots/ || true
+	@echo "🧹 Screenshots temp rimossi (ignorati errori permessi)"
 
 docker-build-visual:
 	@echo "🐳 Building visual regression Docker image..."
