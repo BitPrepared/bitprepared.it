@@ -133,22 +133,27 @@ permalink: /tags/
   .tag-link {
     display: inline-block;
     background: var(--color-secondary);
-    color: var(--color-white);
+    color: #ffffff !important;
     padding: 0.5rem 1rem;
     border-radius: 2rem;
     text-decoration: none !important;
     transition: all var(--transition-base);
+    border: none !important;
+    box-shadow: none !important;
   }
 
   .tag-link:hover {
-    background: var(--color-accent);
+    background: #2563eb !important;
+    color: #ffffff !important;
     transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
   }
 
   .tag-count {
-    opacity: 0.7;
+    color: #ffffff !important;
     font-size: 0.875rem;
+    font-weight: 600;
+    margin-left: 0.25rem;
   }
 
   .tag-header {
