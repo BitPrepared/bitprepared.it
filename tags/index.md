@@ -235,15 +235,17 @@ permalink: /tags/
   }
 
   .tag-post-card .post-date {
-    position: static;
-    background: none;
-    color: var(--color-text-muted);
-    font-size: 0.9rem;
-    margin-bottom: var(--spacing-sm);
-    padding: 0;
-    border-radius: 0;
-    font-weight: normal;
-    font-family: var(--font-body);
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    background: var(--color-accent);
+    color: #000000 !important;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-family: var(--font-display);
+    z-index: 1;
   }
 
   .post-excerpt {
