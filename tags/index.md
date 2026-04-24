@@ -214,6 +214,8 @@ permalink: /tags/
     padding: var(--spacing-md);
     border: var(--border-width) solid var(--color-secondary);
     transition: transform var(--transition-base), box-shadow var(--transition-base);
+    position: relative;
+    overflow: visible;
   }
 
   .tag-post-card:hover {
