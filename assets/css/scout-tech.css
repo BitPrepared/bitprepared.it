@@ -334,6 +334,7 @@ main {
 
 .btn-primary:hover {
   background: var(--color-primary);
+  color: var(--color-white);
   transform: scale(1.02);
   box-shadow: var(--shadow-md);
 }
