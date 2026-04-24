@@ -49,7 +49,8 @@ permalink: /tags/
 
   // Check URL hash for tag
   function checkHash() {
-    const hash = window.location.hash.substring(1); // Remove #
+    let hash = window.location.hash.substring(1); // Remove #
+    hash = decodeURIComponent(hash); // Decode URL encoding (spaces, etc)
 
     if (hash && tagsData[hash]) {
       showTag(hash);
