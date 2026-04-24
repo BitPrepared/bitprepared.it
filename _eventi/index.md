@@ -1,5 +1,6 @@
 ---
-title: Eventi Bit Prepared
+title: Il Percorso Bit Prepared
+subtitle: Dagli EG ai Capi: un cammino di crescita digitale
 layout: page
 permalink: /eventi/
 tags: [bitprepared, eventi, campi, stage]
@@ -15,25 +16,6 @@ tags: [bitprepared, eventi, campi, stage]
     linear-gradient(rgba(22, 22, 22, 0.85), rgba(22, 22, 22, 0.85)),
     url("data:image/svg+xml,%3Csvg width='1200' height='600' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 100 500 Q 300 300 400 350 T 700 250 T 1000 150' stroke='%231a7f1a' stroke-width='4' fill='none' stroke-dasharray='10,10'/%3E%3Ccircle cx='100' cy='500' r='15' fill='%231a7f1a'/%3E%3Ccircle cx='400' cy='350' r='15' fill='%231a7f1a'/%3E%3Ccircle cx='700' cy='250' r='15' fill='%231a7f1a'/%3E%3Ccircle cx='1000' cy='150' r='15' fill='%231a7f1a'/%3E%3C/svg%3E") no-repeat center center;
   background-size: cover;
-}
-
-.percorso-header {
-  text-align: center;
-  margin-bottom: var(--spacing-xl);
-  position: relative;
-  z-index: 2;
-}
-
-.percorso-header h1 {
-  font-size: 2.5rem;
-  color: var(--color-light);
-  margin-bottom: var(--spacing-sm);
-}
-
-.percorso-subtitle {
-  font-size: 1.25rem;
-  color: var(--color-accent);
-  font-family: var(--font-display);
 }
 
 /* Timeline Container */
@@ -204,19 +186,10 @@ tags: [bitprepared, eventi, campi, stage]
   .tappa-icon {
     margin-bottom: var(--spacing-sm);
   }
-
-  .percorso-header h1 {
-    font-size: 2rem;
-  }
 }
 </style>
 
 <div class="eventi-percorso">
-  <header class="percorso-header">
-    <h1>Il Percorso Bit Prepared</h1>
-    <p class="percorso-subtitle">Dagli EG ai Capi: un cammino di crescita digitale</p>
-  </header>
-
   <div class="percorso-timeline">
 
     <!-- Tappa 1: EG -->
