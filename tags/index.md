@@ -209,18 +209,19 @@ permalink: /tags/
   }
 
   .tag-post-card {
-    background: rgba(26, 31, 26, 0.8);
+    background: #161616;
     border-radius: var(--border-radius);
     padding: var(--spacing-md);
     border: 2px solid var(--color-secondary);
     transition: all var(--transition-base);
+    transform: translateY(0);
   }
 
   .tag-post-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 217, 255, 0.3);
     border-color: var(--color-accent);
-    background: rgba(26, 31, 26, 0.95);
+    background: #1a1a1a;
   }
 
   .tag-post-card h2 {
@@ -230,6 +231,7 @@ permalink: /tags/
   .tag-post-card h2 a {
     color: var(--color-light);
     text-decoration: none;
+    transition: color var(--transition-fast);
   }
 
   .tag-post-card h2 a:hover {
