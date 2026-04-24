@@ -88,6 +88,7 @@ validate-graphics: docker-build-visual
 	docker run --rm \
 		--mount type=bind,source=${PWD},target=/app \
 		--add-host=host.docker.internal:host-gateway \
+		--user $(id -u):$(id -g) \
 		bitprepared-visual-regression:latest
 
 visual-baseline: docker-build-visual
@@ -101,6 +102,7 @@ visual-baseline: docker-build-visual
 		--mount type=bind,source=${PWD},target=/app \
 		--add-host=host.docker.internal:host-gateway \
 		-e HOST_IP=host.docker.internal \
+		--user $(id -u):$(id -g) \
 		--entrypoint="" \
 		bitprepared-visual-regression:latest \
 		sh -c 'cd /app/scripts/visual-regression && npm run create-baseline'

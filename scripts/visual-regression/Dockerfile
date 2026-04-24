@@ -13,7 +13,4 @@ COPY . .
 COPY scripts/visual-regression/docker-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-# Switch to node user to avoid permission issues with mounted volumes
-USER node
-
 ENTRYPOINT ["/entrypoint.sh"]
