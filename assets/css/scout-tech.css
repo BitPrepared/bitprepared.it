@@ -498,6 +498,11 @@ footer a::after {
 .mt-lg { margin-top: var(--spacing-lg); }
 .mb-lg { margin-bottom: var(--spacing-lg); }
 
+#events-title,
+#blog-title {
+	color: var(--color-light);
+}
+
 /* ===== SCROLL REVEAL ===== */
 .reveal {
   opacity: 0;
