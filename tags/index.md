@@ -234,10 +234,16 @@ permalink: /tags/
     color: var(--color-accent);
   }
 
-  .post-date {
+  .tag-post-card .post-date {
+    position: static;
+    background: none;
     color: var(--color-text-muted);
     font-size: 0.9rem;
     margin-bottom: var(--spacing-sm);
+    padding: 0;
+    border-radius: 0;
+    font-weight: normal;
+    font-family: var(--font-body);
   }
 
   .post-excerpt {
