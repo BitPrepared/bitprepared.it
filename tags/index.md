@@ -148,11 +148,11 @@ permalink: /tags/
   .tag-link:hover,
   .tag-link:focus,
   .tag-link:active {
-    background: #2563eb !important;
+    background: #00d9ff !important;
     color: #000000 !important;
     text-shadow: none !important;
     transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(37, 99, 235, 0.4) !important;
+    box-shadow: 0 6px 12px rgba(0, 217, 255, 0.4) !important;
     outline: none !important;
     text-decoration: none !important;
     border: none !important;
