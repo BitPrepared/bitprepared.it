@@ -133,7 +133,7 @@ permalink: /tags/
 
   .tag-link {
     display: inline-block;
-    background: #4a5568 !important;
+    background: #1a7f1a !important;
     color: #ffffff !important;
     padding: 0.5rem 1rem;
     border-radius: 2rem;
@@ -148,16 +148,15 @@ permalink: /tags/
   .tag-link:hover,
   .tag-link:focus,
   .tag-link:active {
-    background: #2d3748 !important;
+    background: #2563eb !important;
     color: #ffffff !important;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.5) !important;
+    text-shadow: 0 1px 3px rgba(255,255,255,0.8) !important;
     transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2) !important;
+    box-shadow: 0 6px 12px rgba(37, 99, 235, 0.4) !important;
     outline: none !important;
     text-decoration: none !important;
     border: none !important;
     border-bottom: none !important;
-    box-shadow: none !important;
   }
 
   .tag-count {
@@ -165,7 +164,14 @@ permalink: /tags/
     font-size: 0.875rem;
     font-weight: 700;
     margin-left: 0.25rem;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.4) !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3) !important;
+  }
+
+  .tag-link:hover .tag-count,
+  .tag-link:focus .tag-count,
+  .tag-link:active .tag-count {
+    color: #ffffff !important;
+    text-shadow: 0 1px 3px rgba(255,255,255,0.8) !important;
   }
 
   .tag-header {
