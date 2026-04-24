@@ -102,17 +102,26 @@ layout: default
 
 	.tag {
 		display: inline-block;
-		background: var(--color-secondary);
-		color: var(--color-white);
-		padding: 0.25rem 0.75rem;
-		border-radius: 1rem;
+		background: #1a7f1a !important;
+		color: #ffffff !important;
+		padding: 0.5rem 1rem;
+		border-radius: 2rem;
 		margin: 0.25rem;
 		font-size: 0.875rem;
 		text-decoration: none !important;
+		border: none !important;
+		box-shadow: none !important;
+		outline: none !important;
 	}
 
-	.tag:hover {
-		background: var(--color-accent);
+	.tag:hover,
+	.tag:focus,
+	.tag:active {
+		background: #2563eb !important;
+		color: #000000 !important;
+		text-shadow: none !important;
+		text-decoration: none !important;
+		border: none !important;
 	}
 
 	@media (max-width: 768px) {
