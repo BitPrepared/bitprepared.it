@@ -142,25 +142,29 @@ permalink: /tags/
     border: none !important;
     box-shadow: none !important;
     outline: none !important;
+    border-bottom: none !important;
   }
 
   .tag-link:hover,
   .tag-link:focus,
   .tag-link:active {
-    background: #2563eb !important;
+    background: #1e40af !important;
     color: #ffffff !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3) !important;
     transform: translateY(-2px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
     outline: none !important;
     text-decoration: none !important;
     border: none !important;
+    border-bottom: none !important;
   }
 
   .tag-count {
     color: #ffffff !important;
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 700;
     margin-left: 0.25rem;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.2) !important;
   }
 
   .tag-header {
