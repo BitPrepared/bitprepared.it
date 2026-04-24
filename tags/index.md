@@ -209,19 +209,16 @@ permalink: /tags/
   }
 
   .tag-post-card {
-    background: #161616;
+    background: var(--color-white);
     border-radius: var(--border-radius);
     padding: var(--spacing-md);
-    border: 2px solid var(--color-secondary);
-    transition: all var(--transition-base);
-    transform: translateY(0);
+    border: var(--border-width) solid var(--color-secondary);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
   }
 
   .tag-post-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 24px rgba(0, 217, 255, 0.3);
-    border-color: var(--color-accent);
-    background: #1a1a1a;
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
   }
 
   .tag-post-card h2 {
@@ -229,9 +226,8 @@ permalink: /tags/
   }
 
   .tag-post-card h2 a {
-    color: var(--color-light);
+    color: var(--color-primary);
     text-decoration: none;
-    transition: color var(--transition-fast);
   }
 
   .tag-post-card h2 a:hover {
@@ -245,7 +241,7 @@ permalink: /tags/
   }
 
   .post-excerpt {
-    color: var(--color-light);
+    color: var(--color-text);
     line-height: 1.6;
     margin-bottom: var(--spacing-md);
   }
