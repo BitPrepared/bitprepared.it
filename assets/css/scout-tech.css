@@ -472,7 +472,7 @@ footer a::after {
 .footer-social a:hover {
   background: var(--color-accent);
   transform: scale(1.1);
-  color: var(--color-white);
+  color: #000000;
 }
 
 .footer-social a span {
