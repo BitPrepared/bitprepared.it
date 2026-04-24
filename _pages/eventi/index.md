@@ -5,261 +5,102 @@ permalink: /eventi/
 tags: [bitprepared, eventi, campi, stage]
 ---
 
-<style>
-/* Percorso Scout - Timeline Layout */
-.eventi-percorso {
-  position: relative;
-  padding: var(--spacing-xl) var(--spacing-md);
-  min-height: 80vh;
-  background:
-    linear-gradient(rgba(22, 22, 22, 0.85), rgba(22, 22, 22, 0.85)),
-    url("data:image/svg+xml,%3Csvg width='1200' height='600' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 100 500 Q 300 300 400 350 T 700 250 T 1000 150' stroke='%231a7f1a' stroke-width='4' fill='none' stroke-dasharray='10,10'/%3E%3Ccircle cx='100' cy='500' r='15' fill='%231a7f1a'/%3E%3Ccircle cx='400' cy='350' r='15' fill='%231a7f1a'/%3E%3Ccircle cx='700' cy='250' r='15' fill='%231a7f1a'/%3E%3Ccircle cx='1000' cy='150' r='15' fill='%231a7f1a'/%3E%3C/svg%3E") no-repeat center center;
-  background-size: cover;
-}
+<div class="min-h-screen" style="background: #1a1a1a;">
+  <div class="max-w-6xl mx-auto px-6 py-16">
+    
+    <!-- Header -->
+    <header class="text-center mb-16">
+      <h1 class="text-4xl font-bold text-white mb-4" style="font-family: 'Inter', sans-serif;">Il Percorso Bit Prepared</h1>
+      <p class="text-xl" style="color: #3498db; font-family: 'JetBrains Mono', monospace;">Dagli EG ai Capi: un cammino di crescita digitale</p>
+    </header>
 
-.percorso-header {
-  text-align: center;
-  margin-bottom: var(--spacing-xl);
-  position: relative;
-  z-index: 2;
-}
+    <!-- Three Column Grid -->
+    <div class="flex justify-center gap-8" style="flex-wrap: wrap;">
 
-.percorso-header h1 {
-  font-size: 2.5rem;
-  color: var(--color-light);
-  margin-bottom: var(--spacing-sm);
-}
-
-.percorso-subtitle {
-  font-size: 1.25rem;
-  color: var(--color-accent);
-  font-family: var(--font-display);
-}
-
-/* Timeline Container */
-.percorso-timeline {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  max-width: 1200px;
-  margin: 0 auto;
-  position: relative;
-  gap: var(--spacing-lg);
-  padding: var(--spacing-xl) 0;
-}
-
-/* Linea che collega le tappe */
-.percorso-timeline::before {
-  content: '';
-  position: absolute;
-  top: 120px;
-  left: 15%;
-  right: 15%;
-  height: 4px;
-  background: linear-gradient(90deg, var(--color-secondary) 0%, var(--color-accent) 100%);
-  z-index: 0;
-}
-
-/* Tappa del percorso */
-.percorso-tappa {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  z-index: 1;
-  max-width: 320px;
-}
-
-.tappa-icon {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: var(--color-secondary);
-  border: 4px solid var(--color-accent);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: var(--spacing-md);
-  position: relative;
-  z-index: 2;
-  transition: transform var(--transition-base);
-}
-
-/* Colori specifici per branca */
-.percorso-tappa:nth-child(1) .tappa-icon {
-  background: #1a7f1a; /* Verde - EG */
-  border-color: #00d9ff;
-}
-
-.percorso-tappa:nth-child(2) .tappa-icon {
-  background: #cc0000; /* Rosso - RS */
-  border-color: #ff6b6b;
-}
-
-.percorso-tappa:nth-child(3) .tappa-icon {
-  background: #8b008b; /* Viola - Coca */
-  border-color: #da70d6;
-}
-
-.percorso-tappa:hover .tappa-icon {
-  transform: scale(1.1);
-}
-
-.percorso-tappa:nth-child(1):hover .tappa-icon {
-  box-shadow: 0 0 30px rgba(0, 217, 255, 0.5);
-}
-
-.percorso-tappa:nth-child(2):hover .tappa-icon {
-  box-shadow: 0 0 30px rgba(255, 107, 107, 0.5);
-}
-
-.percorso-tappa:nth-child(3):hover .tappa-icon {
-  box-shadow: 0 0 30px rgba(218, 112, 214, 0.5);
-}
-
-.tappa-icon img {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-}
-
-.tappa-card {
-  background: var(--color-white);
-  border-radius: var(--border-radius);
-  padding: var(--spacing-md);
-  border: 2px solid var(--color-secondary);
-  transition: all var(--transition-base);
-}
-
-.percorso-tappa:hover .tappa-card {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--color-accent);
-}
-
-.tappa-label {
-  text-align: center;
-  margin-bottom: var(--spacing-sm);
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.25rem;
-  color: var(--color-light);
-}
-
-.tappa-eta {
-  text-align: center;
-  font-size: 0.875rem;
-  color: var(--color-accent);
-  margin-bottom: var(--spacing-sm);
-  font-family: var(--font-display);
-}
-
-.tappa-card h3 {
-  font-size: 1.25rem;
-  color: var(--color-primary);
-  margin-bottom: var(--spacing-sm);
-  text-align: center;
-}
-
-.tappa-card p {
-  font-size: 0.95rem;
-  color: var(--color-text-muted);
-  margin-bottom: var(--spacing-md);
-  text-align: center;
-  line-height: 1.5;
-}
-
-.tappa-card .btn-primary {
-  width: 100%;
-  font-size: 0.9rem;
-}
-
-/* Responsive Mobile */
-@media (max-width: 768px) {
-  .eventi-percorso {
-    padding: var(--spacing-lg) var(--spacing-sm);
-  }
-
-  .percorso-timeline {
-    flex-direction: column;
-    align-items: center;
-    gap: var(--spacing-xl);
-    padding: var(--spacing-md) 0;
-  }
-
-  .percorso-timeline::before {
-    left: 50%;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    height: auto;
-    transform: translateX(-50%);
-  }
-
-  .percorso-tappa {
-    max-width: 100%;
-  }
-
-  .tappa-icon {
-    margin-bottom: var(--spacing-sm);
-  }
-
-  .percorso-header h1 {
-    font-size: 2rem;
-  }
-}
-</style>
-
-<div class="eventi-percorso">
-  <header class="percorso-header">
-    <h1>Il Percorso Bit Prepared</h1>
-    <p class="percorso-subtitle">Dagli EG ai Capi: un cammino di crescita digitale</p>
-  </header>
-
-  <div class="percorso-timeline">
-
-    <!-- Tappa 1: EG -->
-    <article class="percorso-tappa">
-      <div class="tappa-icon">
-        <img src="/assets/images/loghi_branche/eg.png" alt="EG">
+      <!-- Column 1: EG -->
+      <div class="flex flex-col items-center text-center" style="max-width: 320px; flex: 1;">
+        <!-- Circular Icon - Green -->
+        <div class="w-20 h-20 rounded-full flex items-center justify-center mb-6" style="background: #2ecc71;">
+          <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        
+        <h2 class="text-2xl font-bold text-white mb-2">Esploratori/Guide</h2>
+        <p class="text-base mb-6" style="color: #cccccc;">11-16 anni</p>
+        
+        <!-- Content Card -->
+        <div class="bg-white rounded-lg p-6 w-full">
+          <h3 class="text-xl font-semibold mb-4" style="color: #3498db;">Campo di Competenza</h3>
+          <p class="text-gray-700 mb-6 leading-relaxed">
+            Google, social network, fotoritocco, video editing, coding. Scopri le tecnologie mantenendo lo stile scout!
+          </p>
+          <a href="/eventi/campo-eg/" 
+             class="inline-block w-full text-center font-semibold py-3 px-6 rounded transition-colors"
+             style="background: #27ae60; color: white;"
+             onmouseover="this.style.background='#2ecc71'"
+             onmouseout="this.style.background='#27ae60'">
+            Scopri il campo
+          </a>
+        </div>
       </div>
-      <p class="tappa-label">Esploratori/Guide</p>
-      <p class="tappa-eta">11-16 anni</p>
-      <div class="tappa-card">
-        <h3>Campo di Competenza</h3>
-        <p>Google, social network, fotoritocco, video editing, coding. Scopri le tecnologie mantenendo lo stile scout!</p>
-        <a href="/eventi/campo-eg/" class="btn-primary">Scopri il campo</a>
-      </div>
-    </article>
 
-    <!-- Tappa 2: R/S -->
-    <article class="percorso-tappa">
-      <div class="tappa-icon">
-        <img src="/assets/images/loghi_branche/rs.png" alt="RS">
+      <!-- Column 2: RS -->
+      <div class="flex flex-col items-center text-center" style="max-width: 320px; flex: 1;">
+        <!-- Circular Icon - Red -->
+        <div class="w-20 h-20 rounded-full flex items-center justify-center mb-6" style="background: #e74c3c;">
+          <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          </svg>
+        </div>
+        
+        <h2 class="text-2xl font-bold text-white mb-2">Rover/Scolte</h2>
+        <p class="text-base mb-6" style="color: #cccccc;">16-21 anni</p>
+        
+        <!-- Content Card -->
+        <div class="bg-white rounded-lg p-6 w-full">
+          <h3 class="text-xl font-semibold mb-4" style="color: #3498db;">EPPPI</h3>
+          <p class="text-gray-700 mb-6 leading-relaxed">
+            La scelta politica nelle società iperconnesse. Come usare i social per agire? Workshop intensivi su cittadinanza digitale.
+          </p>
+          <a href="/eventi/epppi/" 
+             class="inline-block w-full text-center font-semibold py-3 px-6 rounded transition-colors"
+             style="background: #27ae60; color: white;"
+             onmouseover="this.style.background='#2ecc71'"
+             onmouseout="this.style.background='#27ae60'">
+            Scopri EPPPI
+          </a>
+        </div>
       </div>
-      <p class="tappa-label">Rover/Scolte</p>
-      <p class="tappa-eta">16-21 anni</p>
-      <div class="tappa-card">
-        <h3>EPPPI</h3>
-        <p>La scelta politica nelle società iperconnesse. Come usare i social per agire? Workshop intensivi su cittadinanza digitale.</p>
-        <a href="/eventi/epppi/" class="btn-primary">Scopri EPPPI</a>
-      </div>
-    </article>
 
-    <!-- Tappa 3: Capi -->
-    <article class="percorso-tappa">
-      <div class="tappa-icon">
-        <img src="/assets/images/loghi_branche/coca.png" alt="Capi">
+      <!-- Column 3: Capi -->
+      <div class="flex flex-col items-center text-center" style="max-width: 320px; flex: 1;">
+        <!-- Circular Icon - Purple -->
+        <div class="w-20 h-20 rounded-full flex items-center justify-center mb-6" style="background: #9b59b6;">
+          <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+          </svg>
+        </div>
+        
+        <h2 class="text-2xl font-bold text-white mb-2">Capi</h2>
+        <p class="text-base mb-6" style="color: #cccccc;">Adulti</p>
+        
+        <!-- Content Card -->
+        <div class="bg-white rounded-lg p-6 w-full">
+          <h3 class="text-xl font-semibold mb-4" style="color: #3498db;">Stage per Capi</h3>
+          <p class="text-gray-700 mb-6 leading-relaxed">
+            Essere scout nell'era del Web 2.0. La legge scout riletta per il sempre connesso. Strumenti per la tua comunità.
+          </p>
+          <a href="/eventi/stage/" 
+             class="inline-block w-full text-center font-semibold py-3 px-6 rounded transition-colors"
+             style="background: #27ae60; color: white;"
+             onmouseover="this.style.background='#2ecc71'"
+             onmouseout="this.style.background='#27ae60'">
+            Scopri lo stage
+          </a>
+        </div>
       </div>
-      <p class="tappa-label">Capi</p>
-      <p class="tappa-eta">Adulti</p>
-      <div class="tappa-card">
-        <h3>Stage per Capi</h3>
-        <p>Essere scout nell'era del Web 2.0. La legge scout riletta per il sempre connesso. Strumenti per la tua comunità.</p>
-        <a href="/eventi/stage/" class="btn-primary">Scopri lo stage</a>
-      </div>
-    </article>
 
+    </div>
   </div>
 </div>
