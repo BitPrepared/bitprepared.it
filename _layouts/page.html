@@ -1,18 +1,78 @@
 ---
 layout: default
 ---
-<!-- Main Page.html -->
-	<div id="main">
-		<div id="content" class="container">
-			<div class="row">
-				<section class="8u -2u">
-				<!--		<img src="/assets/{{ page.featured }}" class="image medium" alt="{{ page.title}}"> -->
-					{% include edit-button.html %}
-					<header>
-						<h2>{% if page.subtitle %} &#8211; {{ page.subtitle }}{% endif %}</h2>
-					</header>
-					{{ content }}
-				</section>
-			</div>
-		</div>
+
+{% unless page.no_hero %}
+<!-- Hero Section -->
+<header class="hero">
+	<div class="hero-content">
+		<h1 class="hero-title">{{ page.title }}</h1>
+		{% if page.subtitle %}
+		<p class="hero-subtitle">{{ page.subtitle }}</p>
+		{% endif %}
 	</div>
+</header>
+{% endunless %}
+
+<!-- Page Content -->
+<main class="page-section">
+	<div class="container">
+		<article class="page-content">
+			{% include edit-button.html %}
+			<div class="page-body">
+				{{ content }}
+			</div>
+		</article>
+	</div>
+</main>
+
+<style>
+	.page-section {
+		padding: var(--spacing-xl) var(--spacing-md);
+		min-height: 50vh;
+	}
+
+	.page-content {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.page-body {
+		color: var(--color-light);
+		line-height: 1.8;
+		font-size: 1.1rem;
+	}
+
+	.page-body h2,
+	.page-body h3,
+	.page-body h4 {
+		color: var(--color-accent);
+		margin-top: var(--spacing-lg);
+		margin-bottom: var(--spacing-sm);
+	}
+
+	.page-body p {
+		margin-bottom: var(--spacing-sm);
+	}
+
+	.page-body a {
+		color: var(--color-accent);
+		text-decoration: underline;
+	}
+
+	.page-body ul,
+	.page-body ol {
+		margin-bottom: var(--spacing-sm);
+		padding-left: var(--spacing-lg);
+	}
+
+	.page-body li {
+		margin-bottom: var(--spacing-xs);
+	}
+
+	@media (max-width: 768px) {
+		.page-body {
+			font-size: 1rem;
+		}
+	}
+</style>

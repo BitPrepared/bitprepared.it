@@ -79,6 +79,15 @@ Quando utente aggiunge/modifica features:
 1. Hai eseguito make validate-graphics?
 2. Il report è ok (sotto 1% differenze)?
 3. Hai aggiornato la baseline se necessario?
+4. Hai verificato i link con make check-links?
+```
+
+### "Verifica link broken"
+```bash
+# Ricorda di suggerire:
+make check-links
+# Verifica tutti i link (interni ed esterni) nel sito generato
+# Esclude automaticamente social media e localhost
 ```
 
 ### "Sto modificando un template Jekyll"

@@ -1,6 +1,5 @@
 ---
 layout: evento
-permalink: /eventi/epppi/
 title: Essere solidi in una società immateriale | Bologna 8-10 Maggio
 subtitle: Come essere persone concrete in un mondo digitale?
 tags: [bitprepared, epppi, rs, esseri solidi, società digitale, rover, scolte, bologna, 2026]
@@ -15,7 +14,7 @@ hero:
   subtitle: "Come essere persone concrete in un mondo sempre più digitale?"
   location: "Bologna"
   date: "8-10 Maggio 2026"
-  target: "Rover e Scolte in cammino"
+  target: "Rover e Scolte AGESCI"
 
 cta:
   primary:

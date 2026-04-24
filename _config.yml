@@ -22,9 +22,13 @@ plugins:
 gems:
   - jekyll-seo-tag
 
-include: ['_pages']
-
-pages: ./_pages
+collections:
+  eventi:
+    output: true
+    permalink: /:collection/:name/
+  software:
+    output: true
+    permalink: /:collection/:name/
 
 exclude:
   - node_modules

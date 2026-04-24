@@ -1,16 +1,15 @@
 ---
 layout: page
-permalink: /software/
 title: Programmi
+subtitle: Programmi utili per una scout digitale leale
 tags: [bitprepared, programmi]
 modified: 2015-08-28
+permalink: /software/
 image:
   feature: software/software.jpg
   credit: Bit Prepared
   creditlink: http://www.bitprepared.it
 ---
-
-### Programmi Utili per una scout digitale "leale"
 
 ![Debian]({{ site.url }}/assets/images/pages/software/debian.png) [Debian](https://www.debian.org/)
 

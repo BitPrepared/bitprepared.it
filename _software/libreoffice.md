@@ -1,6 +1,5 @@
 ---
 layout: default
-permalink: /software/libreoffice/
 title: Libreoffice
 tags: [bitprepared, programmi, libreoffice]
 modified: 2015-08-28

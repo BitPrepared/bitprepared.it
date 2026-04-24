@@ -28,14 +28,15 @@ Accompagnare gli scout nell'era digitale attraverso:
 
 ## Tech Stack
 
-- **Jekyll 3** — Site generator statico
+- **Jekyll 4** — Site generator statico
 - **Docker** — Ambiente di sviluppo e build containerizzato
 - **GitHub Actions** — CI/CD per deployment automatico
-- **Custom Plugin** — `jekyll-pages-directory.rb` per gestione `_pages/`
 
 ### Features custom
 
+- Struttura Jekyll 4 standard (pages, posts, collections)
 - Layout `evento` per eventi con hero section, CTA, benefits grid
+- Collections custom: `eventi`, `software`
 - Sezioni opzionali: highlights, programma, outcomes, FAQ
 - Edit button (MarkText) visible solo in development
 - Font Awesome icons
@@ -67,20 +68,18 @@ Per tutti i comandi disponibili: `make help`
 
 ```
 bitprepared.it/
-├── _pages/          → Pagine statiche (eventi, software, articles)
-│   ├── eventi/      → Eventi (campo_eg, epppi, stage)
-│   │   └── README_EVENTO.md → Guida template evento
-│   ├── software/    → Guide software (GIMP, LibreOffice, etc.)
-│   └── about/       → Chi siamo
 ├── _posts/          → Blog posts (format: yyyy-mm-dd-titolo.md)
+├── _eventi/         → Collection eventi (campo_eg, epppi, stage)
+│   └── README_EVENTO.md → Guida template evento
+├── _software/       → Collection software (GIMP, LibreOffice, etc.)
 ├── _layouts/        → Template Jekyll
 │   ├── evento.html  → Layout standard per eventi (ex epppi)
 │   ├── default.html
 │   ├── page.html
 │   └── post.html
-├── _plugins/        → Plugin Jekyll custom
-│   └── jekyll-pages-directory.rb
 ├── _includes/       → Componenti riutilizzabili (nav, footer, etc.)
+├── blog/            → Archivio blog (index.html)
+├── about.md         → Pagina chi siamo
 ├── assets/          → CSS, JS, images
 │   └── css/
 │       └── evento-custom.css → Stili template evento

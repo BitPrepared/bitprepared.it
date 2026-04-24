@@ -1,59 +1,100 @@
 ---
-title: benvenuti
+title: Bit Prepared - Digito ergo sum
 layout: default
 tags: [agesci,bitprepared,scout,informatica,specializzazioni,competenza,maestro delle tecnologie, esperto del compiuter, digital life]
 ---
-<!-- Featured -->
-<div id="featured">
-	<div class="container">
-<!--		<header>
-			<h2>Welcome to Linear</h2>
-		</header>
-		<p>This is <strong>Linear</strong>, a responsive HTML5 site template freebie by <a href="http://templated.co">TEMPLATED</a>. Released for free under the <a href="http://templated.co/license">Creative Commons Attribution</a> license, so use it for whatever (personal or commercial) &ndash; just give us credit! Check out more of our stuff at <a href="http://templated.co">our site</a> or follow us on <a href="http://twitter.com/templatedco">Twitter</a>.</p>
-		<hr />
--->		<div class="row" style="display: flex; flex-wrap: wrap;">
-			<section class="4u" style="display: flex; flex-direction: column;">
-				<span class="pennant"><span class="fa fa-eg"></span></span>
-				<h3>Campo di competenza EG</h3>
-				<p>Google, social network, blog, connessioni wireless al campo, come anche fotoritocco, video editing e tanto altro!<br/>mantenendo comunque lo stile scout che ci contraddistingue!</p>
-				<a href="/eventi/campo-eg" class="button button-style1" style="margin-top: auto;">Read More</a>
-			</section>
-			<section class="4u" style="display: flex; flex-direction: column;">
-				<span class="pennant"><span class="fa fa-rs"></span></span>
-				<h3>EPPPI per RS</h3>
-				<p>La scelta politica nelle nostre società iperconnesse cosa vuol dire? Come possiamo sfruttare i social network per agire?<br/>
-	Queste le principali domande del primo Workshop per RS di Bit Prepared</p>
-				<a href="/eventi/epppi" class="button button-style1" style="margin-top: auto;">Read More</a>
-			</section>
-			<section class="4u" style="display: flex; flex-direction: column;">
-				<span class="pennant"><span class="fa fa-coca"></span></span>
-				<h3>Stage per capi</h3>
-				<p>Lo stage è pensato come strumento per portare avanti una ricerca condivisa di cosa voglia significa essere scout nell'era del Web 2.0. La legge scout riletta in ottica del sempre connesso e del tutto adesso, qui e subito.</p>
-				<a href="/eventi/stage" class="button button-style1" style="margin-top: auto;">Read More</a>
-			</section>
 
-		</div>
+<!-- Schema.org JSON-LD Organization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Bit Prepared",
+  "url": "https://www.bitprepared.it",
+  "description": "Digito ergo sum, per un uso consapevole del digitale",
+  "sameAs": [
+    "https://twitter.com/bitprepared",
+    "https://www.facebook.com/bitprepared",
+    "https://www.instagram.com/bit.prepared/"
+  ]
+}
+</script>
+
+<!-- Hero Section -->
+<header class="hero">
+	<div class="hero-content">
+		<h1 class="hero-title">Bit Prepared</h1>
+		<p class="hero-subtitle">Per un uso consapevole del digitale</p>
 	</div>
-</div>
+</header>
 
-<!-- Main -->
-	<div id="main">
-		<div id="content" class="container">
+<!-- Events Section -->
+<section class="events-section" aria-labelledby="events-title">
+	<h2 id="events-title" class="text-center" style="margin-bottom: var(--spacing-lg);">Eventi e Attività</h2>
+	<div class="events-grid">
 
-			{% for post in site.posts offset: 0 limit: 4 %}
-                        <div class="row">
-                                <section class="8u -2u">
-                                        <a href="{{ site.prefix }}{{ post.url }}" class="image full"><img src="/assets/{{ post.featured }}" alt=""></a>
-                                        <header>
-                                                <h2>{{ post.title }}</h2>
-                                        </header>
-                                        {{ post.excerpt }}
-                                        <a href="{{ site.prefix }}{{ post.url }}" class="button button-style1">Read More</a>
-                                </section>
-                        </div>
-                        {% endfor %}
+		<!-- Card 1: Campo EG -->
+		<article class="evento-card">
+			<div class="card-image-wrapper">
+				<img src="/assets/images/loghi_branche/eg.png" alt="Campo di Competenza EG" width="400" height="300" loading="lazy">
+				<span class="post-date">2023</span>
+			</div>
+			<div class="evento-content">
+				<h2>Campo di Competenza EG</h2>
+				<p>Google, social network, fotoritocco, video editing, coding e tanto altro. Mantenendo lo stile scout che ci contraddistingue!</p>
+				<a href="/eventi/campo-eg/" class="btn-primary">Scopri il campo</a>
+			</div>
+		</article>
 
-		</div>
+		<!-- Card 2: EPPPI -->
+		<article class="evento-card">
+			<div class="card-image-wrapper">
+				<img src="/assets/images/loghi_branche/rs.png" alt="EPPPI per Rover/Scolte" width="400" height="300" loading="lazy">
+				<span class="post-date">2026</span>
+			</div>
+			<div class="evento-content">
+				<h2>EPPPI per RS</h2>
+				<p>La scelta politica nelle società iperconnesse. Come possiamo sfruttare i social network per agire? Workshop intensivi per Rover/Scolte.</p>
+				<a href="/eventi/epppi/" class="btn-primary">Scopri EPPPI</a>
+			</div>
+		</article>
+
+		<!-- Card 3: Stage -->
+		<article class="evento-card">
+			<div class="card-image-wrapper">
+				<img src="/assets/images/loghi_branche/coca.png" alt="Stage per Capi" width="400" height="300" loading="lazy">
+				<span class="post-date">2018</span>
+			</div>
+			<div class="evento-content">
+				<h2>Stage per Capi</h2>
+				<p>Essere scout nell'era del Web 2.0. La legge scout riletta in ottica del sempre connesso e del tutto adesso, qui e subito.</p>
+				<a href="/eventi/stage/" class="btn-primary">Scopri lo stage</a>
+			</div>
+		</article>
 
 	</div>
+</section>
 
+<!-- Recent Posts (Optional, keeping Jekyll integration) -->
+{% if site.posts.size > 0 %}
+<section class="blog-section" style="max-width: var(--container-max-width); margin: 0 auto; padding: var(--spacing-xl) var(--spacing-md);" aria-labelledby="blog-title">
+	<h2 id="blog-title" class="text-center" style="margin-bottom: var(--spacing-lg);">Ultimi Articoli</h2>
+	<div class="events-grid">
+		{% for post in site.posts limit: 3 %}
+		<article class="evento-card reveal">
+			{% if post.featured %}
+			<div class="card-image-wrapper">
+				<img src="/assets/{{ post.featured }}" alt="{{ post.title }}" width="400" height="300" loading="lazy">
+				<span class="post-date">{{ post.date | date: "%d %b %Y" }}</span>
+			</div>
+			{% endif %}
+			<div class="evento-content">
+				<h2>{{ post.title }}</h2>
+				<p>{{ post.excerpt | strip_html | truncate: 150 }}</p>
+				<a href="{{ post.url }}" class="btn-primary">Leggi tutto</a>
+			</div>
+		</article>
+		{% endfor %}
+	</div>
+</section>
+{% endif %}

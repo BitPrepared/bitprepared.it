@@ -61,10 +61,10 @@
 		text-decoration: none;
 		color: #80BA8E;
 	}
-	
+
 	a:hover
 	{
-		text-decoration: underline;
+		text-decoration: none;
 	}
 
 	sub

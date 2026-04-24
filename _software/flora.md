@@ -1,6 +1,5 @@
 ---
 layout: default
-permalink: /software/flora/
 title: Flora
 tags: [bitprepared, programmi, flora]
 modified: 2015-08-28

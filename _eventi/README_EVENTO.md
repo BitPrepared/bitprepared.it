@@ -12,7 +12,6 @@ Crea un nuovo file in `_pages/eventi/nome-evento.md` con questo frontmatter mini
 ```yaml
 ---
 layout: evento
-permalink: /eventi/nome-evento/
 title: Titolo evento | Città Date
 subtitle: Sottotitolo descrittivo
 tags: [bitprepared, evento, tag1, tag2]
@@ -199,7 +198,60 @@ Per customizzazioni specifiche di un evento, puoi usare inline styles nel frontm
 
 ## Esempio Completo
 
-Vedi `_pages/eventi/epppi_rs.md` per un esempio completo di tutti i campi utilizzati.
+Vedi `_eventi/epppi.md` per un esempio completo di tutti i campi utilizzati.
+
+---
+
+## Nuove Features (2026)
+
+### Event Status Badge
+
+Mostra automaticamente un badge animato in base allo stato dell'evento:
+
+```yaml
+event_status: upcoming  # upcoming, past, soldout, last_chance
+event_date: 2026-07-29  # YYYY-MM-DD (richiesto per upcoming, opzionale per altri)
+```
+
+**Valori possibili:**
+- `upcoming` — Badge verde "PROSSIMO EVENTO" (con animazione pulse)
+- `soldout` — Badge grigio "SOLD OUT" (senza animazione)
+- `last_chance` — Badge rosso "ULTIMI POSTI" (con animazione pulse)
+- `past` — Nessun badge (evento passato)
+
+### Benefits Section
+
+Sezione di cards iconate per mostrare i vantaggi dell'evento:
+
+```yaml
+benefits_title: "Perché partecipare"
+benefits:
+  - icon: "fa-camera"
+    title: "Fotografia"
+    desc: "Descrizione breve del benefit"
+  - icon: "fa-map-marked-alt"
+    title: "Mapping"
+    desc: "Descrizione breve del benefit"
+  # ... minimo 4 benefits raccomandati
+```
+
+**Note:**
+- Minimo 4 benefits raccomandati per layout grid bilanciato
+- Usa icone FontAwesome Free (prefisso `fa-`)
+- Le cards hanno hover effect con lift e shadow
+
+### Countdown Timer (Opzionale)
+
+Timer dinamico per eventi futuri:
+
+```yaml
+event_status: upcoming
+event_date: 2026-07-29  # YYYY-MM-DD
+```
+
+Il countdown appare automaticamente per eventi con `event_status: upcoming` e `event_date` definito.
+
+**Nota:** Richiede JavaScript `/assets/js/countdown.js` (implementazione futura)
 
 ---
 

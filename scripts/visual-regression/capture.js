@@ -12,6 +12,7 @@ const pages = [
   '/',
   '/about/',
   '/blog/',
+  '/tags/',
   '/eventi/epppi/',
   '/eventi/campo-eg/',
   '/eventi/stage/',
@@ -24,9 +25,7 @@ const pages = [
   '/software/wordpress/',
   '/software/flora/',
   '/software/code/',
-  '/software/prbm/',
-  '/articles/',
-  '/project/github/'
+  '/software/prbm/'
 ];
 
 async function captureScreenshots(serverType, baseUrl) {

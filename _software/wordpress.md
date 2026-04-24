@@ -1,6 +1,5 @@
 ---
 layout: page
-permalink: /software/wordpress/
 title: Wordpress
 tags: [bitprepared, programmi, wordpress]
 modified: 2015-08-28

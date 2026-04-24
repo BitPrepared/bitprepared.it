@@ -1,6 +1,5 @@
 ---
 layout: default
-permalink: /software/vlc/
 title: Vlc
 tags: [bitprepared, programmi, vlc]
 modified: 2015-08-28
