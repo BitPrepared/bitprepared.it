@@ -1,6 +1,6 @@
 ---
 title: Il Percorso Bit Prepared
-subtitle: Dagli EG ai Capi: un cammino di crescita digitale
+subtitle: "Dagli EG ai Capi: un cammino di crescita digitale"
 layout: page
 permalink: /eventi/
 tags: [bitprepared, eventi, campi, stage]
