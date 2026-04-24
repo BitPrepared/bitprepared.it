@@ -85,7 +85,7 @@ validate-graphics: docker-build-visual
 	@echo ""
 	@read -p "Premi ENTER quando server sono pronti..."
 	@echo ""
-	docker run --rm \
+	docker run --rm --init \
 		--mount type=bind,source=${PWD},target=/app \
 		--add-host=host.docker.internal:host-gateway \
 		--user $(id -u):$(id -g) \
@@ -98,7 +98,7 @@ visual-baseline: docker-build-visual
 	@echo ""
 	@read -p "Premi ENTER quando server è pronto..."
 	@echo ""
-	docker run --rm \
+	docker run --rm --init \
 		--mount type=bind,source=${PWD},target=/app \
 		--add-host=host.docker.internal:host-gateway \
 		-e HOST_IP=host.docker.internal \
