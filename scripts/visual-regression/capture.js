@@ -13,7 +13,6 @@ const pages = [
   '/about/',
   '/blog/',
   '/tags/',
-  '/tags/bitprepared/',
   '/eventi/epppi/',
   '/eventi/campo-eg/',
   '/eventi/stage/',
