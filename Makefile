@@ -101,8 +101,9 @@ visual-baseline: docker-build-visual
 		--mount type=bind,source=${PWD},target=/app \
 		--add-host=host.docker.internal:host-gateway \
 		-e HOST_IP=host.docker.internal \
+		--entrypoint="" \
 		bitprepared-visual-regression:latest \
-		node /app/scripts/visual-regression/create-baseline.js
+		sh -c 'cd /app/scripts/visual-regression && npm run create-baseline'
 	@echo "✅ Baseline creata in tests/visual-baseline/"
 	@echo "📝 Commit now: git add tests/visual-baseline/ && git commit -m 'Add visual baseline'"
 

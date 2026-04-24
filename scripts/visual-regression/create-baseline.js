@@ -12,6 +12,7 @@ const pages = [
   '/',
   '/about/',
   '/blog/',
+  '/tags/',
   '/eventi/epppi/',
   '/eventi/campo-eg/',
   '/eventi/stage/',
