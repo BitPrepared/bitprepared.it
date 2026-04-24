@@ -141,13 +141,19 @@ permalink: /tags/
     transition: all var(--transition-base);
     border: none !important;
     box-shadow: none !important;
+    outline: none !important;
   }
 
-  .tag-link:hover {
+  .tag-link:hover,
+  .tag-link:focus,
+  .tag-link:active {
     background: #2563eb !important;
     color: #ffffff !important;
     transform: translateY(-2px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+    outline: none !important;
+    text-decoration: none !important;
+    border: none !important;
   }
 
   .tag-count {
