@@ -149,8 +149,8 @@ permalink: /tags/
   .tag-link:focus,
   .tag-link:active {
     background: #2563eb !important;
-    color: #ffffff !important;
-    text-shadow: 0 1px 3px rgba(255,255,255,0.8) !important;
+    color: #000000 !important;
+    text-shadow: none !important;
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(37, 99, 235, 0.4) !important;
     outline: none !important;
@@ -170,8 +170,8 @@ permalink: /tags/
   .tag-link:hover .tag-count,
   .tag-link:focus .tag-count,
   .tag-link:active .tag-count {
-    color: #ffffff !important;
-    text-shadow: 0 1px 3px rgba(255,255,255,0.8) !important;
+    color: #000000 !important;
+    text-shadow: none !important;
   }
 
   .tag-header {
