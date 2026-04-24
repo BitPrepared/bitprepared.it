@@ -64,18 +64,12 @@ async function createBaseline() {
             timeout: 30000
           });
 
-          // Wait for dynamic content on homepage
-          if (pageUrl === '/' || pageUrl === '') {
-            // Wait for event cards to be present
-            await page.waitForSelector('.evento-card', {
-              timeout: 5000
-            }).catch(() => {
-              console.log('    ⚠️  Event selector not found, using networkidle only');
-            });
-
-            // Additional wait for images to load
-            await page.waitForTimeout(1000);
-          }
+          // Wait for visual regression marker (indicates page fully loaded)
+          await page.waitForSelector('[data-visual-regression-marker="ready"]', {
+            timeout: 5000
+          }).catch(() => {
+            console.log('    ⚠️  Marker not found, using networkidle only');
+          });
 
           const filename = pageUrl.replace(/^\//, '').replace(/\/$/, '').replace(/\//g, '_') || 'index';
           const baselinePath = path.join(__dirname, `../../tests/visual-baseline/${viewportName}/${filename}.png`);
