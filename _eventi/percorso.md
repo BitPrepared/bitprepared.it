@@ -4,41 +4,10 @@ subtitle: "Dagli EG ai Capi: un cammino di crescita digitale"
 layout: page
 permalink: /eventi/
 tags: [bitprepared, eventi, campi, stage]
-no_hero: true
 ---
 
 <style>
 /* Percorso Scout - Timeline Layout */
-.eventi-percorso {
-  position: relative;
-  padding: var(--spacing-xl) var(--spacing-md);
-  min-height: 80vh;
-  background:
-    linear-gradient(rgba(22, 22, 22, 0.85), rgba(22, 22, 22, 0.85)),
-    url("data:image/svg+xml,%3Csvg width='1200' height='600' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 100 500 Q 300 300 400 350 T 700 250 T 1000 150' stroke='%231a7f1a' stroke-width='4' fill='none' stroke-dasharray='10,10'/%3E%3Ccircle cx='100' cy='500' r='15' fill='%231a7f1a'/%3E%3Ccircle cx='400' cy='350' r='15' fill='%231a7f1a'/%3E%3Ccircle cx='700' cy='250' r='15' fill='%231a7f1a'/%3E%3Ccircle cx='1000' cy='150' r='15' fill='%231a7f1a'/%3E%3C/svg%3E") no-repeat center center;
-  background-size: cover;
-}
-
-.percorso-header {
-  text-align: center;
-  margin-bottom: var(--spacing-xl);
-  position: relative;
-  z-index: 2;
-}
-
-.percorso-header h1 {
-  font-size: 2.5rem;
-  color: var(--color-light);
-  margin-bottom: var(--spacing-sm);
-}
-
-.percorso-subtitle {
-  font-size: 1.25rem;
-  color: var(--color-accent);
-  font-family: var(--font-display);
-}
-
-/* Timeline Container */
 .percorso-timeline {
   display: flex;
   justify-content: space-between;
@@ -179,10 +148,6 @@ no_hero: true
 
 /* Responsive Mobile */
 @media (max-width: 768px) {
-  .eventi-percorso {
-    padding: var(--spacing-lg) var(--spacing-sm);
-  }
-
   .percorso-timeline {
     flex-direction: column;
     align-items: center;
@@ -206,20 +171,10 @@ no_hero: true
   .tappa-icon {
     margin-bottom: var(--spacing-sm);
   }
-
-  .percorso-header h1 {
-    font-size: 2rem;
-  }
 }
 </style>
 
-<div class="eventi-percorso">
-  <header class="percorso-header">
-    <h1>{{ page.title }}</h1>
-    <p class="percorso-subtitle">{{ page.subtitle }}</p>
-  </header>
-
-  <div class="percorso-timeline">
+<div class="percorso-timeline">
 
     <!-- Tappa 1: EG -->
     <article class="percorso-tappa">
@@ -264,4 +219,3 @@ no_hero: true
     </article>
 
   </div>
-</div>
