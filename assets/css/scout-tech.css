@@ -127,7 +127,7 @@ a {
   position: relative;
 }
 
-a::after {
+a:not(.btn):not(.btn-primary):not(.btn-event):not(.btn-card):not(.btn-cta):not(.btn-tag)::after {
   content: '';
   position: absolute;
   bottom: -2px;
@@ -138,7 +138,7 @@ a::after {
   transition: width var(--transition-base);
 }
 
-a:hover::after {
+a:not(.btn):not(.btn-primary):not(.btn-event):not(.btn-card):not(.btn-cta):not(.btn-tag):hover::after {
   width: 100%;
 }
 
