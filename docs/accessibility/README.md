@@ -265,3 +265,115 @@ docs/accessibility/
 
 - `SITE_URL` - Target URL to audit (default: `http://host.docker.internal:4000`)
 - `CHROME_PATH` - Path to Chrome binary (auto-detected in container)
+
+## Analyzing Reports
+
+### Quick Summary
+
+```bash
+make accessibility-analyze
+```
+
+Generates a markdown summary with:
+- Lighthouse score
+- Failed audits
+- axe-core violations
+- Top priority fixes
+
+### Quick Score Check
+
+```bash
+make accessibility-score
+```
+
+Shows:
+- Lighthouse accessibility percentage
+- Number of axe-core violations
+
+### Manual Analysis with jq
+
+**Lighthouse score:**
+```bash
+cat docs/accessibility/reports/lighthouse/homepage | jq '.categories.accessibility.score * 100'
+```
+
+**Failed audits:**
+```bash
+cat docs/accessibility/reports/lighthouse/homepage | jq '.audits | to_entries[] | select(.value.score == 0) | {id: .key, title: .value.title}'
+```
+
+**axe-core violations by impact:**
+```bash
+cat docs/accessibility/reports/axe/homepage.json | jq '.violations | group_by(.impact) | map({impact: .[0].impact, count: length})'
+```
+
+**Critical violations only:**
+```bash
+cat docs/accessibility/reports/axe/homepage.json | jq '.violations[] | select(.impact == "critical") | {id, description, nodes: (.nodes | length)}'
+```
+
+**Violations with URLs:**
+```bash
+cat docs/accessibility/reports/axe/homepage.json | jq '.violations[] | {id: .id, impact: .impact, help: .helpUrl}'
+```
+
+### Full Report Analysis
+
+```bash
+# Generate comprehensive markdown report
+./scripts/analyze-a11y-reports.sh docs/accessibility/reports > accessibility-summary.md
+
+# View in browser (if you have markdown viewer)
+cat accessibility-summary.md
+```
+
+### Example Output
+
+```
+## Lighthouse Score
+**Overall:** 96%
+
+### Failed Audits:
+- **Images do not have [alt] attributes**
+  - Decorative images should have alt="" 
+- **Links do not have a discernible name**
+  - Links must have text content or aria-label
+
+## axe-core Violations
+**Total Violations:** 3
+
+### Critical Issues:
+- **color-contrast** (impact: critical)
+  - Elements must have sufficient color contrast
+  - Nodes affected: 5
+
+### Quick Fixes
+1. **Fix low contrast text**
+   - Violation: color-contrast
+   - Help: https://dequeuniversity.com/rules/axe/4.8/color-contrast
+```
+
+## Troubleshooting Reports
+
+### "No report found"
+
+Run audit first:
+```bash
+make accessibility-audit
+```
+
+### "Cannot parse JSON"
+
+Check file exists:
+```bash
+ls -la docs/accessibility/reports/lighthouse/
+ls -la docs/accessibility/reports/axe/
+```
+
+### Large file size
+
+Normal - reports contain full DOM snapshots:
+```bash
+# Check sizes
+du -h docs/accessibility/reports/*/*
+```

@@ -5,7 +5,7 @@ PROJECT_PATH ?= /workspace/bitprepared.it
 DOCKER_IMAGE = jekyll/jekyll:$(JEKYLL_VERSION)
 GEM_VOLUME = bitprepared-gems
 
-.PHONY: serve serve-static build clean install install-gems help open validate-graphics visual-baseline visual-clean docker-build-visual docker-build-a11y workflow generate-blog-post check-links accessibility-audit accessibility-quick accessibility-full _check-a11y-serve _check-servers _start-servers _check-serve _start-serve
+.PHONY: serve serve-static build clean install install-gems help open validate-graphics visual-baseline visual-clean docker-build-visual docker-build-a11y workflow generate-blog-post check-links accessibility-audit accessibility-quick accessibility-full accessibility-analyze accessibility-score _check-a11y-serve _check-servers _start-servers _check-serve _start-serve
 
 help:
 	@echo "Uso: make [target]"
@@ -262,3 +262,31 @@ accessibility-full: docker-build-a11y _check-a11y-serve
 	@echo "📋 Summary:"
 	@echo "  - Lighthouse: docs/accessibility/reports/lighthouse/*.report.json"
 	@echo "  - axe-core: docs/accessibility/reports/axe/*.json"
+
+# Analyze accessibility reports
+.PHONY: accessibility-analyze
+accessibility-analyze:
+	@echo "📊 Analyzing accessibility reports..."
+	@echo ""
+	@./scripts/analyze-a11y-reports.sh docs/accessibility/reports
+
+# Quick score check
+.PHONY: accessibility-score
+accessibility-score:
+	@echo "📊 Lighthouse Accessibility Score:"
+	@if [ -f docs/accessibility/reports/lighthouse/homepage ]; then \
+		node -e "const fs=require('fs');const d=JSON.parse(fs.readFileSync('docs/accessibility/reports/lighthouse/homepage','utf8'));console.log((d.categories.accessibility.score*100).toFixed(0)+'%')"; \
+	elif [ -f docs/accessibility/reports/lighthouse/homepage.json ]; then \
+		cat docs/accessibility/reports/lighthouse/homepage.json | jq -r '.categories.accessibility.score * 100 | floor | . + "%"'; \
+	else \
+		echo "No report found. Run 'make accessibility-audit' first"; \
+	fi
+	@echo ""
+	@echo "🪓 axe-core Violations:"
+	@if [ -f docs/accessibility/reports/axe/homepage.json ]; then \
+		cat docs/accessibility/reports/axe/homepage.json | jq '.violations | length'; \
+	elif [ -f docs/accessibility/reports/axe/homepage ]; then \
+		cat docs/accessibility/reports/axe/homepage | jq '.violations | length'; \
+	else \
+		echo "No report found"; \
+	fi
