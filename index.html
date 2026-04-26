@@ -81,7 +81,7 @@ tags: [agesci,bitprepared,scout,informatica,specializzazioni,competenza,maestro 
 	<h2 id="blog-title" class="text-center" style="margin-bottom: var(--spacing-lg);">Ultimi Articoli</h2>
 	<div class="events-grid">
 		{% for post in site.posts limit: 3 %}
-		<article class="evento-card reveal">
+		<article class="evento-card">
 			{% if post.featured %}
 			<div class="card-image-wrapper">
 				<img src="/assets/{{ post.featured }}" alt="{{ post.title }}" width="400" height="300" loading="lazy">
