@@ -19,7 +19,7 @@ permalink: /tags/
     </ul>
   </div>
 
-  <div id="tag-view" style="display: none;">
+  <div id="tag-view">
     <header class="tag-header">
       <a href="/tags/" class="back-link">← Torna a tutti i tag</a>
       <h1 id="tag-title">#<span id="current-tag"></span></h1>
