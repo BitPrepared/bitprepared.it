@@ -264,6 +264,13 @@ footer {
   text-decoration: underline;
 }
 
+.page-body .btn-primary,
+.page-body .btn-secondary,
+.page-body a.btn-primary,
+.page-body a.btn-secondary {
+  text-decoration: none;
+}
+
 .page-body ul,
 .page-body ol {
   margin-bottom: 1rem;
