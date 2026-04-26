@@ -22,15 +22,26 @@ layout: default
         {% assign evento_id = tappa.evento %}
         {% assign evento = site.eventi | where: "slug", evento_id | first %}
 
+        {% if tappa.branch == 'RS' %}
+          {% assign branch-border = 'border-rossi-600' %}
+          {% assign branch-text = 'text-rossi-900' %}
+        {% elsif tappa.branch == 'Capi' %}
+          {% assign branch-border = 'border-viola-600' %}
+          {% assign branch-text = 'text-viola-900' %}
+        {% else %}
+          {% assign branch-border = 'border-green-600' %}
+          {% assign branch-text = 'text-green-900' %}
+        {% endif %}
+
         <article class="percorso-tappa">
           <div class="tappa-icon">
             <img src="{{ tappa.icon }}" alt="{{ tappa.branch }}">
           </div>
           <p class="tappa-label">{{ tappa.label }}</p>
           <p class="tappa-eta">{{ tappa.eta }}</p>
-          <div class="tappa-card">
-            <h3>{{ evento.hero.title }}</h3>
-            <p>{{ evento.hero.subtitle }}</p>
+          <div class="tappa-card border-2 {{ branch-border }} bg-white">
+            <h3 class="{{ branch-text }}">{{ evento.hero.title }}</h3>
+            <p class="{{ branch-text }}">{{ evento.hero.subtitle }}</p>
             <a href="{{ evento.url }}" class="btn btn-primary">{{ tappa.cta_text }}</a>
           </div>
         </article>

@@ -6,8 +6,25 @@ layout: default
 
   {% include edit-button.html %}
 
+  {% if page.slug == 'epppi' %}
+    {% assign bg-dark = 'bg-rossi-950' %}
+    {% assign bg-primary = 'bg-rossi-600' %}
+    {% assign border-color = 'border-rossi-600' %}
+    {% assign text-light = 'text-rossi-50' %}
+  {% elsif page.slug == 'stage' %}
+    {% assign bg-dark = 'bg-viola-950' %}
+    {% assign bg-primary = 'bg-viola-600' %}
+    {% assign border-color = 'border-viola-600' %}
+    {% assign text-light = 'text-viola-50' %}
+  {% else %}
+    {% assign bg-dark = 'bg-green-950' %}
+    {% assign bg-primary = 'bg-green-600' %}
+    {% assign border-color = 'border-green-600' %}
+    {% assign text-light = 'text-green-50' %}
+  {% endif %}
+
   <!-- Hero Section -->
-  <div class="evento-hero text-center mb-12 sm:mb-16 p-6 sm:p-8 rounded-lg border-2 border-green-600 bg-green-950">
+  <div class="evento-hero text-center mb-12 sm:mb-16 p-6 sm:p-8 rounded-lg border-2 {{ border-color }} {{ bg-dark }}">
     <h2 class="text-2xl sm:text-3xl font-display font-bold text-green-50 mb-2 sm:mb-4">{{ page.hero.title }}</h2>
     <h3 class="text-lg sm:text-xl font-display font-semibold text-cyan-400 mb-4 sm:mb-6">{{ page.hero.subtitle }}</h3>
     <p class="text-sm sm:text-base text-green-50 mb-4 sm:mb-6">
@@ -22,7 +39,7 @@ layout: default
 
   <!-- Event Status Badge -->
   {% if page.event_status == 'upcoming' %}
-  <div class="evento-badge inline-block px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-semibold text-xs sm:text-sm mb-4 sm:mb-6 bg-green-600 text-white">
+  <div class="evento-badge inline-block px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-semibold text-xs sm:text-sm mb-4 sm:mb-6 {{ bg-primary }} text-white">
     <i class="fa fa-calendar-check"></i> PROSSIMO EVENTO
   </div>
   {% elsif page.event_status == 'soldout' %}
@@ -37,16 +54,16 @@ layout: default
 
   {% if page.benefits %}
   <!-- Benefits Section -->
-  <div class="evento-box p-6 sm:p-8 rounded-lg mb-6 sm:mb-8 border border-green-600 bg-green-950">
-    <h2 class="text-xl sm:text-2xl font-display font-bold text-green-50 mb-4 sm:mb-6">{{ page.benefits_title | default: 'Perché partecipare' }}</h2>
+  <div class="evento-box p-6 sm:p-8 rounded-lg mb-6 sm:mb-8 border {{ border-color }} bg-white">
+    <h2 class="text-xl sm:text-2xl font-display font-bold text-green-900 mb-4 sm:mb-6">{{ page.benefits_title | default: 'Perché partecipare' }}</h2>
     <div class="evento-benefits-grid grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
       {% for benefit in page.benefits %}
-      <div class="evento-benefit-card text-center p-4 sm:p-6 bg-white/5 rounded-lg border border-green-600">
-        <div class="evento-benefit-icon text-3xl sm:text-4xl text-cyan-400 mb-3 sm:mb-4">
+      <div class="evento-benefit-card text-center p-4 sm:p-6 bg-green-50 rounded-lg border {{ border-color }}">
+        <div class="evento-benefit-icon text-3xl sm:text-4xl text-green-600 mb-3 sm:mb-4">
           <i class="fa {{ benefit.icon }}"></i>
         </div>
-        <h3 class="text-base sm:text-lg font-display font-semibold text-green-50 mb-1 sm:mb-2">{{ benefit.title }}</h3>
-        <p class="text-xs sm:text-sm text-gray-400">{{ benefit.desc }}</p>
+        <h3 class="text-base sm:text-lg font-display font-semibold text-green-900 mb-1 sm:mb-2">{{ benefit.title }}</h3>
+        <p class="text-xs sm:text-sm text-green-700">{{ benefit.desc }}</p>
       </div>
       {% endfor %}
     </div>
@@ -54,26 +71,26 @@ layout: default
   {% endif %}
 
   <!-- Highlights Section -->
-  <div class="evento-box p-6 sm:p-8 rounded-lg mb-6 sm:mb-8 border border-green-600 bg-green-950">
-    <h2 class="text-xl sm:text-2xl font-display font-bold text-green-50 mb-4 sm:mb-6">
+  <div class="evento-box p-6 sm:p-8 rounded-lg mb-6 sm:mb-8 border {{ border-color }} bg-white">
+    <h2 class="text-xl sm:text-2xl font-display font-bold text-green-900 mb-4 sm:mb-6">
       <i class="fa fa-star text-orange-400"></i> {{ page.highlights_title | default: '10 motivi per cui questo evento è unico' }}
     </h2>
     {% for highlight in page.highlights %}
-    <p class="text-green-50 mb-2 text-sm sm:text-base"><strong>{{ forloop.index }}.</strong> {{ highlight }}</p>
+    <p class="text-green-800 mb-2 text-sm sm:text-base"><strong>{{ forloop.index }}.</strong> {{ highlight }}</p>
     {% endfor %}
   </div>
 
   <!-- Target Audience -->
-  <div class="evento-box p-6 sm:p-8 rounded-lg mb-6 sm:mb-8 border border-green-600 bg-green-950" itemscope itemtype="https://schema.org/Event">
+  <div class="evento-box p-6 sm:p-8 rounded-lg mb-6 sm:mb-8 border {{ border-color }} bg-white" itemscope itemtype="https://schema.org/Event">
     <meta itemprop="name" content="{{ page.title }}" />
     <meta itemprop="startDate" content="{{ page.logistica.quando.date }}" />
     <meta itemprop="location" content="{{ page.logistica.dove.citta }}, {{ page.logistica.dove.luogo }}" />
     <meta itemprop="attendeeCount" content="{{ page.logistica.posti.max }}" />
 
-    <h2 class="text-xl sm:text-2xl font-display font-bold text-green-50 mb-4 sm:mb-6">🎯 Questo evento è per te se...</h2>
+    <h2 class="text-xl sm:text-2xl font-display font-bold text-green-900 mb-4 sm:mb-6"><i class="fa fa-bullseye text-orange-400"></i> Questo evento è per te se...</h2>
     <ul class="list-none">
       {% for item in page.target_audience %}
-      <li class="p-3 sm:p-4 mb-2 sm:mb-3 bg-cyan-400/10 border-l-4 border-cyan-400 rounded-lg text-green-50 hover:translate-x-1 hover:bg-cyan-400/15 transition-all duration-150 text-sm sm:text-base">
+      <li class="p-3 sm:p-4 mb-2 sm:mb-3 bg-green-50 border-l-4 {{ border-color }} rounded-lg text-green-900 hover:translate-x-1 hover:bg-green-100 transition-all duration-150 text-sm sm:text-base">
         <i class="fa {{ item.icon }} mr-2"></i>
         {{ item.text }} <strong>"{{ item.highlight }}"</strong> {{ item.tail }}
       </li>
@@ -112,59 +129,59 @@ layout: default
   </script>
 
   <!-- Programma -->
-  <div class="evento-box p-6 sm:p-8 rounded-lg mb-6 sm:mb-8 border border-green-600 bg-green-950">
-    <h2 class="text-xl sm:text-2xl font-display font-bold text-green-50 mb-4 sm:mb-6">⚡ Se vieni, vivrai...</h2>
+  <div class="evento-box p-6 sm:p-8 rounded-lg mb-6 sm:mb-8 border {{ border-color }} bg-white">
+    <h2 class="text-xl sm:text-2xl font-display font-bold text-green-900 mb-4 sm:mb-6"><i class="fa fa-bolt text-orange-400"></i> Se vieni, vivrai...</h2>
     {% for item in page.programma %}
-    <div class="evento-program-item p-3 sm:p-4 mb-2 sm:mb-3 bg-white/3 rounded-lg border-l-3 border-green-600 text-sm sm:text-base">
-      <h3 class="text-base sm:text-lg font-semibold text-green-50 mb-1 sm:mb-2">{{ item.title }}</h3>
-      <p class="text-green-50 text-sm sm:text-base">{{ item.desc }}</p>
+    <div class="evento-program-item p-3 sm:p-4 mb-2 sm:mb-3 bg-cyan-50 rounded-lg border-l-3 {{ border-color }} text-sm sm:text-base">
+      <h3 class="text-base sm:text-lg font-semibold text-cyan-900 mb-1 sm:mb-2">{{ item.title }}</h3>
+      <p class="text-cyan-800 text-sm sm:text-base">{{ item.desc }}</p>
     </div>
     {% endfor %}
   </div>
 
   {% if page.outcomes %}
   <!-- Outcomes -->
-  <div class="evento-box evento-outcomes p-6 sm:p-8 rounded-lg mb-6 sm:mb-8 border-2 border-cyan-400 bg-gradient-to-br from-green-600/20 to-cyan-400/10">
-    <h2 class="text-xl sm:text-2xl font-display font-bold text-green-50 mb-4 sm:mb-6">🎓 {{ page.outcomes_title | default: 'Cosa porterai a casa' }}</h2>
+  <div class="evento-box evento-outcomes p-6 sm:p-8 rounded-lg mb-6 sm:mb-8 border-2 {{ border-color }} bg-white">
+    <h2 class="text-xl sm:text-2xl font-display font-bold text-green-900 mb-4 sm:mb-6"><i class="fa fa-graduation-cap text-orange-400"></i> {{ page.outcomes_title | default: 'Cosa porterai a casa' }}</h2>
     <ul class="list-none space-y-1 sm:space-y-2">
       {% for outcome in page.outcomes %}
-      <li class="text-green-50 text-sm sm:text-base">✓ <strong class="text-cyan-400">{{ outcome }}</strong></li>
+      <li class="text-green-900 text-sm sm:text-base"><i class="fa fa-check text-green-600"></i> <strong class="text-cyan-700">{{ outcome }}</strong></li>
       {% endfor %}
     </ul>
   </div>
   {% endif %}
 
   <!-- Logistica -->
-  <div class="evento-box p-6 sm:p-8 rounded-lg mb-6 sm:mb-8 border border-green-600 bg-green-950">
-    <h2 class="text-xl sm:text-2xl font-display font-bold text-green-50 mb-4 sm:mb-6">🚀 Logistica</h2>
+  <div class="evento-box p-6 sm:p-8 rounded-lg mb-6 sm:mb-8 border {{ border-color }} bg-white">
+    <h2 class="text-xl sm:text-2xl font-display font-bold text-green-900 mb-4 sm:mb-6"><i class="fa fa-rocket text-orange-400"></i> Logistica</h2>
     <div class="evento-info-grid grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
-      <div class="evento-info-item p-3 sm:p-4 bg-white/3 rounded-lg text-sm sm:text-base">
-        <strong class="block text-cyan-400 mb-1 sm:mb-2"><i class="fa {{ page.logistica.quando.icon }}"></i> {{ page.logistica.quando.label }}</strong>
-        <p class="text-green-50 m-0">{{ page.logistica.quando.date }}<br>
+      <div class="evento-info-item p-3 sm:p-4 bg-green-50 rounded-lg text-sm sm:text-base">
+        <strong class="block text-green-700 mb-1 sm:mb-2"><i class="fa {{ page.logistica.quando.icon }}"></i> {{ page.logistica.quando.label }}</strong>
+        <p class="text-green-900 m-0">{{ page.logistica.quando.date }}<br>
         Arrivo: {{ page.logistica.quando.arrivo }}<br>
         Partenza: {{ page.logistica.quando.partenza }}</p>
       </div>
-      <div class="evento-info-item p-3 sm:p-4 bg-white/3 rounded-lg text-sm sm:text-base">
-        <strong class="block text-cyan-400 mb-1 sm:mb-2"><i class="fa {{ page.logistica.dove.icon }}"></i> {{ page.logistica.dove.label }}</strong>
-        <p class="text-green-50 m-0">{{ page.logistica.dove.citta }}<br>{{ page.logistica.dove.luogo }}</p>
+      <div class="evento-info-item p-3 sm:p-4 bg-green-50 rounded-lg text-sm sm:text-base">
+        <strong class="block text-green-700 mb-1 sm:mb-2"><i class="fa {{ page.logistica.dove.icon }}"></i> {{ page.logistica.dove.label }}</strong>
+        <p class="text-green-900 m-0">{{ page.logistica.dove.citta }}<br>{{ page.logistica.dove.luogo }}</p>
       </div>
-      <div class="evento-info-item p-3 sm:p-4 bg-white/3 rounded-lg text-sm sm:text-base">
-        <strong class="block text-cyan-400 mb-1 sm:mb-2"><i class="fa {{ page.logistica.per_chi.icon }}"></i> {{ page.logistica.per_chi.label }}</strong>
-        <p class="text-green-50 m-0">{{ page.logistica.per_chi.text }}</p>
+      <div class="evento-info-item p-3 sm:p-4 bg-green-50 rounded-lg text-sm sm:text-base">
+        <strong class="block text-green-700 mb-1 sm:mb-2"><i class="fa {{ page.logistica.per_chi.icon }}"></i> {{ page.logistica.per_chi.label }}</strong>
+        <p class="text-green-900 m-0">{{ page.logistica.per_chi.text }}</p>
       </div>
-      <div class="evento-info-item p-3 sm:p-4 bg-white/3 rounded-lg text-sm sm:text-base">
-        <strong class="block text-cyan-400 mb-1 sm:mb-2"><i class="fa {{ page.logistica.posti.icon }}"></i> {{ page.logistica.posti.label }}</strong>
-        <p class="text-green-50 m-0">{{ page.logistica.posti.max }} massimo<br>
+      <div class="evento-info-item p-3 sm:p-4 bg-green-50 rounded-lg text-sm sm:text-base">
+        <strong class="block text-green-700 mb-1 sm:mb-2"><i class="fa {{ page.logistica.posti.icon }}"></i> {{ page.logistica.posti.label }}</strong>
+        <p class="text-green-900 m-0">{{ page.logistica.posti.max }} massimo<br>
         {{ page.logistica.posti.min }} minimo per confermare<br>
         Waiting list: {{ page.logistica.posti.waiting }} persone</p>
       </div>
-      <div class="evento-info-item p-3 sm:p-4 bg-white/3 rounded-lg text-sm sm:text-base">
-        <strong class="block text-cyan-400 mb-1 sm:mb-2"><i class="fa {{ page.logistica.come_arrivare.icon }}"></i> {{ page.logistica.come_arrivare.label }}</strong>
-        <p class="text-green-50 m-0">{{ page.logistica.come_arrivare.text }}</p>
+      <div class="evento-info-item p-3 sm:p-4 bg-green-50 rounded-lg text-sm sm:text-base">
+        <strong class="block text-green-700 mb-1 sm:mb-2"><i class="fa {{ page.logistica.come_arrivare.icon }}"></i> {{ page.logistica.come_arrivare.label }}</strong>
+        <p class="text-green-900 m-0">{{ page.logistica.come_arrivare.text }}</p>
       </div>
-      <div class="evento-info-item p-3 sm:p-4 bg-white/3 rounded-lg text-sm sm:text-base">
-        <strong class="block text-cyan-400 mb-1 sm:mb-2"><i class="fa {{ page.logistica.cosa_portare.icon }}"></i> {{ page.logistica.cosa_portare.label }}</strong>
-        <p class="text-green-50 m-0">{{ page.logistica.cosa_portare.items }}</p>
+      <div class="evento-info-item p-3 sm:p-4 bg-green-50 rounded-lg text-sm sm:text-base">
+        <strong class="block text-green-700 mb-1 sm:mb-2"><i class="fa {{ page.logistica.cosa_portare.icon }}"></i> {{ page.logistica.cosa_portare.label }}</strong>
+        <p class="text-green-900 m-0">{{ page.logistica.cosa_portare.items }}</p>
       </div>
     </div>
     <div class="text-center mt-4 sm:mt-6">
@@ -175,28 +192,28 @@ layout: default
   </div>
 
   <!-- FAQ -->
-  <div class="evento-box p-6 sm:p-8 rounded-lg mb-6 sm:mb-8 border border-green-600 bg-green-950">
-    <h2 class="text-xl sm:text-2xl font-display font-bold text-green-50 mb-4 sm:mb-6">❓ FAQ</h2>
+  <div class="evento-box p-6 sm:p-8 rounded-lg mb-6 sm:mb-8 border {{ border-color }} bg-white">
+    <h2 class="text-xl sm:text-2xl font-display font-bold text-green-900 mb-4 sm:mb-6"><i class="fa fa-question-circle text-orange-400"></i> FAQ</h2>
     {% for faq in page.faq %}
-    <div class="evento-faq-item p-3 sm:p-4 mb-2 sm:mb-3 bg-white/3 rounded-lg text-sm sm:text-base">
-      <p class="text-green-50 m-0"><strong class="text-cyan-400">{{ faq.q }}</strong><br>{{ faq.a }}</p>
+    <div class="evento-faq-item p-3 sm:p-4 mb-2 sm:mb-3 bg-cyan-50 rounded-lg text-sm sm:text-base">
+      <p class="text-cyan-900 m-0"><strong class="text-cyan-700">{{ faq.q }}</strong><br>{{ faq.a }}</p>
     </div>
     {% endfor %}
   </div>
 
   <!-- Locandina -->
   <div class="text-center my-8 sm:my-12">
-    <img src="{{ page.image }}" alt="{{ page.hero.title }}" class="max-w-full h-auto rounded-lg border-2 border-green-600 mx-auto">
+    <img src="{{ page.image }}" alt="{{ page.hero.title }}" class="max-w-full h-auto rounded-lg border-2 {{ border-color }} mx-auto">
   </div>
 
   <!-- Social -->
-  <div class="evento-box evento-social text-center p-6 sm:p-8 rounded-lg mb-6 sm:mb-8 border border-green-600 bg-green-950">
-    <h3 class="text-xl sm:text-2xl font-display font-bold text-green-50 mb-3 sm:mb-4">📱 {{ page.social.title }}</h3>
-    <p class="text-green-50 text-sm sm:text-base">{{ page.social.description }}<br>{{ page.social.hashtags }}</p>
+  <div class="evento-box evento-social text-center p-6 sm:p-8 rounded-lg mb-6 sm:mb-8 border {{ border-color }} bg-white">
+    <h3 class="text-xl sm:text-2xl font-display font-bold text-green-900 mb-3 sm:mb-4"><i class="fa fa-share-alt text-orange-400"></i> {{ page.social.title }}</h3>
+    <p class="text-green-800 text-sm sm:text-base">{{ page.social.description }}<br>{{ page.social.hashtags }}</p>
   </div>
 
   <!-- Content markdown originale -->
-  <div class="text-green-50 text-sm sm:text-base leading-relaxed">
+  <div class="text-green-900 text-sm sm:text-base leading-relaxed">
     {{ content }}
   </div>
 </div>

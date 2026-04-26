@@ -8,6 +8,16 @@ tailwind.config = {
         dark: '#0a1f0a',
         light: '#e8f5e8',
         white: '#ffffff',
+        rossi: {
+          950: '#4d0000',
+          600: '#cc0000',
+          50: '#fff0f0',
+        },
+        viola: {
+          950: '#1a0033',
+          600: '#7b2d8e',
+          50: '#f5f0ff',
+        },
       },
       fontFamily: {
         display: ['JetBrains Mono', 'Courier New', 'monospace'],
