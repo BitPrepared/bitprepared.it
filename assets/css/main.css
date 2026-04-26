@@ -267,8 +267,27 @@ footer {
 .page-body .btn-primary,
 .page-body .btn-secondary,
 .page-body a.btn-primary,
-.page-body a.btn-secondary {
-  text-decoration: none;
+.page-body a.btn-secondary,
+.page-body .btn,
+.page-body .btn-event,
+.page-body .btn-card,
+.page-body .btn-cta,
+.page-body .btn-tag,
+.page-body a.btn,
+.page-body a.btn-event,
+.page-body a.btn-card,
+.page-body a.btn-cta,
+.page-body a.btn-tag {
+  text-decoration: none !important;
+}
+
+.page-body .btn:hover,
+.page-body a.btn:hover,
+.page-body .btn-event:hover,
+.page-body .btn-card:hover,
+.page-body .btn-cta:hover,
+.page-body .btn-tag:hover {
+  text-decoration: none !important;
 }
 
 .page-body ul,
