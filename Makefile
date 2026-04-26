@@ -5,7 +5,7 @@ PROJECT_PATH ?= /workspace/bitprepared.it
 DOCKER_IMAGE = jekyll/jekyll:$(JEKYLL_VERSION)
 GEM_VOLUME = bitprepared-gems
 
-.PHONY: serve serve-static build clean install install-gems help open validate-graphics visual-baseline visual-clean docker-build-visual workflow generate-blog-post check-links
+.PHONY: serve serve-static build clean install install-gems help open validate-graphics visual-baseline visual-clean docker-build-visual workflow generate-blog-post check-links _check-servers _start-servers _check-serve _start-serve
 
 help:
 	@echo "Uso: make [target]"
@@ -26,6 +26,9 @@ help:
 	@echo "  generate-blog-post- Genera blog post da file evento"
 	@echo "  check-links      - Verifica link broken nel sito (htmltest)"
 	@echo "  help             - Mostra questo messaggio"
+	@echo ""
+	@echo "Opzioni:"
+	@echo "  VIEWPORTS='desktop,mobile' make validate-graphics - Test solo viewport specifici"
 
 serve:
 	docker run --rm -it \
@@ -34,7 +37,7 @@ serve:
 		-e BUNDLE_PATH=/usr/local/bundle \
 		-p $(PORT):4000 \
 		$(DOCKER_IMAGE) \
-		jekyll serve --config _config.yml,_config_dev.yml
+		jekyll serve --config _config.yml,_config_dev.yml --force_polling
 
 serve-static: build
 	@echo "Server statico avviato su http://localhost:$(STATIC_PORT)/"
@@ -79,39 +82,72 @@ open:
 validate-graphics: docker-build-visual
 	@echo "🔍 Avvio validazione grafica in Docker..."
 	@echo ""
-	@echo "⚠️  Richiede server attivi in terminali separati:"
-	@echo "   Terminal 1: make serve"
-	@echo "   Terminal 2: make serve-static"
-	@echo ""
-	@read -p "Premi ENTER quando server sono pronti..."
-	@echo ""
+	@echo "📡 Verifica server..."
+	@$(MAKE) --no-print-directory _check-servers || $(MAKE) --no-print-directory _start-servers
+	@mkdir -p screenshots/serve screenshots/static screenshots/diff screenshots/report
+	@chmod -R 777 screenshots/
 	docker run --rm --init \
 		--mount type=bind,source=${PWD},target=/app \
 		--add-host=host.docker.internal:host-gateway \
-		--user $(id -u):$(id -g) \
-		bitprepared-visual-regression:latest
+		--user $(shell id -u):$(shell id -g) \
+		--entrypoint="" \
+		-e HOST_IP=host.docker.internal \
+		-e VIEWPORTS="${VIEWPORTS}" \
+		bitprepared-visual-regression:latest \
+		sh -c 'cd /app/scripts/visual-regression && node capture.js && node compare.js'
+
+.PHONY: _check-servers _start-servers
+_check-servers:
+	@echo -n "  ● Serve (4000): "
+	@curl -f -s -o /dev/null http://localhost:4000 && echo "✅" || (echo "❌"; exit 1)
+	@echo -n "  ● Static (8000): "
+	@curl -f -s -o /dev/null http://localhost:8000 && echo "✅" || (echo "❌"; exit 1)
+	@echo ""
+
+_start-servers:
+	@echo ""
+	@echo "⚠️  Server non attivi. Avvia in terminali separati:"
+	@echo "   Terminal 1: make serve"
+	@echo "   Terminal 2: cd _site && python3 -m http.server 8000"
+	@echo ""
+	@read -p "Premi ENTER quando server sono pronti..."
+	@$(MAKE) --no-print-directory _check-servers
 
 visual-baseline: docker-build-visual
 	@echo "📸 Creazione baseline images..."
-	@echo "⚠️  Assicurati che 'make serve' sia attivo su porta 4000"
-	@echo "   In un altro terminale esegui: make serve"
 	@echo ""
-	@read -p "Premi ENTER quando server è pronto..."
-	@echo ""
+	@echo "📡 Verifica server..."
+	@$(MAKE) --no-print-directory _check-serve || $(MAKE) --no-print-directory _start-serve
+	@mkdir -p tests/visual-baseline/desktop tests/visual-baseline/mobile tests/visual-baseline/tablet
 	docker run --rm --init \
 		--mount type=bind,source=${PWD},target=/app \
 		--add-host=host.docker.internal:host-gateway \
 		-e HOST_IP=host.docker.internal \
-		--user $(id -u):$(id -g) \
+		--user $(shell id -u):$(shell id -g) \
 		--entrypoint="" \
 		bitprepared-visual-regression:latest \
-		sh -c 'cd /app/scripts/visual-regression && npm run create-baseline'
+		node /app/scripts/visual-regression/create-baseline.js
+
+.PHONY: _check-serve _start-serve
+_check-serve:
+	@echo -n "  ● Serve (4000): "
+	@curl -f -s -o /dev/null http://localhost:4000 && echo "✅" || (echo "❌"; exit 1)
+	@echo ""
+
+_start-serve:
+	@echo ""
+	@echo "⚠️  Server non attivo. Avvia in un terminale separato:"
+	@echo "   Terminal 1: make serve"
+	@echo ""
+	@read -p "Premi ENTER quando server è pronto..."
+	@$(MAKE) --no-print-directory _check-serve
 	@echo "✅ Baseline creata in tests/visual-baseline/"
 	@echo "📝 Commit now: git add tests/visual-baseline/ && git commit -m 'Add visual baseline'"
 
 visual-clean:
-	@-rm -rf screenshots/ || true
-	@echo "🧹 Screenshots temp rimossi (ignorati errori permessi)"
+	@echo "🧹 Rimozione screenshots..."
+	@rm -rf screenshots/
+	@echo "✅ Screenshots rimossi"
 
 docker-build-visual:
 	@echo "🐳 Building visual regression Docker image..."

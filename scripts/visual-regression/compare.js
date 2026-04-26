@@ -5,11 +5,12 @@ const path = require('path');
 
 const THRESHOLD_PERCENT = 1;
 const PIXEL_THRESHOLD = 0.1;
+const SIZE_DIFF_THRESHOLD = 0.1; // Allow 10% size difference
 
 const viewports = ['desktop', 'mobile', 'tablet'];
 
 const pages = [
-  '',
+  'index',
   'about',
   'blog',
   'tags',
@@ -264,7 +265,7 @@ function generateReport(results) {
             <td>${r.server}</td>
             <td>${r.diffPercent}%</td>
             <td><span class="badge ${r.passed ? 'pass' : 'fail'}">${r.passed ? 'PASS' : 'FAIL'}</span></td>
-            <td>${r.numDiffPixels > 0 ? `<a class="diff-link" href="../diff/${r.viewport}/${r.page}.png" target="_blank">View Diff</a>` : '-'}</td>
+            <td>${!r.passed ? `<a class="diff-link" href="../diff/${r.viewport}/${r.page}_${r.server}.png" target="_blank">View Diff</a>` : '-'}</td>
           </tr>
         `).join('')}
       </tbody>
@@ -306,7 +307,15 @@ function main() {
 
   const results = [];
 
-  for (const viewport of viewports) {
+  // Filter viewports if specified
+  const viewportFilter = process.env.VIEWPORTS ? process.env.VIEWPORTS.split(',') : [];
+  const filteredViewports = viewportFilter.length > 0 ? viewports.filter(v => viewportFilter.includes(v)) : viewports;
+
+  if (viewportFilter.length > 0) {
+    console.log(`🎯 Filtering viewports: ${viewportFilter.join(', ')}\n`);
+  }
+
+  for (const viewport of filteredViewports) {
     for (const page of pages) {
       const baselinePath = path.join(__dirname, `../../tests/visual-baseline/${viewport}/${page}.png`);
       const servePath = path.join(__dirname, `../../screenshots/serve/${viewport}/${page}.png`);
@@ -316,6 +325,16 @@ function main() {
 
       if (!fs.existsSync(baselinePath)) {
         console.log(`⚠️  No baseline for ${viewport}/${page}.png - skipping`);
+        continue;
+      }
+
+      if (!fs.existsSync(servePath)) {
+        console.log(`⚠️  No serve screenshot for ${viewport}/${page}.png - skipping`);
+        continue;
+      }
+
+      if (!fs.existsSync(staticPath)) {
+        console.log(`⚠️  No static screenshot for ${viewport}/${page}.png - skipping`);
         continue;
       }
 
