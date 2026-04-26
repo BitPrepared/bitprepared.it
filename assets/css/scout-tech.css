@@ -391,6 +391,8 @@ main {
 }
 
 .btn-cta:hover {
+  background: var(--color-accent);
+  color: #000000;
   transform: scale(1.05);
   box-shadow: 0 8px 16px rgba(0, 217, 255, 0.4);
   text-decoration: none !important;
