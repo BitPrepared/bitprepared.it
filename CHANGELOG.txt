@@ -1,6 +1,27 @@
 Changelog BitPrepared.it
 -------------------
 
+### 2026-04-26
+  * MIGRATION: Scout Tech Redesign applicato a Jekyll 4
+    - CSS Migration: 5 files → 2 files (main.css, scout-tech.css)
+    - JS Updates: Aggiunto tailwind-config.js
+    - Layout Updates: Modernizzati tutti layout con Tailwind CSS
+    - Homepage: Complete redesign con hero section e cards
+    - Eventi: Aggiornato layout per design system moderno
+    - Branch: feature/apply-scout-tech-redesign
+    - Basato su: MIGRAZIONE_JEKYLL4.md
+  * FIX: Sezione tags non funzionante
+    - Aggiunto styles tags.css a scout-tech.css (163 righe)
+    - Ripristinate classi: .tags-archive, .tag-link, .tag-post-card, .btn-primary
+  * FIX: Homepage cards "Scopri..." disallineati
+    - Aggiunto flex flex-col alle article cards
+    - Aggiunto flex-grow ai contenuti per allineare bottoni in basso
+    - Aggiunto text-center ai link per migliorare allineamento
+  * FIX: Software icone centrate invece che a sinistra
+    - Modificato .page-body img in main.css
+    - Aggiunto selettore specifico per permalink-software
+    - Icone ora allineate a sinistra con inline-block
+
 ### 2026-04-24
   * FIX: Visual regression timing issues
     - Added global data-visual-regression-marker to default layout

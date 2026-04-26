@@ -34,41 +34,41 @@ tags: [agesci,bitprepared,scout,informatica,specializzazioni,competenza,maestro 
 	<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
 		<!-- Card 1: Campo EG -->
-		<article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-base">
+		<article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-base flex flex-col">
 			<div class="relative">
 				<img src="/assets/images/loghi_branche/eg.png" alt="Campo di Competenza EG" width="400" height="300" loading="lazy" class="w-full h-48 object-cover">
 				<span class="absolute top-2 right-2 bg-accent text-dark px-3 py-1 rounded-full text-sm font-semibold">2023</span>
 			</div>
-			<div class="p-6">
+			<div class="p-6 flex flex-col flex-grow">
 				<h2 class="text-2xl font-display font-bold mb-3" style="color: #0a3d0a;">Campo di Competenza EG</h2>
-				<p class="mb-4" style="color: #666666;">Google, social network, fotoritocco, video editing, coding e tanto altro. Mantenendo lo stile scout che ci contraddistingue!</p>
-				<a href="/eventi/campo-eg/" class="inline-block rounded-full font-semibold transition-colors duration-fast" style="background: #1a7f1a; color: white; padding: 0.75rem 1.5rem;">Scopri il campo</a>
+				<p class="mb-4 flex-grow" style="color: #666666;">Google, social network, fotoritocco, video editing, coding e tanto altro. Mantenendo lo stile scout che ci contraddistingue!</p>
+				<a href="/eventi/campo-eg/" class="inline-block text-center rounded-full font-semibold transition-colors duration-fast" style="background: #1a7f1a; color: white; padding: 0.75rem 1.5rem;">Scopri il campo</a>
 			</div>
 		</article>
 
 		<!-- Card 2: EPPPI -->
-		<article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-base">
+		<article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-base flex flex-col">
 			<div class="relative">
 				<img src="/assets/images/loghi_branche/rs.png" alt="EPPPI per Rover/Scolte" width="400" height="300" loading="lazy" class="w-full h-48 object-cover">
 				<span class="absolute top-2 right-2 bg-accent text-dark px-3 py-1 rounded-full text-sm font-semibold">2026</span>
 			</div>
-			<div class="p-6">
+			<div class="p-6 flex flex-col flex-grow">
 				<h2 class="text-2xl font-display font-bold mb-3" style="color: #0a3d0a;">EPPPI per RS</h2>
-				<p class="mb-4" style="color: #666666;">La scelta politica nelle società iperconnesse. Come possiamo sfruttare i social network per agire? Workshop intensivi per Rover/Scolte.</p>
-				<a href="/eventi/epppi/" class="inline-block rounded-full font-semibold transition-colors duration-fast" style="background: #1a7f1a; color: white; padding: 0.75rem 1.5rem;">Scopri EPPPI</a>
+				<p class="mb-4 flex-grow" style="color: #666666;">La scelta politica nelle società iperconnesse. Come possiamo sfruttare i social network per agire? Workshop intensivi per Rover/Scolte.</p>
+				<a href="/eventi/epppi/" class="inline-block text-center rounded-full font-semibold transition-colors duration-fast" style="background: #1a7f1a; color: white; padding: 0.75rem 1.5rem;">Scopri EPPPI</a>
 			</div>
 		</article>
 
 		<!-- Card 3: Stage -->
-		<article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-base">
+		<article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-base flex flex-col">
 			<div class="relative">
 				<img src="/assets/images/loghi_branche/coca.png" alt="Stage per Capi" width="400" height="300" loading="lazy" class="w-full h-48 object-cover">
 				<span class="absolute top-2 right-2 bg-accent text-dark px-3 py-1 rounded-full text-sm font-semibold">2018</span>
 			</div>
-			<div class="p-6">
+			<div class="p-6 flex flex-col flex-grow">
 				<h2 class="text-2xl font-display font-bold mb-3" style="color: #0a3d0a;">Stage per Capi</h2>
-				<p class="mb-4" style="color: #666666;">Essere scout nell'era del Web 2.0. La legge scout riletta in ottica del sempre connesso e del tutto adesso, qui e subito.</p>
-				<a href="/eventi/stage/" class="inline-block rounded-full font-semibold transition-colors duration-fast" style="background: #1a7f1a; color: white; padding: 0.75rem 1.5rem;">Scopri lo stage</a>
+				<p class="mb-4 flex-grow" style="color: #666666;">Essere scout nell'era del Web 2.0. La legge scout riletta in ottica del sempre connesso e del tutto adesso, qui e subito.</p>
+				<a href="/eventi/stage/" class="inline-block text-center rounded-full font-semibold transition-colors duration-fast" style="background: #1a7f1a; color: white; padding: 0.75rem 1.5rem;">Scopri lo stage</a>
 			</div>
 		</article>
 
@@ -81,14 +81,14 @@ tags: [agesci,bitprepared,scout,informatica,specializzazioni,competenza,maestro 
 	<h2 id="blog-title" class="text-3xl font-display font-bold text-center text-light mb-8">Ultimi Articoli</h2>
 	<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 		{% for post in site.posts limit: 3 %}
-		<article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-base">
+		<article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-base flex flex-col">
 			{% if post.featured %}
 			<div class="relative">
 				<img src="/assets/{{ post.featured }}" alt="{{ post.title }}" width="400" height="300" loading="lazy" class="w-full h-48 object-cover">
 				<span class="absolute top-2 right-2 bg-accent text-dark px-3 py-1 rounded-full text-sm font-semibold">{{ post.date | date: "%d %b %Y" }}</span>
 			</div>
 			{% endif %}
-			<div class="p-6">
+			<div class="p-6 flex flex-col flex-grow">
 				<h2 class="text-2xl font-display font-bold text-primary mb-3">{{ post.title }}</h2>
 				<p class="text-gray-600 mb-4">{{ post.excerpt | strip_html | truncate: 150 }}</p>
 				<a href="{{ post.url }}" class="inline-block bg-secondary text-white px-6 py-3 rounded-full font-semibold hover:bg-accent hover:text-dark transition-colors duration-fast">Leggi tutto</a>

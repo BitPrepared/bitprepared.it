@@ -278,8 +278,19 @@ footer {
 .page-body img {
   max-width: 100%;
   height: auto;
+}
+
+.page-body img:not([alt="software icon"]) {
   display: block;
   margin: 1rem auto;
+}
+
+/* Software page icons left-aligned */
+body[class*="software"] .page-body img,
+.permalink-software .page-body img {
+  display: inline-block;
+  margin: 0 0.5rem 0 0;
+  vertical-align: middle;
 }
 
 @media (max-width: 768px) {
