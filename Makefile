@@ -85,9 +85,10 @@ validate-graphics: docker-build-visual
 	@echo ""
 	@read -p "Premi ENTER quando server sono pronti..."
 	@echo ""
-	docker run --rm \
+	docker run --rm --init \
 		--mount type=bind,source=${PWD},target=/app \
 		--add-host=host.docker.internal:host-gateway \
+		--user $(id -u):$(id -g) \
 		bitprepared-visual-regression:latest
 
 visual-baseline: docker-build-visual
@@ -97,18 +98,20 @@ visual-baseline: docker-build-visual
 	@echo ""
 	@read -p "Premi ENTER quando server è pronto..."
 	@echo ""
-	docker run --rm \
+	docker run --rm --init \
 		--mount type=bind,source=${PWD},target=/app \
 		--add-host=host.docker.internal:host-gateway \
 		-e HOST_IP=host.docker.internal \
+		--user $(id -u):$(id -g) \
+		--entrypoint="" \
 		bitprepared-visual-regression:latest \
-		node /app/scripts/visual-regression/create-baseline.js
+		sh -c 'cd /app/scripts/visual-regression && npm run create-baseline'
 	@echo "✅ Baseline creata in tests/visual-baseline/"
 	@echo "📝 Commit now: git add tests/visual-baseline/ && git commit -m 'Add visual baseline'"
 
 visual-clean:
-	@rm -rf screenshots/
-	@echo "🧹 Screenshots temp rimossi"
+	@-rm -rf screenshots/ || true
+	@echo "🧹 Screenshots temp rimossi (ignorati errori permessi)"
 
 docker-build-visual:
 	@echo "🐳 Building visual regression Docker image..."

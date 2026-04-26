@@ -241,17 +241,10 @@ main {
   border-radius: var(--border-radius);
   overflow: hidden;
   transition: transform var(--transition-base), box-shadow var(--transition-base);
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeUp 0.6s ease-out forwards;
   display: flex;
   flex-direction: column;
   height: 100%;
 }
-
-.evento-card:nth-child(1) { animation-delay: 0.1s; }
-.evento-card:nth-child(2) { animation-delay: 0.2s; }
-.evento-card:nth-child(3) { animation-delay: 0.3s; }
 
 @keyframes fadeUp {
   to {
@@ -503,20 +496,7 @@ footer a::after {
 	color: var(--color-light);
 }
 
-/* ===== SCROLL REVEAL ===== */
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
-}
+/* SCROLL REVEAL REMOVED - Cards now immediately visible */
 
 /* ===== RESPONSIVE BASE ===== */
 @media (max-width: 1024px) {

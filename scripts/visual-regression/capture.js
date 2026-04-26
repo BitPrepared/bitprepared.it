@@ -2,6 +2,19 @@ const { chromium } = require('@playwright/test');
 const fs = require('fs');
 const path = require('path');
 
+// Handle interrupt signals
+let browsers = [];
+process.on('SIGINT', async () => {
+  console.log('\n\n⚠️  Interrupted, cleaning up...');
+  for (const b of browsers) await b.close();
+  process.exit(130);
+});
+
+process.on('SIGTERM', async () => {
+  for (const b of browsers) await b.close();
+  process.exit(143);
+});
+
 const viewports = {
   desktop: { width: 1920, height: 1080 },
   tablet: { width: 768, height: 1024 },
@@ -25,7 +38,9 @@ const pages = [
   '/software/wordpress/',
   '/software/flora/',
   '/software/code/',
-  '/software/prbm/'
+  '/software/prbm/',
+  '/articles/',
+  '/project/github/'
 ];
 
 async function captureScreenshots(serverType, baseUrl) {
@@ -34,6 +49,7 @@ async function captureScreenshots(serverType, baseUrl) {
   const browser = await chromium.launch({
     headless: true
   });
+  browsers.push(browser); // Track for cleanup
 
   for (const [viewportName, viewport] of Object.entries(viewports)) {
     console.log(`  📱 Viewport: ${viewportName} (${viewport.width}x${viewport.height})`);
@@ -55,7 +71,27 @@ async function captureScreenshots(serverType, baseUrl) {
           timeout: 30000
         });
 
-        const filename = pageUrl.replace(/\//g, '_').replace(/^_/, '') || 'index';
+        // Homepage: wait for images to load (lazy loading issue)
+        if (pageUrl === '/' || pageUrl === '') {
+          await page.evaluate(() => {
+            const images = Array.from(document.querySelectorAll('img'));
+            return Promise.all(images.map(img => {
+              if (img.complete) return;
+              return new Promise(resolve => {
+                img.addEventListener('load', resolve);
+                img.addEventListener('error', resolve); // Also handle load errors
+                setTimeout(resolve, 1000); // Timeout 1s per image
+              });
+            }));
+          });
+        } else {
+          // Other pages: wait for marker with short timeout
+          await page.waitForSelector('[data-visual-regression-marker="ready"]', {
+            timeout: 2000
+          }).catch(() => {}); // Silent fail
+        }
+
+        const filename = pageUrl.replace(/^\//, '').replace(/\/$/, '').replace(/\//g, '_') || 'index';
         const screenshotPath = path.join(__dirname, `../../screenshots/${serverType}/${viewportName}/${filename}.png`);
 
         const dir = path.dirname(screenshotPath);
@@ -78,6 +114,7 @@ async function captureScreenshots(serverType, baseUrl) {
   }
 
   await browser.close();
+  browsers = browsers.filter(b => b !== browser); // Remove from tracking
   console.log(`✅ Screenshots captured for ${serverType}`);
 }
 

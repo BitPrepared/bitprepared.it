@@ -2,6 +2,19 @@ const { chromium } = require('@playwright/test');
 const fs = require('fs');
 const path = require('path');
 
+// Handle interrupt signals
+let browser = null;
+process.on('SIGINT', async () => {
+  console.log('\n\n⚠️  Interrupted, cleaning up...');
+  if (browser) await browser.close();
+  process.exit(130); // 128 + SIGINT(2)
+});
+
+process.on('SIGTERM', async () => {
+  if (browser) await browser.close();
+  process.exit(143); // 128 + SIGTERM(15)
+});
+
 const viewports = {
   desktop: { width: 1920, height: 1080 },
   tablet: { width: 768, height: 1024 },
@@ -12,6 +25,7 @@ const pages = [
   '/',
   '/about/',
   '/blog/',
+  '/tags/',
   '/eventi/epppi/',
   '/eventi/campo-eg/',
   '/eventi/stage/',
@@ -39,7 +53,7 @@ async function createBaseline() {
   try {
     console.log('📸 Capturing baseline images...');
 
-    const browser = await chromium.launch({
+    browser = await chromium.launch({
       headless: true
     });
 
@@ -63,7 +77,21 @@ async function createBaseline() {
             timeout: 30000
           });
 
-          const filename = pageUrl.replace(/\//g, '_').replace(/^_/, '') || 'index';
+          // Homepage: wait for images to load (lazy loading issue)
+          if (pageUrl === '/' || pageUrl === '') {
+            await page.evaluate(() => {
+              const images = Array.from(document.querySelectorAll('img[loading="lazy"]'));
+              images.forEach(img => img.loading = 'eager');
+            });
+            await page.waitForTimeout(500); // Small wait for images
+          } else {
+            // Other pages: wait for marker with short timeout
+            await page.waitForSelector('[data-visual-regression-marker="ready"]', {
+              timeout: 2000
+            }).catch(() => {}); // Silent fail
+          }
+
+          const filename = pageUrl.replace(/^\//, '').replace(/\/$/, '').replace(/\//g, '_') || 'index';
           const baselinePath = path.join(__dirname, `../../tests/visual-baseline/${viewportName}/${filename}.png`);
 
           const dir = path.dirname(baselinePath);

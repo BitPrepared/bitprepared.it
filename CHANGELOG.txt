@@ -1,6 +1,28 @@
 Changelog BitPrepared.it
 -------------------
 
+### 2026-04-24
+  * FIX: Visual regression timing issues
+    - Added global data-visual-regression-marker to default layout
+    - Scripts wait for marker instead of page-specific selectors
+    - Works for ALL pages, prevents lazy-loaded content timing issues
+  * FIX: Visual baseline script execution
+    - Corretto comando Docker: npm run create-baseline (non node diretto)
+    - Allineate pagine in capture.js, create-baseline.js, compare.js
+    - Aggiunte pagine mancanti: /tags/, /articles/, /project/github/
+    - Fix filename pattern: removed trailing underscore (about_.png → about.png)
+  * FIX: Docker permissions
+    - Pass host UID to container with --user $(id -u):$(id -g)
+    - Prevents root-owned files in screenshots/ directory
+    - visual-clean now ignores permission errors
+
+### 2026-04-21
+  * FIX: Visual baseline creation script
+    - Corretto comando Docker: npm run create-baseline (non node diretto)
+    - Allineate pagine in capture.js, create-baseline.js, compare.js
+    - Aggiunte pagine mancanti: /tags/, /articles/, /project/github/
+    - Makefile: usa npm run invece di node diretto
+
 ### 2026-04-21
   * FEATURE: Generatore automatico blog post per eventi
     - Script Ruby: scripts/generate-blog-post.rb
