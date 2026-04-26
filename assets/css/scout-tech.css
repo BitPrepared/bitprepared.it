@@ -984,3 +984,77 @@ footer a:focus {
   outline-offset: 2px !important;
   box-shadow: 0 0 0 4px rgba(0, 217, 255, 0.3) !important;
 }
+
+/* ===== SOFTWARE GRID ===== */
+.software-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.software-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: var(--color-white);
+  border: 2px solid var(--color-secondary);
+  border-radius: var(--border-radius);
+  transition: all var(--transition-base);
+}
+
+.software-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-accent);
+}
+
+.software-icon img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.software-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.software-name {
+  margin-bottom: 0.5rem;
+}
+
+.software-name a {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.software-name a:hover {
+  color: var(--color-accent);
+}
+
+.software-description {
+  font-size: 0.95rem;
+  color: var(--color-dark);
+  line-height: 1.5;
+}
+
+@media (max-width: 640px) {
+  .software-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .software-item {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .software-icon {
+    margin: 0 auto;
+  }
+}

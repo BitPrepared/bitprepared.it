@@ -296,7 +296,7 @@ accessibility-score:
 	@if [ -f docs/accessibility/reports/lighthouse/homepage ]; then \
 		node -e "const fs=require('fs');const d=JSON.parse(fs.readFileSync('docs/accessibility/reports/lighthouse/homepage','utf8'));console.log((d.categories.accessibility.score*100).toFixed(0)+'%')"; \
 	elif [ -f docs/accessibility/reports/lighthouse/homepage.json ]; then \
-		cat docs/accessibility/reports/lighthouse/homepage.json | jq -r '.categories.accessibility.score * 100 | floor | . + "%"'; \
+		cat docs/accessibility/reports/lighthouse/homepage.json | jq -r '(.categories.accessibility.score * 100 | floor | tostring) + "%"'; \
 	else \
 		echo "No report found. Run 'make accessibility-audit' first"; \
 	fi
