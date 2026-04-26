@@ -29,29 +29,19 @@ layout: default
       | <i class="fa fa-calendar text-cyan-400"></i> {{ page.hero.date }}
       | <i class="fa fa-users text-cyan-400"></i> {{ page.hero.target }}
     </p>
+    {% assign event_date = page.event_date | date: "%s" %}
+    {% assign today = site.time | date: "%s" %}
+    {% if event_date >= today %}
     <a href="{{ page.cta.primary.url }}" class="btn btn-cta">
       {{ page.cta.primary.text }}
     </a>
+    {% endif %}
   </div>
 </header>
 
 <!-- Event Status Badge -->
 <div class="max-w-4xl mx-auto px-4 sm:px-6 -mt-8 relative z-10">
   {% include edit-button.html %}
-
-  {% if page.event_status == 'upcoming' %}
-  <div class="evento-badge inline-block px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-semibold text-xs sm:text-sm mb-4 sm:mb-6 {{ bg-primary }} text-white">
-    <i class="fa fa-calendar-check"></i> PROSSIMO EVENTO
-  </div>
-  {% elsif page.event_status == 'soldout' %}
-  <div class="evento-badge inline-block px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-semibold text-xs sm:text-sm mb-4 sm:mb-6 bg-red-500 text-white">
-    <i class="fa fa-ban"></i> SOLD OUT
-  </div>
-  {% elsif page.event_status == 'last_chance' %}
-  <div class="evento-badge inline-block px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-semibold text-xs sm:text-sm mb-4 sm:mb-6 bg-orange-500 text-white">
-    <i class="fa fa-clock"></i> ULTIMI POSTI
-  </div>
-  {% endif %}
 
   <div class="evento-page">
 
@@ -187,11 +177,13 @@ layout: default
         <p class="text-green-900 m-0">{{ page.logistica.cosa_portare.items }}</p>
       </div>
     </div>
+    {% if event_date >= today %}
     <div class="text-center mt-4 sm:mt-6">
       <a href="{{ page.cta.secondary.url }}" class="btn btn-cta">
         {{ page.cta.secondary.text }}
       </a>
     </div>
+    {% endif %}
   </div>
 
   <!-- FAQ -->
@@ -210,10 +202,17 @@ layout: default
   </div>
 
   <!-- Social -->
+  {% if page.tags %}
   <div class="evento-box evento-social text-center p-6 sm:p-8 rounded-lg mb-6 sm:mb-8 border {{ border-color }} bg-white">
-    <h3 class="text-xl sm:text-2xl font-display font-bold text-green-900 mb-3 sm:mb-4"><i class="fa fa-share-alt text-orange-400"></i> {{ page.social.title }}</h3>
-    <p class="text-green-800 text-sm sm:text-base">{{ page.social.description }}<br>{{ page.social.hashtags }}</p>
+    <h3 class="text-xl sm:text-2xl font-display font-bold text-green-900 mb-3 sm:mb-4"><i class="fa fa-share-alt text-orange-400"></i> Condividi questo evento</h3>
+    <p class="text-green-800 text-sm sm:text-base mb-4">{{ page.social.description }}</p>
+    <p class="text-green-800 text-sm sm:text-base">
+      {% for tag in page.tags %}
+      <a href="/tags/#{{ tag }}" class="btn btn-tag">#{{ tag }}</a>
+      {% endfor %}
+    </p>
   </div>
+  {% endif %}
 
   <!-- Content markdown originale -->
   <div class="text-green-900 text-sm sm:text-base leading-relaxed">
