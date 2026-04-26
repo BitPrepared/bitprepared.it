@@ -39,6 +39,13 @@ title: Titolo Pagina
 ---
 ```
 
+### JavaScript e Liquid Variables
+**IMPORTANTE**: JavaScript che usa variabili Liquid (`{% for %}`, `{{ variable }}`) deve stare **inline** nei file HTML/Markdown, NON in file `.js` esterni.
+
+**Perché**: Jekyll non processa i file `.js` - li tratta come asset statici.
+
+**Esempio**: `tags/index.md` ha JS inline perché genera dati da `site.tags` con loop Liquid. Se sposti JS in file esterno, le variabili Liquid non vengono processate e il codice si rompe.
+
 ## File Critici da Aggiornare
 
 Quando utente aggiunge/modifica features:
