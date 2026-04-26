@@ -18,7 +18,7 @@ permalink: /tags/
     <ul class="tags-list">
       {% for tag in site.tags %}
       <li>
-        <a href="#" data-tag="{{ tag[0] }}" class="tag-link">
+        <a href="#" data-tag="{{ tag[0] }}" class="btn btn-tag">
           #{{ tag[0] }} <span class="tag-count">({{ tag[1].size }})</span>
         </a>
       </li>
@@ -90,7 +90,7 @@ function showTag(tagName) {
   `).join('');
 }
 
-document.querySelectorAll('.tag-link').forEach(link => {
+document.querySelectorAll('.btn-tag').forEach(link => {
   link.addEventListener('click', (e) => {
     e.preventDefault();
     const tag = link.getAttribute('data-tag');
