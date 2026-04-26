@@ -85,7 +85,7 @@ function showTag(tagName) {
       <h2><a href="${post.url}">${post.title}</a></h2>
       <p class="post-date">${post.date}</p>
       <p class="post-excerpt">${post.excerpt}</p>
-      <a href="${post.url}" class="btn-primary">Leggi tutto</a>
+      <a href="${post.url}" class="btn btn-primary">Leggi tutto</a>
     </article>
   `).join('');
 }
