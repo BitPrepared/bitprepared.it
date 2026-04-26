@@ -17,6 +17,10 @@
 	<!-- Scout Tech Modern CSS -->
 	<link rel="stylesheet" href="/assets/css/scout-tech.css" />
 	<link rel="stylesheet" href="/assets/css/scout-tech-mobile.css" />
+	<link rel="stylesheet" href="/assets/css/page.css" />
+	{% if page.title == 'Tags' %}
+	<link rel="stylesheet" href="/assets/css/tags.css" />
+	{% endif %}
 	<style>
 		.skip-link {
 			position: absolute;
@@ -81,6 +85,10 @@
 
 	<!-- Scroll Animations (Optional) -->
 	<script src="/assets/js/scroll-animations.js"></script>
+
+	{% if page.title == 'Tags' %}
+	<script src="/assets/js/tags.js"></script>
+	{% endif %}
 
 	<!-- Visual Regression Marker: indicates page is fully loaded -->
 	<div data-visual-regression-marker="ready" style="display:none !important;"></div>
