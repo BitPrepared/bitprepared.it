@@ -316,7 +316,7 @@ main {
 .btn {
   display: inline-block;
   text-align: center;
-  text-decoration: none;
+  text-decoration: none !important;
   font-family: var(--font-display);
   font-weight: 600;
   border: none;
@@ -335,6 +335,7 @@ main {
 .btn-primary:hover {
   background: var(--color-accent);
   color: #000000;
+  text-decoration: none !important;
 }
 
 .btn-primary:active {
@@ -352,6 +353,7 @@ main {
   color: #000000;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 217, 255, 0.3);
+  text-decoration: none !important;
 }
 
 .btn-event:active {
@@ -368,6 +370,7 @@ main {
 .btn-card:hover {
   background: var(--color-accent);
   color: #000000;
+  text-decoration: none !important;
 }
 
 /* CTA button - prominent call-to-action */
@@ -381,6 +384,7 @@ main {
 .btn-cta:hover {
   transform: scale(1.05);
   box-shadow: 0 8px 16px rgba(0, 217, 255, 0.4);
+  text-decoration: none !important;
 }
 
 .btn-cta:active {
@@ -400,6 +404,7 @@ main {
 .btn-tag:hover {
   background: var(--color-accent);
   color: #000000;
+  text-decoration: none !important;
 }
 
 /* Card actions wrapper - aligns buttons to bottom */
