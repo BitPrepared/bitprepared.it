@@ -332,7 +332,7 @@ main {
 }
 
 .btn:focus {
-  outline: none;
+  /* Focus indicators now defined in accessibility section below */
 }
 
 /* Primary button - green, default */
@@ -921,4 +921,49 @@ footer a::after {
   .tappa-icon {
     margin-bottom: var(--spacing-sm);
   }
+}
+
+/* ===== ACCESSIBILITY: FOCUS INDICATORS ===== */
+/* Focus styles for ALL interactive elements - WCAG 2.4.7 */
+
+a:focus,
+button:focus,
+[tabindex]:focus {
+  outline: 3px solid #00d9ff !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px rgba(0, 217, 255, 0.3) !important;
+}
+
+/* Button focus overrides - CRITICAL FIX */
+.btn:focus,
+.btn-primary:focus,
+.btn-event:focus,
+.btn-card:focus,
+.btn-cta:focus,
+.btn-tag:focus {
+  outline: 3px solid #00d9ff !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px rgba(0, 217, 255, 0.3) !important;
+}
+
+/* Navigation focus */
+.navbar-brand:focus,
+.navbar-nav a:focus {
+  background: rgba(26, 127, 26, 0.3) !important;
+  outline: 3px solid #00d9ff !important;
+  outline-offset: 2px !important;
+}
+
+/* Footer focus */
+footer a:focus {
+  outline: 3px solid #00d9ff !important;
+  outline-offset: 2px !important;
+  background: rgba(26, 127, 26, 0.3) !important;
+}
+
+/* Tag link focus */
+.tag-link:focus {
+  outline: 3px solid #00d9ff !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px rgba(0, 217, 255, 0.3) !important;
 }

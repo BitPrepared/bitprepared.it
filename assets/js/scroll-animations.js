@@ -7,34 +7,71 @@
 (function() {
 	'use strict';
 
-	// ===== MOBILE MENU TOGGLE =====
-	const navbarToggle = document.getElementById('navbar-toggle');
-	const navbarNav = document.getElementById('navbar-nav');
+		// ===== MOBILE MENU TOGGLE =====
+		const navbarToggle = document.getElementById('navbar-toggle');
+		const navbarNav = document.getElementById('navbar-nav');
 
-	if (navbarToggle && navbarNav) {
-		navbarToggle.addEventListener('click', () => {
-			navbarToggle.classList.toggle('active');
-			navbarNav.classList.toggle('active');
-		});
+		if (navbarToggle && navbarNav) {
+			navbarToggle.addEventListener('click', () => {
+				const isExpanded = navbarToggle.classList.toggle('active');
+				navbarNav.classList.toggle('active');
 
-		// Close menu when clicking a link
-		const navLinks = navbarNav.querySelectorAll('a');
-		navLinks.forEach(link => {
-			link.addEventListener('click', () => {
-				navbarToggle.classList.remove('active');
-				navbarNav.classList.remove('active');
+				// Update aria-expanded for accessibility
+				navbarToggle.setAttribute('aria-expanded', isExpanded);
+
+				// Focus management: move focus to first link when opening, back to toggle when closing
+				if (isExpanded) {
+					// Menu opened - focus first link
+					const firstLink = navbarNav.querySelector('a');
+					if (firstLink) {
+						setTimeout(() => firstLink.focus(), 100);
+					}
+				} else {
+					// Menu closed - focus returns to toggle
+					navbarToggle.focus();
+				}
 			});
-		});
 
-		// Close menu when clicking outside
-		document.addEventListener('click', (e) => {
-			if (!navbarToggle.contains(e.target) && !navbarNav.contains(e.target)) {
-				navbarToggle.classList.remove('active');
-				navbarNav.classList.remove('active');
-			}
-		});
-	}
+			// Close menu when clicking a link
+			const navLinks = navbarNav.querySelectorAll('a');
+			navLinks.forEach(link => {
+				link.addEventListener('click', () => {
+					navbarToggle.classList.remove('active');
+					navbarNav.classList.remove('active');
+					navbarToggle.setAttribute('aria-expanded', 'false');
+				});
+			});
 
+			// Close menu when clicking outside
+			document.addEventListener('click', (e) => {
+				if (!navbarToggle.contains(e.target) && !navbarNav.contains(e.target)) {
+					const wasOpen = navbarToggle.classList.contains('active');
+					navbarToggle.classList.remove('active');
+					navbarNav.classList.remove('active');
+					navbarToggle.setAttribute('aria-expanded', 'false');
+				}
+			});
+
+			// Keyboard support: ESC to close menu
+			navbarToggle.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape' && navbarToggle.classList.contains('active')) {
+					navbarToggle.classList.remove('active');
+					navbarNav.classList.remove('active');
+					navbarToggle.setAttribute('aria-expanded', 'false');
+					navbarToggle.focus();
+				}
+			});
+
+			// Trap focus within menu when open (mobile only)
+			navbarNav.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape') {
+					navbarToggle.classList.remove('active');
+					navbarNav.classList.remove('active');
+					navbarToggle.setAttribute('aria-expanded', 'false');
+					navbarToggle.focus();
+				}
+			});
+		}
 	// ===== INTERSECTION OBSERVER FOR SCROLL REVEAL =====
 	const observerOptions = {
 		root: null, // viewport

@@ -126,6 +126,11 @@ body {
   text-decoration: none;
 }
 
+.navbar-brand:focus {
+  outline: 3px solid #00d9ff;
+  outline-offset: 2px;
+}
+
 .navbar-toggle {
   display: none;
   flex-direction: column;
@@ -161,6 +166,12 @@ body {
 
 .navbar-nav li a:hover {
   color: #00d9ff;
+}
+
+.navbar-nav li a:focus {
+  background: rgba(26, 127, 26, 0.3);
+  outline: 3px solid #00d9ff;
+  outline-offset: 2px;
 }
 
 @media (max-width: 768px) {
@@ -212,8 +223,23 @@ footer {
   color: #00d9ff;
 }
 
+.footer-social a:focus {
+  outline: 3px solid #00d9ff;
+  outline-offset: 2px;
+  background: rgba(26, 127, 26, 0.3);
+}
+
 .footer-social a span {
-  display: none;
+  /* Screen reader only - NOT display: none for accessibility */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .footer-links {
