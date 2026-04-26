@@ -41,6 +41,21 @@ function compareImages(img1Path, img2Path, diffPath) {
 
   const img1 = PNG.sync.read(fs.readFileSync(img1Path));
   const img2 = PNG.sync.read(fs.readFileSync(img2Path));
+
+  // Check if image sizes match
+  if (img1.width !== img2.width || img1.height !== img2.height) {
+    return {
+      error: 'Image size mismatch',
+      img1Size: `${img1.width}x${img1.height}`,
+      img2Size: `${img2.width}x${img2.height}`,
+      numDiffPixels: 0,
+      totalPixels: img1.width * img1.height,
+      diffPercent: '0.00',
+      passed: false,
+      needsRebaseline: true
+    };
+  }
+
   const diff = new PNG({ width: img1.width, height: img1.height });
 
   const numDiffPixels = pixelmatch(
@@ -258,7 +273,26 @@ function generateReport(results) {
         </tr>
       </thead>
       <tbody id="results">
-        ${results.map(r => `
+        ${results.map(r => {
+          if (r.error === 'Image size mismatch') {
+            return `
+          <tr class="fail">
+            <td><code>${r.page}</code></td>
+            <td><span class="viewport">${r.viewport}</span></td>
+            <td>${r.server}</td>
+            <td colspan="3">⚠️ Size mismatch: baseline ${r.img1Size} vs current ${r.img2Size}. Rebase needed.</td>
+          </tr>`;
+          }
+          if (r.error === 'File not found') {
+            return `
+          <tr class="fail">
+            <td><code>${r.page}</code></td>
+            <td><span class="viewport">${r.viewport}</span></td>
+            <td>${r.server}</td>
+            <td colspan="3">⚠️ Missing: ${r.missing}</td>
+          </tr>`;
+          }
+          return `
           <tr class="${r.passed ? 'pass' : 'fail'}">
             <td><code>${r.page}</code></td>
             <td><span class="viewport">${r.viewport}</span></td>
@@ -266,8 +300,8 @@ function generateReport(results) {
             <td>${r.diffPercent}%</td>
             <td><span class="badge ${r.passed ? 'pass' : 'fail'}">${r.passed ? 'PASS' : 'FAIL'}</span></td>
             <td>${!r.passed ? `<a class="diff-link" href="../diff/${r.viewport}/${r.page}_${r.server}.png" target="_blank">View Diff</a>` : '-'}</td>
-          </tr>
-        `).join('')}
+          </tr>`;
+        }).join('')}
       </tbody>
     </table>
   </div>
@@ -341,33 +375,54 @@ function main() {
       const serveResult = compareImages(baselinePath, servePath, serveDiffPath);
       const staticResult = compareImages(baselinePath, staticPath, staticDiffPath);
 
-      if (!serveResult.error) {
-        results.push({
-          page,
-          viewport,
-          server: 'serve',
-          ...serveResult
-        });
-      }
+      // Add serve result (include errors for reporting)
+      results.push({
+        page,
+        viewport,
+        server: 'serve',
+        ...serveResult
+      });
 
-      if (!staticResult.error) {
-        results.push({
-          page,
+      // Add static result (include errors for reporting)
+      results.push({
+        page,
           viewport,
           server: 'static',
           ...staticResult
         });
+
+      // Log results with error handling
+      const serveStatus = serveResult.error ? '⚠️' : (serveResult.passed ? '✅' : '❌');
+      const staticStatus = staticResult.error ? '⚠️' : (staticResult.passed ? '✅' : '❌');
+
+      if (serveResult.error === 'Image size mismatch') {
+        console.log(`${serveStatus} ${viewport}/${page} serve: Size ${serveResult.img1Size} vs ${serveResult.img2Size}`);
+      } else if (serveResult.error === 'File not found') {
+        console.log(`${serveStatus} ${viewport}/${page} serve: Missing ${serveResult.missing}`);
+      } else {
+        console.log(`${serveStatus} ${viewport}/${page}: serve=${serveResult.diffPercent}%`);
       }
 
-      const status = serveResult.passed && staticResult.passed ? '✅' : '❌';
-      console.log(`${status} ${viewport}/${page}: serve=${serveResult.diffPercent}%, static=${staticResult.diffPercent}%`);
+      if (staticResult.error === 'Image size mismatch') {
+        console.log(`${staticStatus} ${viewport}/${page} static: Size ${staticResult.img1Size} vs ${staticResult.img2Size}`);
+      } else if (staticResult.error === 'File not found') {
+        console.log(`${staticStatus} ${viewport}/${page} static: Missing ${staticResult.missing}`);
+      } else {
+        console.log(`${staticStatus} ${viewport}/${page}: static=${staticResult.diffPercent}%`);
+      }
     }
   }
 
   generateReport(results);
 
-  const hasFailures = results.some(r => !r.passed);
-  if (hasFailures) {
+  const hasFailures = results.some(r => !r.passed && !r.error);
+  const hasSizeMismatches = results.some(r => r.error === 'Image size mismatch');
+
+  if (hasSizeMismatches) {
+    console.error('\n⚠️  Some images have size mismatches - baseline needs update');
+    console.error('Run: make visual-baseline');
+    process.exit(1);
+  } else if (hasFailures) {
     console.error('\n❌ Validation FAILED: Differences exceed threshold');
     process.exit(1);
   } else {

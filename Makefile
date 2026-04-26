@@ -5,7 +5,7 @@ PROJECT_PATH ?= /workspace/bitprepared.it
 DOCKER_IMAGE = jekyll/jekyll:$(JEKYLL_VERSION)
 GEM_VOLUME = bitprepared-gems
 
-.PHONY: serve serve-static build clean install install-gems help open validate-graphics visual-baseline visual-clean docker-build-visual docker-build-a11y workflow generate-blog-post check-links accessibility-audit accessibility-quick accessibility-full accessibility-analyze accessibility-score accessibility-clean accessibility-purge _check-a11y-serve _check-servers _start-servers _check-serve _start-serve
+.PHONY: serve serve-static build clean install install-gems help open validate-graphics compare-graphics visual-baseline visual-clean docker-build-visual docker-build-a11y workflow generate-blog-post check-links accessibility-audit accessibility-quick accessibility-full accessibility-analyze accessibility-score accessibility-clean accessibility-purge _check-a11y-serve _check-servers _start-servers _check-serve _start-serve
 
 help:
 	@echo "Uso: make [target]"
@@ -19,6 +19,7 @@ help:
 	@echo "  install          - Installa dipendenze bundle (Docker, locale)"
 	@echo "  install-gems     - Installa gemme in volume persistente (una tantum)"
 	@echo "  validate-graphics- Valida grafica serve vs serve-static (Docker)"
+	@echo "  compare-graphics - Confronta solo screenshot esistenti (veloce)"
 	@echo "  visual-baseline  - Crea baseline immagini (richiede make serve attivo)"
 	@echo "  visual-clean      - Rimuovi screenshot temp"
 	@echo "  docker-build-visual- Build immagine Docker visual regression"
@@ -102,6 +103,17 @@ validate-graphics: docker-build-visual
 		-e VIEWPORTS="${VIEWPORTS}" \
 		bitprepared-visual-regression:latest \
 		sh -c 'cd /app/scripts/visual-regression && node capture.js && node compare.js'
+
+compare-graphics: docker-build-visual
+	@echo "📊 Confronto screenshot esistenti (no capture)..."
+	@echo ""
+	@mkdir -p screenshots/diff screenshots/report
+	docker run --rm --init \
+		--mount type=bind,source=${PWD},target=/app \
+		--user $(shell id -u):$(shell id -g) \
+		--entrypoint="" \
+		bitprepared-visual-regression:latest \
+		node /app/scripts/visual-regression/compare.js
 
 .PHONY: _check-servers _start-servers
 _check-servers:
