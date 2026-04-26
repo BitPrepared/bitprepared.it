@@ -2,32 +2,29 @@
 layout: default
 ---
 
-<div class="evento-page max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+{% if page.slug == 'epppi' %}
+  {% assign bg-dark = 'bg-rossi-950' %}
+  {% assign bg-primary = 'bg-rossi-600' %}
+  {% assign border-color = 'border-rossi-600' %}
+  {% assign text-light = 'text-rossi-50' %}
+{% elsif page.slug == 'stage' %}
+  {% assign bg-dark = 'bg-viola-950' %}
+  {% assign bg-primary = 'bg-viola-600' %}
+  {% assign border-color = 'border-viola-600' %}
+  {% assign text-light = 'text-viola-50' %}
+{% else %}
+  {% assign bg-dark = 'bg-green-950' %}
+  {% assign bg-primary = 'bg-green-600' %}
+  {% assign border-color = 'border-green-600' %}
+  {% assign text-light = 'text-green-50' %}
+{% endif %}
 
-  {% include edit-button.html %}
-
-  {% if page.slug == 'epppi' %}
-    {% assign bg-dark = 'bg-rossi-950' %}
-    {% assign bg-primary = 'bg-rossi-600' %}
-    {% assign border-color = 'border-rossi-600' %}
-    {% assign text-light = 'text-rossi-50' %}
-  {% elsif page.slug == 'stage' %}
-    {% assign bg-dark = 'bg-viola-950' %}
-    {% assign bg-primary = 'bg-viola-600' %}
-    {% assign border-color = 'border-viola-600' %}
-    {% assign text-light = 'text-viola-50' %}
-  {% else %}
-    {% assign bg-dark = 'bg-green-950' %}
-    {% assign bg-primary = 'bg-green-600' %}
-    {% assign border-color = 'border-green-600' %}
-    {% assign text-light = 'text-green-50' %}
-  {% endif %}
-
-  <!-- Hero Section -->
-  <div class="evento-hero text-center mb-12 sm:mb-16 p-6 sm:p-8 rounded-lg border-2 {{ border-color }} {{ bg-dark }}">
-    <h2 class="text-2xl sm:text-3xl font-display font-bold text-green-50 mb-2 sm:mb-4">{{ page.hero.title }}</h2>
-    <h3 class="text-lg sm:text-xl font-display font-semibold text-cyan-400 mb-4 sm:mb-6">{{ page.hero.subtitle }}</h3>
-    <p class="text-sm sm:text-base text-green-50 mb-4 sm:mb-6">
+<!-- Hero Section -->
+<header class="hero flex items-center justify-center text-center">
+  <div class="hero-content max-w-5xl mx-auto px-6">
+    <h1 class="hero-title text-5xl font-display font-bold text-light mb-4">{{ page.hero.title }}</h1>
+    <p class="hero-subtitle text-xl text-light mb-6">{{ page.hero.subtitle }}</p>
+    <p class="text-light mb-8">
       <i class="fa fa-map-marker text-cyan-400"></i> {{ page.hero.location }}
       | <i class="fa fa-calendar text-cyan-400"></i> {{ page.hero.date }}
       | <i class="fa fa-users text-cyan-400"></i> {{ page.hero.target }}
@@ -36,8 +33,12 @@ layout: default
       {{ page.cta.primary.text }}
     </a>
   </div>
+</header>
 
-  <!-- Event Status Badge -->
+<!-- Event Status Badge -->
+<div class="max-w-4xl mx-auto px-4 sm:px-6 -mt-8 relative z-10">
+  {% include edit-button.html %}
+
   {% if page.event_status == 'upcoming' %}
   <div class="evento-badge inline-block px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-semibold text-xs sm:text-sm mb-4 sm:mb-6 {{ bg-primary }} text-white">
     <i class="fa fa-calendar-check"></i> PROSSIMO EVENTO
@@ -51,6 +52,8 @@ layout: default
     <i class="fa fa-clock"></i> ULTIMI POSTI
   </div>
   {% endif %}
+
+  <div class="evento-page">
 
   {% if page.benefits %}
   <!-- Benefits Section -->
@@ -215,5 +218,6 @@ layout: default
   <!-- Content markdown originale -->
   <div class="text-green-900 text-sm sm:text-base leading-relaxed">
     {{ content }}
+  </div>
   </div>
 </div>
