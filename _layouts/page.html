@@ -2,24 +2,22 @@
 layout: default
 ---
 
-{% unless page.no_hero %}
 <!-- Hero Section -->
-<header class="hero">
-	<div class="hero-content">
-		<h1 class="hero-title">{{ page.title }}</h1>
+<header class="hero flex items-center justify-center text-center">
+	<div class="hero-content max-w-5xl mx-auto px-6">
+		<h1 class="hero-title text-5xl font-display font-bold text-light mb-4">{{ page.title }}</h1>
 		{% if page.subtitle %}
-		<p class="hero-subtitle">{{ page.subtitle }}</p>
+		<p class="hero-subtitle text-xl text-light">{{ page.subtitle }}</p>
 		{% endif %}
 	</div>
 </header>
-{% endunless %}
 
 <!-- Page Content -->
-<main class="page-section">
-	<div class="container">
+<main class="page-section px-6 py-16 min-h-[50vh]">
+	<div class="max-w-4xl mx-auto">
 		<article class="page-content">
 			{% include edit-button.html %}
-			<div class="page-body">
+			<div class="page-body text-light leading-relaxed text-lg">
 				{{ content }}
 			</div>
 		</article>

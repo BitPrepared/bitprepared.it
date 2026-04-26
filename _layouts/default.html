@@ -14,27 +14,12 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 
-	<!-- Scout Tech Modern CSS -->
-	<link rel="stylesheet" href="/assets/css/scout-tech.css" />
-	<link rel="stylesheet" href="/assets/css/scout-tech-mobile.css" />
-	<link rel="stylesheet" href="/assets/css/page.css" />
-	{% if page.title == 'Tags' %}
-	<link rel="stylesheet" href="/assets/css/tags.css" />
-	{% endif %}
-	<style>
-		.skip-link {
-			position: absolute;
-			top: -40px;
-			left: 0;
-			background: var(--color-accent);
-			color: var(--color-dark);
-			padding: 8px;
-			z-index: 100;
-			text-decoration: none;
-			font-weight: 600;
-		}
-		.skip-link:focus { top: 0; }
-	</style>
+	<!-- Tailwind CSS -->
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script src="/assets/js/tailwind-config.js"></script>
+
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css" />
 </head>
 <body>
 
@@ -85,9 +70,6 @@
 
 	<!-- Scroll Animations (Optional) -->
 	<script src="/assets/js/scroll-animations.js"></script>
-
-	<!-- Visual Regression Marker: indicates page is fully loaded -->
-	<div data-visual-regression-marker="ready" style="display:none !important;"></div>
 
 </body>
 </html>

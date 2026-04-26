@@ -142,17 +142,8 @@ a:hover::after {
   width: 100%;
 }
 
-a:hover:not(.btn-primary):not(.evento-cta):not(.evento-cta-secondary):not(.tag-link) {
+a:hover {
   color: var(--color-accent);
-}
-
-/* Disable ::after on buttons */
-.btn-primary::after,
-.evento-cta::after,
-.evento-cta-secondary::after,
-.tag-link::after {
-  display: none !important;
-  width: 0 !important;
 }
 
 /* ===== LAYOUT ===== */
@@ -241,10 +232,17 @@ main {
   border-radius: var(--border-radius);
   overflow: hidden;
   transition: transform var(--transition-base), box-shadow var(--transition-base);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 0.6s ease-out forwards;
   display: flex;
   flex-direction: column;
   height: 100%;
 }
+
+.evento-card:nth-child(1) { animation-delay: 0.1s; }
+.evento-card:nth-child(2) { animation-delay: 0.2s; }
+.evento-card:nth-child(3) { animation-delay: 0.3s; }
 
 @keyframes fadeUp {
   to {
@@ -336,7 +334,6 @@ main {
 
 .btn-primary:hover {
   background: var(--color-primary);
-  color: var(--color-white) !important;
   transform: scale(1.02);
   box-shadow: var(--shadow-md);
 }
@@ -465,7 +462,7 @@ footer a::after {
 .footer-social a:hover {
   background: var(--color-accent);
   transform: scale(1.1);
-  color: #000000 !important;
+  color: var(--color-white);
 }
 
 .footer-social a span {
@@ -491,12 +488,20 @@ footer a::after {
 .mt-lg { margin-top: var(--spacing-lg); }
 .mb-lg { margin-bottom: var(--spacing-lg); }
 
-#events-title,
-#blog-title {
-	color: var(--color-light);
+/* ===== SCROLL REVEAL ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-/* SCROLL REVEAL REMOVED - Cards now immediately visible */
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 /* ===== RESPONSIVE BASE ===== */
 @media (max-width: 1024px) {
