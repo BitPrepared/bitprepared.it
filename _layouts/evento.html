@@ -214,9 +214,14 @@ layout: default
   </div>
   {% endif %}
 
+  {% if content %}
   <!-- Content markdown originale -->
-  <div class="text-green-900 text-sm sm:text-base leading-relaxed">
-    {{ content }}
+  <div class="evento-box p-6 sm:p-8 rounded-lg mb-6 sm:mb-8 border {{ border-color }} bg-white">
+    <h2 class="text-xl sm:text-2xl font-display font-bold text-green-900 mb-4 sm:mb-6">📝 Ulteriori informazioni</h2>
+    <div class="text-green-900 text-sm sm:text-base leading-relaxed">
+      {{ content }}
+    </div>
   </div>
+  {% endif %}
   </div>
 </div>
