@@ -43,7 +43,7 @@ const pages = [
   '/project/github/'
 ];
 
-async function captureScreenshots(serverType, baseUrl) {
+async function captureScreenshots(serverType, baseUrl, viewportsToUse) {
   console.log(`\n📸 Capturing screenshots from ${serverType}...`);
 
   const browser = await chromium.launch({
@@ -51,7 +51,7 @@ async function captureScreenshots(serverType, baseUrl) {
   });
   browsers.push(browser); // Track for cleanup
 
-  for (const [viewportName, viewport] of Object.entries(viewports)) {
+  for (const [viewportName, viewport] of Object.entries(viewportsToUse)) {
     console.log(`  📱 Viewport: ${viewportName} (${viewport.width}x${viewport.height})`);
 
     // Create context with viewport
@@ -91,6 +91,9 @@ async function captureScreenshots(serverType, baseUrl) {
           }).catch(() => {}); // Silent fail
         }
 
+        // Extra delay for stable rendering
+        await page.waitForTimeout(500);
+
         const filename = pageUrl.replace(/^\//, '').replace(/\/$/, '').replace(/\//g, '_') || 'index';
         const screenshotPath = path.join(__dirname, `../../screenshots/${serverType}/${viewportName}/${filename}.png`);
 
@@ -121,13 +124,27 @@ async function captureScreenshots(serverType, baseUrl) {
 async function main() {
   console.log('=== Visual Regression Capture ===\n');
 
+  // Debug user info
+  console.log(`Running as UID: ${process.getuid()}`);
+  console.log(`Running as GID: ${process.getgid()}`);
+
   const hostIp = process.env.HOST_IP || 'localhost';
   console.log(`Using host: ${hostIp}\n`);
 
+  // Filter viewports if specified
+  const viewportFilter = process.env.VIEWPORTS ? process.env.VIEWPORTS.split(',') : [];
+  const filteredViewports = viewportFilter.length > 0
+    ? Object.fromEntries(Object.entries(viewports).filter(([key]) => viewportFilter.includes(key)))
+    : viewports;
+
+  if (viewportFilter.length > 0) {
+    console.log(`🎯 Filtering viewports: ${viewportFilter.join(', ')}\n`);
+  }
+
   try {
     // Servers gia avviati sul host
-    await captureScreenshots('serve', `http://${hostIp}:4000`);
-    await captureScreenshots('static', `http://${hostIp}:8000`);
+    await captureScreenshots('serve', `http://${hostIp}:4000`, filteredViewports);
+    await captureScreenshots('static', `http://${hostIp}:8000`, filteredViewports);
 
     console.log('\n✅ All screenshots captured successfully!');
   } catch (error) {
