@@ -377,3 +377,100 @@ Normal - reports contain full DOM snapshots:
 # Check sizes
 du -h docs/accessibility/reports/*/*
 ```
+
+## Cleaning Up
+
+### Remove Reports Only
+
+```bash
+make accessibility-clean
+```
+
+Removes all JSON reports in `docs/accessibility/reports/`. Keeps Docker image.
+
+### Remove All Artifacts
+
+```bash
+make accessibility-purge
+```
+
+Removes:
+- All accessibility reports
+- Docker accessibility image (`bitprepared-a11y:latest`)
+
+Use this when you want to free disk space or start completely fresh.
+
+### Manual Cleanup
+
+```bash
+# Remove reports only
+rm -rf docs/accessibility/reports/
+
+# Remove Docker image
+docker rmi bitprepared-a11y:latest
+
+# Remove generated analysis files
+rm -f accessibility-summary.md
+```
+
+### When to Clean
+
+**Before commits:**
+```bash
+make accessibility-clean
+```
+Remove reports before committing (reports are build artifacts).
+
+**After testing:**
+```bash
+make accessibility-purge
+```
+Free up disk space after finishing accessibility work.
+
+**Regenerating reports:**
+```bash
+make accessibility-clean
+make accessibility-audit
+```
+Clean slate for fresh audit.
+
+### Show Issue Locations
+
+```bash
+make accessibility-issues
+```
+
+Shows exactly WHERE the accessibility issues are:
+- CSS selectors of failing elements
+- DOM path to each element
+- Grouped by issue type
+
+**Example output:**
+```markdown
+## Background and foreground colors do not have sufficient contrast ratio.
+
+1. `.btn-primary`
+   Path: `body > div.container > button.btn-primary`
+
+2. `#footer a`
+   Path: `body > footer > div.links > a`
+```
+
+Use this to quickly locate and fix specific elements.
+
+### Find Specific Issues
+
+**All color-contrast failures:**
+```bash
+cat docs/accessibility/reports/lighthouse/homepage | jq '.audits["color-contrast"].details.items[] | {selector: .node.selector, path: .node.path}'
+```
+
+**Missing alt texts:**
+```bash
+cat docs/accessibility/reports/lighthouse/homepage | jq '.audits["image-alt"].details.items[] | {snippet: .node.snippet}'
+```
+
+**All failing elements with paths:**
+```bash
+cat docs/accessibility/reports/lighthouse/homepage | jq '.audits | to_entries[] | select(.value.score == 0) | {audit: .key, title: .value.title, items: (.value.details.items | length)}'
+```

@@ -5,7 +5,7 @@ PROJECT_PATH ?= /workspace/bitprepared.it
 DOCKER_IMAGE = jekyll/jekyll:$(JEKYLL_VERSION)
 GEM_VOLUME = bitprepared-gems
 
-.PHONY: serve serve-static build clean install install-gems help open validate-graphics visual-baseline visual-clean docker-build-visual docker-build-a11y workflow generate-blog-post check-links accessibility-audit accessibility-quick accessibility-full accessibility-analyze accessibility-score _check-a11y-serve _check-servers _start-servers _check-serve _start-serve
+.PHONY: serve serve-static build clean install install-gems help open validate-graphics visual-baseline visual-clean docker-build-visual docker-build-a11y workflow generate-blog-post check-links accessibility-audit accessibility-quick accessibility-full accessibility-analyze accessibility-score accessibility-clean accessibility-purge _check-a11y-serve _check-servers _start-servers _check-serve _start-serve
 
 help:
 	@echo "Uso: make [target]"
@@ -27,6 +27,10 @@ help:
 	@echo "  check-links      - Verifica link broken nel sito (htmltest)"
 	@echo "  accessibility-audit- Audit accessibilità completo (Lighthouse + axe, Docker)"
 	@echo "  accessibility-quick - Quick check accessibilità (Lighthouse solo homepage)"
+		@echo "  accessibility-analyze - Analizza report esistenti e genera summary"
+		@echo "  accessibility-score - Mostra score rapidi (Lighthouse + axe violations)"
+		@echo "  accessibility-clean  - Rimuovi report accessibilità"
+		@echo "  accessibility-purge  - Rimuovi report + Docker image a11y"
 	@echo "  accessibility-full- Audit completo tutte le pagine (8 pagine rappresentative)"
 	@echo "  help             - Mostra questo messaggio"
 	@echo ""
@@ -289,4 +293,32 @@ accessibility-score:
 		cat docs/accessibility/reports/axe/homepage | jq '.violations | length'; \
 	else \
 		echo "No report found"; \
+	fi
+
+# Clean accessibility reports
+.PHONY: accessibility-clean
+accessibility-clean:
+	@echo "🧹 Cleaning accessibility reports..."
+	@rm -rf docs/accessibility/reports/
+	@echo "✅ Accessibility reports removed"
+	@echo "💡 Run 'make accessibility-audit' to regenerate"
+
+# Clean all accessibility artifacts (reports + Docker image)
+.PHONY: accessibility-purge
+accessibility-purge: accessibility-clean
+	@echo "🗑️  Removing accessibility Docker image..."
+	@docker rmi bitprepared-a11y:latest 2>/dev/null || echo "Image not found or already removed"
+	@echo "✅ All accessibility artifacts removed"
+
+# Show specific accessibility issues with element locations
+.PHONY: accessibility-issues
+accessibility-issues:
+	@echo "🔍 Showing accessibility issues with element locations..."
+	@echo ""
+	@if [ -f docs/accessibility/reports/lighthouse/homepage ]; then \
+		./scripts/show-a11y-issues.sh docs/accessibility/reports/lighthouse/homepage; \
+	elif [ -f docs/accessibility/reports/lighthouse/homepage.json ]; then \
+		./scripts/show-a11y-issues.sh docs/accessibility/reports/lighthouse/homepage.json; \
+	else \
+		echo "No report found. Run 'make accessibility-audit' first"; \
 	fi
