@@ -15,11 +15,11 @@ image:
 
 * Distribuzione linux utilizzata sui computer al campo
 
-![Libreoffice]({{ site.url }}/assets/images/pages/software/libreoffice.png) [Libreoffice]({{ site.url }}{{ page.permalink }}libreoffice)
+![Libreoffice]({{ site.url }}/assets/images/pages/software/libreoffice.png) [Libreoffice]({{ site.url }}/software/libreoffice/)
 
 * Programma per l'editing di testi, calcolo, presentazioni. Utile per scrivere un canzoniere oppure un bansiere.
 
-![Wordrpess]({{ site.url }}/assets/images/pages/software/wordpress.png) [Wordpress](https://wordpress.org)
+![Wordpress]({{ site.url }}/assets/images/pages/software/wordpress.png) [Wordpress](https://wordpress.org)
 
 * Piattaforma per la creazione di un sito o blog. Utile per scrivere un giornalino del campo online
 
@@ -57,11 +57,11 @@ image:
 
 [AppLab](https://code.org/educate/applab) 
 
-![Scribus]({{ site.url }}/assets/images/pages/software/scribus.png)[Scribus](https://www.scribus.net/) 
+![Scribus]({{ site.url }}/assets/images/pages/software/scribus.png) [Scribus](https://www.scribus.net/) 
 
 * Programma per l'editoria e l'impaginazione
 
-![qStopmotion]({{ site.url }}/assets/images/pages/software/qstopmotion.png)[qStopmotion](http://www.qstopmotion.org/) 
+![qStopmotion]({{ site.url }}/assets/images/pages/software/qstopmotion.png) [qStopmotion](http://www.qstopmotion.org/) 
 
 * Programma per la realizzazione di stopmotion
 

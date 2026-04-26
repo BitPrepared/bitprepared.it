@@ -4,6 +4,13 @@ title: Tags
 permalink: /tags/
 ---
 
+<style>
+  /* Override page wrapper width for tag cards grid */
+  body .page-section:has(.tags-archive) > .max-w-4xl {
+    max-width: 80rem; /* equivalent to max-w-6xl */
+  }
+</style>
+
 <div class="tags-archive">
   <h1 id="tags-title">Tutti i Tag</h1>
 

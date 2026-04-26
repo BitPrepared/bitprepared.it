@@ -613,6 +613,7 @@ footer a::after {
 
 .tag-posts {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: var(--spacing-lg);
 }
 
@@ -620,6 +621,7 @@ footer a::after {
   background: var(--color-white);
   border-radius: var(--border-radius);
   padding: var(--spacing-md);
+  padding-top: 3rem;
   border: var(--border-width) solid var(--color-secondary);
   transition: transform var(--transition-base), box-shadow var(--transition-base);
   position: relative;
