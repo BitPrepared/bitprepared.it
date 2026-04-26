@@ -1,19 +1,20 @@
 #!/usr/bin/env node
-const { chromium } = require('playwright');
+const puppeteer = require('puppeteer');
 const fs = require('fs');
 
 const SITE_URL = process.argv[2];
 const OUTPUT_FILE = process.argv[3];
 
 async function runAxe() {
-  const browser = await chromium.launch({
+  const browser = await puppeteer.launch({
     headless: true,
-    args: ['--no-sandbox', '--disable-gpu']
+    args: ['--no-sandbox', '--disable-gpu'],
+    executablePath: '/usr/bin/chromium'
   });
 
   try {
     const page = await browser.newPage();
-    await page.goto(SITE_URL);
+    await page.goto(SITE_URL, { waitUntil: 'networkidle0' });
 
     // Inject and run axe-core
     const results = await page.evaluate(async () => {

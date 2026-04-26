@@ -1,5 +1,9 @@
 FROM node:20-bullseye
 
+# Force IPv4 for downloads (fixes Playwright installation in Docker)
+ENV PLAYWRIGHT_DOWNLOAD_HOST=https://playwright.azureedge.net
+ENV NODE_OPTIONS=--dns-result-order=ipv4first
+
 # Install system dependencies and Chromium
 RUN apt-get update && apt-get install -y \
     ca-certificates \
@@ -29,13 +33,9 @@ RUN apt-get update && apt-get install -y \
 RUN npm install -g \
     lighthouse
 
-# Install Playwright browsers
-RUN npx playwright install chromium
-RUN npx playwright install-deps chromium
-
-# Install Playwright locally for scripts
+# Install Puppeteer (uses system Chromium)
 WORKDIR /app
-RUN npm install playwright
+RUN npm install puppeteer
 
 # Set Chrome path for Lighthouse
 ENV CHROME_PATH=/usr/bin/chromium

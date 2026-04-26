@@ -228,6 +228,7 @@ accessibility-audit: docker-build-a11y _check-a11y-serve
 	@echo ""
 	@mkdir -p docs/accessibility/reports
 	docker run --rm --init \
+		--user $(shell id -u):$(shell id -g) \
 		--mount type=bind,source=${PWD}/docs/accessibility/reports,target=/app/reports \
 		--add-host=host.docker.internal:host-gateway \
 		-e SITE_URL=http://host.docker.internal:4000 \
@@ -242,6 +243,7 @@ accessibility-quick: docker-build-a11y _check-a11y-serve
 	@echo ""
 	@mkdir -p docs/accessibility/reports/lighthouse
 	docker run --rm --init \
+		--user $(shell id -u):$(shell id -g) \
 		--mount type=bind,source=${PWD}/docs/accessibility/reports,target=/app/reports \
 		--add-host=host.docker.internal:host-gateway \
 		-e SITE_URL=http://host.docker.internal:4000 \
@@ -256,6 +258,7 @@ accessibility-full: docker-build-a11y _check-a11y-serve
 	@echo ""
 	@mkdir -p docs/accessibility/reports
 	docker run --rm --init \
+		--user $(shell id -u):$(shell id -g) \
 		--mount type=bind,source=${PWD}/docs/accessibility/reports,target=/app/reports \
 		--add-host=host.docker.internal:host-gateway \
 		-e SITE_URL=http://host.docker.internal:4000 \
