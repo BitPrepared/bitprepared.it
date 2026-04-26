@@ -560,7 +560,6 @@ footer a::after {
 
 .footer-copy {
   font-size: 0.875rem;
-  color: var(--color-text-muted);
 }
 
 /* ===== UTILITY CLASSES ===== */
