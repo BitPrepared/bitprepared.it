@@ -18,7 +18,7 @@ tags: [bitprepared, eventi, campi, stage]
       <div class="tappa-card">
         <h3>Campo di Competenza</h3>
         <p>Google, social network, fotoritocco, video editing, coding. Scopri le tecnologie mantenendo lo stile scout!</p>
-        <a href="/eventi/campo-eg/" class="btn-primary">Scopri il campo</a>
+        <a href="/eventi/campo-eg/" class="btn btn-primary">Scopri il campo</a>
       </div>
     </article>
 
@@ -32,7 +32,7 @@ tags: [bitprepared, eventi, campi, stage]
       <div class="tappa-card">
         <h3>EPPPI</h3>
         <p>La scelta politica nelle società iperconnesse. Come usare i social per agire? Workshop intensivi su cittadinanza digitale.</p>
-        <a href="/eventi/epppi/" class="btn-primary">Scopri EPPPI</a>
+        <a href="/eventi/epppi/" class="btn btn-primary">Scopri EPPPI</a>
       </div>
     </article>
 
@@ -46,7 +46,7 @@ tags: [bitprepared, eventi, campi, stage]
       <div class="tappa-card">
         <h3>Stage per Capi</h3>
         <p>Essere scout nell'era del Web 2.0. La legge scout riletta per il sempre connesso. Strumenti per la tua comunità.</p>
-        <a href="/eventi/stage/" class="btn-primary">Scopri lo stage</a>
+        <a href="/eventi/stage/" class="btn btn-primary">Scopri lo stage</a>
       </div>
     </article>
 
