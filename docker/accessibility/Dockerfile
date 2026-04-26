@@ -1,8 +1,8 @@
-FROM node:18-bullseye
+FROM node:20-bullseye
 
-# Install system dependencies for Chrome/Chromium
+# Install system dependencies and Chromium
 RUN apt-get update && apt-get install -y \
-    chromium \
+    ca-certificates \
     fonts-liberation \
     libasound2 \
     libatk-bridge2.0-0 \
@@ -22,32 +22,28 @@ RUN apt-get update && apt-get install -y \
     libxkbcommon0 \
     libxrandr2 \
     xdg-utils \
-    python3 \
-    python3-pip \
+    chromium \
     && rm -rf /var/lib/apt/lists/*
 
-# Install accessibility tools
+# Install accessibility tools globally
 RUN npm install -g \
-    lighthouse \
-    @axe-core/cli \
-    pa11y \
-    playwright
+    lighthouse
 
-# Install Python tools for additional analysis
-RUN pip3 install --no-cache-dir \
-    pyyaml \
-    beautifulsoup4 \
-    lxml
+# Install Playwright browsers
+RUN npx playwright install chromium
+RUN npx playwright install-deps chromium
+
+# Install Playwright locally for scripts
+WORKDIR /app
+RUN npm install playwright
+
+# Set Chrome path for Lighthouse
+ENV CHROME_PATH=/usr/bin/chromium
 
 # Create reports directory
 RUN mkdir -p /app/reports
 
-# Set environment variables for Chromium
-ENV CHROME_BIN=/usr/bin/chromium
-ENV CHROME_PATH=/usr/bin/chromium
-
-# Copy scripts
-COPY scripts/*.sh /app/scripts/
-RUN chmod +x /app/scripts/*.sh
+# Copy scripts from accessibility directory
+COPY docker/accessibility/scripts/ /app/scripts/
 
 WORKDIR /app

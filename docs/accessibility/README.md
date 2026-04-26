@@ -12,16 +12,30 @@ make serve
 make accessibility-audit
 ```
 
+## Requirements
+
+- **Docker** - Required for running accessibility tools in isolated environment
+- **Jekyll server** running on port 4000
+
 ## Available Commands
+
+### `make docker-build-a11y`
+Builds the Docker image with accessibility tools (auto-run by other commands).
+
+**Image includes:**
+- Node.js 20
+- Lighthouse (Google's auditing tool)
+- Playwright (browser automation)
+- Chromium browser
+- axe-core (injected via CDN)
 
 ### `make accessibility-audit`
 Runs complete accessibility audit on homepage using:
-- **Lighthouse** - Full accessibility scan with HTML report
+- **Lighthouse** - Full accessibility scan
 - **axe-core** - WCAG 2.1 AA compliance check
 
 **Output:**
-- `docs/accessibility/reports/lighthouse/homepage.report.html` - Visual report
-- `docs/accessibility/reports/lighthouse/homepage.report.json` - Raw data
+- `docs/accessibility/reports/lighthouse/homepage.json` - Lighthouse results
 - `docs/accessibility/reports/axe/homepage.json` - Violations
 
 **Time:** ~2 minutes
@@ -30,7 +44,7 @@ Runs complete accessibility audit on homepage using:
 Quick check using Lighthouse on homepage only.
 
 **Output:**
-- `docs/accessibility/reports/lighthouse/quick-check.report.html`
+- `docs/accessibility/reports/lighthouse/quick-check.json`
 
 **Time:** ~1 minute
 
@@ -48,9 +62,6 @@ Comprehensive audit testing 8 representative pages:
 - Summary with accessibility scores
 
 **Time:** ~8-10 minutes
-
-### `make docker-build-a11y`
-Builds the Docker image with accessibility tools (auto-run by other commands).
 
 ## What Gets Tested
 
@@ -85,6 +96,11 @@ Builds the Docker image with accessibility tools (auto-run by other commands).
 - **70-89**: Needs improvement
 - **< 70**: Significant issues
 
+View results:
+```bash
+cat docs/accessibility/reports/lighthouse/homepage.json | jq '.categories.accessibility.score'
+```
+
 ### axe-core Violations
 
 Violations categorized by severity:
@@ -93,15 +109,10 @@ Violations categorized by severity:
 - **Moderate**: Minor difficulties
 - **Minor**: Cosmetic issues
 
-## Docker Container
-
-The `bitprepared-a11y:latest` image includes:
-
-- **Node.js 18** - Runtime
-- **Chromium** - Headless browser
-- **Lighthouse** - Google's auditing tool
-- **axe-core** - Deque's accessibility engine
-- **Pa11y** - Accessibility testing toolkit
+View violations:
+```bash
+cat docs/accessibility/reports/axe/homepage.json | jq '.violations | length'
+```
 
 ## Workflow Integration
 
@@ -111,8 +122,8 @@ The `bitprepared-a11y:latest` image includes:
 # Quick check
 make accessibility-quick
 
-# Review report
-xdg-open docs/accessibility/reports/lighthouse/quick-check.report.html
+# View score
+cat docs/accessibility/reports/lighthouse/quick-check.json | jq '.categories.accessibility.score'
 ```
 
 ### Before Major Release
@@ -135,6 +146,26 @@ Consider integrating into CI/CD pipeline:
   run: make accessibility-quick
 ```
 
+## Docker Container
+
+The `bitprepared-a11y:latest` image runs in complete isolation:
+- **No host pollution** - All tools inside container
+- **Reproducible** - Same environment every time
+- **Easy cleanup** - `docker rmi bitprepared-a11y:latest`
+
+## Architecture
+
+```
+Docker Container (bitprepared-a11y)
+├── Node.js 20
+├── Lighthouse (CLI)
+├── Playwright (browser automation)
+├── Chromium (headless browser)
+└── Scripts
+    ├── accessibility-audit.js (single page)
+    └── accessibility-full-audit.js (multi-page)
+```
+
 ## Known Limitations
 
 ### Automated Tools Can't Detect
@@ -147,13 +178,12 @@ Consider integrating into CI/CD pipeline:
 
 ### Excluded Checks
 
-- `color-contrast` in axe (handled by Lighthouse)
 - Social media links (allowed 404s)
 - Anchor links with hashes
 
 ## Troubleshooting
 
-### "Connection refused" error
+### "Connection refused" or "Server not running"
 
 **Problem:** Jekyll server not running
 
@@ -162,24 +192,40 @@ Consider integrating into CI/CD pipeline:
 make serve
 ```
 
+### "Cannot connect to Docker daemon"
+
+**Problem:** Docker not running
+
+**Solution:** Start Docker daemon:
+```bash
+sudo systemctl start docker  # Linux
+# Or start Docker Desktop on macOS/Windows
+```
+
 ### Docker build fails
 
-**Problem:** Network or dependencies issue
+**Problem:** Network issues or missing dependencies
 
 **Solution:** Rebuild from scratch:
-```bash`
+```bash
 docker rmi bitprepared-a11y:latest
 make docker-build-a11y
 ```
 
 ### Reports not generated
 
-**Problem:** Permission issues
+**Problem:** Permission issues or container errors
 
 **Solution:** Fix directory permissions:
 ```bash
 chmod -R 755 docs/accessibility/reports/
 ```
+
+### "host.docker.internal" not working
+
+**Problem:** Docker networking issue on Linux
+
+**Solution:** Use `--network=host` (add to docker run commands in Makefile)
 
 ## Additional Resources
 
@@ -192,7 +238,7 @@ chmod -R 755 docs/accessibility/reports/
 
 After running automated tests:
 
-1. **Review reports** - Open HTML reports in browser
+1. **Review reports** - Check JSON files or use jq for summaries
 2. **Prioritize issues** - Fix critical first, then major
 3. **Manual testing** - Keyboard navigation, screen readers
 4. **Implement fixes** - Update Jekyll templates/CSS
@@ -203,14 +249,19 @@ After running automated tests:
 
 ```
 docker/accessibility/
-├── Dockerfile              # Container definition
+├── Dockerfile              # Container definition (Node.js 20)
 └── scripts/
-    ├── accessibility-audit.sh       # Single page audit
-    └── accessibility-full-audit.sh  # Multi-page audit
+    ├── accessibility-audit.js       # Single page audit
+    └── accessibility-full-audit.js  # Multi-page audit
 
 docs/accessibility/
 ├── README.md              # This file
 └── reports/
-    ├── lighthouse/        # Lighthouse results
-    └── axe/              # axe-core results
+    ├── lighthouse/        # Lighthouse results (JSON)
+    └── axe/              # axe-core results (JSON)
 ```
+
+## Environment Variables
+
+- `SITE_URL` - Target URL to audit (default: `http://host.docker.internal:4000`)
+- `CHROME_PATH` - Path to Chrome binary (auto-detected in container)

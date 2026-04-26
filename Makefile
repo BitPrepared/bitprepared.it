@@ -5,7 +5,7 @@ PROJECT_PATH ?= /workspace/bitprepared.it
 DOCKER_IMAGE = jekyll/jekyll:$(JEKYLL_VERSION)
 GEM_VOLUME = bitprepared-gems
 
-.PHONY: serve serve-static build clean install install-gems help open validate-graphics visual-baseline visual-clean docker-build-visual workflow generate-blog-post check-links accessibility-audit accessibility-quick accessibility-full docker-build-a11y _check-servers _start-servers _check-serve _start-serve
+.PHONY: serve serve-static build clean install install-gems help open validate-graphics visual-baseline visual-clean docker-build-visual docker-build-a11y workflow generate-blog-post check-links accessibility-audit accessibility-quick accessibility-full _check-a11y-serve _check-servers _start-servers _check-serve _start-serve
 
 help:
 	@echo "Uso: make [target]"
@@ -208,54 +208,57 @@ check-links: build
 	@echo "   - Errori certificati SSL (siti esterni con problemi)"
 	@echo "   - Alt text vuoto (accessibilità)"
 
-# Accessibility Audit
+
+# Accessibility Audit (Docker-based)
+.PHONY: docker-build-a11y _check-a11y-serve
 docker-build-a11y:
 	@echo "🐳 Building accessibility Docker image..."
 	docker build -t bitprepared-a11y:latest -f docker/accessibility/Dockerfile .
 
-accessibility-audit: docker-build-a11y
+_check-a11y-serve:
+	@echo -n "  ● Jekyll Serve (4000): "
+	@curl -f -s -o /dev/null http://localhost:4000 && echo "✅" || (echo "❌"; echo ""; echo "⚠️  Server not running. Start with: make serve"; exit 1)
+
+accessibility-audit: docker-build-a11y _check-a11y-serve
 	@echo "🔍 Running accessibility audit..."
-	@echo "⚠️  Make sure 'make serve' is running in another terminal"
 	@echo ""
 	@mkdir -p docs/accessibility/reports
 	docker run --rm --init \
-		--mount type=bind,source=${PWD},target=/app \
+		--mount type=bind,source=${PWD}/docs/accessibility/reports,target=/app/reports \
 		--add-host=host.docker.internal:host-gateway \
 		-e SITE_URL=http://host.docker.internal:4000 \
 		bitprepared-a11y:latest \
-		/app/scripts/accessibility-audit.sh
+		bash /app/scripts/accessibility-audit.sh
 	@echo ""
 	@echo "✅ Audit complete! Reports saved to docs/accessibility/reports/"
-	@echo "📊 View Lighthouse report: xdg-open docs/accessibility/reports/lighthouse/homepage.report.html 2>/dev/null || open docs/accessibility/reports/lighthouse/homepage.report.html 2>/dev/null"
+	@echo "📋 View JSON: cat docs/accessibility/reports/lighthouse/homepage.report.json"
 
-accessibility-quick: docker-build-a11y
+accessibility-quick: docker-build-a11y _check-a11y-serve
 	@echo "🚀 Quick accessibility check (Lighthouse only)..."
-	@echo "⚠️  Make sure 'make serve' is running in another terminal"
 	@echo ""
 	@mkdir -p docs/accessibility/reports/lighthouse
 	docker run --rm --init \
-		--mount type=bind,source=${PWD},target=/app \
+		--mount type=bind,source=${PWD}/docs/accessibility/reports,target=/app/reports \
 		--add-host=host.docker.internal:host-gateway \
 		-e SITE_URL=http://host.docker.internal:4000 \
 		bitprepared-a11y:latest \
-		lighthouse $(SITE_URL) --only-categories=accessibility --output=json --output=html --output-path=/app/reports/lighthouse/quick-check --chrome-flags="--headless --no-sandbox --disable-gpu"
+		sh -c "npx -y lighthouse \$$SITE_URL --only-categories=accessibility --output=json --output-path=/app/reports/lighthouse/quick-check --chrome-flags='--headless --no-sandbox --disable-gpu' --quiet"
 	@echo ""
-	@echo "✅ Quick check complete! Report saved to docs/accessibility/reports/lighthouse/quick-check.report.html"
+	@echo "✅ Quick check complete! Report saved to docs/accessibility/reports/lighthouse/quick-check.json"
 
-accessibility-full: docker-build-a11y
+accessibility-full: docker-build-a11y _check-a11y-serve
 	@echo "🔍 Full accessibility audit (all pages)..."
-	@echo "⚠️  Make sure 'make serve' is running in another terminal"
 	@echo "⏱️  This will test 8 pages and may take several minutes..."
 	@echo ""
 	@mkdir -p docs/accessibility/reports
 	docker run --rm --init \
-		--mount type=bind,source=${PWD},target=/app \
+		--mount type=bind,source=${PWD}/docs/accessibility/reports,target=/app/reports \
 		--add-host=host.docker.internal:host-gateway \
 		-e SITE_URL=http://host.docker.internal:4000 \
 		bitprepared-a11y:latest \
-		/app/scripts/accessibility-full-audit.sh
+		bash /app/scripts/accessibility-full-audit.sh
 	@echo ""
 	@echo "✅ Full audit complete! Reports saved to docs/accessibility/reports/"
 	@echo "📋 Summary:"
-	@echo "  - Lighthouse: docs/accessibility/reports/lighthouse/*.json"
+	@echo "  - Lighthouse: docs/accessibility/reports/lighthouse/*.report.json"
 	@echo "  - axe-core: docs/accessibility/reports/axe/*.json"
