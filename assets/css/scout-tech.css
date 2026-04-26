@@ -44,7 +44,7 @@
 :root {
   /* Colors */
   --color-primary: #0a3d0a;
-  --color-secondary: #1a7f1a;
+  --color-secondary: #0d5c0d;
   --color-accent: #00d9ff;
   --color-dark: #0a1f0a;
   --color-light: #e8f5e8;
@@ -421,6 +421,21 @@ main {
   margin-top: auto;
   display: flex;
   flex-direction: column;
+}
+
+/* Post tags section - better vertical spacing when wrapping */
+.post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  align-items: center;
+  line-height: 2;
+}
+
+.post-footer {
+  border-top: var(--border-width) solid var(--color-secondary);
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-md);
 }
 
 /* ===== NAVIGATION ===== */

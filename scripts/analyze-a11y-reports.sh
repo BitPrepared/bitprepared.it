@@ -9,31 +9,55 @@ echo ""
 echo "Generated: $(date)"
 echo ""
 
-if [ -f "$REPORTS_DIR/lighthouse/homepage" ]; then
-  LIGHTHOUSE="$REPORTS_DIR/lighthouse/homepage"
-else
-  LIGHTHOUSE="$REPORTS_DIR/lighthouse/homepage.json"
+# Find all Lighthouse reports (both .json and no-extension files)
+LIGHTHOUSE_FILES=()
+if [ -d "$REPORTS_DIR/lighthouse" ]; then
+  while IFS= read -r file; do
+    [[ ! "$file" =~ \.report\.json$ ]] && LIGHTHOUSE_FILES+=("$file")
+  done < <(find "$REPORTS_DIR/lighthouse" -type f \( -name "*.json" -o -type f ! -name "*" \) 2>/dev/null | sort)
 fi
 
-if [ -f "$REPORTS_DIR/axe/homepage.json" ]; then
-  AXE="$REPORTS_DIR/axe/homepage.json"
-else
-  AXE="$REPORTS_DIR/axe/homepage"
+# Find all axe-core reports
+AXE_FILES=()
+if [ -d "$REPORTS_DIR/axe" ]; then
+  while IFS= read -r file; do
+    AXE_FILES+=("$file")
+  done < <(find "$REPORTS_DIR/axe" -type f -name "*.json" 2>/dev/null | sort)
 fi
 
-# Run analysis using separate Node.js scripts
-node "$SCRIPT_DIR/analyze-lighthouse.js" "$LIGHTHOUSE"
+if [ ${#LIGHTHOUSE_FILES[@]} -eq 0 ] && [ ${#AXE_FILES[@]} -eq 0 ]; then
+  echo "⚠️  No reports found in $REPORTS_DIR"
+  echo "Run 'make accessibility-audit' first"
+  exit 1
+fi
 
-echo ""
-echo "## axe-core Violations"
-echo ""
+# Analyze each Lighthouse report
+for lighthouse_file in "${LIGHTHOUSE_FILES[@]}"; do
+  page_name=$(basename "$lighthouse_file" .json)
+  echo "## Lighthouse: $page_name"
+  echo ""
+  node "$SCRIPT_DIR/analyze-lighthouse.js" "$lighthouse_file"
+  echo ""
+done
 
-node "$SCRIPT_DIR/analyze-axe.js" "$AXE"
+# Analyze each axe-core report
+for axe_file in "${AXE_FILES[@]}"; do
+  page_name=$(basename "$axe_file" .json)
+  echo "## axe-core Violations: $page_name"
+  echo ""
+  node "$SCRIPT_DIR/analyze-axe.js" "$axe_file"
+  echo ""
+  node "$SCRIPT_DIR/analyze-fixes.js" "$axe_file"
+  echo ""
+done
 
-echo ""
-node "$SCRIPT_DIR/analyze-fixes.js" "$AXE"
-
-echo ""
 echo "## Files Analyzed"
-echo "- Lighthouse: \`$LIGHTHOUSE\`"
-echo "- axe-core: \`$AXE\`"
+echo "**Lighthouse reports:** ${#LIGHTHOUSE_FILES[@]}"
+for file in "${LIGHTHOUSE_FILES[@]}"; do
+  echo "- \`$file\`"
+done
+echo ""
+echo "**axe-core reports:** ${#AXE_FILES[@]}"
+for file in "${AXE_FILES[@]}"; do
+  echo "- \`$file\`"
+done
