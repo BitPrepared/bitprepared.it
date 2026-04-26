@@ -2,6 +2,15 @@ Changelog BitPrepared.it
 -------------------
 
 ### 2026-04-26
+  * FEATURE: Accessibility miglioramenti WCAG AA
+    - Contrast: --color-secondary scuro (#0d5c0d, ratio 11.7:1)
+    - Semantics: Heading order corretto (h4→h3 program items)
+    - Layout: Post tags spacing migliorato (.post-tags flex container)
+  * DEV: Docker container stabilità
+    - Accessibility: Playwright→Puppeteer (chromium di sistema)
+    - Visual regression: Chromium args per no-crash Docker
+
+### 2026-04-26
   * MIGRATION: Scout Tech Redesign applicato a Jekyll 4
     - CSS Migration: 5 files → 2 files (main.css, scout-tech.css)
     - JS Updates: Aggiunto tailwind-config.js
