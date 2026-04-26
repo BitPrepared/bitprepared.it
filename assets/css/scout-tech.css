@@ -324,6 +324,15 @@ main {
   cursor: pointer;
   transition: all var(--transition-fast);
   padding: 0.75rem 1.5rem;
+  outline: none;
+}
+
+.btn:hover {
+  outline: none;
+}
+
+.btn:focus {
+  outline: none;
 }
 
 /* Primary button - green, default */
