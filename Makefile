@@ -7,7 +7,7 @@ GEM_VOLUME = bitprepared-gems
 POLLING ?= 0
 A11Y_PAGE ?= full
 
-.PHONY: serve serve-bg serve-static serve-static-bg build clean install install-gems help open validate-graphics compare-graphics visual-baseline visual-clean docker-build-visual docker-build-a11y workflow generate-blog-post check-links accessibility-audit accessibility-analyze accessibility-clean accessibility-purge stop-servers stop-serve stop-static version-validate version-bump version-show
+.PHONY: serve serve-bg serve-static serve-static-bg build build-css clean install install-gems help open validate-graphics compare-graphics visual-baseline visual-clean docker-build-visual docker-build-a11y workflow generate-blog-post check-links accessibility-audit accessibility-analyze accessibility-clean accessibility-purge stop-servers stop-serve stop-static version-validate version-bump version-show
 
 help:
 	@echo "Uso: make [target]"
@@ -20,6 +20,7 @@ help:
 	@echo "  stop-servers     - Ferma tutti i server background"
 	@echo "  open             - Apri sito locale nel browser (http://localhost:4000/)"
 	@echo "  build            - Genera sito statico"
+	@echo "  build-css        - Genera Tailwind CSS localmente (Docker)"
 	@echo "  clean            - Rimuove _site/"
 	@echo "  install          - Installa dipendenze bundle (Docker, locale)"
 	@echo "  install-gems     - Installa gemme in volume persistente (una tantum)"
@@ -130,6 +131,15 @@ build:
 		$(DOCKER_IMAGE) \
 		jekyll build
 	@cp robots.txt _site/
+
+build-css:
+	@echo "🎨 Generazione Tailwind CSS in Docker..."
+	@docker run --rm \
+		--mount type=bind,source=${PWD},target=/app \
+		-w /app \
+		node:20-alpine \
+		npm run build:css
+	@echo "✅ CSS generato: assets/css/tailwind.css"
 
 clean:
 	rm -rf _site .jekyll-cache

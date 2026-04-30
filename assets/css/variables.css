@@ -1,0 +1,58 @@
+/*
+ * CSS Variables - BitPrepared.it
+ * Single source of truth for colors, typography, spacing, shadows
+ * Used by: Tailwind, main.css, scout-tech.css
+ */
+
+:root {
+  /* ===== COLORS (Direct HEX values for compatibility) ===== */
+  /* Primary palette - Verde foresta */
+  --color-primary-hex: #0a3d0a;
+  --color-secondary-hex: #1a7f1a;
+  --color-accent-hex: #00d9ff;
+
+  /* Light/Dark theme */
+  --color-dark-hex: #0a1f0a;
+  --color-light-hex: #e8f5e8;
+  --color-bg-hex: #161616;
+  --color-white-hex: #ffffff;
+
+  /* Text colors */
+  --color-text-hex: #e8f5e8;
+  --color-text-muted-hex: #666666;
+  --color-text-dark-hex: #1a1a1a;
+
+  /* Special theme colors */
+  --color-rosso-600-hex: #cc0000;
+  --color-rosso-50-hex: #fff0f0;
+  --color-rosso-light-hex: #ff6b6b;
+  --color-viola-600-hex: #7b2d8e;
+  --color-viola-50-hex: #f5f0ff;
+  --color-viola-light-hex: #da70d6;
+
+  /* ===== TYPOGRAPHY ===== */
+  --font-display: 'JetBrains Mono', 'Courier New', monospace;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* ===== SPACING ===== */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 4rem;
+
+  /* ===== LAYOUT ===== */
+  --container-max-width: 1200px;
+  --border-radius: 8px;
+  --border-width: 1px;
+
+  /* ===== SHADOWS ===== */
+  --shadow-sm: 0 2px 8px rgba(10, 63, 10, 0.1);
+  --shadow-md: 0 4px 16px rgba(10, 63, 10, 0.15);
+  --shadow-lg: 0 8px 24px rgba(26, 127, 26, 0.3);
+
+  /* ===== TRANSITIONS ===== */
+  --transition-fast: 150ms ease-out;
+  --transition-base: 300ms ease-out;
+  --transition-slow: 600ms ease-out;
+}

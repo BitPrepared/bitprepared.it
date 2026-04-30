@@ -14,6 +14,10 @@ twitter:
   username: bitprepared
   card: summary
 
+# SEO plugin settings
+seo:
+  meta_generator: false
+
 # output
 encoding: "utf-8"
 
