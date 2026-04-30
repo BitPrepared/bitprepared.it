@@ -7,7 +7,7 @@ GEM_VOLUME = bitprepared-gems
 POLLING ?= 0
 A11Y_PAGE ?= full
 
-.PHONY: serve serve-bg serve-static serve-static-bg build clean install install-gems help open validate-graphics compare-graphics visual-baseline visual-clean docker-build-visual docker-build-a11y workflow generate-blog-post check-links accessibility-audit accessibility-analyze accessibility-clean accessibility-purge stop-servers stop-serve stop-static
+.PHONY: serve serve-bg serve-static serve-static-bg build clean install install-gems help open validate-graphics compare-graphics visual-baseline visual-clean docker-build-visual docker-build-a11y workflow generate-blog-post check-links accessibility-audit accessibility-analyze accessibility-clean accessibility-purge stop-servers stop-serve stop-static version-validate version-bump version-show
 
 help:
 	@echo "Uso: make [target]"
@@ -366,3 +366,23 @@ accessibility-issues:
 	else \
 		echo "No report found. Run 'make accessibility-audit' first"; \
 	fi
+
+# Semantic Versioning
+.PHONY: version-validate version-bump version-show
+version-validate:
+	@echo "📋 Validating CHANGELOG..."
+	@chmod +x ./scripts/validate-changelog.sh
+	@./scripts/validate-changelog.sh
+
+version-bump:
+	@echo "🔖 Bumping version..."
+	@read -p "Type (major/minor/patch): " type; \
+	chmod +x ./scripts/bump-version.sh; \
+	./scripts/bump-version.sh $$type
+
+version-show:
+	@echo "📌 Current version:"
+	@grep -m 1 "^## \[" CHANGELOG.txt | sed 's/^## \[\([^]]*\)\].*/\1/'
+	@echo ""
+	@echo "📋 Git tags:"
+	@git tag -l | tail -5
