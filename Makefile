@@ -129,6 +129,7 @@ build:
 		-e BUNDLE_PATH=/usr/local/bundle \
 		$(DOCKER_IMAGE) \
 		jekyll build
+	@cp robots.txt _site/
 
 clean:
 	rm -rf _site .jekyll-cache
@@ -386,3 +387,4 @@ version-show:
 	@echo ""
 	@echo "📋 Git tags:"
 	@git tag -l | tail -5
+
