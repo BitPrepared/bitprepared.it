@@ -133,13 +133,13 @@ build:
 	@cp robots.txt _site/
 
 build-css:
-	@echo "🎨 Generazione Tailwind CSS in Docker..."
+	@echo "🎨 Generazione CSS unificato in Docker..."
 	@docker run --rm \
 		--mount type=bind,source=${PWD},target=/app \
 		-w /app \
 		node:20-alpine \
-		npm run build:css
-	@echo "✅ CSS generato: assets/css/tailwind.css"
+		sh -c 'npm run build:css && cat assets/css/tailwind-input.css assets/css/tailwind.css assets/css/main.css assets/css/scout-tech.css > assets/css/styles.css'
+	@echo "✅ CSS unificato generato: assets/css/styles.css"
 
 clean:
 	rm -rf _site .jekyll-cache
