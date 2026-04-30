@@ -6,3 +6,4 @@ screenshots/
 scripts/visual-regression/node_modules/
 /.config
 /docs/accessibility/reports/
+/CHANGELOG.txt.backup
