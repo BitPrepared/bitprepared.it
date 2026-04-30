@@ -140,8 +140,20 @@ body {
   height: 3px;
   background: #e8f5e8;
   margin: 3px 0;
-  transition: 0.3s ease-out;
+  transition: 300ms ease-out;
   border-radius: 2px;
+}
+
+.navbar-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(8px, 8px);
+}
+
+.navbar-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
 }
 
 .navbar-nav {

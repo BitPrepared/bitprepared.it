@@ -143,8 +143,20 @@ body {
   height: 3px;
   background: #e8f5e8;
   margin: 3px 0;
-  transition: 0.3s ease-out;
+  transition: 300ms ease-out;
   border-radius: 2px;
+}
+
+.navbar-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(8px, 8px);
+}
+
+.navbar-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
 }
 
 .navbar-nav {
@@ -750,93 +762,6 @@ main {
   border-top: 1px solid #1a7f1a;
   margin-top: 4rem;
   padding-top: 1.5rem;
-}
-
-/* ===== NAVIGATION ===== */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: rgba(10, 31, 10, 0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid #1a7f1a;
-  z-index: 1000;
-  padding: 1rem 1.5rem;
-}
-
-.navbar-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-}
-
-.navbar-brand {
-  font-family: JetBrains Mono, Courier New, monospace;
-  font-weight: 700;
-  font-size: 1.25rem;
-  color: #e8f5e8;
-}
-
-.navbar-brand::after {
-  display: none;
-}
-
-.navbar-toggle {
-  display: none;
-  flex-direction: column;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.5rem;
-  z-index: 1001;
-}
-
-.navbar-toggle span {
-  width: 25px;
-  height: 3px;
-  background: #e8f5e8;
-  margin: 3px 0;
-  transition: 300ms ease-out;
-  border-radius: 2px;
-}
-
-.navbar-toggle.active span:nth-child(1) {
-  transform: rotate(45deg) translate(8px, 8px);
-}
-
-.navbar-toggle.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.navbar-toggle.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(7px, -7px);
-}
-
-.navbar-nav {
-  display: flex;
-  gap: 1.5rem;
-  list-style: none;
-}
-
-.navbar-nav a {
-  color: #e8f5e8;
-  font-weight: 500;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  transition: background 150ms ease-out, color 150ms ease-out;
-}
-
-.navbar-nav a::after {
-  display: none;
-}
-
-.navbar-nav a:hover {
-  background: rgba(26, 127, 26, 0.2);
-  color: #00d9ff;
 }
 
 /* ===== FOOTER ===== */
