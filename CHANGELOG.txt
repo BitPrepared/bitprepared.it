@@ -8,6 +8,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- SEMVER: Semantic versioning implementation
+  - New version format: v1.2.3 instead of timestamps
+  - GitHub labels: release:major, release:minor, release:patch
+  - Automatic version bump on merge via labels
+  - CHANGELOG validation pre-merge via GitHub Actions
+  - Scripts: validate-changelog.sh, bump-version.sh, migrate-changelog.sh
+  - Makefile targets: version-validate, version-bump, version-show
+
+### Changed
+- DEV: Makefile serve improvements
+  - POLLING parameter: make serve POLLING=1 for force_polling
+  - Default make serve: no force_polling (lighter CPU usage)
+- DEV: Autonomous server management
+  - New targets: serve-bg, serve-static-bg, stop-servers, stop-serve, stop-static
+  - Servers start/stop automatically for validate-graphics, accessibility-audit, visual-baseline
+  - No more manual server management required
+  - Automatic cleanup even if commands fail
+
+- DEV: Accessibility workflow improvements
+  - Fused accessibility-analyze + accessibility-score into single target
+  - accessibility-analyze generates physical summary.md report
+  - accessibility-audit now runs analyze automatically after audit
+  - Added A11Y_PAGE parameter: make accessibility-audit A11Y_PAGE=index (homepage only)
+  - Removed: accessibility-full, accessibility-quick (simplified interface)
+  - Quick scores now show ALL pages, not just homepage
+
+- DEV: GitHub Actions workflow updates
+  - New workflow: validate-pr.yml for pre-merge checks
+  - Updated: site-release.yml uses semantic versioning
+  - Automatic CHANGELOG bump + git tag creation on merge
+  - Accessibility report now uploaded as workflow artifact
+
+### Fixed
+- FIX: Server cleanup on command failure
+  - validate-graphics, accessibility-audit, visual-baseline now always stop servers
+  - Subshell pattern ensures cleanup even if docker run fails
+- FIX: Container name conflicts in serve-bg
+  - Automatic cleanup of existing containers before starting new ones
+  - Improved stop-serve with fallback PID handling
+
 ## [20260426T125004] - 2026-04-26
 
 ### 2026-04-26
