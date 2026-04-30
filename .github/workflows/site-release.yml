@@ -37,6 +37,39 @@ jobs:
         docker run \
         -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
         jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
+    - name: Run accessibility audit
+      run: |
+        # Build a11y Docker image
+        docker build -t bitprepared-a11y:latest -f docker/accessibility/Dockerfile .
+        # Start Jekyll in background
+        docker run -d \
+          --name bitprepared-jekyll \
+          -v ${{ github.workspace }}:/srv/jekyll \
+          -p 4000:4000 \
+          jekyll/jekyll:latest \
+          jekyll serve --config _config.yml,_config_dev.yml --host 0.0.0.0
+        # Wait for Jekyll to be ready
+        for i in {1..30}; do
+          if curl -f -s -o /dev/null http://localhost:4000; then
+            echo "Jekyll ready"
+            break
+          fi
+          sleep 1
+        done
+        # Run accessibility audit
+        mkdir -p docs/accessibility/reports
+        docker run --rm --init \
+          -v ${{ github.workspace }}/docs/accessibility/reports:/app/reports \
+          --add-host=host.docker.internal:host-gateway \
+          -e SITE_URL=http://host.docker.internal:4000 \
+          bitprepared-a11y:latest \
+          bash /app/scripts/accessibility-full-audit.sh
+        # Stop Jekyll
+        docker stop bitprepared-jekyll || true
+        docker rm bitprepared-jekyll || true
+    - name: Generate accessibility summary
+      run: |
+        ./scripts/analyze-a11y-reports.sh docs/accessibility/reports > docs/accessibility/reports/summary.md
     - uses: montudor/action-zip@v1
       with:
         args: zip -qq -r release.zip _site
@@ -47,3 +80,8 @@ jobs:
         makeLatest: true
         tag: ${{ steps.date.outputs.formattedTime }}
         bodyFile: "CHANGELOG.txt"
+    - name: Upload accessibility summary as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: accessibility-report
+        path: docs/accessibility/reports/summary.md
