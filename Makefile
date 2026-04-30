@@ -4,15 +4,20 @@ STATIC_PORT ?= 8000
 PROJECT_PATH ?= /workspace/bitprepared.it
 DOCKER_IMAGE = jekyll/jekyll:$(JEKYLL_VERSION)
 GEM_VOLUME = bitprepared-gems
+POLLING ?= 0
+A11Y_PAGE ?= full
 
-.PHONY: serve serve-static build clean install install-gems help open validate-graphics compare-graphics visual-baseline visual-clean docker-build-visual docker-build-a11y workflow generate-blog-post check-links accessibility-audit accessibility-quick accessibility-full accessibility-analyze accessibility-score accessibility-clean accessibility-purge _check-a11y-serve _check-servers _start-servers _check-serve _start-serve
+.PHONY: serve serve-bg serve-static serve-static-bg build clean install install-gems help open validate-graphics compare-graphics visual-baseline visual-clean docker-build-visual docker-build-a11y workflow generate-blog-post check-links accessibility-audit accessibility-analyze accessibility-clean accessibility-purge stop-servers stop-serve stop-static
 
 help:
 	@echo "Uso: make [target]"
 	@echo ""
 	@echo "Target disponibili:"
 	@echo "  serve            - Avvia server di sviluppo (porta 4000, Docker)"
+	@echo "  serve-bg         - Avvia Jekyll in background (per CI/CD)"
 	@echo "  serve-static     - Avvia server statico (porta 8000, Python)"
+	@echo "  serve-static-bg  - Avvia server statico in background (per CI/CD)"
+	@echo "  stop-servers     - Ferma tutti i server background"
 	@echo "  open             - Apri sito locale nel browser (http://localhost:4000/)"
 	@echo "  build            - Genera sito statico"
 	@echo "  clean            - Rimuove _site/"
@@ -20,22 +25,21 @@ help:
 	@echo "  install-gems     - Installa gemme in volume persistente (una tantum)"
 	@echo "  validate-graphics- Valida grafica serve vs serve-static (Docker)"
 	@echo "  compare-graphics - Confronta solo screenshot esistenti (veloce)"
-	@echo "  visual-baseline  - Crea baseline immagini (richiede make serve attivo)"
+	@echo "  visual-baseline  - Crea baseline immagini (autonomous, avvia server in background)"
 	@echo "  visual-clean      - Rimuovi screenshot temp"
 	@echo "  docker-build-visual- Build immagine Docker visual regression"
 	@echo "  workflow         - Mostra guida workflow sviluppo"
 	@echo "  generate-blog-post- Genera blog post da file evento"
 	@echo "  check-links      - Verifica link broken nel sito (htmltest)"
-	@echo "  accessibility-audit- Audit accessibilità completo (Lighthouse + axe, Docker)"
-	@echo "  accessibility-quick - Quick check accessibilità (Lighthouse solo homepage)"
-		@echo "  accessibility-analyze - Analizza report esistenti e genera summary"
-		@echo "  accessibility-score - Mostra score rapidi (Lighthouse + axe violations)"
+	@echo "  accessibility-audit- Audit accessibilità + auto-analyze (default: full 8 pagine, usa A11Y_PAGE=index per solo homepage)"
+		@echo "  accessibility-analyze - Analizza report, genera summary.md e mostra score di tutte le pagine"
 		@echo "  accessibility-clean  - Rimuovi report accessibilità"
 		@echo "  accessibility-purge  - Rimuovi report + Docker image a11y"
-	@echo "  accessibility-full- Audit completo tutte le pagine (8 pagine rappresentative)"
 	@echo "  help             - Mostra questo messaggio"
 	@echo ""
 	@echo "Opzioni:"
+	@echo "  POLLING=1 make serve - Abilita force_polling per live reload"
+	@echo "  A11Y_PAGE=index make accessibility-audit - Test solo homepage invece di full (8 pagine)"
 	@echo "  VIEWPORTS='desktop,mobile' make validate-graphics - Test solo viewport specifici"
 
 serve:
@@ -45,11 +49,77 @@ serve:
 		-e BUNDLE_PATH=/usr/local/bundle \
 		-p $(PORT):4000 \
 		$(DOCKER_IMAGE) \
-		jekyll serve --config _config.yml,_config_dev.yml --force_polling
+		jekyll serve --config _config.yml,_config_dev.yml $(if $(filter 1,$(POLLING)),--force_polling,)
 
 serve-static: build
 	@echo "Server statico avviato su http://localhost:$(STATIC_PORT)/"
 	@cd _site && python3 -m http.server $(STATIC_PORT)
+
+.PHONY: serve-bg serve-static-bg stop-servers stop-serve stop-static
+
+# Avvia Jekyll serve in background (scrive PID)
+serve-bg:
+	@echo "🚀 Avvio Jekyll in background..."
+	@docker stop bitprepared-jekyll-$(PORT) 2>/dev/null || true
+	@docker rm bitprepared-jekyll-$(PORT) 2>/dev/null || true
+	@docker run -d \
+		--name bitprepared-jekyll-$(PORT) \
+		--mount type=bind,source=${PWD},target=/srv/jekyll \
+		--volume="$(GEM_VOLUME):/usr/local/bundle" \
+		-e BUNDLE_PATH=/usr/local/bundle \
+		-p $(PORT):4000 \
+		$(DOCKER_IMAGE) \
+		jekyll serve --config _config.yml,_config_dev.yml --host 0.0.0.0 > /dev/null
+	@docker ps -q -f name=bitprepared-jekyll-$(PORT) > .jekyll_serve.pid
+	@echo "⏳ Attendo avvio server..."
+	@for i in $$(seq 1 30); do \
+		if curl -f -s -o /dev/null http://localhost:$(PORT); then \
+			echo "✅ Jekyll pronto su http://localhost:$(PORT)"; \
+			exit 0; \
+		fi; \
+		sleep 1; \
+	done; \
+	echo "❌ Timeout avvio Jekyll"; exit 1
+
+# Avvia server statico in background (scrive PID)
+serve-static-bg: build
+	@echo "🚀 Avvio server statico in background..."
+	@cd _site && python3 -m http.server $(STATIC_PORT) > /tmp/static_server.log 2>&1 & \
+		echo $$! > ../.static_serve.pid
+	@echo "⏳ Attendo avvio server..."
+	@for i in $$(seq 1 10); do \
+		if curl -f -s -o /dev/null http://localhost:$(STATIC_PORT); then \
+			echo "✅ Server statico pronto su http://localhost:$(STATIC_PORT)"; \
+			exit 0; \
+		fi; \
+		sleep 1; \
+	done; \
+	echo "❌ Timeout avvio server statico"; exit 1
+
+# Ferma entrambi i server
+stop-servers: stop-serve stop-static
+
+# Ferma Jekyll
+stop-serve:
+	@echo "🛑 Fermo Jekyll..."
+	@docker stop bitprepared-jekyll-$(PORT) 2>/dev/null || true
+	@docker rm bitprepared-jekyll-$(PORT) 2>/dev/null || true
+	@if [ -f .jekyll_serve.pid ]; then \
+		pid=$$(cat .jekyll_serve.pid); \
+		docker stop $$pid 2>/dev/null || true; \
+		docker rm $$pid 2>/dev/null || true; \
+		rm -f .jekyll_serve.pid; \
+	fi
+	@echo "✅ Jekyll fermato"
+
+# Ferma server statico
+stop-static:
+	@if [ -f .static_serve.pid ]; then \
+		echo "🛑 Fermo server statico..."; \
+		kill $$(cat .static_serve.pid) 2>/dev/null || true; \
+		rm -f .static_serve.pid; \
+		echo "✅ Server statico fermato"; \
+	fi
 
 build:
 	docker run --rm -it \
@@ -90,11 +160,12 @@ open:
 validate-graphics: docker-build-visual
 	@echo "🔍 Avvio validazione grafica in Docker..."
 	@echo ""
-	@echo "📡 Verifica server..."
-	@$(MAKE) --no-print-directory _check-servers || $(MAKE) --no-print-directory _start-servers
+	@$(MAKE) --no-print-directory serve-bg
+	@$(MAKE) --no-print-directory serve-static-bg
 	@mkdir -p screenshots/serve screenshots/static screenshots/diff screenshots/report
 	@chmod -R 777 screenshots/
-	docker run --rm --init \
+	@echo "📸 Eseguo capture..."
+	@(docker run --rm --init \
 		--mount type=bind,source=${PWD},target=/app \
 		--add-host=host.docker.internal:host-gateway \
 		--user $(shell id -u):$(shell id -g) \
@@ -102,7 +173,11 @@ validate-graphics: docker-build-visual
 		-e HOST_IP=host.docker.internal \
 		-e VIEWPORTS="${VIEWPORTS}" \
 		bitprepared-visual-regression:latest \
-		sh -c 'cd /app/scripts/visual-regression && node capture.js && node compare.js'
+		sh -c 'cd /app/scripts/visual-regression && node capture.js && node compare.js'; \
+	ret=$$?; \
+	$(MAKE) --no-print-directory stop-servers; \
+	exit $$ret)
+	@echo "✅ Validazione completata"
 
 compare-graphics: docker-build-visual
 	@echo "📊 Confronto screenshot esistenti (no capture)..."
@@ -115,51 +190,22 @@ compare-graphics: docker-build-visual
 		bitprepared-visual-regression:latest \
 		node /app/scripts/visual-regression/compare.js
 
-.PHONY: _check-servers _start-servers
-_check-servers:
-	@echo -n "  ● Serve (4000): "
-	@curl -f -s -o /dev/null http://localhost:4000 && echo "✅" || (echo "❌"; exit 1)
-	@echo -n "  ● Static (8000): "
-	@curl -f -s -o /dev/null http://localhost:8000 && echo "✅" || (echo "❌"; exit 1)
-	@echo ""
-
-_start-servers:
-	@echo ""
-	@echo "⚠️  Server non attivi. Avvia in terminali separati:"
-	@echo "   Terminal 1: make serve"
-	@echo "   Terminal 2: cd _site && python3 -m http.server 8000"
-	@echo ""
-	@read -p "Premi ENTER quando server sono pronti..."
-	@$(MAKE) --no-print-directory _check-servers
-
 visual-baseline: docker-build-visual
 	@echo "📸 Creazione baseline images..."
 	@echo ""
-	@echo "📡 Verifica server..."
-	@$(MAKE) --no-print-directory _check-serve || $(MAKE) --no-print-directory _start-serve
+	@$(MAKE) --no-print-directory serve-bg
 	@mkdir -p tests/visual-baseline/desktop tests/visual-baseline/mobile tests/visual-baseline/tablet
-	docker run --rm --init \
+	@(docker run --rm --init \
 		--mount type=bind,source=${PWD},target=/app \
 		--add-host=host.docker.internal:host-gateway \
 		-e HOST_IP=host.docker.internal \
 		--user $(shell id -u):$(shell id -g) \
 		--entrypoint="" \
 		bitprepared-visual-regression:latest \
-		node /app/scripts/visual-regression/create-baseline.js
-
-.PHONY: _check-serve _start-serve
-_check-serve:
-	@echo -n "  ● Serve (4000): "
-	@curl -f -s -o /dev/null http://localhost:4000 && echo "✅" || (echo "❌"; exit 1)
-	@echo ""
-
-_start-serve:
-	@echo ""
-	@echo "⚠️  Server non attivo. Avvia in un terminale separato:"
-	@echo "   Terminal 1: make serve"
-	@echo ""
-	@read -p "Premi ENTER quando server è pronto..."
-	@$(MAKE) --no-print-directory _check-serve
+		node /app/scripts/visual-regression/create-baseline.js; \
+	ret=$$?; \
+	$(MAKE) --no-print-directory stop-serve; \
+	exit $$ret)
 	@echo "✅ Baseline creata in tests/visual-baseline/"
 	@echo "📝 Commit now: git add tests/visual-baseline/ && git commit -m 'Add visual baseline'"
 
@@ -226,89 +272,72 @@ check-links: build
 
 
 # Accessibility Audit (Docker-based)
-.PHONY: docker-build-a11y _check-a11y-serve
+.PHONY: docker-build-a11y
 docker-build-a11y:
 	@echo "🐳 Building accessibility Docker image..."
 	docker build -t bitprepared-a11y:latest -f docker/accessibility/Dockerfile .
 
-_check-a11y-serve:
-	@echo -n "  ● Jekyll Serve (4000): "
-	@curl -f -s -o /dev/null http://localhost:4000 && echo "✅" || (echo "❌"; echo ""; echo "⚠️  Server not running. Start with: make serve"; exit 1)
-
-accessibility-audit: docker-build-a11y _check-a11y-serve
+accessibility-audit: docker-build-a11y
 	@echo "🔍 Running accessibility audit..."
 	@echo ""
+	@$(MAKE) --no-print-directory serve-bg
 	@mkdir -p docs/accessibility/reports
-	docker run --rm --init \
-		--user $(shell id -u):$(shell id -g) \
-		--mount type=bind,source=${PWD}/docs/accessibility/reports,target=/app/reports \
-		--add-host=host.docker.internal:host-gateway \
-		-e SITE_URL=http://host.docker.internal:4000 \
-		bitprepared-a11y:latest \
-		bash /app/scripts/accessibility-audit.sh
+	@(if [ "$(A11Y_PAGE)" = "index" ]; then \
+		echo "📊 Testing homepage only..."; \
+		docker run --rm --init \
+			--user $(shell id -u):$(shell id -g) \
+			--mount type=bind,source=${PWD}/docs/accessibility/reports,target=/app/reports \
+			--add-host=host.docker.internal:host-gateway \
+			-e SITE_URL=http://host.docker.internal:4000 \
+			bitprepared-a11y:latest \
+			bash /app/scripts/accessibility-audit.sh; \
+	else \
+		echo "📊 Testing all pages (8 pages)..."; \
+		echo "⏱️  This may take several minutes..."; \
+		docker run --rm --init \
+			--user $(shell id -u):$(shell id -g) \
+			--mount type=bind,source=${PWD}/docs/accessibility/reports,target=/app/reports \
+			--add-host=host.docker.internal:host-gateway \
+			-e SITE_URL=http://host.docker.internal:4000 \
+			bitprepared-a11y:latest \
+			bash /app/scripts/accessibility-full-audit.sh; \
+	fi; \
+	ret=$$?; \
+	$(MAKE) --no-print-directory stop-serve; \
+	exit $$ret)
 	@echo ""
 	@echo "✅ Audit complete! Reports saved to docs/accessibility/reports/"
 	@echo "📋 View JSON: cat docs/accessibility/reports/lighthouse/homepage.report.json"
+	@echo ""
+	@$(MAKE) --no-print-directory accessibility-analyze
 
-accessibility-quick: docker-build-a11y _check-a11y-serve
-	@echo "🚀 Quick accessibility check (Lighthouse only)..."
-	@echo ""
-	@mkdir -p docs/accessibility/reports/lighthouse
-	docker run --rm --init \
-		--user $(shell id -u):$(shell id -g) \
-		--mount type=bind,source=${PWD}/docs/accessibility/reports,target=/app/reports \
-		--add-host=host.docker.internal:host-gateway \
-		-e SITE_URL=http://host.docker.internal:4000 \
-		bitprepared-a11y:latest \
-		sh -c "npx -y lighthouse \$$SITE_URL --only-categories=accessibility --output=json --output-path=/app/reports/lighthouse/quick-check --chrome-flags='--headless --no-sandbox --disable-gpu' --quiet"
-	@echo ""
-	@echo "✅ Quick check complete! Report saved to docs/accessibility/reports/lighthouse/quick-check.json"
 
-accessibility-full: docker-build-a11y _check-a11y-serve
-	@echo "🔍 Full accessibility audit (all pages)..."
-	@echo "⏱️  This will test 8 pages and may take several minutes..."
-	@echo ""
-	@mkdir -p docs/accessibility/reports
-	docker run --rm --init \
-		--user $(shell id -u):$(shell id -g) \
-		--mount type=bind,source=${PWD}/docs/accessibility/reports,target=/app/reports \
-		--add-host=host.docker.internal:host-gateway \
-		-e SITE_URL=http://host.docker.internal:4000 \
-		bitprepared-a11y:latest \
-		bash /app/scripts/accessibility-full-audit.sh
-	@echo ""
-	@echo "✅ Full audit complete! Reports saved to docs/accessibility/reports/"
-	@echo "📋 Summary:"
-	@echo "  - Lighthouse: docs/accessibility/reports/lighthouse/*.report.json"
-	@echo "  - axe-core: docs/accessibility/reports/axe/*.json"
-
-# Analyze accessibility reports
-.PHONY: accessibility-analyze
+# Analyze accessibility reports and generate summary
 accessibility-analyze:
 	@echo "📊 Analyzing accessibility reports..."
 	@echo ""
-	@./scripts/analyze-a11y-reports.sh docs/accessibility/reports
-
-# Quick score check
-.PHONY: accessibility-score
-accessibility-score:
-	@echo "📊 Lighthouse Accessibility Score:"
-	@if [ -f docs/accessibility/reports/lighthouse/homepage ]; then \
-		node -e "const fs=require('fs');const d=JSON.parse(fs.readFileSync('docs/accessibility/reports/lighthouse/homepage','utf8'));console.log((d.categories.accessibility.score*100).toFixed(0)+'%')"; \
-	elif [ -f docs/accessibility/reports/lighthouse/homepage.json ]; then \
-		cat docs/accessibility/reports/lighthouse/homepage.json | jq -r '(.categories.accessibility.score * 100 | floor | tostring) + "%"'; \
-	else \
-		echo "No report found. Run 'make accessibility-audit' first"; \
-	fi
+	@mkdir -p docs/accessibility/reports
+	@./scripts/analyze-a11y-reports.sh docs/accessibility/reports > docs/accessibility/reports/summary.md
+	@echo "✅ Summary saved to docs/accessibility/reports/summary.md"
 	@echo ""
-	@echo "🪓 axe-core Violations:"
-	@if [ -f docs/accessibility/reports/axe/homepage.json ]; then \
-		cat docs/accessibility/reports/axe/homepage.json | jq '.violations | length'; \
-	elif [ -f docs/accessibility/reports/axe/homepage ]; then \
-		cat docs/accessibility/reports/axe/homepage | jq '.violations | length'; \
-	else \
-		echo "No report found"; \
-	fi
+	@echo "📊 Quick Scores:"
+	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@for file in docs/accessibility/reports/lighthouse/*.json docs/accessibility/reports/lighthouse/*; do \
+		if [ -f "$$file" ]; then \
+			pagename=$$(basename "$$file" .json | sed 's/\.report$$//'); \
+			score=$$(cat "$$file" | jq -r '.categories.accessibility.score * 100 | floor'); \
+			echo "  ● Lighthouse ($$pagename): $$score%"; \
+		fi; \
+	done
+	@for file in docs/accessibility/reports/axe/*.json; do \
+		if [ -f "$$file" ]; then \
+			pagename=$$(basename "$$file" .json); \
+			violations=$$(cat "$$file" | jq '.violations | length'); \
+			echo "  ● axe-core ($$pagename): $$violations violations"; \
+		fi; \
+	done
+	@echo ""
+	@echo "📋 Full summary: cat docs/accessibility/reports/summary.md"
 
 # Clean accessibility reports
 .PHONY: accessibility-clean
