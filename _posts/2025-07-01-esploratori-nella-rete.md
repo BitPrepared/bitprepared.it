@@ -9,6 +9,7 @@ featured: images/esploratori-della-rete.png
 comments: true
 share: true
 permalink: /blog/2025/esploratori-nella-rete/
+type: blog
 ---
 
 Arriva il XXXIX° campo e/g e come anno avrà luogo alla base di Costigiola. Il brevetto di maestro delle tecnologie ti aspetta. Se vuoi essere cambiamento nel tuo reparto, saper usare al meglio le tecnologie questo e' il campo che fa per te, con una radicata storia e tanti capi competenti pronti ad accoglierti. 

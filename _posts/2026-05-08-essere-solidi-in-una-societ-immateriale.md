@@ -10,6 +10,7 @@ featured: images/essere-solidi.png
 comments: true
 share: true
 permalink: /blog/2026/essere-solidi-in-una-societ-immateriale-bologna-8-10-maggio/
+type: blog
 ---
 
 **Come essere persone concrete in un mondo sempre più digitale?**
