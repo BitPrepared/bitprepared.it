@@ -206,3 +206,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [Unreleased]: https://github.com/bitprepared/bitprepared.it/compare/v20260426T125004...HEAD
 [20260426T125004]: https://github.com/bitprepared.bitprepared.it/releases/tag/v20260426T125004
+
+### Added
+- Phase 3: Accessibility, SEO, Images, and Performance
+  - ARIA verification system with make check-aria (245 ARIA tags found)
+  - Enhanced SEO with jekyll-seo-tag plugin
+  - Schema.org JSON-LD structured data for blog posts and events
+  - Open Graph and Twitter Card meta tags via jekyll-seo-tag
+  - Image optimization pipeline for responsive images (mobile/tablet/desktop)
+  - Lazy loading for below-the-fold images
+  - Critical CSS extraction (468 bytes) for faster render
+  - Site logo placeholder for SEO and social sharing
+  - Performance optimization now mandatory
+
+### Changed
+- SEO: Enabled jekyll-seo-tag plugin with configuration
+- Layouts: Added structured-data.html and lazy-load.html includes
+- Images: Added loading="lazy" attribute to all images
+- CSS: Inline critical CSS, defer main stylesheet
+- Makefile: Added check-aria, optimize-images, extract-critical targets
+
+### Fixed
+- Duplicate structured-data include in default layout
+- Removed glob dependency from check-aria.js
+- Graceful fallback when ImageMagick not available

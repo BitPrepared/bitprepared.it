@@ -1,0 +1,1520 @@
+{
+  "_site/about/index.html": [
+    {
+      "tag": "aria-label",
+      "value": "Menu principale",
+      "line": 49,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Toggle navigation",
+      "line": 52,
+      "context": "<button class=\"navbar-toggle\" id=\"navbar-toggle\" aria-label=\"Toggle navigation\" aria-expanded=\"false"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Footer con informazioni su Bit Prepared",
+      "line": 97,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Twitter",
+      "line": 100,
+      "context": "<a href=\"https://twitter.com/bitprepared\" class=\"fa fa-twitter\" aria-label=\"Seguici su Twitter\"><spa"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Facebook",
+      "line": 101,
+      "context": "<a href=\"https://www.facebook.com/bitprepared\" class=\"fa fa-facebook\" aria-label=\"Seguici su Faceboo"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Instagram",
+      "line": 102,
+      "context": "<a href=\"https://www.instagram.com/bit.prepared/\" class=\"fa fa-instagram\" aria-label=\"Seguici su Ins"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Invia email a info@bitprepared.it",
+      "line": 103,
+      "context": "<a href=\"mailto:info@bitprepared.it\" class=\"fa fa-envelope\" aria-label=\"Invia email a info@bitprepar"
+    },
+    {
+      "tag": "role",
+      "value": "navigation",
+      "line": 49,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "role",
+      "value": "main",
+      "line": 67,
+      "context": "<main id=\"main-content\" role=\"main\">"
+    },
+    {
+      "tag": "role",
+      "value": "contentinfo",
+      "line": 97,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    }
+  ],
+  "_site/blog/2015/esploratori-nella-rete/index.html": [
+    {
+      "tag": "aria-label",
+      "value": "Menu principale",
+      "line": 77,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Toggle navigation",
+      "line": 80,
+      "context": "<button class=\"navbar-toggle\" id=\"navbar-toggle\" aria-label=\"Toggle navigation\" aria-expanded=\"false"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Footer con informazioni su Bit Prepared",
+      "line": 158,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Twitter",
+      "line": 161,
+      "context": "<a href=\"https://twitter.com/bitprepared\" class=\"fa fa-twitter\" aria-label=\"Seguici su Twitter\"><spa"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Facebook",
+      "line": 162,
+      "context": "<a href=\"https://www.facebook.com/bitprepared\" class=\"fa fa-facebook\" aria-label=\"Seguici su Faceboo"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Instagram",
+      "line": 163,
+      "context": "<a href=\"https://www.instagram.com/bit.prepared/\" class=\"fa fa-instagram\" aria-label=\"Seguici su Ins"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Invia email a info@bitprepared.it",
+      "line": 164,
+      "context": "<a href=\"mailto:info@bitprepared.it\" class=\"fa fa-envelope\" aria-label=\"Invia email a info@bitprepar"
+    },
+    {
+      "tag": "role",
+      "value": "navigation",
+      "line": 77,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "role",
+      "value": "main",
+      "line": 95,
+      "context": "<main id=\"main-content\" role=\"main\">"
+    },
+    {
+      "tag": "role",
+      "value": "presentation",
+      "line": 112,
+      "context": "<img src=\"/assets/images/esploratori-della-rete.png\" alt=\"\" loading=\"lazy\" class=\"w-full h-auto\" rol"
+    },
+    {
+      "tag": "role",
+      "value": "contentinfo",
+      "line": 158,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    }
+  ],
+  "_site/blog/2023/esploratori-nella-rete/index.html": [
+    {
+      "tag": "aria-label",
+      "value": "Menu principale",
+      "line": 77,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Toggle navigation",
+      "line": 80,
+      "context": "<button class=\"navbar-toggle\" id=\"navbar-toggle\" aria-label=\"Toggle navigation\" aria-expanded=\"false"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Footer con informazioni su Bit Prepared",
+      "line": 171,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Twitter",
+      "line": 174,
+      "context": "<a href=\"https://twitter.com/bitprepared\" class=\"fa fa-twitter\" aria-label=\"Seguici su Twitter\"><spa"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Facebook",
+      "line": 175,
+      "context": "<a href=\"https://www.facebook.com/bitprepared\" class=\"fa fa-facebook\" aria-label=\"Seguici su Faceboo"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Instagram",
+      "line": 176,
+      "context": "<a href=\"https://www.instagram.com/bit.prepared/\" class=\"fa fa-instagram\" aria-label=\"Seguici su Ins"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Invia email a info@bitprepared.it",
+      "line": 177,
+      "context": "<a href=\"mailto:info@bitprepared.it\" class=\"fa fa-envelope\" aria-label=\"Invia email a info@bitprepar"
+    },
+    {
+      "tag": "role",
+      "value": "navigation",
+      "line": 77,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "role",
+      "value": "main",
+      "line": 95,
+      "context": "<main id=\"main-content\" role=\"main\">"
+    },
+    {
+      "tag": "role",
+      "value": "presentation",
+      "line": 112,
+      "context": "<img src=\"/assets/images/esploratori-della-rete.png\" alt=\"\" loading=\"lazy\" class=\"w-full h-auto\" rol"
+    },
+    {
+      "tag": "role",
+      "value": "contentinfo",
+      "line": 171,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    }
+  ],
+  "_site/blog/2025/esploratori-nella-rete/index.html": [
+    {
+      "tag": "aria-label",
+      "value": "Menu principale",
+      "line": 77,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Toggle navigation",
+      "line": 80,
+      "context": "<button class=\"navbar-toggle\" id=\"navbar-toggle\" aria-label=\"Toggle navigation\" aria-expanded=\"false"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Footer con informazioni su Bit Prepared",
+      "line": 170,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Twitter",
+      "line": 173,
+      "context": "<a href=\"https://twitter.com/bitprepared\" class=\"fa fa-twitter\" aria-label=\"Seguici su Twitter\"><spa"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Facebook",
+      "line": 174,
+      "context": "<a href=\"https://www.facebook.com/bitprepared\" class=\"fa fa-facebook\" aria-label=\"Seguici su Faceboo"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Instagram",
+      "line": 175,
+      "context": "<a href=\"https://www.instagram.com/bit.prepared/\" class=\"fa fa-instagram\" aria-label=\"Seguici su Ins"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Invia email a info@bitprepared.it",
+      "line": 176,
+      "context": "<a href=\"mailto:info@bitprepared.it\" class=\"fa fa-envelope\" aria-label=\"Invia email a info@bitprepar"
+    },
+    {
+      "tag": "role",
+      "value": "navigation",
+      "line": 77,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "role",
+      "value": "main",
+      "line": 95,
+      "context": "<main id=\"main-content\" role=\"main\">"
+    },
+    {
+      "tag": "role",
+      "value": "presentation",
+      "line": 112,
+      "context": "<img src=\"/assets/images/esploratori-della-rete.png\" alt=\"\" loading=\"lazy\" class=\"w-full h-auto\" rol"
+    },
+    {
+      "tag": "role",
+      "value": "contentinfo",
+      "line": 170,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    }
+  ],
+  "_site/blog/index.html": [
+    {
+      "tag": "aria-label",
+      "value": "Menu principale",
+      "line": 47,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Toggle navigation",
+      "line": 50,
+      "context": "<button class=\"navbar-toggle\" id=\"navbar-toggle\" aria-label=\"Toggle navigation\" aria-expanded=\"false"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Footer con informazioni su Bit Prepared",
+      "line": 159,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Twitter",
+      "line": 162,
+      "context": "<a href=\"https://twitter.com/bitprepared\" class=\"fa fa-twitter\" aria-label=\"Seguici su Twitter\"><spa"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Facebook",
+      "line": 163,
+      "context": "<a href=\"https://www.facebook.com/bitprepared\" class=\"fa fa-facebook\" aria-label=\"Seguici su Faceboo"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Instagram",
+      "line": 164,
+      "context": "<a href=\"https://www.instagram.com/bit.prepared/\" class=\"fa fa-instagram\" aria-label=\"Seguici su Ins"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Invia email a info@bitprepared.it",
+      "line": 165,
+      "context": "<a href=\"mailto:info@bitprepared.it\" class=\"fa fa-envelope\" aria-label=\"Invia email a info@bitprepar"
+    },
+    {
+      "tag": "role",
+      "value": "navigation",
+      "line": 47,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "role",
+      "value": "main",
+      "line": 65,
+      "context": "<main id=\"main-content\" role=\"main\">"
+    },
+    {
+      "tag": "role",
+      "value": "contentinfo",
+      "line": 159,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    }
+  ],
+  "_site/cookie-policy/index.html": [
+    {
+      "tag": "aria-label",
+      "value": "Menu principale",
+      "line": 47,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Toggle navigation",
+      "line": 50,
+      "context": "<button class=\"navbar-toggle\" id=\"navbar-toggle\" aria-label=\"Toggle navigation\" aria-expanded=\"false"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Footer con informazioni su Bit Prepared",
+      "line": 227,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Twitter",
+      "line": 230,
+      "context": "<a href=\"https://twitter.com/bitprepared\" class=\"fa fa-twitter\" aria-label=\"Seguici su Twitter\"><spa"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Facebook",
+      "line": 231,
+      "context": "<a href=\"https://www.facebook.com/bitprepared\" class=\"fa fa-facebook\" aria-label=\"Seguici su Faceboo"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Instagram",
+      "line": 232,
+      "context": "<a href=\"https://www.instagram.com/bit.prepared/\" class=\"fa fa-instagram\" aria-label=\"Seguici su Ins"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Invia email a info@bitprepared.it",
+      "line": 233,
+      "context": "<a href=\"mailto:info@bitprepared.it\" class=\"fa fa-envelope\" aria-label=\"Invia email a info@bitprepar"
+    },
+    {
+      "tag": "role",
+      "value": "navigation",
+      "line": 47,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "role",
+      "value": "main",
+      "line": 65,
+      "context": "<main id=\"main-content\" role=\"main\">"
+    },
+    {
+      "tag": "role",
+      "value": "contentinfo",
+      "line": 227,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    }
+  ],
+  "_site/eventi/campo-eg/index.html": [
+    {
+      "tag": "aria-label",
+      "value": "Menu principale",
+      "line": 76,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Toggle navigation",
+      "line": 79,
+      "context": "<button class=\"navbar-toggle\" id=\"navbar-toggle\" aria-label=\"Toggle navigation\" aria-expanded=\"false"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Footer con informazioni su Bit Prepared",
+      "line": 449,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Twitter",
+      "line": 452,
+      "context": "<a href=\"https://twitter.com/bitprepared\" class=\"fa fa-twitter\" aria-label=\"Seguici su Twitter\"><spa"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Facebook",
+      "line": 453,
+      "context": "<a href=\"https://www.facebook.com/bitprepared\" class=\"fa fa-facebook\" aria-label=\"Seguici su Faceboo"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Instagram",
+      "line": 454,
+      "context": "<a href=\"https://www.instagram.com/bit.prepared/\" class=\"fa fa-instagram\" aria-label=\"Seguici su Ins"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Invia email a info@bitprepared.it",
+      "line": 455,
+      "context": "<a href=\"mailto:info@bitprepared.it\" class=\"fa fa-envelope\" aria-label=\"Invia email a info@bitprepar"
+    },
+    {
+      "tag": "role",
+      "value": "navigation",
+      "line": 76,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "role",
+      "value": "main",
+      "line": 94,
+      "context": "<main id=\"main-content\" role=\"main\">"
+    },
+    {
+      "tag": "role",
+      "value": "contentinfo",
+      "line": 449,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    }
+  ],
+  "_site/eventi/epppi/index.html": [
+    {
+      "tag": "aria-label",
+      "value": "Menu principale",
+      "line": 76,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Toggle navigation",
+      "line": 79,
+      "context": "<button class=\"navbar-toggle\" id=\"navbar-toggle\" aria-label=\"Toggle navigation\" aria-expanded=\"false"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Footer con informazioni su Bit Prepared",
+      "line": 441,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Twitter",
+      "line": 444,
+      "context": "<a href=\"https://twitter.com/bitprepared\" class=\"fa fa-twitter\" aria-label=\"Seguici su Twitter\"><spa"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Facebook",
+      "line": 445,
+      "context": "<a href=\"https://www.facebook.com/bitprepared\" class=\"fa fa-facebook\" aria-label=\"Seguici su Faceboo"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Instagram",
+      "line": 446,
+      "context": "<a href=\"https://www.instagram.com/bit.prepared/\" class=\"fa fa-instagram\" aria-label=\"Seguici su Ins"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Invia email a info@bitprepared.it",
+      "line": 447,
+      "context": "<a href=\"mailto:info@bitprepared.it\" class=\"fa fa-envelope\" aria-label=\"Invia email a info@bitprepar"
+    },
+    {
+      "tag": "role",
+      "value": "navigation",
+      "line": 76,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "role",
+      "value": "main",
+      "line": 94,
+      "context": "<main id=\"main-content\" role=\"main\">"
+    },
+    {
+      "tag": "role",
+      "value": "contentinfo",
+      "line": 441,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    }
+  ],
+  "_site/eventi/index.html": [
+    {
+      "tag": "aria-label",
+      "value": "Menu principale",
+      "line": 50,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Toggle navigation",
+      "line": 53,
+      "context": "<button class=\"navbar-toggle\" id=\"navbar-toggle\" aria-label=\"Toggle navigation\" aria-expanded=\"false"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Footer con informazioni su Bit Prepared",
+      "line": 152,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Twitter",
+      "line": 155,
+      "context": "<a href=\"https://twitter.com/bitprepared\" class=\"fa fa-twitter\" aria-label=\"Seguici su Twitter\"><spa"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Facebook",
+      "line": 156,
+      "context": "<a href=\"https://www.facebook.com/bitprepared\" class=\"fa fa-facebook\" aria-label=\"Seguici su Faceboo"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Instagram",
+      "line": 157,
+      "context": "<a href=\"https://www.instagram.com/bit.prepared/\" class=\"fa fa-instagram\" aria-label=\"Seguici su Ins"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Invia email a info@bitprepared.it",
+      "line": 158,
+      "context": "<a href=\"mailto:info@bitprepared.it\" class=\"fa fa-envelope\" aria-label=\"Invia email a info@bitprepar"
+    },
+    {
+      "tag": "role",
+      "value": "navigation",
+      "line": 50,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "role",
+      "value": "main",
+      "line": 68,
+      "context": "<main id=\"main-content\" role=\"main\">"
+    },
+    {
+      "tag": "role",
+      "value": "contentinfo",
+      "line": 152,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    }
+  ],
+  "_site/eventi/stage/index.html": [
+    {
+      "tag": "aria-label",
+      "value": "Menu principale",
+      "line": 76,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Toggle navigation",
+      "line": 79,
+      "context": "<button class=\"navbar-toggle\" id=\"navbar-toggle\" aria-label=\"Toggle navigation\" aria-expanded=\"false"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Footer con informazioni su Bit Prepared",
+      "line": 443,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Twitter",
+      "line": 446,
+      "context": "<a href=\"https://twitter.com/bitprepared\" class=\"fa fa-twitter\" aria-label=\"Seguici su Twitter\"><spa"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Facebook",
+      "line": 447,
+      "context": "<a href=\"https://www.facebook.com/bitprepared\" class=\"fa fa-facebook\" aria-label=\"Seguici su Faceboo"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Instagram",
+      "line": 448,
+      "context": "<a href=\"https://www.instagram.com/bit.prepared/\" class=\"fa fa-instagram\" aria-label=\"Seguici su Ins"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Invia email a info@bitprepared.it",
+      "line": 449,
+      "context": "<a href=\"mailto:info@bitprepared.it\" class=\"fa fa-envelope\" aria-label=\"Invia email a info@bitprepar"
+    },
+    {
+      "tag": "role",
+      "value": "navigation",
+      "line": 76,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "role",
+      "value": "main",
+      "line": 94,
+      "context": "<main id=\"main-content\" role=\"main\">"
+    },
+    {
+      "tag": "role",
+      "value": "contentinfo",
+      "line": 443,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    }
+  ],
+  "_site/index.html": [
+    {
+      "tag": "aria-label",
+      "value": "Menu principale",
+      "line": 49,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Toggle navigation",
+      "line": 52,
+      "context": "<button class=\"navbar-toggle\" id=\"navbar-toggle\" aria-label=\"Toggle navigation\" aria-expanded=\"false"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Footer con informazioni su Bit Prepared",
+      "line": 217,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Twitter",
+      "line": 220,
+      "context": "<a href=\"https://twitter.com/bitprepared\" class=\"fa fa-twitter\" aria-label=\"Seguici su Twitter\"><spa"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Facebook",
+      "line": 221,
+      "context": "<a href=\"https://www.facebook.com/bitprepared\" class=\"fa fa-facebook\" aria-label=\"Seguici su Faceboo"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Instagram",
+      "line": 222,
+      "context": "<a href=\"https://www.instagram.com/bit.prepared/\" class=\"fa fa-instagram\" aria-label=\"Seguici su Ins"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Invia email a info@bitprepared.it",
+      "line": 223,
+      "context": "<a href=\"mailto:info@bitprepared.it\" class=\"fa fa-envelope\" aria-label=\"Invia email a info@bitprepar"
+    },
+    {
+      "tag": "role",
+      "value": "navigation",
+      "line": 49,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "role",
+      "value": "main",
+      "line": 67,
+      "context": "<main id=\"main-content\" role=\"main\">"
+    },
+    {
+      "tag": "role",
+      "value": "contentinfo",
+      "line": 217,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    },
+    {
+      "tag": "aria-labelledby",
+      "value": "events-title",
+      "line": 105,
+      "context": "<section class=\"events-section max-w-6xl mx-auto px-6 py-16\" aria-labelledby=\"events-title\">"
+    },
+    {
+      "tag": "aria-labelledby",
+      "value": "blog-title",
+      "line": 153,
+      "context": "<section class=\"max-w-6xl mx-auto px-6 py-16\" aria-labelledby=\"blog-title\">"
+    }
+  ],
+  "_site/privacy/index.html": [
+    {
+      "tag": "aria-label",
+      "value": "Menu principale",
+      "line": 47,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Toggle navigation",
+      "line": 50,
+      "context": "<button class=\"navbar-toggle\" id=\"navbar-toggle\" aria-label=\"Toggle navigation\" aria-expanded=\"false"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Footer con informazioni su Bit Prepared",
+      "line": 250,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Twitter",
+      "line": 253,
+      "context": "<a href=\"https://twitter.com/bitprepared\" class=\"fa fa-twitter\" aria-label=\"Seguici su Twitter\"><spa"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Facebook",
+      "line": 254,
+      "context": "<a href=\"https://www.facebook.com/bitprepared\" class=\"fa fa-facebook\" aria-label=\"Seguici su Faceboo"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Instagram",
+      "line": 255,
+      "context": "<a href=\"https://www.instagram.com/bit.prepared/\" class=\"fa fa-instagram\" aria-label=\"Seguici su Ins"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Invia email a info@bitprepared.it",
+      "line": 256,
+      "context": "<a href=\"mailto:info@bitprepared.it\" class=\"fa fa-envelope\" aria-label=\"Invia email a info@bitprepar"
+    },
+    {
+      "tag": "role",
+      "value": "navigation",
+      "line": 47,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "role",
+      "value": "main",
+      "line": 65,
+      "context": "<main id=\"main-content\" role=\"main\">"
+    },
+    {
+      "tag": "role",
+      "value": "contentinfo",
+      "line": 250,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    }
+  ],
+  "_site/software/code/index.html": [
+    {
+      "tag": "aria-label",
+      "value": "Menu principale",
+      "line": 50,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Toggle navigation",
+      "line": 53,
+      "context": "<button class=\"navbar-toggle\" id=\"navbar-toggle\" aria-label=\"Toggle navigation\" aria-expanded=\"false"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Footer con informazioni su Bit Prepared",
+      "line": 84,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Twitter",
+      "line": 87,
+      "context": "<a href=\"https://twitter.com/bitprepared\" class=\"fa fa-twitter\" aria-label=\"Seguici su Twitter\"><spa"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Facebook",
+      "line": 88,
+      "context": "<a href=\"https://www.facebook.com/bitprepared\" class=\"fa fa-facebook\" aria-label=\"Seguici su Faceboo"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Instagram",
+      "line": 89,
+      "context": "<a href=\"https://www.instagram.com/bit.prepared/\" class=\"fa fa-instagram\" aria-label=\"Seguici su Ins"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Invia email a info@bitprepared.it",
+      "line": 90,
+      "context": "<a href=\"mailto:info@bitprepared.it\" class=\"fa fa-envelope\" aria-label=\"Invia email a info@bitprepar"
+    },
+    {
+      "tag": "role",
+      "value": "navigation",
+      "line": 50,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "role",
+      "value": "main",
+      "line": 68,
+      "context": "<main id=\"main-content\" role=\"main\">"
+    },
+    {
+      "tag": "role",
+      "value": "contentinfo",
+      "line": 84,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    }
+  ],
+  "_site/software/flora/index.html": [
+    {
+      "tag": "aria-label",
+      "value": "Menu principale",
+      "line": 50,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Toggle navigation",
+      "line": 53,
+      "context": "<button class=\"navbar-toggle\" id=\"navbar-toggle\" aria-label=\"Toggle navigation\" aria-expanded=\"false"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Footer con informazioni su Bit Prepared",
+      "line": 78,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Twitter",
+      "line": 81,
+      "context": "<a href=\"https://twitter.com/bitprepared\" class=\"fa fa-twitter\" aria-label=\"Seguici su Twitter\"><spa"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Facebook",
+      "line": 82,
+      "context": "<a href=\"https://www.facebook.com/bitprepared\" class=\"fa fa-facebook\" aria-label=\"Seguici su Faceboo"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Instagram",
+      "line": 83,
+      "context": "<a href=\"https://www.instagram.com/bit.prepared/\" class=\"fa fa-instagram\" aria-label=\"Seguici su Ins"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Invia email a info@bitprepared.it",
+      "line": 84,
+      "context": "<a href=\"mailto:info@bitprepared.it\" class=\"fa fa-envelope\" aria-label=\"Invia email a info@bitprepar"
+    },
+    {
+      "tag": "role",
+      "value": "navigation",
+      "line": 50,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "role",
+      "value": "main",
+      "line": 68,
+      "context": "<main id=\"main-content\" role=\"main\">"
+    },
+    {
+      "tag": "role",
+      "value": "contentinfo",
+      "line": 78,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    }
+  ],
+  "_site/software/gimp/index.html": [
+    {
+      "tag": "aria-label",
+      "value": "Menu principale",
+      "line": 50,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Toggle navigation",
+      "line": 53,
+      "context": "<button class=\"navbar-toggle\" id=\"navbar-toggle\" aria-label=\"Toggle navigation\" aria-expanded=\"false"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Footer con informazioni su Bit Prepared",
+      "line": 88,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Twitter",
+      "line": 91,
+      "context": "<a href=\"https://twitter.com/bitprepared\" class=\"fa fa-twitter\" aria-label=\"Seguici su Twitter\"><spa"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Facebook",
+      "line": 92,
+      "context": "<a href=\"https://www.facebook.com/bitprepared\" class=\"fa fa-facebook\" aria-label=\"Seguici su Faceboo"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Instagram",
+      "line": 93,
+      "context": "<a href=\"https://www.instagram.com/bit.prepared/\" class=\"fa fa-instagram\" aria-label=\"Seguici su Ins"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Invia email a info@bitprepared.it",
+      "line": 94,
+      "context": "<a href=\"mailto:info@bitprepared.it\" class=\"fa fa-envelope\" aria-label=\"Invia email a info@bitprepar"
+    },
+    {
+      "tag": "role",
+      "value": "navigation",
+      "line": 50,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "role",
+      "value": "main",
+      "line": 68,
+      "context": "<main id=\"main-content\" role=\"main\">"
+    },
+    {
+      "tag": "role",
+      "value": "contentinfo",
+      "line": 88,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    }
+  ],
+  "_site/software/index.html": [
+    {
+      "tag": "aria-label",
+      "value": "Menu principale",
+      "line": 50,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Toggle navigation",
+      "line": 53,
+      "context": "<button class=\"navbar-toggle\" id=\"navbar-toggle\" aria-label=\"Toggle navigation\" aria-expanded=\"false"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Footer con informazioni su Bit Prepared",
+      "line": 313,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Twitter",
+      "line": 316,
+      "context": "<a href=\"https://twitter.com/bitprepared\" class=\"fa fa-twitter\" aria-label=\"Seguici su Twitter\"><spa"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Facebook",
+      "line": 317,
+      "context": "<a href=\"https://www.facebook.com/bitprepared\" class=\"fa fa-facebook\" aria-label=\"Seguici su Faceboo"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Instagram",
+      "line": 318,
+      "context": "<a href=\"https://www.instagram.com/bit.prepared/\" class=\"fa fa-instagram\" aria-label=\"Seguici su Ins"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Invia email a info@bitprepared.it",
+      "line": 319,
+      "context": "<a href=\"mailto:info@bitprepared.it\" class=\"fa fa-envelope\" aria-label=\"Invia email a info@bitprepar"
+    },
+    {
+      "tag": "role",
+      "value": "navigation",
+      "line": 50,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "role",
+      "value": "main",
+      "line": 68,
+      "context": "<main id=\"main-content\" role=\"main\">"
+    },
+    {
+      "tag": "role",
+      "value": "contentinfo",
+      "line": 313,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    }
+  ],
+  "_site/software/libreoffice/index.html": [
+    {
+      "tag": "aria-label",
+      "value": "Menu principale",
+      "line": 50,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Toggle navigation",
+      "line": 53,
+      "context": "<button class=\"navbar-toggle\" id=\"navbar-toggle\" aria-label=\"Toggle navigation\" aria-expanded=\"false"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Footer con informazioni su Bit Prepared",
+      "line": 90,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Twitter",
+      "line": 93,
+      "context": "<a href=\"https://twitter.com/bitprepared\" class=\"fa fa-twitter\" aria-label=\"Seguici su Twitter\"><spa"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Facebook",
+      "line": 94,
+      "context": "<a href=\"https://www.facebook.com/bitprepared\" class=\"fa fa-facebook\" aria-label=\"Seguici su Faceboo"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Instagram",
+      "line": 95,
+      "context": "<a href=\"https://www.instagram.com/bit.prepared/\" class=\"fa fa-instagram\" aria-label=\"Seguici su Ins"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Invia email a info@bitprepared.it",
+      "line": 96,
+      "context": "<a href=\"mailto:info@bitprepared.it\" class=\"fa fa-envelope\" aria-label=\"Invia email a info@bitprepar"
+    },
+    {
+      "tag": "role",
+      "value": "navigation",
+      "line": 50,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "role",
+      "value": "main",
+      "line": 68,
+      "context": "<main id=\"main-content\" role=\"main\">"
+    },
+    {
+      "tag": "role",
+      "value": "contentinfo",
+      "line": 90,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    }
+  ],
+  "_site/software/mayalinux/index.html": [
+    {
+      "tag": "aria-label",
+      "value": "Menu principale",
+      "line": 50,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Toggle navigation",
+      "line": 53,
+      "context": "<button class=\"navbar-toggle\" id=\"navbar-toggle\" aria-label=\"Toggle navigation\" aria-expanded=\"false"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Footer con informazioni su Bit Prepared",
+      "line": 88,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Twitter",
+      "line": 91,
+      "context": "<a href=\"https://twitter.com/bitprepared\" class=\"fa fa-twitter\" aria-label=\"Seguici su Twitter\"><spa"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Facebook",
+      "line": 92,
+      "context": "<a href=\"https://www.facebook.com/bitprepared\" class=\"fa fa-facebook\" aria-label=\"Seguici su Faceboo"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Instagram",
+      "line": 93,
+      "context": "<a href=\"https://www.instagram.com/bit.prepared/\" class=\"fa fa-instagram\" aria-label=\"Seguici su Ins"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Invia email a info@bitprepared.it",
+      "line": 94,
+      "context": "<a href=\"mailto:info@bitprepared.it\" class=\"fa fa-envelope\" aria-label=\"Invia email a info@bitprepar"
+    },
+    {
+      "tag": "role",
+      "value": "navigation",
+      "line": 50,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "role",
+      "value": "main",
+      "line": 68,
+      "context": "<main id=\"main-content\" role=\"main\">"
+    },
+    {
+      "tag": "role",
+      "value": "contentinfo",
+      "line": 88,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    }
+  ],
+  "_site/software/prbm/index.html": [
+    {
+      "tag": "aria-label",
+      "value": "Menu principale",
+      "line": 50,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Toggle navigation",
+      "line": 53,
+      "context": "<button class=\"navbar-toggle\" id=\"navbar-toggle\" aria-label=\"Toggle navigation\" aria-expanded=\"false"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Footer con informazioni su Bit Prepared",
+      "line": 93,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Twitter",
+      "line": 96,
+      "context": "<a href=\"https://twitter.com/bitprepared\" class=\"fa fa-twitter\" aria-label=\"Seguici su Twitter\"><spa"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Facebook",
+      "line": 97,
+      "context": "<a href=\"https://www.facebook.com/bitprepared\" class=\"fa fa-facebook\" aria-label=\"Seguici su Faceboo"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Instagram",
+      "line": 98,
+      "context": "<a href=\"https://www.instagram.com/bit.prepared/\" class=\"fa fa-instagram\" aria-label=\"Seguici su Ins"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Invia email a info@bitprepared.it",
+      "line": 99,
+      "context": "<a href=\"mailto:info@bitprepared.it\" class=\"fa fa-envelope\" aria-label=\"Invia email a info@bitprepar"
+    },
+    {
+      "tag": "role",
+      "value": "navigation",
+      "line": 50,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "role",
+      "value": "main",
+      "line": 68,
+      "context": "<main id=\"main-content\" role=\"main\">"
+    },
+    {
+      "tag": "role",
+      "value": "contentinfo",
+      "line": 93,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    }
+  ],
+  "_site/software/qgis/index.html": [
+    {
+      "tag": "aria-label",
+      "value": "Menu principale",
+      "line": 50,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Toggle navigation",
+      "line": 53,
+      "context": "<button class=\"navbar-toggle\" id=\"navbar-toggle\" aria-label=\"Toggle navigation\" aria-expanded=\"false"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Footer con informazioni su Bit Prepared",
+      "line": 97,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Twitter",
+      "line": 100,
+      "context": "<a href=\"https://twitter.com/bitprepared\" class=\"fa fa-twitter\" aria-label=\"Seguici su Twitter\"><spa"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Facebook",
+      "line": 101,
+      "context": "<a href=\"https://www.facebook.com/bitprepared\" class=\"fa fa-facebook\" aria-label=\"Seguici su Faceboo"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Instagram",
+      "line": 102,
+      "context": "<a href=\"https://www.instagram.com/bit.prepared/\" class=\"fa fa-instagram\" aria-label=\"Seguici su Ins"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Invia email a info@bitprepared.it",
+      "line": 103,
+      "context": "<a href=\"mailto:info@bitprepared.it\" class=\"fa fa-envelope\" aria-label=\"Invia email a info@bitprepar"
+    },
+    {
+      "tag": "role",
+      "value": "navigation",
+      "line": 50,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "role",
+      "value": "main",
+      "line": 68,
+      "context": "<main id=\"main-content\" role=\"main\">"
+    },
+    {
+      "tag": "role",
+      "value": "contentinfo",
+      "line": 97,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    }
+  ],
+  "_site/software/vlc/index.html": [
+    {
+      "tag": "aria-label",
+      "value": "Menu principale",
+      "line": 50,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Toggle navigation",
+      "line": 53,
+      "context": "<button class=\"navbar-toggle\" id=\"navbar-toggle\" aria-label=\"Toggle navigation\" aria-expanded=\"false"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Footer con informazioni su Bit Prepared",
+      "line": 78,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Twitter",
+      "line": 81,
+      "context": "<a href=\"https://twitter.com/bitprepared\" class=\"fa fa-twitter\" aria-label=\"Seguici su Twitter\"><spa"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Facebook",
+      "line": 82,
+      "context": "<a href=\"https://www.facebook.com/bitprepared\" class=\"fa fa-facebook\" aria-label=\"Seguici su Faceboo"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Instagram",
+      "line": 83,
+      "context": "<a href=\"https://www.instagram.com/bit.prepared/\" class=\"fa fa-instagram\" aria-label=\"Seguici su Ins"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Invia email a info@bitprepared.it",
+      "line": 84,
+      "context": "<a href=\"mailto:info@bitprepared.it\" class=\"fa fa-envelope\" aria-label=\"Invia email a info@bitprepar"
+    },
+    {
+      "tag": "role",
+      "value": "navigation",
+      "line": 50,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "role",
+      "value": "main",
+      "line": 68,
+      "context": "<main id=\"main-content\" role=\"main\">"
+    },
+    {
+      "tag": "role",
+      "value": "contentinfo",
+      "line": 78,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    }
+  ],
+  "_site/software/wordpress/index.html": [
+    {
+      "tag": "aria-label",
+      "value": "Menu principale",
+      "line": 50,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Toggle navigation",
+      "line": 53,
+      "context": "<button class=\"navbar-toggle\" id=\"navbar-toggle\" aria-label=\"Toggle navigation\" aria-expanded=\"false"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Footer con informazioni su Bit Prepared",
+      "line": 100,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Twitter",
+      "line": 103,
+      "context": "<a href=\"https://twitter.com/bitprepared\" class=\"fa fa-twitter\" aria-label=\"Seguici su Twitter\"><spa"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Facebook",
+      "line": 104,
+      "context": "<a href=\"https://www.facebook.com/bitprepared\" class=\"fa fa-facebook\" aria-label=\"Seguici su Faceboo"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Instagram",
+      "line": 105,
+      "context": "<a href=\"https://www.instagram.com/bit.prepared/\" class=\"fa fa-instagram\" aria-label=\"Seguici su Ins"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Invia email a info@bitprepared.it",
+      "line": 106,
+      "context": "<a href=\"mailto:info@bitprepared.it\" class=\"fa fa-envelope\" aria-label=\"Invia email a info@bitprepar"
+    },
+    {
+      "tag": "role",
+      "value": "navigation",
+      "line": 50,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "role",
+      "value": "main",
+      "line": 68,
+      "context": "<main id=\"main-content\" role=\"main\">"
+    },
+    {
+      "tag": "role",
+      "value": "contentinfo",
+      "line": 100,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    }
+  ],
+  "_site/tags/index.html": [
+    {
+      "tag": "aria-label",
+      "value": "Menu principale",
+      "line": 47,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Toggle navigation",
+      "line": 50,
+      "context": "<button class=\"navbar-toggle\" id=\"navbar-toggle\" aria-label=\"Toggle navigation\" aria-expanded=\"false"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Footer con informazioni su Bit Prepared",
+      "line": 453,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Twitter",
+      "line": 456,
+      "context": "<a href=\"https://twitter.com/bitprepared\" class=\"fa fa-twitter\" aria-label=\"Seguici su Twitter\"><spa"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Facebook",
+      "line": 457,
+      "context": "<a href=\"https://www.facebook.com/bitprepared\" class=\"fa fa-facebook\" aria-label=\"Seguici su Faceboo"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Instagram",
+      "line": 458,
+      "context": "<a href=\"https://www.instagram.com/bit.prepared/\" class=\"fa fa-instagram\" aria-label=\"Seguici su Ins"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Invia email a info@bitprepared.it",
+      "line": 459,
+      "context": "<a href=\"mailto:info@bitprepared.it\" class=\"fa fa-envelope\" aria-label=\"Invia email a info@bitprepar"
+    },
+    {
+      "tag": "role",
+      "value": "navigation",
+      "line": 47,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "role",
+      "value": "main",
+      "line": 65,
+      "context": "<main id=\"main-content\" role=\"main\">"
+    },
+    {
+      "tag": "role",
+      "value": "contentinfo",
+      "line": 453,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    }
+  ],
+  "_site/test-lookup.html": [
+    {
+      "tag": "aria-label",
+      "value": "Menu principale",
+      "line": 47,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Toggle navigation",
+      "line": 50,
+      "context": "<button class=\"navbar-toggle\" id=\"navbar-toggle\" aria-label=\"Toggle navigation\" aria-expanded=\"false"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Footer con informazioni su Bit Prepared",
+      "line": 106,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Twitter",
+      "line": 109,
+      "context": "<a href=\"https://twitter.com/bitprepared\" class=\"fa fa-twitter\" aria-label=\"Seguici su Twitter\"><spa"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Facebook",
+      "line": 110,
+      "context": "<a href=\"https://www.facebook.com/bitprepared\" class=\"fa fa-facebook\" aria-label=\"Seguici su Faceboo"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Seguici su Instagram",
+      "line": 111,
+      "context": "<a href=\"https://www.instagram.com/bit.prepared/\" class=\"fa fa-instagram\" aria-label=\"Seguici su Ins"
+    },
+    {
+      "tag": "aria-label",
+      "value": "Invia email a info@bitprepared.it",
+      "line": 112,
+      "context": "<a href=\"mailto:info@bitprepared.it\" class=\"fa fa-envelope\" aria-label=\"Invia email a info@bitprepar"
+    },
+    {
+      "tag": "role",
+      "value": "navigation",
+      "line": 47,
+      "context": "<nav class=\"navbar\" role=\"navigation\" aria-label=\"Menu principale\">"
+    },
+    {
+      "tag": "role",
+      "value": "main",
+      "line": 65,
+      "context": "<main id=\"main-content\" role=\"main\">"
+    },
+    {
+      "tag": "role",
+      "value": "contentinfo",
+      "line": 106,
+      "context": "<footer role=\"contentinfo\" aria-label=\"Footer con informazioni su Bit Prepared\">"
+    }
+  ]
+}
