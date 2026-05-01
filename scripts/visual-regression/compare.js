@@ -2,6 +2,7 @@ const pixelmatch = require('pixelmatch');
 const { PNG } = require('pngjs');
 const fs = require('fs');
 const path = require('path');
+const { extractPagesFromSitemap } = require('./extract-pages-from-sitemap');
 
 const THRESHOLD_PERCENT = 1;
 const PIXEL_THRESHOLD = 0.1;
@@ -14,6 +15,8 @@ const pages = [
   'about',
   'blog',
   'tags',
+  'tags_maestro delle tecnologie',
+  'eventi',
   'eventi_epppi',
   'eventi_campo-eg',
   'eventi_stage',
@@ -41,6 +44,21 @@ function compareImages(img1Path, img2Path, diffPath) {
 
   const img1 = PNG.sync.read(fs.readFileSync(img1Path));
   const img2 = PNG.sync.read(fs.readFileSync(img2Path));
+
+  // Check if image sizes match
+  if (img1.width !== img2.width || img1.height !== img2.height) {
+    return {
+      error: 'Image size mismatch',
+      img1Size: `${img1.width}x${img1.height}`,
+      img2Size: `${img2.width}x${img2.height}`,
+      numDiffPixels: 0,
+      totalPixels: img1.width * img1.height,
+      diffPercent: '0.00',
+      passed: false,
+      needsRebaseline: true
+    };
+  }
+
   const diff = new PNG({ width: img1.width, height: img1.height });
 
   const numDiffPixels = pixelmatch(
@@ -258,7 +276,26 @@ function generateReport(results) {
         </tr>
       </thead>
       <tbody id="results">
-        ${results.map(r => `
+        ${results.map(r => {
+          if (r.error === 'Image size mismatch') {
+            return `
+          <tr class="fail">
+            <td><code>${r.page}</code></td>
+            <td><span class="viewport">${r.viewport}</span></td>
+            <td>${r.server}</td>
+            <td colspan="3">⚠️ Size mismatch: baseline ${r.img1Size} vs current ${r.img2Size}. Rebase needed.</td>
+          </tr>`;
+          }
+          if (r.error === 'File not found') {
+            return `
+          <tr class="fail">
+            <td><code>${r.page}</code></td>
+            <td><span class="viewport">${r.viewport}</span></td>
+            <td>${r.server}</td>
+            <td colspan="3">⚠️ Missing: ${r.missing}</td>
+          </tr>`;
+          }
+          return `
           <tr class="${r.passed ? 'pass' : 'fail'}">
             <td><code>${r.page}</code></td>
             <td><span class="viewport">${r.viewport}</span></td>
@@ -266,8 +303,8 @@ function generateReport(results) {
             <td>${r.diffPercent}%</td>
             <td><span class="badge ${r.passed ? 'pass' : 'fail'}">${r.passed ? 'PASS' : 'FAIL'}</span></td>
             <td>${!r.passed ? `<a class="diff-link" href="../diff/${r.viewport}/${r.page}_${r.server}.png" target="_blank">View Diff</a>` : '-'}</td>
-          </tr>
-        `).join('')}
+          </tr>`;
+        }).join('')}
       </tbody>
     </table>
   </div>
@@ -302,8 +339,69 @@ function generateReport(results) {
   console.log(`   Failed: ${failedTests}/${totalTests}`);
 }
 
+function getAvailableBaselines() {
+  const baselineRoot = path.join(__dirname, '../../tests/visual-baseline');
+
+  if (!fs.existsSync(baselineRoot)) {
+    return [];
+  }
+
+  const folders = fs.readdirSync(baselineRoot, { withFileTypes: true })
+    .filter(dirent => dirent.isDirectory())
+    .map(dirent => dirent.name)
+    .filter(name => /^\d{4}\.\d{2}$/.test(name)) // Only YYYY.MM format
+    .sort() // Ascending order
+    .reverse(); // Descending (most recent first)
+
+  return folders;
+}
+
+function selectBaseline(availableBaselines) {
+  if (availableBaselines.length === 0) {
+    console.error('❌ Nessuna baseline trovata in tests/visual-baseline/');
+    console.error('   Creala con: make visual-baseline');
+    process.exit(1);
+  }
+
+  if (availableBaselines.length === 1) {
+    const selected = availableBaselines[0];
+    console.log(`✅ Usando baseline: ${selected}`);
+    return selected;
+  }
+
+  // Multiple baselines - show options
+  console.log('\n📂 Baseline disponibili:');
+  availableBaselines.forEach((folder, index) => {
+    console.log(`   ${index + 1}. ${folder}`);
+  });
+
+  // Check for environment variable
+  if (process.env.BASELINE_VERSION && process.env.BASELINE_VERSION !== 'latest') {
+    const selected = process.env.BASELINE_VERSION;
+    if (!availableBaselines.includes(selected)) {
+      console.error(`❌ Baseline ${selected} non trovata`);
+      console.error(`   Disponibili: ${availableBaselines.join(', ')}`);
+      process.exit(1);
+    }
+    console.log(`\n✅ Baseline specificata: ${selected}`);
+    return selected;
+  }
+
+  // Default: most recent
+  const selected = availableBaselines[0];
+  console.log(`\n✅ Baseline più recente selezionata: ${selected}`);
+  console.log(`   Per usarne un'altra: BASELINE_VERSION=YYYY.MM make validate-graphics`);
+
+  return selected;
+}
+
 function main() {
   console.log('=== Visual Regression Compare ===\n');
+
+  // Get available baselines and select one
+  const availableBaselines = getAvailableBaselines();
+  const selectedBaseline = selectBaseline(availableBaselines);
+  const baselineBasePath = path.join(__dirname, '../../tests/visual-baseline', selectedBaseline);
 
   const results = [];
 
@@ -315,9 +413,31 @@ function main() {
     console.log(`🎯 Filtering viewports: ${viewportFilter.join(', ')}\n`);
   }
 
+  // Carica pagine dalla sitemap
+  let pageUrls = extractPagesFromSitemap();
+
+  // Converti URL in nomi file
+  let pages = pageUrls.map(url => {
+    return url
+      .replace(/^\//, '')              // Rimuovi slash iniziale
+      .replace(/\/$/, '')             // Rimuovi slash finale
+      .replace(/\//g, '_')           // Converti slash in underscore
+      .replace(/#/g, '_hash_')       // Converti hash per filename
+      || 'index';
+  });
+
+  // Aggiungi pagine speciali (hash pages non in sitemap)
+  pages.push('tags_maestro delle tecnologie');
+
+  // Filtra duplicati
+  pages = [...new Set(pages)];
+
+  console.log(`📸 Testing ${pages.length} pages from sitemap`);
+  console.log('');
+
   for (const viewport of filteredViewports) {
     for (const page of pages) {
-      const baselinePath = path.join(__dirname, `../../tests/visual-baseline/${viewport}/${page}.png`);
+      const baselinePath = path.join(baselineBasePath, viewport, `${page}.png`);
       const servePath = path.join(__dirname, `../../screenshots/serve/${viewport}/${page}.png`);
       const staticPath = path.join(__dirname, `../../screenshots/static/${viewport}/${page}.png`);
       const serveDiffPath = path.join(__dirname, `../../screenshots/diff/${viewport}/${page}_serve.png`);
@@ -341,33 +461,54 @@ function main() {
       const serveResult = compareImages(baselinePath, servePath, serveDiffPath);
       const staticResult = compareImages(baselinePath, staticPath, staticDiffPath);
 
-      if (!serveResult.error) {
-        results.push({
-          page,
-          viewport,
-          server: 'serve',
-          ...serveResult
-        });
-      }
+      // Add serve result (include errors for reporting)
+      results.push({
+        page,
+        viewport,
+        server: 'serve',
+        ...serveResult
+      });
 
-      if (!staticResult.error) {
-        results.push({
-          page,
+      // Add static result (include errors for reporting)
+      results.push({
+        page,
           viewport,
           server: 'static',
           ...staticResult
         });
+
+      // Log results with error handling
+      const serveStatus = serveResult.error ? '⚠️' : (serveResult.passed ? '✅' : '❌');
+      const staticStatus = staticResult.error ? '⚠️' : (staticResult.passed ? '✅' : '❌');
+
+      if (serveResult.error === 'Image size mismatch') {
+        console.log(`${serveStatus} ${viewport}/${page} serve: Size ${serveResult.img1Size} vs ${serveResult.img2Size}`);
+      } else if (serveResult.error === 'File not found') {
+        console.log(`${serveStatus} ${viewport}/${page} serve: Missing ${serveResult.missing}`);
+      } else {
+        console.log(`${serveStatus} ${viewport}/${page}: serve=${serveResult.diffPercent}%`);
       }
 
-      const status = serveResult.passed && staticResult.passed ? '✅' : '❌';
-      console.log(`${status} ${viewport}/${page}: serve=${serveResult.diffPercent}%, static=${staticResult.diffPercent}%`);
+      if (staticResult.error === 'Image size mismatch') {
+        console.log(`${staticStatus} ${viewport}/${page} static: Size ${staticResult.img1Size} vs ${staticResult.img2Size}`);
+      } else if (staticResult.error === 'File not found') {
+        console.log(`${staticStatus} ${viewport}/${page} static: Missing ${staticResult.missing}`);
+      } else {
+        console.log(`${staticStatus} ${viewport}/${page}: static=${staticResult.diffPercent}%`);
+      }
     }
   }
 
   generateReport(results);
 
-  const hasFailures = results.some(r => !r.passed);
-  if (hasFailures) {
+  const hasFailures = results.some(r => !r.passed && !r.error);
+  const hasSizeMismatches = results.some(r => r.error === 'Image size mismatch');
+
+  if (hasSizeMismatches) {
+    console.error('\n⚠️  Some images have size mismatches - baseline needs update');
+    console.error('Run: make visual-baseline');
+    process.exit(1);
+  } else if (hasFailures) {
     console.error('\n❌ Validation FAILED: Differences exceed threshold');
     process.exit(1);
   } else {

@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /.jekyll-cache/
+Disallow: /vendor/
+
+Sitemap: https://www.bitprepared.it/sitemap.xml

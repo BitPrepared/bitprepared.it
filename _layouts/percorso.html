@@ -1,0 +1,51 @@
+---
+layout: default
+---
+
+<!-- Hero Section -->
+<header class="hero flex items-center justify-center text-center">
+  <div class="hero-content max-w-5xl mx-auto px-6">
+    <h1 class="hero-title text-5xl font-display font-bold text-light mb-4">{{ page.title }}</h1>
+    {% if page.subtitle %}
+    <p class="hero-subtitle text-xl text-light">{{ page.subtitle }}</p>
+    {% endif %}
+  </div>
+</header>
+
+<!-- Percorso Timeline Content - Full width for timeline -->
+<main class="page-section px-6 py-16 min-h-[50vh]">
+  <div class="max-w-6xl mx-auto">
+    {% include edit-button.html %}
+
+    <div class="percorso-timeline">
+      {% for tappa in page.tappe %}
+        {% assign evento_id = tappa.evento %}
+        {% assign evento = site.eventi | where: "slug", evento_id | first %}
+
+        {% if tappa.branch == 'RS' %}
+          {% assign branch-border = 'border-rossi-600' %}
+          {% assign branch-text = 'text-rossi-900' %}
+        {% elsif tappa.branch == 'Capi' %}
+          {% assign branch-border = 'border-viola-600' %}
+          {% assign branch-text = 'text-viola-900' %}
+        {% else %}
+          {% assign branch-border = 'border-green-600' %}
+          {% assign branch-text = 'text-green-900' %}
+        {% endif %}
+
+        <article class="percorso-tappa">
+          <div class="tappa-icon">
+            <img src="{{ tappa.icon }}" alt="{{ tappa.branch }}">
+          </div>
+          <p class="tappa-label">{{ tappa.label }}</p>
+          <p class="tappa-eta">{{ tappa.eta }}</p>
+          <div class="tappa-card border-2 {{ branch-border }} bg-white">
+            <h3 class="{{ branch-text }}">{{ evento.hero.title }}</h3>
+            <p class="{{ branch-text }}">{{ evento.hero.subtitle }}</p>
+            <a href="{{ evento.url }}" class="btn btn-primary">{{ tappa.cta_text }}</a>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</main>

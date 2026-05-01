@@ -1,10 +1,12 @@
 ---
 layout: evento
+slug: epppi
 title: Essere solidi in una società immateriale | Bologna 8-10 Maggio
 subtitle: Come essere persone concrete in un mondo digitale?
 tags: [bitprepared, epppi, rs, esseri solidi, società digitale, rover, scolte, bologna, 2026]
 modified: 2026-04-20
 image: /assets/images/locandina_epppi_2026.jpg
+event_date: 2026-05-08
 
 highlights_title: "10 motivi per cui questo EPPPI è diverso"
 outcomes_title: "Cosa porterai a casa"

@@ -16,7 +16,7 @@ process.on('SIGTERM', async () => {
 });
 
 const viewports = {
-  desktop: { width: 1920, height: 1080 },
+  desktop: { width: 1920, height: 2000 },  // Increased height for full-page capture
   tablet: { width: 768, height: 1024 },
   mobile: { width: 375, height: 667 }
 };
@@ -26,6 +26,7 @@ const pages = [
   '/about/',
   '/blog/',
   '/tags/',
+  '/eventi/',
   '/eventi/epppi/',
   '/eventi/campo-eg/',
   '/eventi/stage/',
@@ -47,7 +48,23 @@ async function captureScreenshots(serverType, baseUrl, viewportsToUse) {
   console.log(`\n📸 Capturing screenshots from ${serverType}...`);
 
   const browser = await chromium.launch({
-    headless: true
+    headless: true,
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-gpu',
+      '--disable-software-rasterizer',
+      '--disable-extensions',
+      '--disable-background-networking',
+      '--disable-default-apps',
+      '--disable-sync',
+      '--metrics-recording-only',
+      '--mute-audio',
+      '--no-first-run',
+      '--safebrowsing-disable-auto-update',
+      '--disable-popup-blocking'
+    ]
   });
   browsers.push(browser); // Track for cleanup
 

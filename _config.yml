@@ -3,7 +3,9 @@ description: Digito ergo sum, per un uso consapevole del digitale
 tagline: maestro delle tecnologie, esperto del compiuter, digital life
 paginate: 10
 language: 'it'
-project_path: none
+lang: it_IT
+locale: it_IT
+
 
 url: https://www.bitprepared.it
 email: info@bitprepared.it
@@ -12,15 +14,21 @@ twitter:
   username: bitprepared
   card: summary
 
+# SEO plugin settings
+seo:
+  meta_generator: false
+
 # output
 encoding: "utf-8"
 
 plugins:
   - jekyll-paginate
   - jekyll-seo-tag
+  - jekyll-sitemap
 
 gems:
   - jekyll-seo-tag
+  - jekyll-sitemap
 
 collections:
   eventi:
@@ -41,3 +49,8 @@ exclude:
   - CHANGELOG.txt
   - LICENSE.txt
   - .git*
+  - test-lookup.html
+  - screenshots/
+  - scripts/
+  - .jekyll-cache/
+  - .jekyll-metadata/

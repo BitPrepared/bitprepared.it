@@ -1,0 +1,48 @@
+---
+layout: default
+---
+
+<!-- Hero Section -->
+<header class="hero flex items-center justify-center text-center">
+  <div class="hero-content max-w-5xl mx-auto px-6">
+    <h1 class="hero-title text-5xl font-display font-bold text-light mb-4">{{ page.title }}</h1>
+    {% if page.subtitle %}
+    <p class="hero-subtitle text-xl text-light">{{ page.subtitle }}</p>
+    {% endif %}
+  </div>
+</header>
+
+<!-- Software Content -->
+<main class="page-section px-6 py-16 min-h-[50vh]">
+  <div class="max-w-6xl mx-auto">
+    {% include edit-button.html %}
+
+    <div class="software-grid">
+      {% for software in page.software_list %}
+      <div class="software-item">
+        <div class="software-icon">
+          <img src="{{ software.icon }}" alt="{{ software.name }} logo">
+        </div>
+        <div class="software-info">
+          <div class="software-name">
+            {% if software.external %}
+            <a href="{{ software.url }}" target="_blank" rel="noopener">{{ software.name }}</a>
+            {% else %}
+            <a href="{{ software.url }}">{{ software.name }}</a>
+            {% endif %}
+          </div>
+          <div class="software-description">
+            {{ software.description }}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <article class="page-content mt-16">
+      <div class="page-body text-light leading-relaxed text-lg">
+        {{ content }}
+      </div>
+    </article>
+  </div>
+</main>

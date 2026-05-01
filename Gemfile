@@ -6,4 +6,5 @@ gem 'coderay', '~> 1.1'
 
 gem 'jekyll-paginate'
 gem 'jekyll-seo-tag'
+gem 'jekyll-sitemap'
 gem 'webrick'

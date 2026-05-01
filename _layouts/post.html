@@ -3,37 +3,37 @@ layout: default
 ---
 
 <!-- Hero Section -->
-<header class="hero">
-	<div class="hero-content">
-		<h1 class="hero-title">{{ page.title }}</h1>
+<header class="hero flex items-center justify-center text-center">
+	<div class="hero-content max-w-5xl mx-auto px-6">
+		<h1 class="hero-title text-5xl font-display font-bold text-light mb-4">{{ page.title }}</h1>
 		{% if page.date %}
-		<p class="hero-subtitle">{{ page.date | date: "%d %B %Y" }}</p>
+		<p class="hero-subtitle text-xl text-light">{{ page.date | date: "%d %B %Y" }}</p>
 		{% endif %}
 	</div>
 </header>
 
 <!-- Post Content -->
-<main class="page-section">
-	<div class="container">
+<main class="page-section px-6 py-16 min-h-[50vh]">
+	<div class="max-w-4xl mx-auto">
 		<article class="page-content">
 			{% if page.featured %}
-			<div class="post-featured-image">
-				<img src="/assets/{{ page.featured }}" alt="{{ page.title }}" loading="lazy">
+			<div class="post-featured-image mb-8 rounded-lg overflow-hidden border border-secondary">
+				<img src="/assets/{{ page.featured }}" alt="" loading="lazy" class="w-full h-auto" role="presentation">
 			</div>
 			{% endif %}
 
 			{% include edit-button.html %}
 
-			<div class="page-body">
+			<div class="page-body text-light leading-relaxed text-lg">
 				{{ content }}
 			</div>
 
 			{% if page.tags %}
-			<footer class="post-footer">
-				<p class="post-tags">
+			<footer class="post-footer mt-16 pt-6 border-t border-secondary">
+				<p class="post-tags text-center text-light">
 					<strong>Tag:</strong>
 					{% for tag in page.tags %}
-					<a href="/tags/#{{ tag }}" class="tag">#{{ tag }}</a>
+					<a href="/tags/#{{ tag }}" class="btn btn-tag">#{{ tag }}</a>
 					{% endfor %}
 				</p>
 			</footer>
@@ -41,102 +41,3 @@ layout: default
 		</article>
 	</div>
 </main>
-
-<style>
-	.page-section {
-		padding: var(--spacing-xl) var(--spacing-md);
-		min-height: 50vh;
-	}
-
-	.page-content {
-		max-width: 800px;
-		margin: 0 auto;
-	}
-
-	.post-featured-image {
-		margin-bottom: var(--spacing-lg);
-		border-radius: var(--border-radius);
-		overflow: hidden;
-		border: var(--border-width) solid var(--color-secondary);
-	}
-
-	.post-featured-image img {
-		width: 100%;
-		height: auto;
-		display: block;
-	}
-
-	.page-body {
-		color: var(--color-light);
-		line-height: 1.8;
-		font-size: 1.1rem;
-	}
-
-	.page-body h2,
-	.page-body h3,
-	.page-body h4 {
-		color: var(--color-accent);
-		margin-top: var(--spacing-lg);
-		margin-bottom: var(--spacing-sm);
-	}
-
-	.page-body p {
-		margin-bottom: var(--spacing-sm);
-	}
-
-	.page-body a {
-		color: var(--color-accent);
-		text-decoration: underline;
-	}
-
-	.page-body ul,
-	.page-body ol {
-		margin-left: var(--spacing-md);
-		padding-left: var(--spacing-md);
-	}
-
-	.page-body li {
-		margin-bottom: var(--spacing-xs);
-	}
-
-	.post-footer {
-		margin-top: var(--spacing-xl);
-		padding-top: var(--spacing-md);
-		border-top: 1px solid var(--color-secondary);
-	}
-
-	.post-tags {
-		text-align: center;
-		color: var(--color-light);
-	}
-
-	.tag {
-		display: inline-block;
-		background: #1a7f1a !important;
-		color: #ffffff !important;
-		padding: 0.5rem 1rem;
-		border-radius: 2rem;
-		margin: 0.25rem;
-		font-size: 0.875rem;
-		text-decoration: none !important;
-		border: none !important;
-		box-shadow: none !important;
-		outline: none !important;
-	}
-
-	.tag:hover,
-	.tag:focus,
-	.tag:active {
-		background: #00d9ff !important;
-		color: #000000 !important;
-		text-shadow: none !important;
-		text-decoration: none !important;
-		border: none !important;
-	}
-
-	@media (max-width: 768px) {
-		.page-body {
-			font-size: 1rem;
-		}
-	}
-</style>
