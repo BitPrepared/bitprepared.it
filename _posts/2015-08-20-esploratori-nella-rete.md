@@ -9,6 +9,7 @@ featured: images/esploratori-della-rete.png
 comments: true
 share: true
 permalink: /blog/2015/esploratori-nella-rete/
+type: blog
 ---
 
 Ecco il XXX° campo e/g avrà luogo quest'anno a Costigiola. Ci saranno ben 20 esporatori/guide 

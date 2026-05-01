@@ -9,7 +9,8 @@ tags: [agesci,bitprepared,scout,informatica,specializzazioni,competenza,maestro 
 featured: images/esploratori-della-rete.png
 comments: true
 share: true
-permalink: /articles/2023/esploratori-nella-rete/
+permalink: /blog/2023/esploratori-nella-rete/
+type: blog
 ---
 
 Arriva il XXXVII° campo e/g e come anno avrà luogo alla base di Costigiola. Quest'anno finalmente con il brevetto di maestro delle tecnologie. Se vuoi essere cambiamento nel tuo reparto, saper usare al meglio le tecnologie questo e' il campo che fa per te, con una radicata storia e tanti capi competenti pronti ad accoglierti. 

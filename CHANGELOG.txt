@@ -9,6 +9,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Phase 2: Collections and blog restructure
+  - Unified blog and news into single /blog/ page with type field filtering
+  - Created dedicated layouts: blog.html, tags.html with max-w-6xl
+  - Added subtitle "Pensieri digitali" to blog page
+  - All blog posts now under /blog/ path (previously mixed /articles/ and /blog/)
+  - Uniformed card styles across homepage, /blog/, and /tags/
+  - Enhanced navigation with Blog link
+- CSS: Utility classes for brand colors
+  - Added .text-brand-dark and .text-muted classes
+- DEV: Phase 2 implementation plan
+  - New document: docs/superpowers/plans/2026-05-01-fase2-collections.md
+
+### Changed
+- Blog structure: All posts consolidated under /blog/ with consistent card design
+- Card images: Increased height from h-48 (192px) to h-56 (224px) for better proportion
+- Layout widths: blog and tags pages now use max-w-6xl (previously max-w-4xl)
+- Removed page-body wrapper from blog/tags layouts for direct content rendering
+- CSS cleanup: Removed obsolete .tag-post-card, .tags-archive width constraints
+
+### Fixed
+- Card width constraints: Removed max-width: 900px from .tags-archive
+- CSS override: Removed .tag-posts grid template that overrode Tailwind classes
+- Color preservation: Added rule to preserve .text-primary color inside .page-body
+- Liquid syntax: Fixed orphaned endif tag in index.html
+- Card consistency: All blog/news cards now match homepage card structure
 - Fase 1: CSS/JS cleanup per Jekyll 4 refactor
   - CSS utility classes: .text-brand-dark, .text-muted (sostituiscono inline styles)
   - Edit button development-only script esterno (edit-button-dev.js)

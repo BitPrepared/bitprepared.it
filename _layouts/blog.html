@@ -1,0 +1,23 @@
+---
+layout: default
+---
+
+<!-- Hero Section -->
+<header class="hero flex items-center justify-center text-center">
+	<div class="hero-content max-w-5xl mx-auto px-6">
+		<h1 class="hero-title text-5xl font-display font-bold text-light mb-4">{{ page.title }}</h1>
+		{% if page.subtitle %}
+		<p class="hero-subtitle text-xl text-light">{{ page.subtitle }}</p>
+		{% endif %}
+	</div>
+</header>
+
+<!-- Page Content - Full width for card grid -->
+<main class="page-section px-6 py-16 min-h-[50vh]">
+	<div class="max-w-6xl mx-auto">
+		<article class="page-content">
+			{% include edit-button.html %}
+			{{ content }}
+		</article>
+	</div>
+</main>

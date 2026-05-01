@@ -1,5 +1,8 @@
 ---
+layout: post
+title: Osservando il cielo
 published: false
+type: blog
 ---
 
 <article id="post-434" class="post-434 post type-post status-publish format-standard hentry category-attivita category-cronache tag-astrolabio tag-astronomia tag-attivita tag-bitprepared tag-condivisione tag-costigiola tag-stelle tag-veglia-alle-stelle">
