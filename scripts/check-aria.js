@@ -1,10 +1,23 @@
 const fs = require('fs');
-const glob = require('glob');
+const path = require('path');
 
 const ariaTags = ['aria-label', 'aria-describedby', 'aria-hidden', 'role', 'aria-live', 'aria-labelledby'];
 const report = {};
 
-glob.sync('_site/**/*.html').forEach(file => {
+function walkDir(dir, callback) {
+  const files = fs.readdirSync(dir);
+  files.forEach((file) => {
+    const filePath = path.join(dir, file);
+    const stat = fs.statSync(filePath);
+    if (stat.isDirectory()) {
+      walkDir(filePath, callback);
+    } else if (file.endsWith('.html')) {
+      callback(filePath);
+    }
+  });
+}
+
+walkDir('_site', (file) => {
   const html = fs.readFileSync(file, 'utf8');
   const lines = html.split('\n');
   const fileReport = [];
@@ -33,5 +46,7 @@ glob.sync('_site/**/*.html').forEach(file => {
 });
 
 fs.writeFileSync('aria-report.json', JSON.stringify(report, null, 2));
-console.log(`✅ ARIA report generated: ${Object.keys(report).length} files with ARIA tags`);
-console.log(`📄 Total ARIA attributes found: ${Object.values(report).flat().length}`);
+const fileCount = Object.keys(report).length;
+const tagCount = Object.values(report).flat().length;
+console.log(`✅ ARIA report generated: ${fileCount} files with ARIA tags`);
+console.log(`📄 Total ARIA attributes found: ${tagCount}`);
