@@ -9,6 +9,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Fase 1: CSS/JS cleanup per Jekyll 4 refactor
+  - CSS utility classes: .text-brand-dark, .text-muted (sostituiscono inline styles)
+  - Edit button development-only script esterno (edit-button-dev.js)
+  - Make target: test-cleanup per verificare rimozione inline CSS/JS
+  - Documentation: Implementation plan, design spec, test report
+  - project_path configuration per development edit button
+
+### Changed
+- Fase 1: Rimozione inline CSS/JS
+  - Index.html: 3 card con classi CSS invece di inline styles
+  - Edit button: script inline → file esterno con data attributes
+  - Edit button: caricato solo in development environment
+  - CSS: classi brand color in styles.css (scout-tech.css non caricato)
+  - Default layout: include edit-button.html per edit button globale
+  - Inline styles: 0 occorrenze (eccezione JSON-LD schema legittimo)
+
+### Fixed
+- CSS classi spostate da scout-tech.css → styles.css (scout-tech non caricato)
+- Edit button: aggiunto positioning styles (#edit-btn) in CSS
+- Edit button: aggiunto visual styles (.evento-edit-icon) bianco/quadrato
 - SEMVER: Semantic versioning implementation
   - New version format: v1.2.3 instead of timestamps
   - GitHub labels: release:major, release:minor, release:patch
