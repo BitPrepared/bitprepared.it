@@ -54,3 +54,6 @@ exclude:
   - scripts/
   - .jekyll-cache/
   - .jekyll-metadata/
+
+# Development configuration
+project_path: /workspace/bitprepared.it
