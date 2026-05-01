@@ -28,6 +28,16 @@
   color: #00d9ff !important;
 }
 
+/* ===== BRAND COLOR UTILITIES (Phase 1 Cleanup) ===== */
+/* Replaced inline styles in index.html - Task 1 */
+.text-brand-dark {
+  color: #0a3d0a;
+}
+
+.text-muted {
+  color: #666666;
+}
+
 /* ===== BASE STYLES ===== */
 body {
   background: #161616;
