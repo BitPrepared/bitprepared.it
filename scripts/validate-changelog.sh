@@ -20,8 +20,8 @@ if ! grep -q "^\[Unreleased\]:" "$CHANGELOG_FILE"; then
   exit 1
 fi
 
-# Get last version
-LAST_VERSION=$(grep -m 1 "^\## \[" "$CHANGELOG_FILE" | sed 's/^\## \[\([^]]*\)\].*/\1/')
+# Get last version (skip [Unreleased] section)
+LAST_VERSION=$(grep "^\## \[" "$CHANGELOG_FILE" | grep -v "^\## \[Unreleased\]" | head -1 | sed 's/^\## \[\([^]]*\)\].*/\1/')
 if [ -z "$LAST_VERSION" ]; then
   echo "❌ ERROR: No version entry found in $CHANGELOG_FILE"
   echo "   Expected format: ## [1.2.3] - YYYY-MM-DD"
@@ -32,29 +32,38 @@ echo "✅ Last version: $LAST_VERSION"
 echo "✅ CHANGELOG validation passed"
 
 # Calculate next version
-CURRENT_MAJOR=$(echo "$LAST_VERSION" | cut -d. -f1)
-CURRENT_MINOR=$(echo "$LAST_VERSION" | cut -d. -f2)
-CURRENT_PATCH=$(echo "$LAST_VERSION" | cut -d. -f3)
+# Check if last version is timestamp format (contains T) or semver format
+if [[ "$LAST_VERSION" == *"T"* ]]; then
+  # Old timestamp format - start fresh with semver
+  echo "⚠️  Old timestamp format detected: $LAST_VERSION"
+  echo "🔄 Migrating to semantic versioning..."
+  NEXT_VERSION="1.0.0"
+else
+  # Semver format
+  CURRENT_MAJOR=$(echo "$LAST_VERSION" | cut -d. -f1)
+  CURRENT_MINOR=$(echo "$LAST_VERSION" | cut -d. -f2)
+  CURRENT_PATCH=$(echo "$LAST_VERSION" | cut -d. -f3)
 
-case "$RELEASE_TYPE" in
-  major)
-    NEXT_MAJOR=$((CURRENT_MAJOR + 1))
-    NEXT_VERSION="${NEXT_MAJOR}.0.0"
-    ;;
-  minor)
-    NEXT_MINOR=$((CURRENT_MINOR + 1))
-    NEXT_VERSION="${CURRENT_MAJOR}.${NEXT_MINOR}.0"
-    ;;
-  patch)
-    NEXT_PATCH=$((CURRENT_PATCH + 1))
-    NEXT_VERSION="${CURRENT_MAJOR}.${CURRENT_MINOR}.${NEXT_PATCH}"
-    ;;
-  *)
-    echo "❌ ERROR: Invalid RELEASE_TYPE: $RELEASE_TYPE"
-    echo "   Must be: major, minor, or patch"
-    exit 1
-    ;;
-esac
+  case "$RELEASE_TYPE" in
+    major)
+      NEXT_MAJOR=$((CURRENT_MAJOR + 1))
+      NEXT_VERSION="${NEXT_MAJOR}.0.0"
+      ;;
+    minor)
+      NEXT_MINOR=$((CURRENT_MINOR + 1))
+      NEXT_VERSION="${CURRENT_MAJOR}.${NEXT_MINOR}.0"
+      ;;
+    patch)
+      NEXT_PATCH=$((CURRENT_PATCH + 1))
+      NEXT_VERSION="${CURRENT_MAJOR}.${CURRENT_MINOR}.${NEXT_PATCH}"
+      ;;
+    *)
+      echo "❌ ERROR: Invalid RELEASE_TYPE: $RELEASE_TYPE"
+      echo "   Must be: major, minor, or patch"
+      exit 1
+      ;;
+  esac
+fi
 
 echo "📌 Next version will be: v$NEXT_VERSION"
 
