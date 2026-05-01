@@ -49,3 +49,8 @@ exclude:
   - CHANGELOG.txt
   - LICENSE.txt
   - .git*
+  - test-lookup.html
+  - screenshots/
+  - scripts/
+  - .jekyll-cache/
+  - .jekyll-metadata/

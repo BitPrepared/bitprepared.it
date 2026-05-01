@@ -172,6 +172,9 @@ validate-graphics: docker-build-visual
 	@echo "🔍 Avvio validazione grafica in Docker..."
 	@echo ""
 	@$(MAKE) --no-print-directory serve-bg
+	@if [ "$(BASELINE_VERSION)" != "" ] && [ "$(BASELINE_VERSION)" != "latest" ]; then \
+		echo "📂 Baseline specificata: $(BASELINE_VERSION)"; \
+	fi
 	@$(MAKE) --no-print-directory serve-static-bg
 	@mkdir -p screenshots/serve screenshots/static screenshots/diff screenshots/report
 	@chmod -R 777 screenshots/
@@ -182,6 +185,7 @@ validate-graphics: docker-build-visual
 		--user $(shell id -u):$(shell id -g) \
 		--entrypoint="" \
 		-e HOST_IP=host.docker.internal \
+		-e BASELINE_VERSION="$(BASELINE_VERSION)" \
 		-e VIEWPORTS="${VIEWPORTS}" \
 		bitprepared-visual-regression:latest \
 		sh -c 'cd /app/scripts/visual-regression && node capture.js && node compare.js'; \
@@ -205,7 +209,7 @@ visual-baseline: docker-build-visual
 	@echo "📸 Creazione baseline images..."
 	@echo ""
 	@$(MAKE) --no-print-directory serve-bg
-	@mkdir -p tests/visual-baseline/desktop tests/visual-baseline/mobile tests/visual-baseline/tablet
+	@mkdir -p tests/visual-baseline
 	@(docker run --rm --init \
 		--mount type=bind,source=${PWD},target=/app \
 		--add-host=host.docker.internal:host-gateway \
@@ -217,8 +221,8 @@ visual-baseline: docker-build-visual
 	ret=$$?; \
 	$(MAKE) --no-print-directory stop-serve; \
 	exit $$ret)
-	@echo "✅ Baseline creata in tests/visual-baseline/"
-	@echo "📝 Commit now: git add tests/visual-baseline/ && git commit -m 'Add visual baseline'"
+	@echo "✅ Baseline creata in tests/visual-baseline/$$(date +%Y.%m)/"
+	@echo "📝 Commit now: git add tests/visual-baseline/ && git commit -m 'Add baseline $$(date +%Y.%m)'"
 
 visual-clean:
 	@echo "🧹 Rimozione screenshots..."

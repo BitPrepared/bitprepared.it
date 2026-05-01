@@ -2,6 +2,7 @@ const pixelmatch = require('pixelmatch');
 const { PNG } = require('pngjs');
 const fs = require('fs');
 const path = require('path');
+const { extractPagesFromSitemap } = require('./extract-pages-from-sitemap');
 
 const THRESHOLD_PERCENT = 1;
 const PIXEL_THRESHOLD = 0.1;
@@ -14,6 +15,8 @@ const pages = [
   'about',
   'blog',
   'tags',
+  'tags_maestro delle tecnologie',
+  'eventi',
   'eventi_epppi',
   'eventi_campo-eg',
   'eventi_stage',
@@ -336,8 +339,69 @@ function generateReport(results) {
   console.log(`   Failed: ${failedTests}/${totalTests}`);
 }
 
+function getAvailableBaselines() {
+  const baselineRoot = path.join(__dirname, '../../tests/visual-baseline');
+
+  if (!fs.existsSync(baselineRoot)) {
+    return [];
+  }
+
+  const folders = fs.readdirSync(baselineRoot, { withFileTypes: true })
+    .filter(dirent => dirent.isDirectory())
+    .map(dirent => dirent.name)
+    .filter(name => /^\d{4}\.\d{2}$/.test(name)) // Only YYYY.MM format
+    .sort() // Ascending order
+    .reverse(); // Descending (most recent first)
+
+  return folders;
+}
+
+function selectBaseline(availableBaselines) {
+  if (availableBaselines.length === 0) {
+    console.error('❌ Nessuna baseline trovata in tests/visual-baseline/');
+    console.error('   Creala con: make visual-baseline');
+    process.exit(1);
+  }
+
+  if (availableBaselines.length === 1) {
+    const selected = availableBaselines[0];
+    console.log(`✅ Usando baseline: ${selected}`);
+    return selected;
+  }
+
+  // Multiple baselines - show options
+  console.log('\n📂 Baseline disponibili:');
+  availableBaselines.forEach((folder, index) => {
+    console.log(`   ${index + 1}. ${folder}`);
+  });
+
+  // Check for environment variable
+  if (process.env.BASELINE_VERSION && process.env.BASELINE_VERSION !== 'latest') {
+    const selected = process.env.BASELINE_VERSION;
+    if (!availableBaselines.includes(selected)) {
+      console.error(`❌ Baseline ${selected} non trovata`);
+      console.error(`   Disponibili: ${availableBaselines.join(', ')}`);
+      process.exit(1);
+    }
+    console.log(`\n✅ Baseline specificata: ${selected}`);
+    return selected;
+  }
+
+  // Default: most recent
+  const selected = availableBaselines[0];
+  console.log(`\n✅ Baseline più recente selezionata: ${selected}`);
+  console.log(`   Per usarne un'altra: BASELINE_VERSION=YYYY.MM make validate-graphics`);
+
+  return selected;
+}
+
 function main() {
   console.log('=== Visual Regression Compare ===\n');
+
+  // Get available baselines and select one
+  const availableBaselines = getAvailableBaselines();
+  const selectedBaseline = selectBaseline(availableBaselines);
+  const baselineBasePath = path.join(__dirname, '../../tests/visual-baseline', selectedBaseline);
 
   const results = [];
 
@@ -349,9 +413,31 @@ function main() {
     console.log(`🎯 Filtering viewports: ${viewportFilter.join(', ')}\n`);
   }
 
+  // Carica pagine dalla sitemap
+  let pageUrls = extractPagesFromSitemap();
+
+  // Converti URL in nomi file
+  let pages = pageUrls.map(url => {
+    return url
+      .replace(/^\//, '')              // Rimuovi slash iniziale
+      .replace(/\/$/, '')             // Rimuovi slash finale
+      .replace(/\//g, '_')           // Converti slash in underscore
+      .replace(/#/g, '_hash_')       // Converti hash per filename
+      || 'index';
+  });
+
+  // Aggiungi pagine speciali (hash pages non in sitemap)
+  pages.push('tags_maestro delle tecnologie');
+
+  // Filtra duplicati
+  pages = [...new Set(pages)];
+
+  console.log(`📸 Testing ${pages.length} pages from sitemap`);
+  console.log('');
+
   for (const viewport of filteredViewports) {
     for (const page of pages) {
-      const baselinePath = path.join(__dirname, `../../tests/visual-baseline/${viewport}/${page}.png`);
+      const baselinePath = path.join(baselineBasePath, viewport, `${page}.png`);
       const servePath = path.join(__dirname, `../../screenshots/serve/${viewport}/${page}.png`);
       const staticPath = path.join(__dirname, `../../screenshots/static/${viewport}/${page}.png`);
       const serveDiffPath = path.join(__dirname, `../../screenshots/diff/${viewport}/${page}_serve.png`);

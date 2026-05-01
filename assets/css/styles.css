@@ -1084,6 +1084,12 @@ footer a::after {
   gap: 2rem;
 }
 
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
 .tag-post-card {
   background: #ffffff;
   border-radius: 8px;

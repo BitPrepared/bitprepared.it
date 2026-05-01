@@ -1,6 +1,7 @@
 const { chromium } = require('@playwright/test');
 const fs = require('fs');
 const path = require('path');
+const { extractPagesFromSitemap } = require('./extract-pages-from-sitemap');
 
 // Handle interrupt signals
 let browser = null;
@@ -26,6 +27,8 @@ const pages = [
   '/about/',
   '/blog/',
   '/tags/',
+  '/tags/#maestro delle tecnologie',
+  '/eventi/',
   '/eventi/epppi/',
   '/eventi/campo-eg/',
   '/eventi/stage/',
@@ -43,6 +46,21 @@ const pages = [
   '/project/github/'
 ];
 
+// Generate YYYY.MM folder for baseline versioning
+const now = new Date();
+const year = now.getFullYear();
+const month = String(now.getMonth() + 1).padStart(2, '0');
+const baselineVersion = `${year}.${month}`;
+const baselineBaseFolder = path.join(__dirname, '../../tests/visual-baseline', baselineVersion);
+
+console.log(`📅 Baseline version: ${baselineVersion}`);
+
+// Create baseline folder if it doesn't exist
+if (!fs.existsSync(baselineBaseFolder)) {
+  fs.mkdirSync(baselineBaseFolder, { recursive: true });
+  console.log(`📁 Created folder: ${baselineBaseFolder}`);
+}
+
 async function createBaseline() {
   console.log('=== Creating Visual Baseline ===\n');
 
@@ -51,7 +69,18 @@ async function createBaseline() {
   console.log('⚠️  Make sure "make serve" is running on port 4000\n');
 
   try {
-    console.log('📸 Capturing baseline images...');
+    // Carica pagine dalla sitemap
+    let pages = await extractPagesFromSitemap();
+
+    // Aggiungi pagine speciali non in sitemap (hash pages, etc.)
+    const specialPages = [
+      '/tags/#maestro delle tecnologie'
+    ];
+
+    pages = [...pages, ...specialPages];
+
+    console.log(`📸 Testing ${pages.length} pages from sitemap`);
+    console.log('');
 
     browser = await chromium.launch({
       headless: true
@@ -84,6 +113,9 @@ async function createBaseline() {
               images.forEach(img => img.loading = 'eager');
             });
             await page.waitForTimeout(500); // Small wait for images
+          } else if (pageUrl.includes('/tags/#')) {
+            // Tag pages with hash: wait for tag view to load
+            await page.waitForTimeout(500); // Wait for JavaScript to execute
           } else {
             // Other pages: wait for marker with short timeout
             await page.waitForSelector('[data-visual-regression-marker="ready"]', {
@@ -92,7 +124,7 @@ async function createBaseline() {
           }
 
           const filename = pageUrl.replace(/^\//, '').replace(/\/$/, '').replace(/\//g, '_') || 'index';
-          const baselinePath = path.join(__dirname, `../../tests/visual-baseline/${viewportName}/${filename}.png`);
+          const baselinePath = path.join(baselineBaseFolder, viewportName, `${filename}.png`);
 
           const dir = path.dirname(baselinePath);
           if (!fs.existsSync(dir)) {
@@ -115,8 +147,8 @@ async function createBaseline() {
 
     await browser.close();
 
-    console.log('\n✅ Baseline created successfully in tests/visual-baseline/');
-    console.log('📝 Commit these files to git to save the baseline');
+    console.log(`\n✅ Baseline created successfully in tests/visual-baseline/${baselineVersion}/`);
+    console.log(`📝 Commit now: git add tests/visual-baseline/ && git commit -m 'Add baseline ${baselineVersion}'`);
 
   } catch (error) {
     console.error('\n❌ Error:', error.message);
