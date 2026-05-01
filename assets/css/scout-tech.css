@@ -652,49 +652,11 @@ footer a::after {
   gap: 2rem;
 }
 
-.tag-post-card {
-  background: #ffffff;
-  border-radius: 8px;
-  color: #0a1f0a;
-  padding: 1.5rem;
-  padding-top: 3rem;
-  border: 1px solid #1a7f1a;
-  transition: transform 300ms ease-out, box-shadow 300ms ease-out;
-  position: relative;
-  overflow: visible;
-}
 
-.tag-post-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(26, 127, 26, 0.3);
-}
 
-.tag-post-card h2 {
-  margin-bottom: 1rem;
-}
 
-.tag-post-card h2 a {
-  color: #0a3d0a;
-  text-decoration: none;
-}
 
-.tag-post-card h2 a:hover {
-  color: #00d9ff;
-}
 
-.tag-post-card .post-date {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: #00d9ff;
-  color: #000000 !important;
-  padding: 0.25rem 0.75rem;
-  border-radius: 1rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  font-family: JetBrains Mono, Courier New, monospace;
-  z-index: 1;
-}
 
 .post-excerpt {
   color: #0a1f0a;
