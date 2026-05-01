@@ -18,13 +18,14 @@ bitprepared.it/
 │   ├── check-aria.js          # CREATE: Extract ARIA tags to JSON
 │   └── optimize-images.js     # CREATE: Image optimization pipeline
 ├── _includes/
-│   ├── seo.html               # MODIFY: Enhanced meta tags
-│   └── structured-data.html   # CREATE: Schema.org JSON-LD
+│   ├── structured-data.html   # CREATE: Schema.org JSON-LD
+│   └── head.html              # MODIFY: Add {% seo %}
 ├── _plugins/
 │   └── image_optimizer.rb     # CREATE: Jekyll hook for image optimization
 ├── Makefile                    # MODIFY: Add check-aria target
 └── assets/
-    └── images/                # OPTIMIZE: All images during build
+    └── images/
+        └── logo.png            # CREATE: Site logo for SEO
 ```
 
 ---
@@ -114,7 +115,53 @@ git commit -m "feat: add ARIA verification system
 
 ---
 
-## Task 2: Enhanced SEO Meta Tags
+## Task 2: Create Site Logo
+
+**Files:**
+- Create: `assets/images/logo.png`
+
+- [ ] **Step 1: Create logo.png specifications**
+
+Logo requirements:
+- Size: 512x512px (optimal for Schema.org and social sharing)
+- Format: PNG with transparency
+- Background: Transparent (for light/dark mode compatibility)
+- Content: "Bit Prepared" text or icon
+- Colors: Brand colors (#0a3d0a primary, #00d9ff accent)
+
+- [ ] **Step 2: Create placeholder logo**
+
+```bash
+# Create simple placeholder logo
+convert -size 512x512 xc:none \
+  -font Helvetica-Bold -pointsize 72 -fill "#0a3d0a" \
+  -gravity center -annotate +0+0 "Bit\nPrepared" \
+  assets/images/logo.png
+
+# Verify logo created
+ls -lh assets/images/logo.png
+```
+
+- [ ] **Step 3: Verify logo in browser**
+
+Open `http://localhost:4000/assets/images/logo.png` in browser
+
+Expected: Logo image loads correctly
+
+- [ ] **Step 4: Commit**
+
+```bash
+git add assets/images/logo.png
+git commit -m "feat: add Bit Prepared site logo
+
+- Add 512x512px logo.png for SEO and social sharing
+- Placeholder logo with brand colors
+- Will be replaced with final design"
+```
+
+---
+
+## Task 3: Enhanced SEO Meta Tags
 
 **Files:**
 - Create: `_includes/structured-data.html`
@@ -143,8 +190,8 @@ seo:
   author: Bit Prepared
   lang: it_IT
   locale: it_IT
-  image: /assets/images/agesci_logo.png
-  logo: /assets/images/agesci_logo.png
+  image: /assets/images/logo.png
+  logo: /assets/images/logo.png
   social:
     name: Bit Prepared
     links:
@@ -181,11 +228,11 @@ cat > _includes/structured-data.html << 'EOF'
     "name": "Bit Prepared",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://www.bitprepared.it/assets/images/agesci_logo.png"
+      "url": "https://www.bitprepared.it/assets/images/logo.png"
     }
   },
   "description": "{{ page.description | default: page.excerpt | strip_html | truncate: 160 }}",
-  "image": "{{ page.featured | default: '/assets/images/agesci_logo.png' | prepend: 'https://www.bitprepared.it' }}"
+  "image": "{{ page.featured | default: '/assets/images/logo.png' | prepend: 'https://www.bitprepared.it' }}"
 }
 </script>
 {% elsif page.layout == 'evento' %}
@@ -241,7 +288,7 @@ git commit -m "feat: enable jekyll-seo-tag and add structured data
 
 ---
 
-## Task 3: Image Optimization Pipeline
+## Task 4: Image Optimization Pipeline
 
 **Files:**
 - Create: `_plugins/image_optimizer.rb`
@@ -382,7 +429,7 @@ git commit -m "feat: add image optimization pipeline
 
 ---
 
-## Task 4: Integration Testing
+## Task 5: Integration Testing
 
 **Files:**
 - Test: All Phase 3 features
