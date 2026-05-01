@@ -116,13 +116,34 @@ jobs:
         env:
           CHANGELOG_FILE: "CHANGELOG.txt"
 
-      - name: Commit version bump
+      - name: Commit version bump to branch
         run: |
+          VERSION="${{ needs.determine-release-type.outputs.next-version }}"
+          BRANCH_NAME="chore/bump-version-${VERSION}"
+
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
+
+          # Create new branch
+          git checkout -b "$BRANCH_NAME"
+
+          # Commit version bump
           git add CHANGELOG.txt
-          git commit -m "chore: bump version to ${{ needs.determine-release-type.outputs.next-version }}"
-          git push
+          git commit -m "chore: bump version to $VERSION"
+
+          # Push branch
+          git push origin "$BRANCH_NAME"
+
+          # Create PR using gh cli
+          gh pr create \
+            --title "Release $VERSION - Version Bump" \
+            --body "Automated version bump to $VERSION. This PR was created by the release workflow." \
+            --base master \
+            --head "$BRANCH_NAME" \
+            --label "release:automated"
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build the site in the jekyll/builder container
         run: |
