@@ -417,3 +417,8 @@ test-cleanup:
 	@echo ""
 	@echo "✅ All cleanup tests passed!"
 
+
+.PHONY: check-aria
+check-aria:
+	@echo "🔍 Checking ARIA tags..."
+	@node scripts/check-aria.js
