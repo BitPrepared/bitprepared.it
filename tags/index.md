@@ -77,7 +77,7 @@ function showTag(tagName) {
   postsContainer.innerHTML = `<div class="grid grid-cols-1 md:grid-cols-3 gap-6">` + posts.map(post => {
     const featuredImage = post.featured ? `
       <div class="relative">
-        <img src="/assets/${post.featured}" alt="${post.title}" width="400" height="300" loading="lazy" class="w-full h-56 object-cover">
+        <img src="/assets/${post.featured}" alt="${post.title}" width="400" height="300" loading="lazy" class="w-full h-56 object-cover" loading="lazy">
         <span class="absolute top-2 right-2 bg-accent text-dark px-3 py-1 rounded-full text-sm font-semibold">${post.date}</span>
       </div>
     ` : '';

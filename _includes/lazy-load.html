@@ -1,0 +1,42 @@
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Native lazy loading with Intersection Observer fallback
+  const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+
+  if ('loading' in HTMLImageElement.prototype) {
+    // Browser supports native lazy loading
+    console.log('✅ Native lazy loading supported');
+  } else {
+    // Fallback to Intersection Observer
+    console.log('⚠️  Using Intersection Observer fallback');
+    const imageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
+          }
+          img.classList.add('loaded');
+          imageObserver.unobserve(img);
+        }
+      });
+    });
+
+    lazyImages.forEach(function(img) {
+      imageObserver.observe(img);
+    });
+  }
+});
+</script>
+
+<style>
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
+}
+
+img[loading="lazy"].loaded,
+img[loading="lazy"]::-webkit-loading {
+  opacity: 1;
+}
+</style>
