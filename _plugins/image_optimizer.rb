@@ -2,16 +2,16 @@ require 'fileutils'
 require 'pathname'
 
 Jekyll::Hooks.register :pages, :post_write do |page|
-  # Skip if page is not written yet or doesn't have destination
-  next unless page.respond_to?(:destination) && page.destination
-  next unless page.destination.end_with?('.html')
+  # Get destination path correctly for Jekyll 4.4.1
+  dest = page.destination(@page.site.dest)
+  next unless dest.end_with?('.html')
 
-  dest_dir = File.dirname(page.destination)
-  source_dir = File.join(page.site.dest, '..')
+  dest_dir = File.dirname(dest)
+  source_dir = File.join(@page.site.dest, '..')
 
   # Copy and optimize images referenced in HTML
   begin
-    html = File.read(page.destination)
+    html = File.read(dest)
     html.scan(/\/assets\/images\/([^\s"')]+)/) do |match|
       image_path = match[0]
       source_image = File.join(source_dir, image_path)
@@ -26,6 +26,6 @@ Jekyll::Hooks.register :pages, :post_write do |page|
       end
     end
   rescue => e
-    puts "⚠️  Error processing images for #{page.destination}: #{e.message}"
+    puts "⚠️  Error processing images: #{e.message}"
   end
 end
