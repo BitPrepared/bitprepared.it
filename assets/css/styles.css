@@ -954,6 +954,15 @@ footer a::after {
 .mt-lg { margin-top: 2rem; }
 .mb-lg { margin-bottom: 2rem; }
 
+/* ==================================================
+   BRAND COLOR UTILITIES
+   Sostituiscono inline styles in index.html
+   ================================================== */
+
+.text-brand-dark {
+  color: #0a3d0a;
+}
+
 /* ===== SCROLL REVEAL ===== */
 .reveal {
   opacity: 0;
@@ -1478,4 +1487,35 @@ footer a:focus {
   .software-icon {
     margin: 0 auto;
   }
+}
+
+/* ===== EDIT BUTTON (Development Only) ===== */
+.evento-edit-icon {
+  background: #ffffff;
+  color: #0a3d0a;
+  border: 2px solid #0a3d0a;
+  border-radius: 4px;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: all 300ms ease;
+}
+
+.evento-edit-icon:hover {
+  background: #f5f5f5;
+  border-color: #0a5d0a;
+  transform: translateY(-2px);
+}
+
+/* Edit button positioning */
+#edit-btn {
+  position: fixed !important;
+  top: 20px !important;
+  right: 20px !important;
+  z-index: 10000 !important;
 }
