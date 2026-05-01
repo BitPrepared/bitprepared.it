@@ -402,3 +402,18 @@ version-show:
 	@echo "📋 Git tags:"
 	@git tag -l | tail -5
 
+# Test: Verifica che inline CSS/JS siano stati rimossi
+test-cleanup:
+	@echo "Testing CSS/JS cleanup..."
+	@echo "1. Checking for inline CSS styles..."
+	@! grep -r 'style="color:' _site/index.html || { echo "❌ FAIL: Found inline color styles"; exit 1; }
+	@echo "✅ PASS: No inline color styles in index.html"
+	@echo "2. Checking for inline JavaScript..."
+	@! grep -r '<script' _site/index.html | grep -v 'src=' | grep -v 'application/ld+json' || { echo "❌ FAIL: Found inline JavaScript"; exit 1; }
+	@echo "✅ PASS: No inline JavaScript (except JSON-LD)"
+	@echo "3. Checking edit-button-dev.js excluded from production..."
+	@! grep -r 'edit-button-dev.js' _site/ || { echo "❌ FAIL: edit-button-dev.js found in production"; exit 1; }
+	@echo "✅ PASS: edit-button-dev.js excluded from production"
+	@echo ""
+	@echo "✅ All cleanup tests passed!"
+
