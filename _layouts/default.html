@@ -9,32 +9,17 @@
 		<meta name="keywords" content="{{ page.tags | join: ', ' }}">
 	{% endif %}
 
-	<!-- Google Fonts -->
+		<!-- Favicon -->
+	<link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico" />
+	<link rel="apple-touch-icon" href="/assets/images/favicon.png" />
+
+<!-- Google Fonts -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 
-	<!-- Scout Tech Modern CSS -->
-	<link rel="stylesheet" href="/assets/css/scout-tech.css" />
-	<link rel="stylesheet" href="/assets/css/scout-tech-mobile.css" />
-	<link rel="stylesheet" href="/assets/css/page.css" />
-	{% if page.title == 'Tags' %}
-	<link rel="stylesheet" href="/assets/css/tags.css" />
-	{% endif %}
-	<style>
-		.skip-link {
-			position: absolute;
-			top: -40px;
-			left: 0;
-			background: var(--color-accent);
-			color: var(--color-dark);
-			padding: 8px;
-			z-index: 100;
-			text-decoration: none;
-			font-weight: 600;
-		}
-		.skip-link:focus { top: 0; }
-	</style>
+	<!-- CSS: Unified stylesheet -->
+	<link rel="stylesheet" href="/assets/css/styles.css" />
 </head>
 <body>
 
@@ -42,7 +27,7 @@
 	<a href="#main-content" class="skip-link">Vai al contenuto principale</a>
 
 	<!-- Navigation -->
-	<nav class="navbar">
+	<nav class="navbar" role="navigation" aria-label="Menu principale">
 		<div class="navbar-content">
 			<a href="/" class="navbar-brand">BitPrepared</a>
 			<button class="navbar-toggle" id="navbar-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navbar-nav">
@@ -60,23 +45,36 @@
 	</nav>
 
 	<!-- Main Content -->
-	<main id="main-content">
+	<main id="main-content" role="main">
 		{{ content }}
 	</main>
 
 	<!-- Footer -->
-	<footer>
+	<footer role="contentinfo" aria-label="Footer con informazioni su Bit Prepared">
+		<!-- Social -->
 		<div class="footer-social">
-			<a href="https://twitter.com/bitprepared" class="fa fa-twitter"><span>Twitter</span></a>
-			<a href="https://www.facebook.com/bitprepared" class="fa fa-facebook"><span>Facebook</span></a>
-			<a href="https://www.instagram.com/bit.prepared/" class="fa fa-instagram"><span>Instagram</span></a>
-			<a href="mailto:info@bitprepared.it" class="fa fa-envelope"><span>Email</span></a>
+			<a href="https://twitter.com/bitprepared" class="fa fa-twitter" aria-label="Seguici su Twitter"><span>Twitter</span></a>
+			<a href="https://www.facebook.com/bitprepared" class="fa fa-facebook" aria-label="Seguici su Facebook"><span>Facebook</span></a>
+			<a href="https://www.instagram.com/bit.prepared/" class="fa fa-instagram" aria-label="Seguici su Instagram"><span>Instagram</span></a>
+			<a href="mailto:info@bitprepared.it" class="fa fa-envelope" aria-label="Invia email a info@bitprepared.it"><span>Email</span></a>
 		</div>
+
+		<!-- Link principali -->
 		<div class="footer-links">
-			<a href="/about/">Chi siamo</a> |
-			<a href="/eventi/">Eventi</a> |
+			<a href="/about/">Chi siamo</a>
+			<a href="/eventi/">Eventi</a>
 			<a href="/software/">Software</a>
+			<a href="/blog/">Blog</a>
 		</div>
+
+		<!-- Link legali -->
+		<div class="footer-legal">
+			<a href="/privacy/">Privacy Policy</a>
+			<span class="separator">|</span>
+			<a href="/cookie-policy/">Cookie Policy</a>
+		</div>
+
+		<!-- Copyright -->
 		<div class="footer-copy">
 			&copy; {{ site.time | date: "%Y" }} Bit Prepared<br>
 			"Digito ergo sum" - Per un uso consapevole del digitale
@@ -85,9 +83,6 @@
 
 	<!-- Scroll Animations (Optional) -->
 	<script src="/assets/js/scroll-animations.js"></script>
-
-	<!-- Visual Regression Marker: indicates page is fully loaded -->
-	<div data-visual-regression-marker="ready" style="display:none !important;"></div>
 
 </body>
 </html>

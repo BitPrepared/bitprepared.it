@@ -1,10 +1,12 @@
 ---
 layout: evento
+slug: stage
 title: Stage per Capi - Vivere ed educare nell'era digitale
 subtitle: digito ergo sum
 tags: [bitprepared, stage, specializzazioni, formazione capi, digitale]
 modified: 2026-04-21
 image: /assets/images/pages/stage.jpg
+event_date: 2018-09-15
 event_status: past
 
 benefits_title: "Perché partecipare allo Stage"

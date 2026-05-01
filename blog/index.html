@@ -1,22 +1,57 @@
 ---
-title: Blog
 layout: default
 ---
 
-<!-- Main -->
-	<div id="main">
-		<div id="content" class="container">
-			{% for post in site.posts offset: 0 limit: 16 %}
-			<div class="row">
-				<section class="8u -2u">
-					<a href="{{ site.prefix }}{{ post.url }}" class="image full"><img src="/assets/{{ post.featured }}" alt=""></a>
-					<header>
-						<h2>{{ post.title }}</h2>
-					</header>
-					{{ post.excerpt }}
-					<a href="{{ site.prefix }}{{ post.url }}" class="button button-style1">Read More</a>
-				</section>
-			</div>
-			{% endfor %}
-		</div>
-	</div>
+<style>
+  .blog-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .blog-grid {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+  }
+</style>
+
+<!-- Hero Section -->
+<header class="hero flex items-center justify-center text-center">
+  <div class="hero-content max-w-5xl mx-auto px-6">
+    <h1 class="hero-title text-5xl font-display font-bold text-light mb-4">Blog</h1>
+    <p class="hero-subtitle text-xl text-light">Articoli, riflessioni e approfondimenti sul digitale</p>
+  </div>
+</header>
+
+<!-- Page Content -->
+<div class="page-section px-6 py-16">
+  <div class="blog-grid">
+      {% for post in site.posts offset: 0 limit: 16 %}
+      <article class="tag-post-card">
+        {% if post.featured %}
+        <div class="mb-6">
+          <img src="/assets/{{ post.featured }}" alt="{{ post.title }}" class="w-full h-48 object-cover rounded-lg border-2 border-green-600">
+        </div>
+        {% endif %}
+
+        <h2 class="text-xl font-semibold mb-2">
+          <a href="{{ post.url }}" class="text-green-900 hover:text-cyan-700 no-underline">{{ post.title }}</a>
+        </h2>
+
+        <p class="post-date text-sm font-mono text-cyan-700 mb-4">
+          {{ post.date | date: '%d %B %Y' }}
+        </p>
+
+        <p class="post-excerpt text-gray-700 mb-6 line-height-1.6">
+          {{ post.excerpt }}
+        </p>
+
+        <a href="{{ post.url }}" class="btn btn-primary">Leggi tutto</a>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</div>

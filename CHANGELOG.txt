@@ -1,5 +1,102 @@
 Changelog BitPrepared.it
--------------------
+========================
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+### Added
+- SEMVER: Semantic versioning implementation
+  - New version format: v1.2.3 instead of timestamps
+  - GitHub labels: release:major, release:minor, release:patch
+  - Automatic version bump on merge via labels
+  - CHANGELOG validation pre-merge via GitHub Actions
+  - Scripts: validate-changelog.sh, bump-version.sh, migrate-changelog.sh
+  - Makefile targets: version-validate, version-bump, version-show
+- SEO: Comprehensive SEO improvement plan
+  - New document: docs/SEO_IMPROVEMENT_PLAN.md
+  - Enhanced metadata structure and semantic HTML
+  - Improved search engine optimization across all pages
+- Visual regression: Updated baselines for 2026.05
+  - New baseline screenshots for all viewports (desktop, mobile, tablet)
+  - Improved comparison script with better error reporting
+  - Enhanced page extraction from sitemap
+
+### Changed
+- DEV: Makefile serve improvements
+  - POLLING parameter: make serve POLLING=1 for force_polling
+  - Default make serve: no force_polling (lighter CPU usage)
+- DEV: Autonomous server management
+  - New targets: serve-bg, serve-static-bg, stop-servers, stop-serve, stop-static
+  - Servers start/stop automatically for validate-graphics, accessibility-audit, visual-baseline
+  - No more manual server management required
+  - Automatic cleanup even if commands fail
+
+- DEV: Accessibility workflow improvements
+  - Fused accessibility-analyze + accessibility-score into single target
+  - accessibility-analyze generates physical summary.md report
+  - accessibility-audit now runs analyze automatically after audit
+  - Added A11Y_PAGE parameter: make accessibility-audit A11Y_PAGE=index (homepage only)
+  - Removed: accessibility-full, accessibility-quick (simplified interface)
+  - Quick scores now show ALL pages, not just homepage
+
+- DEV: GitHub Actions workflow updates
+  - New workflow: validate-pr.yml for pre-merge checks
+  - Updated: site-release.yml uses semantic versioning
+  - Automatic CHANGELOG bump + git tag creation on merge
+  - Accessibility report now uploaded as workflow artifact
+
+- UI: Social icon styling improvements
+  - Better visual consistency across social media icons
+  - Improved hover states and alignment
+
+- UI: Mobile-friendly CSS improvements
+  - Enhanced responsive design for mobile devices
+  - Better layout and spacing on small screens
+  - Streamlined CSS for improved mobile performance
+
+### Fixed
+- FIX: Server cleanup on command failure
+  - validate-graphics, accessibility-audit, visual-baseline now always stop servers
+  - Subshell pattern ensures cleanup even if docker run fails
+- FIX: Container name conflicts in serve-bg
+  - Automatic cleanup of existing containers before starting new ones
+  - Improved stop-serve with fallback PID handling
+
+## [20260426T125004] - 2026-04-26
+
+### 2026-04-26
+  * FEATURE: Accessibility miglioramenti WCAG AA
+    - Contrast: --color-secondary scuro (#0d5c0d, ratio 11.7:1)
+    - Semantics: Heading order corretto (h4→h3 program items)
+    - Layout: Post tags spacing migliorato (.post-tags flex container)
+  * DEV: Docker container stabilità
+    - Accessibility: Playwright→Puppeteer (chromium di sistema)
+    - Visual regression: Chromium args per no-crash Docker
+
+### 2026-04-26
+  * MIGRATION: Scout Tech Redesign applicato a Jekyll 4
+    - CSS Migration: 5 files → 2 files (main.css, scout-tech.css)
+    - JS Updates: Aggiunto tailwind-config.js
+    - Layout Updates: Modernizzati tutti layout con Tailwind CSS
+    - Homepage: Complete redesign con hero section e cards
+    - Eventi: Aggiornato layout per design system moderno
+    - Branch: feature/apply-scout-tech-redesign
+    - Basato su: MIGRAZIONE_JEKYLL4.md
+  * FIX: Sezione tags non funzionante
+    - Aggiunto styles tags.css a scout-tech.css (163 righe)
+    - Ripristinate classi: .tags-archive, .tag-link, .tag-post-card, .btn-primary
+  * FIX: Homepage cards "Scopri..." disallineati
+    - Aggiunto flex flex-col alle article cards
+    - Aggiunto flex-grow ai contenuti per allineare bottoni in basso
+    - Aggiunto text-center ai link per migliorare allineamento
+  * FIX: Software icone centrate invece che a sinistra
+    - Modificato .page-body img in main.css
+    - Aggiunto selettore specifico per permalink-software
+    - Icone ora allineate a sinistra con inline-block
 
 ### 2026-04-24
   * FIX: Visual regression timing issues
@@ -61,3 +158,6 @@ Changelog BitPrepared.it
 
 ### 2019-06-01
   * aggiornamento software list
+
+[Unreleased]: https://github.com/bitprepared/bitprepared.it/compare/v20260426T125004...HEAD
+[20260426T125004]: https://github.com/bitprepared.bitprepared.it/releases/tag/v20260426T125004

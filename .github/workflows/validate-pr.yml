@@ -1,0 +1,77 @@
+name: Validate PR
+
+on:
+  pull_request:
+    branches:
+      - master
+    types: [opened, synchronize, reopened, labeled]
+
+jobs:
+  validate-changelog:
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect release type from labels
+        id: release-type
+        run: |
+          if [[ "${{ contains(github.event.pull_request.labels.*.name, 'release:major') }}" == "true" ]]; then
+            echo "type=major" >> $GITHUB_OUTPUT
+          elif [[ "${{ contains(github.event.pull_request.labels.*.name, 'release:minor') }}" == "true" ]]; then
+            echo "type=minor" >> $GITHUB_OUTPUT
+          elif [[ "${{ contains(github.event.pull_request.labels.*.name, 'release:patch') }}" == "true" ]]; then
+            echo "type=patch" >> $GITHUB_OUTPUT
+          else
+            echo "type=auto" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Set release type to patch if auto
+        if: steps.release-type.outputs.type == 'auto'
+        run: |
+          echo "type=patch" >> $GITHUB_OUTPUT
+
+      - name: Show detected release type
+        run: |
+          echo "🏷️  Release type detected: ${{ steps.release-type.outputs.type }}"
+
+      - name: Validate CHANGELOG
+        id: validate
+        run: |
+          chmod +x ./scripts/validate-changelog.sh
+          ./scripts/validate-changelog.sh
+        env:
+          RELEASE_TYPE: ${{ steps.release-type.outputs.type }}
+
+      - name: Show next version
+        run: |
+          echo "📌 Next version will be: v${{ env.NEXT_VERSION }}"
+
+      - name: Comment on PR if validation fails
+        if: failure() && steps.validate.outcome == 'failure'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '❌ **CHANGELOG Validation Failed**\n\n' +
+                    'Please ensure CHANGELOG.txt is updated:\n' +
+                    '- Add an **[Unreleased]** section at the end with your changes\n' +
+                    '- Follow the format: `## [Unreleased]`\n\n' +
+                    'For more details, see the workflow logs.'
+            })
+
+      - name: Check validation result
+        if: always()
+        run: |
+          if [[ "${{ steps.validate.outcome }}" == "success" ]]; then
+            echo "✅ CHANGELOG validation passed"
+          else
+            echo "❌ CHANGELOG validation failed"
+            exit 1
+          fi
