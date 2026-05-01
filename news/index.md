@@ -1,13 +1,12 @@
 ---
-layout: page
+layout: news
 title: News
 permalink: /news/
 ---
 
-<section class="max-w-6xl mx-auto px-6 py-16" aria-labelledby="news-title">
-  <h1 id="news-title" class="text-3xl font-display font-bold text-center text-light mb-8">News Bit Prepared</h1>
-  
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<h2 id="news-title" class="text-3xl font-display font-bold text-center text-light mb-8">News Bit Prepared</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
     {% for post in site.posts %}
       {% if post.type == 'news' %}
         <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-base flex flex-col">
@@ -32,10 +31,9 @@ permalink: /news/
       {% endif %}
     {% endfor %}
   </div>
-</section>
 
 {% if site.posts.size == 0 or site.posts.type == 'news' %}
-  <div class="max-w-6xl mx-auto px-6 py-16 text-center">
+  <div class="text-center">
     <p class="text-gray-600">Nessuna notizia disponibile.</p>
   </div>
 {% endif %}

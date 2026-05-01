@@ -1,13 +1,12 @@
 ---
-layout: page
+layout: blog
 title: Blog
 permalink: /blog/
 ---
 
-<section class="max-w-6xl mx-auto px-6 py-16" aria-labelledby="blog-title">
-  <h1 id="blog-title" class="text-3xl font-display font-bold text-center text-light mb-8">Blog Bit Prepared</h1>
-  
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<h2 id="blog-title" class="text-3xl font-display font-bold text-center text-light mb-8">Blog Bit Prepared</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
     {% for post in site.posts %}
       {% if post.type == 'blog' or post.type == nil %}
         <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-base flex flex-col">
@@ -32,4 +31,3 @@ permalink: /blog/
       {% endif %}
     {% endfor %}
   </div>
-</section>
