@@ -11,22 +11,22 @@ permalink: /news/
     {% for post in site.posts %}
       {% if post.type == 'news' %}
         <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-base flex flex-col">
+          {% if post.featured %}
           <div class="relative">
-            {% if post.featured %}
-              <img src="/assets/{{ post.featured }}" alt="{{ post.title }}" width="400" height="300" loading="lazy" class="w-full h-48 object-cover">
-            {% else %}
-              <img src="/assets/images/placeholder-news.png" alt="{{ post.title }}" width="400" height="300" loading="lazy" class="w-full h-48 object-cover">
-            {% endif %}
+            <img src="/assets/{{ post.featured }}" alt="{{ post.title }}" width="400" height="300" loading="lazy" class="w-full h-48 object-cover">
             {% if post.date %}
-              <span class="absolute top-2 right-2 bg-accent text-dark px-3 py-1 rounded-full text-sm font-semibold">{{ post.date | date: "%d %b %Y" }}</span>
+            <span class="absolute top-2 right-2 bg-accent text-dark px-3 py-1 rounded-full text-sm font-semibold">{{ post.date | date: "%d %b %Y" }}</span>
             {% endif %}
           </div>
+          {% endif %}
           <div class="p-6 flex flex-col flex-grow">
-            <h3 class="text-2xl font-display font-bold text-brand-dark mb-3">{{ post.title }}</h3>
+            <h3 class="text-2xl font-display font-bold text-primary mb-3">{{ post.title }}</h3>
             {% if post.excerpt %}
-              <p class="mb-4 flex-grow text-muted">{{ post.excerpt | strip_html | truncate: 150 }}</p>
+            <p class="text-gray-600 mb-4">{{ post.excerpt | strip_html | truncate: 150 }}</p>
             {% endif %}
-            <a href="{{ post.url }}" class="btn btn-event">Leggi tutto</a>
+            <div class="card-actions">
+              <a href="{{ post.url }}" class="btn btn-card">Leggi tutto</a>
+            </div>
           </div>
         </article>
       {% endif %}
