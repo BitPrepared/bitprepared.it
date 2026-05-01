@@ -9,7 +9,7 @@ tags: [agesci,bitprepared,scout,informatica,specializzazioni,competenza,maestro 
 featured: images/esploratori-della-rete.png
 comments: true
 share: true
-permalink: /articles/2023/esploratori-nella-rete/
+permalink: /blog/2023/esploratori-nella-rete/
 type: blog
 ---
 
