@@ -57,3 +57,22 @@ exclude:
 
 # Development configuration
 project_path: /workspace/bitprepared.it
+
+# SEO configuration
+seo:
+  title: Bit Prepared
+  description: Bit Prepared eventi formativi ed educativi su tecnologia e societa
+  author: Bit Prepared
+  lang: it_IT
+  locale: it_IT
+  image: /assets/images/logo.png
+  logo: /assets/images/logo.png
+  social:
+    name: Bit Prepared
+    links:
+      - https://twitter.com/bitprepared
+      - https://www.facebook.com/bitprepared
+      - https://www.instagram.com/bit.prepared/
+  twitter:
+    username: bitprepared
+    card: summary_large_image
