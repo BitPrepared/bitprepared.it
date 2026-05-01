@@ -4,25 +4,35 @@ title: News
 permalink: /news/
 ---
 
-<h1 id="news-title">News Bit Prepared</h1>
+<h1 id="news-title" class="text-3xl font-display font-bold text-center text-light mb-8">News Bit Prepared</h1>
 
-<div class="news-grid">
-  {% for post in site.posts %}
-    {% if post.type == 'news' %}
-      <article class="news-card">
-        {% if post.date %}
-          <span class="post-date">{{ post.date | date: '%d %B %Y' }}</span>
-        {% endif %}
-        <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-        {% if post.excerpt %}
-          <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 200 }}</p>
-        {% endif %}
-        <a href="{{ post.url }}" class="btn btn-primary">Leggi tutto</a>
-      </article>
-    {% endif %}
-  {% endfor %}
+<div class="max-w-6xl mx-auto px-6 py-16">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    {% for post in site.posts %}
+      {% if post.type == 'news' %}
+        <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-base flex flex-col">
+          {% if post.date %}
+            <div class="relative">
+              <div class="bg-accent text-dark px-3 py-1 rounded-full text-sm font-semibold inline-block mt-4 ml-4">{{ post.date | date: "%d %b %Y" }}</div>
+            </div>
+          {% endif %}
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-2xl font-display font-bold text-primary mb-3">{{ post.title }}</h3>
+            {% if post.excerpt %}
+              <p class="text-gray-600 mb-4">{{ post.excerpt | strip_html | truncate: 150 }}</p>
+            {% endif %}
+            <div class="card-actions">
+              <a href="{{ post.url }}" class="btn btn-card">Leggi tutto</a>
+            </div>
+          </div>
+        </article>
+      {% endif %}
+    {% endfor %}
+  </div>
 </div>
 
 {% if site.posts.size == 0 or site.posts.type == 'news' %}
-  <p>Nessuna notizia disponibile.</p>
+  <div class="max-w-6xl mx-auto px-6 py-16 text-center">
+    <p class="text-gray-600">Nessuna notizia disponibile.</p>
+  </div>
 {% endif %}
