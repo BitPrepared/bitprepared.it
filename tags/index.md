@@ -1,15 +1,8 @@
 ---
-layout: page
+layout: tags
 title: Tags
 permalink: /tags/
 ---
-
-<style>
-  /* Override page wrapper width for tag cards grid */
-  body .page-section:has(.tags-archive) > .max-w-4xl {
-    max-width: 80rem; /* equivalent to max-w-6xl */
-  }
-</style>
 
 <div class="tags-archive">
   <h1 id="tags-title">Tutti i Tag</h1>
@@ -46,7 +39,8 @@ const tagsData = {
       title: "{{ post.title | escape }}",
       url: "{{ post.url }}",
       date: "{{ post.date | date: '%d %B %Y' }}",
-      excerpt: {{ post.excerpt | strip_html | truncate: 200 | jsonify }}
+      excerpt: {{ post.excerpt | strip_html | truncate: 150 | jsonify }},
+      featured: "{{ post.featured }}"
     }{% unless forloop.last %},{% endunless %}
     {% endfor %}
   ]{% unless forloop.last %},{% endunless %}
@@ -80,14 +74,27 @@ function showTag(tagName) {
   document.getElementById('tag-count').textContent = posts.length;
 
   const postsContainer = document.getElementById('tag-posts');
-  postsContainer.innerHTML = posts.map(post => `
-    <article class="tag-post-card">
-      <h2><a href="${post.url}">${post.title}</a></h2>
-      <p class="post-date">${post.date}</p>
-      <p class="post-excerpt">${post.excerpt}</p>
-      <a href="${post.url}" class="btn btn-primary">Leggi tutto</a>
-    </article>
-  `).join('');
+  postsContainer.innerHTML = `<div class="grid grid-cols-1 md:grid-cols-3 gap-6">` + posts.map(post => {
+    const featuredImage = post.featured ? `
+      <div class="relative">
+        <img src="/assets/${post.featured}" alt="${post.title}" width="400" height="300" loading="lazy" class="w-full h-56 object-cover">
+        <span class="absolute top-2 right-2 bg-accent text-dark px-3 py-1 rounded-full text-sm font-semibold">${post.date}</span>
+      </div>
+    ` : '';
+
+    return `
+      <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-base flex flex-col">
+        ${featuredImage}
+        <div class="p-6 flex flex-col flex-grow">
+          <h3 class="text-2xl font-display font-bold text-primary mb-3">${post.title}</h3>
+          <p class="text-gray-600 mb-4">${post.excerpt}</p>
+          <div class="card-actions">
+            <a href="${post.url}" class="btn btn-card">Leggi tutto</a>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join('') + `</div>`;
 }
 
 document.querySelectorAll('.btn-tag').forEach(link => {
