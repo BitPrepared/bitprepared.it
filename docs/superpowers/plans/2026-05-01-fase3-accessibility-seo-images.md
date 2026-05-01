@@ -1,12 +1,12 @@
-# Fase 3: ARIA + SEO + Images Implementation Plan
+# Fase 3: ARIA + SEO + Images + Performance Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Implement accessibility verification, SEO optimization, and image optimization pipeline
+**Goal:** Implement accessibility verification, SEO optimization, image optimization pipeline, and performance optimization
 
-**Architecture:** Make commands for ARIA extraction, enhanced meta tags, automated image optimization during build
+**Architecture:** Make commands for ARIA extraction, enhanced meta tags, automated image optimization, lazy loading, critical CSS
 
-**Tech Stack:** Node.js scripts (Cheerio), Jekyll hooks, ImageMagick/sharp, JSON output
+**Tech Stack:** Node.js scripts (Cheerio), Jekyll hooks, ImageMagick/sharp, JSON output, Critical CSS extraction
 
 ---
 
@@ -16,16 +16,20 @@
 bitprepared.it/
 ├── scripts/
 │   ├── check-aria.js          # CREATE: Extract ARIA tags to JSON
-│   └── optimize-images.js     # CREATE: Image optimization pipeline
+│   ├── optimize-images.js     # CREATE: Image optimization pipeline
+│   └── extract-critical-css.js # CREATE: Critical CSS extraction
 ├── _includes/
 │   ├── structured-data.html   # CREATE: Schema.org JSON-LD
-│   └── head.html              # MODIFY: Add {% seo %}
+│   ├── head.html              # MODIFY: Add {% seo %}
+│   └── lazy-load.html         # CREATE: Lazy loading script
 ├── _plugins/
 │   └── image_optimizer.rb     # CREATE: Jekyll hook for image optimization
-├── Makefile                    # MODIFY: Add check-aria target
-└── assets/
-    └── images/
-        └── logo.png            # CREATE: Site logo for SEO
+├── Makefile                    # MODIFY: Add check-aria, optimize targets
+├── assets/
+│   ├── css/
+│   │   └── critical.css       # CREATE: Critical CSS for inline
+│   └── images/
+│       └── logo.png            # CREATE: Site logo for SEO
 ```
 
 ---
@@ -429,7 +433,192 @@ git commit -m "feat: add image optimization pipeline
 
 ---
 
-## Task 5: Integration Testing
+## Task 5: Lazy Loading Implementation
+
+**Files:**
+- Create: `_includes/lazy-load.html`
+- Modify: `_layouts/default.html`
+
+- [ ] **Step 1: Create lazy-load.html include**
+
+```bash
+cat > _includes/lazy-load.html << 'EOF'
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Lazy load images below the fold
+  const lazyImages = document.querySelectorAll('img[data-src]');
+
+  const imageObserver = new IntersectionObserver(function(entries, observer) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        img.src = img.dataset.src;
+        img.classList.remove('lazy');
+        imageObserver.unobserve(img);
+      }
+    });
+  });
+
+  lazyImages.forEach(function(img) {
+    imageObserver.observe(img);
+  });
+});
+</script>
+
+<style>
+.lazy {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.lazy.loaded {
+  opacity: 1;
+}
+</style>
+EOF
+```
+
+- [ ] **Step 2: Update image tags in layouts**
+
+Modify `_layouts/post.html` and `_layouts/evento.html`:
+```html
+<img src="/assets/images/placeholder.png"
+     data-src="{{ page.featured }}"
+     alt="{{ page.title }}"
+     class="lazy"
+     loading="lazy">
+```
+
+- [ ] **Step 3: Add native lazy loading to all images**
+
+Update blog card template:
+```html
+<img src="/assets/{{ post.featured }}"
+     alt="{{ post.title }}"
+     width="400"
+     height="300"
+     loading="lazy"
+     class="w-full h-56 object-cover">
+```
+
+- [ ] **Step 4: Test lazy loading**
+
+```bash
+jekyll build
+jekyll serve
+# Open browser DevTools → Network
+# Reload page and verify images load as you scroll
+```
+
+Expected: Images below fold load when scrolled into view
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add _includes/lazy-load.html _layouts/post.html _layouts/evento.html blog/index.md
+git commit -m "feat: add lazy loading for images
+
+- Add Intersection Observer-based lazy loading
+- Add native loading=\"lazy\" attribute to images
+- Improve initial page load performance"
+```
+
+---
+
+## Task 6: Critical CSS Extraction
+
+**Files:**
+- Create: `scripts/extract-critical-css.js`
+- Create: `assets/css/critical.css`
+- Modify: `_layouts/default.html`
+
+- [ ] **Step 1: Create critical CSS extraction script**
+
+```bash
+cat > scripts/extract-critical-css.js << 'EOF'
+const fs = require('fs');
+const critical = require('critical');
+
+critical.generate({
+  base: '_site/',
+  src: 'index.html',
+  dest: 'assets/css/critical.css',
+  dimensions: [{
+    width: 1920,
+    height: 1080
+  }],
+  minify: true
+}).then(() => {
+  console.log('✅ Critical CSS extracted');
+}).catch(err => {
+  console.error('❌ Error:', err);
+});
+EOF
+```
+
+- [ ] **Step 2: Create critical.css placeholder**
+
+```bash
+cat > assets/css/critical.css << 'EOF'
+/* Critical CSS - Inline in head for above-the-fold content */
+.hero-title { color: #E8F5E8; }
+.hero-subtitle { color: #E8F5E8; }
+.bg-white { background-color: #ffffff; }
+/* More critical styles to be extracted */
+EOF
+```
+
+- [ ] **Step 3: Update default layout to inline critical CSS**
+
+Modify `_layouts/default.html`:
+```html
+<head>
+  <meta charset="utf-8">
+  <style>
+    {% include_relative assets/css/critical.css %}
+  </style>
+  <link rel="stylesheet" href="/assets/css/main.css" media="print" onload="this.media='all'">
+  {% seo %}
+  {% include structured-data.html %}
+</head>
+```
+
+- [ ] **Step 4: Add Makefile target**
+
+```bash
+grep "extract-critical:" Makefile || cat >> Makefile << 'EOM'
+
+.PHONY: extract-critical
+extract-critical:
+	@echo "🎨 Extracting critical CSS..."
+	@node scripts/extract-critical-css.js
+EOM
+```
+
+- [ ] **Step 5: Test critical CSS**
+
+```bash
+jekyll build
+node scripts/extract-critical-css.js
+ls -lh assets/css/critical.css
+```
+
+Expected: Small CSS file with above-the-fold styles
+
+- [ ] **Step 6: Commit**
+
+```bash
+git add scripts/extract-critical-css.js assets/css/critical.css _layouts/default.html Makefile
+git commit -m "feat: add critical CSS extraction
+
+- Extract above-the-fold CSS for inline loading
+- Reduce render-blocking resources
+- Add extract-critical make target"
+```
+
+---
+
+## Task 7: Integration Testing
 
 **Files:**
 - Test: All Phase 3 features
@@ -472,11 +661,14 @@ Expected: Multiple responsive versions of images
 cat >> CHANGELOG.txt << 'EOF'
 
 ### Added
-- Phase 3: Accessibility, SEO, and Image optimization
+- Phase 3: Accessibility, SEO, Images, and Performance
   - ARIA verification system with make check-aria
   - Enhanced SEO with Schema.org structured data
-  - Open Graph and Twitter Card meta tags
+  - Open Graph and Twitter Card meta tags via jekyll-seo-tag
   - Image optimization pipeline for responsive images
+  - Lazy loading for below-the-fold images
+  - Critical CSS extraction for faster render
+  - Site logo for SEO and social sharing
 EOF
 ```
 
