@@ -4,11 +4,10 @@ title: Blog
 permalink: /blog/
 ---
 
-<h2 id="blog-title" class="text-3xl font-display font-bold text-center text-light mb-8">Blog Bit Prepared</h2>
+
 
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
     {% for post in site.posts %}
-      {% if post.type == 'blog' or post.type == nil %}
         <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-base flex flex-col">
           {% if post.featured %}
           <div class="relative">
@@ -28,6 +27,11 @@ permalink: /blog/
             </div>
           </div>
         </article>
-      {% endif %}
     {% endfor %}
   </div>
+
+{% if site.posts.size == 0 %}
+  <div class="text-center">
+    <p class="text-gray-600">Nessun articolo disponibile.</p>
+  </div>
+{% endif %}
