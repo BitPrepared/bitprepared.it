@@ -16,6 +16,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - CHANGELOG validation pre-merge via GitHub Actions
   - Scripts: validate-changelog.sh, bump-version.sh, migrate-changelog.sh
   - Makefile targets: version-validate, version-bump, version-show
+- SEO: Comprehensive SEO improvement plan
+  - New document: docs/SEO_IMPROVEMENT_PLAN.md
+  - Enhanced metadata structure and semantic HTML
+  - Improved search engine optimization across all pages
+- Visual regression: Updated baselines for 2026.05
+  - New baseline screenshots for all viewports (desktop, mobile, tablet)
+  - Improved comparison script with better error reporting
+  - Enhanced page extraction from sitemap
 
 ### Changed
 - DEV: Makefile serve improvements
@@ -40,6 +48,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Updated: site-release.yml uses semantic versioning
   - Automatic CHANGELOG bump + git tag creation on merge
   - Accessibility report now uploaded as workflow artifact
+
+- UI: Social icon styling improvements
+  - Better visual consistency across social media icons
+  - Improved hover states and alignment
+
+- UI: Mobile-friendly CSS improvements
+  - Enhanced responsive design for mobile devices
+  - Better layout and spacing on small screens
+  - Streamlined CSS for improved mobile performance
 
 ### Fixed
 - FIX: Server cleanup on command failure
