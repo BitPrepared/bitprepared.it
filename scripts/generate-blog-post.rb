@@ -74,6 +74,7 @@ class BlogPostGenerator
     {
       # Frontmatter
       layout: 'post',
+      type: 'blog',
       title: frontmatter['title'],
       description: hero['subtitle'] || frontmatter['title'],
       modified: frontmatter['modified'] || Time.now.strftime('%Y-%m-%d'),
@@ -133,6 +134,7 @@ class BlogPostGenerator
     <<~MARKDOWN
 ---
 layout: #{data[:layout]}
+type: blog
 title: #{data[:title]}
 description: "#{data[:description]}"
 modified: #{data[:modified]}
