@@ -729,9 +729,9 @@ make serve
 **Phase 3 Complete** ✅
 
 Prossime fasi opzionali:
-- Performance optimization (lazy loading, critical CSS)
-- Advanced SEO (sitemap.xml, robots.txt)
+- Advanced SEO (sitemap.xml, robots.txt verification)
 - PWA features (service worker, manifest)
+- Performance monitoring (Lighthouse CI)
 
 ---
 
