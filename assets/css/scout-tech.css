@@ -507,6 +507,15 @@ footer a::after {
 .mt-lg { margin-top: 2rem; }
 .mb-lg { margin-bottom: 2rem; }
 
+/* ==================================================
+   BRAND COLOR UTILITIES
+   Sostituiscono inline styles in index.html
+   ================================================== */
+
+.text-brand-dark {
+  color: #0a3d0a;
+}
+
 /* ===== SCROLL REVEAL ===== */
 .reveal {
   opacity: 0;
