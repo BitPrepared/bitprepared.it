@@ -995,11 +995,6 @@ footer a::after {
   display: none;
 }
 
-.tags-archive {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 4rem 1.5rem;
-}
 
 .tags-archive h1 {
   text-align: center;
