@@ -2,12 +2,15 @@ require 'fileutils'
 require 'pathname'
 
 Jekyll::Hooks.register :pages, :post_write do |page|
-  # Get destination path correctly for Jekyll 4.4.1
-  dest = page.destination(@page.site.dest)
+  # Skip if page doesn't have site attribute
+  next unless page.respond_to?(:site)
+
+  # Get destination path
+  dest = page.destination(page.site.dest)
   next unless dest.end_with?('.html')
 
   dest_dir = File.dirname(dest)
-  source_dir = File.join(@page.site.dest, '..')
+  source_dir = File.join(page.site.dest, '..')
 
   # Copy and optimize images referenced in HTML
   begin
