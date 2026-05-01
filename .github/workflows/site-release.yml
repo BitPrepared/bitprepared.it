@@ -17,6 +17,8 @@ jobs:
   determine-release-type:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     outputs:
       release-type: ${{ steps.detect-type.outputs.type }}
       next-version: ${{ steps.detect-type.outputs.version }}
@@ -83,6 +85,8 @@ jobs:
     if: github.event.pull_request.merged == true
     needs: determine-release-type
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     permissions:
       contents: write
     steps:
