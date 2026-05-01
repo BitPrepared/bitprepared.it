@@ -118,10 +118,48 @@ git commit -m "feat: add ARIA verification system
 
 **Files:**
 - Create: `_includes/structured-data.html`
-- Modify: `_includes/seo.html`
 - Modify: `_layouts/default.html`
+- Modify: `_includes/head.html`
 
-- [ ] **Step 1: Create structured-data.html include**
+- [ ] **Step 1: Enable jekyll-seo-tag in head.html**
+
+```bash
+# Check if head.html exists
+ls _includes/head.html || echo "{% seo %}" > _includes/head.html
+```
+
+Add to head.html:
+```html
+{% seo %}
+```
+
+- [ ] **Step 2: Configure jekyll-seo-tag in _config.yml**
+
+```yaml
+# Add to _config.yml
+seo:
+  title: Bit Prepared
+  description: Bit Prepared eventi formativi ed educativi su tecnologia e societa
+  author: Bit Prepared
+  lang: it_IT
+  locale: it_IT
+  image: /assets/images/logo.png
+  logo: /assets/images/logo.png
+  social:
+    name: Bit Prepared
+    links:
+      - https://twitter.com/bitprepared
+      - https://www.facebook.com/bitprepared
+      - https://www.instagram.com/bit.prepared/
+  twitter:
+    username: bitprepared
+    card: summary_large_image
+  facebook:
+    app_id: # Optional
+    publisher: # Optional
+```
+
+- [ ] **Step 3: Create structured-data.html include**
 
 ```bash
 cat > _includes/structured-data.html << 'EOF'
@@ -178,54 +216,27 @@ cat > _includes/structured-data.html << 'EOF'
 EOF
 ```
 
-- [ ] **Step 2: Update seo.html with enhanced meta tags**
+- [ ] **Step 4: Add structured-data to default layout**
 
-Read current seo.html:
-```bash
-cat _includes/seo.html
-```
-
-Add Open Graph and Twitter Card tags:
-```html
-<!-- Open Graph -->
-<meta property="og:title" content="{{ page.title | default: site.title }}">
-<meta property="og:description" content="{{ page.description | default: site.description }}">
-<meta property="og:type" content="{% if page.layout == 'post' %}article{% elsif page.layout == 'evento' %}event{% else %}website{% endif %}">
-<meta property="og:url" content="{{ page.url | absolute_url }}">
-<meta property="og:image" content="{{ page.featured | default: '/assets/images/logo.png' | absolute_url }}">
-
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{{ page.title | default: site.title }}">
-<meta name="twitter:description" content="{{ page.description | default: site.description }}">
-<meta name="twitter:image" content="{{ page.featured | default: '/assets/images/logo.png' | absolute_url }}">
-```
-
-- [ ] **Step 3: Add includes to default layout**
-
-```bash
-grep "structured-data" _layouts/default.html || sed -i '/<head>/a\ {% include structured-data.html %}' _layouts/default.html
-```
-
-- [ ] **Step 4: Verify meta tags in generated site**
+- [ ] **Step 5: Verify meta tags in generated site**
 
 ```bash
 jekyll build
-grep -r "og:title\|twitter:card" _site/**/*.html | head -10
+grep -r "og:title\|twitter:card\|meta.*description" _site/**/*.html | head -10
 ```
 
-Expected: Open Graph and Twitter Card meta tags present
+Expected: jekyll-seo-tag generated meta tags present
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 6: Commit**
 
 ```bash
-git add _includes/structured-data.html _includes/seo.html _layouts/default.html
-git commit -m "feat: enhance SEO with structured data and meta tags
+git add _includes/structured-data.html _includes/head.html _layouts/default.html _config.yml
+git commit -m "feat: enable jekyll-seo-tag and add structured data
 
+- Enable jekyll-seo-tag plugin with {% seo %}
+- Configure SEO settings in _config.yml
 - Add Schema.org JSON-LD for blog posts and events
-- Add Open Graph meta tags
-- Add Twitter Card meta tags
-- Improve search engine and social media sharing"
+- Remove manual meta tag duplication"
 ```
 
 ---
