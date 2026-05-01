@@ -35,6 +35,12 @@ body {
   margin-top: 20px;
 }
 
+@media (max-width: 768px) {
+  #main-content {
+    margin-top: 0;
+  }
+}
+
 /* ===== FONT AWESOME ===== */
 @font-face {
   font-family: 'FontAwesome';
@@ -266,6 +272,86 @@ footer {
   color: #e8f5e8;
   font-size: 0.875rem;
   line-height: 1.5;
+}
+
+/* ===== FOOTER LEGAL ===== */
+.footer-legal {
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+.footer-legal a {
+  color: #e8f5e8;
+  text-decoration: none;
+  margin: 0 0.5rem;
+}
+
+.footer-legal a:hover {
+  color: #00d9ff;
+}
+
+.footer-legal .separator {
+  color: #666666;
+  margin: 0 0.5rem;
+}
+
+/* ===== BREADCRUMB ===== */
+.breadcrumb-nav {
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  border-bottom: none;
+}
+
+.breadcrumb-list {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 1200px;
+}
+
+.breadcrumb-list li {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+}
+
+.breadcrumb-list li::after {
+  content: '/';
+  margin: 0 0.5rem;
+  color: #1a7f1a;
+}
+
+.breadcrumb-list li:last-child::after {
+  content: '';
+}
+
+.breadcrumb-list a {
+  color: #1a7f1a;
+  text-decoration: none;
+  transition: color 0.15s ease-out;
+}
+
+.breadcrumb-list a:hover {
+  color: #00d9ff;
+  text-decoration: underline;
+}
+
+.breadcrumb-list span {
+  color: #666666;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .breadcrumb-nav {
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
+  }
+
+  .breadcrumb-list li {
+    font-size: 0.8125rem;
+  }
 }
 
 /* ===== PAGE BODY STYLES ===== */
