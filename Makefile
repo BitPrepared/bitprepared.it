@@ -422,3 +422,8 @@ test-cleanup:
 check-aria:
 	@echo "🔍 Checking ARIA tags..."
 	@node scripts/check-aria.js
+
+.PHONY: optimize-images
+optimize-images:
+	@echo "🖼️  Optimizing images..."
+	@node scripts/optimize-images.js
