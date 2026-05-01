@@ -143,8 +143,8 @@ seo:
   author: Bit Prepared
   lang: it_IT
   locale: it_IT
-  image: /assets/images/logo.png
-  logo: /assets/images/logo.png
+  image: /assets/images/agesci_logo.png
+  logo: /assets/images/agesci_logo.png
   social:
     name: Bit Prepared
     links:
@@ -181,11 +181,11 @@ cat > _includes/structured-data.html << 'EOF'
     "name": "Bit Prepared",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://www.bitprepared.it/assets/images/logo.png"
+      "url": "https://www.bitprepared.it/assets/images/agesci_logo.png"
     }
   },
   "description": "{{ page.description | default: page.excerpt | strip_html | truncate: 160 }}",
-  "image": "{{ page.featured | default: '/assets/images/logo.png' | prepend: 'https://www.bitprepared.it' }}"
+  "image": "{{ page.featured | default: '/assets/images/agesci_logo.png' | prepend: 'https://www.bitprepared.it' }}"
 }
 </script>
 {% elsif page.layout == 'evento' %}
