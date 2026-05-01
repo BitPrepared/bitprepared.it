@@ -427,3 +427,8 @@ check-aria:
 optimize-images:
 	@echo "🖼️  Optimizing images..."
 	@node scripts/optimize-images.js
+
+.PHONY: extract-critical
+extract-critical:
+	@echo "🎨 Extracting critical CSS..."
+	@node scripts/extract-critical-css.js
