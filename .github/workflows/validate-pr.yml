@@ -26,13 +26,8 @@ jobs:
           elif [[ "${{ contains(github.event.pull_request.labels.*.name, 'release:patch') }}" == "true" ]]; then
             echo "type=patch" >> $GITHUB_OUTPUT
           else
-            echo "type=auto" >> $GITHUB_OUTPUT
+            echo "type=patch" >> $GITHUB_OUTPUT
           fi
-
-      - name: Set release type to patch if auto
-        if: steps.release-type.outputs.type == 'auto'
-        run: |
-          echo "type=patch" >> $GITHUB_OUTPUT
 
       - name: Show detected release type
         run: |
