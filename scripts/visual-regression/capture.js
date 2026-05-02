@@ -88,25 +88,18 @@ async function captureScreenshots(serverType, baseUrl, viewportsToUse) {
           timeout: 30000
         });
 
-        // Homepage: wait for images to load (lazy loading issue)
-        if (pageUrl === '/' || pageUrl === '') {
-          await page.evaluate(() => {
-            const images = Array.from(document.querySelectorAll('img'));
-            return Promise.all(images.map(img => {
-              if (img.complete) return;
-              return new Promise(resolve => {
-                img.addEventListener('load', resolve);
-                img.addEventListener('error', resolve); // Also handle load errors
-                setTimeout(resolve, 1000); // Timeout 1s per image
-              });
-            }));
-          });
-        } else {
-          // Other pages: wait for marker with short timeout
-          await page.waitForSelector('[data-visual-regression-marker="ready"]', {
-            timeout: 2000
-          }).catch(() => {}); // Silent fail
-        }
+        // Wait for all images to load (handles lazy loading)
+        await page.evaluate(() => {
+          const images = Array.from(document.querySelectorAll('img'));
+          return Promise.all(images.map(img => {
+            if (img.complete) return;
+            return new Promise(resolve => {
+              img.addEventListener('load', resolve);
+              img.addEventListener('error', resolve); // Also handle load errors
+              setTimeout(resolve, 1000); // Timeout 1s per image
+            });
+          }));
+        });
 
         // Extra delay for stable rendering
         await page.waitForTimeout(500);
