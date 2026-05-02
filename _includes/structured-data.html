@@ -1,0 +1,50 @@
+{% if page.layout == 'post' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ page.title }}",
+  "datePublished": "{{ page.date | date: '%Y-%m-%d' }}",
+  "dateModified": "{{ page.modified | default: page.date | date: '%Y-%m-%d' }}",
+  "author": {
+    "@type": "Organization",
+    "name": "Bit Prepared",
+    "url": "https://www.bitprepared.it"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bit Prepared",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.bitprepared.it/assets/images/logo.png"
+    }
+  },
+  "description": "{{ page.description | default: page.excerpt | strip_html | truncate: 160 }}",
+  "image": "{{ page.featured | default: '/assets/images/logo.png' | prepend: 'https://www.bitprepared.it' }}"
+}
+</script>
+{% elsif page.layout == 'evento' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "{{ page.title }}",
+  "startDate": "{{ page.hero.date }}",
+  "location": {
+    "@type": "Place",
+    "name": "{{ page.hero.location }}",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Italia",
+      "addressCountry": "IT"
+    }
+  },
+  "description": "{{ page.hero.subtitle | default: page.title }}",
+  "organizer": {
+    "@type": "Organization",
+    "name": "Bit Prepared",
+    "url": "https://www.bitprepared.it"
+  }
+}
+</script>
+{% endif %}

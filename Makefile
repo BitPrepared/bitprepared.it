@@ -417,3 +417,18 @@ test-cleanup:
 	@echo ""
 	@echo "✅ All cleanup tests passed!"
 
+
+.PHONY: check-aria
+check-aria:
+	@echo "🔍 Checking ARIA tags..."
+	@node scripts/check-aria.js
+
+.PHONY: optimize-images
+optimize-images:
+	@echo "🖼️  Optimizing images..."
+	@node scripts/optimize-images.js
+
+.PHONY: extract-critical
+extract-critical:
+	@echo "🎨 Extracting critical CSS..."
+	@node scripts/extract-critical-css.js

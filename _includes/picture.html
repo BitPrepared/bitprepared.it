@@ -1,0 +1,5 @@
+<picture>
+  <source srcset="/assets/images/{{ include.file | replace: '.', '-m.' }}" media="(max-width: 640px)">
+  <source srcset="/assets/images/{{ include.file | replace: '.', '-t.' }}" media="(max-width: 1024px)">
+  <img src="/assets/images/{{ include.file }}" alt="{{ include.alt }}" loading="lazy">
+</picture>

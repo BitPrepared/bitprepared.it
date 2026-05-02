@@ -9,3 +9,5 @@ node_modules/
 /docs/accessibility/reports/
 /CHANGELOG.txt.backup
 assets/css/tailwind.css
+docs/accessibility/reports/
+.worktrees/

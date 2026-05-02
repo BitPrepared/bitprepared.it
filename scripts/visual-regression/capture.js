@@ -1,6 +1,7 @@
 const { chromium } = require('@playwright/test');
 const fs = require('fs');
 const path = require('path');
+const { captureScreenshot, generateFilename } = require('./screenshot-utils');
 
 // Handle interrupt signals
 let browsers = [];
@@ -16,7 +17,7 @@ process.on('SIGTERM', async () => {
 });
 
 const viewports = {
-  desktop: { width: 1920, height: 2000 },  // Increased height for full-page capture
+  desktop: { width: 1920, height: 1080 },
   tablet: { width: 768, height: 1024 },
   mobile: { width: 375, height: 667 }
 };
@@ -83,35 +84,7 @@ async function captureScreenshots(serverType, baseUrl, viewportsToUse) {
 
         console.log(`    🔗 ${pageUrl}`);
 
-        await page.goto(fullUrl, {
-          waitUntil: 'networkidle',
-          timeout: 30000
-        });
-
-        // Homepage: wait for images to load (lazy loading issue)
-        if (pageUrl === '/' || pageUrl === '') {
-          await page.evaluate(() => {
-            const images = Array.from(document.querySelectorAll('img'));
-            return Promise.all(images.map(img => {
-              if (img.complete) return;
-              return new Promise(resolve => {
-                img.addEventListener('load', resolve);
-                img.addEventListener('error', resolve); // Also handle load errors
-                setTimeout(resolve, 1000); // Timeout 1s per image
-              });
-            }));
-          });
-        } else {
-          // Other pages: wait for marker with short timeout
-          await page.waitForSelector('[data-visual-regression-marker="ready"]', {
-            timeout: 2000
-          }).catch(() => {}); // Silent fail
-        }
-
-        // Extra delay for stable rendering
-        await page.waitForTimeout(500);
-
-        const filename = pageUrl.replace(/^\//, '').replace(/\/$/, '').replace(/\//g, '_') || 'index';
+        const filename = generateFilename(pageUrl);
         const screenshotPath = path.join(__dirname, `../../screenshots/${serverType}/${viewportName}/${filename}.png`);
 
         const dir = path.dirname(screenshotPath);
@@ -119,10 +92,7 @@ async function captureScreenshots(serverType, baseUrl, viewportsToUse) {
           fs.mkdirSync(dir, { recursive: true });
         }
 
-        await page.screenshot({
-          path: screenshotPath,
-          fullPage: true
-        });
+        await captureScreenshot(page, fullUrl, screenshotPath);
 
         await page.close();
       } catch (error) {
