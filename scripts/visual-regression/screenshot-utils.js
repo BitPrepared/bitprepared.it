@@ -22,18 +22,22 @@ const generateFilename = (url) => {
 };
 
 const captureScreenshot = async (page, url, path) => {
-  await page.goto(url, {
-    waitUntil: 'networkidle',
-    timeout: 30000
-  });
+  try {
+    await page.goto(url, {
+      waitUntil: 'networkidle',
+      timeout: 30000
+    });
 
-  await waitForImages(page);
-  await page.waitForTimeout(500); // Extra delay for stable rendering
+    await waitForImages(page);
+    await page.waitForTimeout(500); // Extra delay for stable rendering
 
-  await page.screenshot({
-    path: path,
-    fullPage: true
-  });
+    await page.screenshot({
+      path: path,
+      fullPage: true
+    });
+  } catch (error) {
+    throw new Error(`Failed to capture screenshot for ${url} at ${path}: ${error.message}`);
+  }
 };
 
 module.exports = { waitForImages, generateFilename, captureScreenshot };
