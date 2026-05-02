@@ -51,8 +51,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Quick scores now show ALL pages, not just homepage
 - DEV: GitHub Actions workflow updates
   - New workflow: validate-pr.yml for pre-merge checks
-  - Updated: site-release.yml uses semantic versioning
-  - Automatic CHANGELOG bump + git tag creation on merge
+  - Removed: site-release.yml (too complex, replaced with create-release.yml)
+  - Added: create-release.yml for manual release builds
   - Accessibility report now uploaded as workflow artifact
 - UI: Social icon styling improvements
   - Better visual consistency across social media icons
@@ -238,9 +238,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Aggiornamento software list
 
-[Unreleased.1.0] - 2026-05-02
-
-[Unreleased.1.0]: https://github.com/bitprepared/bitprepared.it/compare/vUnreleased...vUnreleased.1.0
 [Unreleased]: https://github.com/bitprepared/bitprepared.it/compare/v1.0.0...HEAD
 [1.0.0]: https://github.com/bitprepared/bitprepared.it/compare/v20260426T125004...v1.0.0
 [20260426T125004]: https://github.com/bitprepared/bitprepared.it/compare/v0.9.0...v20260426T125004
