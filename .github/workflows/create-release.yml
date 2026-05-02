@@ -143,4 +143,3 @@ jobs:
           tag: ${{ steps.detect-version.outputs.tag }}
           bodyFile: "CHANGELOG.txt"
           generateReleaseNotes: false
-          generateReleaseNotes: false
