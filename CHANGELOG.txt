@@ -72,11 +72,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Fixed RELEASE_TYPE detection: removed broken conditional step
   - Now defaults to 'patch' when no release label present (previously failed with 'auto')
   - Simplified workflow logic for release type detection
-- DEV: Makefile release workflow improvements
-  - version-validate now accepts RELEASE_TYPE parameter: make version-validate RELEASE_TYPE=minor
-  - release target now asks type first, then validates with correct type
-  - PR body includes release type for clarity
-  - Version calculation and validation now use consistent type
+- DEV: GitHub Actions workflows restructure
+  - Removed: site-release.yml (too complex, tried to do too much)
+  - Added: create-release.yml (manual workflow only)
+    - Takes git tag as input (e.g. v1.0.0)
+    - Builds site with Jekyll
+    - Runs accessibility audit
+    - Creates GitHub release with artifacts
+    - NO commits, NO bumps, just build + release
+  - Simplified release flow: manual `make release`, then manual workflow
+- DEV: Makefile release workflow restored
+  - `make release` creates PR with CHANGELOG bump
+  - PR body includes instructions for next steps
+  - After merge, manually trigger "Create Release" workflow
+  - Works with protected master branch
 - Fase 1: CSS/JS cleanup per Jekyll 4 refactor
   - CSS utility classes: .text-brand-dark, .text-muted (sostituiscono inline styles)
   - Edit button development-only script esterno (edit-button-dev.js)

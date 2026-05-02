@@ -499,19 +499,16 @@ release:
 	echo "Step 7: Creating PR..."; \
 	gh pr create \
 		--title "Release $$NEXT_VERSION - Version Bump" \
-		--body "Automated version bump to $$NEXT_VERSION. **Release type: $$release_type**\n\nThis PR was created by the release workflow." \
+		--body "Automated version bump to $$NEXT_VERSION. **Release type: $$release_type**\n\n📋 After merging this PR:\n1. Go to Actions → 'Create Release' workflow\n2. Run workflow manually\n3. Artifacts will be built and attached to GitHub release" \
 		--base master \
 		--head "$$BRANCH_NAME" \
-		--label "release:automated"; \
+		--label "release:automated" \
+		--label "release:$$release_type"; \
 	echo ""; \
 	echo "✅ Release PR created!"; \
-	echo "🔗 View PR: gh pr view" \
-	gh pr create \
-		--title "Release $$NEXT_VERSION - Version Bump" \
-		--body "Automated version bump to $$NEXT_VERSION. This PR was created by the release workflow." \
-		--base master \
-		--head "$$BRANCH_NAME" \
-		--label "release:automated"; \
+	echo "🔗 View PR: gh pr view"; \
 	echo ""; \
-	echo "✅ Release PR created!"; \
-	echo "🔗 View PR: gh pr view"
+	echo "⏳ Next steps:"; \
+	echo "   1. Merge this PR"; \
+	echo "   2. Go to Actions → 'Create Release' workflow"; \
+	echo "   3. Run workflow to build and create release"
