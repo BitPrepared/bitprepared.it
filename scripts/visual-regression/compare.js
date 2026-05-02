@@ -395,7 +395,7 @@ function selectBaseline(availableBaselines) {
   return selected;
 }
 
-function main() {
+async function main() {
   console.log('=== Visual Regression Compare ===\n');
 
   // Get available baselines and select one
@@ -414,7 +414,7 @@ function main() {
   }
 
   // Carica pagine dalla sitemap
-  let pageUrls = extractPagesFromSitemap();
+  let pageUrls = await extractPagesFromSitemap();
 
   // Converti URL in nomi file
   let pages = pageUrls.map(url => {
@@ -426,8 +426,8 @@ function main() {
       || 'index';
   });
 
-  // Aggiungi pagine speciali (hash pages non in sitemap)
-  pages.push('tags_maestro delle tecnologie');
+  // NOTA: Le pagine con hash (es. /tags/#maestro-delle-tecnologie) non sono testate
+  // perché richiedono interazione JavaScript e non sono nella sitemap
 
   // Filtra duplicati
   pages = [...new Set(pages)];
