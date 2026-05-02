@@ -451,6 +451,11 @@ release:
 	@read -p "Release type (major/minor/patch): " release_type; \
 	LAST_VERSION=$$(grep "^## \[" CHANGELOG.txt | grep -v "^## \[Unreleased\]" | head -1 | sed 's/^## \[\([^]]*\)\].*/\1/'); \
 	if [[ -z "$$LAST_VERSION" ]]; then \
+		echo "⚠️  No previous version found, using 1.0.0"; \
+		NEXT_VERSION="1.0.0"; \
+	elif [[ "$$LAST_VERSION" == *"T"* ]]; then \
+		echo "⚠️  Old timestamp format detected: $$LAST_VERSION"; \
+		echo "🔄 Migrating to semantic versioning..."; \
 		NEXT_VERSION="1.0.0"; \
 	else \
 		CURRENT_MAJOR=$$(echo "$$LAST_VERSION" | cut -d. -f1); \
