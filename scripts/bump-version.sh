@@ -55,18 +55,58 @@ TODAY=$(date +%Y-%m-%d)
 # Create temporary file
 TEMP_FILE=$(mktemp)
 
-# Replace [Unreleased]: with new version
-sed "s/\[Unreleased\]:/[$NEXT_VERSION] - $TODAY\n\n[Unreleased\]:/" "$CHANGELOG_FILE" > "$TEMP_FILE"
+# Use awk to properly move [Unreleased] content to new version
+awk -v new_version="$NEXT_VERSION" -v today="$TODAY" '
+  # Start processing
+  BEGIN { in_unreleased = 0; unreleased_content = "" }
 
-# Add new version link before [Unreleased]:
-# Check if link already exists
-if ! grep -q "^\[$NEXT_VERSION\]:" "$TEMP_FILE"; then
-  # Insert new version link
-  sed -i "/^\[Unreleased\]:/i [$NEXT_VERSION]: https://github.com/bitprepared/bitprepared.it/compare/v$LAST_VERSION...v$NEXT_VERSION" "$TEMP_FILE"
-fi
+  # Match [Unreleased] header
+  /^## \[Unreleased\]/ {
+    in_unreleased = 1
+    # Print new version header
+    print "## [" new_version "] - " today
+    print ""
+    next
+  }
+
+  # Match next version header (end of [Unreleased] section)
+  /^## \[/ && in_unreleased {
+    in_unreleased = 0
+    # Print the collected unreleased content
+    printf "%s", unreleased_content
+    # Print current line
+    print
+    next
+  }
+
+  # Inside [Unreleased] section, collect content
+  in_unreleased {
+    unreleased_content = unreleased_content $0 "\n"
+    next
+  }
+
+  # All other lines, print as-is
+  { print }
+' "$CHANGELOG_FILE" > "$TEMP_FILE"
 
 # Replace file
 mv "$TEMP_FILE" "$CHANGELOG_FILE"
+
+# Add new version link before [Unreleased]:
+if ! grep -q "^\[$NEXT_VERSION\]:" "$CHANGELOG_FILE"; then
+  # Insert new version link
+  TEMP_FILE=$(mktemp)
+  awk -v new_version="$NEXT_VERSION" -v last_version="$LAST_VERSION" '
+    # Match [Unreleased]: link section
+    /^\[Unreleased\]:/ {
+      # Print new version link first
+      print "[" new_version "]: https://github.com/bitprepared/bitprepared.it/compare/v" last_version "...v" new_version
+    }
+    # Print all lines
+    { print }
+  ' "$CHANGELOG_FILE" > "$TEMP_FILE"
+  mv "$TEMP_FILE" "$CHANGELOG_FILE"
+fi
 
 echo "✅ Version bumped to $NEXT_VERSION"
 echo "📝 CHANGELOG updated"
