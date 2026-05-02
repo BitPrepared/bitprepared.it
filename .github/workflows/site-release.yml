@@ -180,3 +180,79 @@ jobs:
         with:
           name: release-site
           path: release.zip
+
+  release:
+    needs: build-and-audit
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    environment: production
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Show release info
+        run: |
+          echo "📦 Releasing:"
+          echo "   Version: ${{ needs.build-and-audit.outputs.next-version }}"
+          echo "   Tag: ${{ needs.build-and-audit.outputs.tag-name }}"
+
+      - name: Bump version in CHANGELOG
+        run: |
+          chmod +x ./scripts/bump-version.sh
+          ./scripts/bump-version.sh ${{ github.event.inputs.release_type }}
+        env:
+          CHANGELOG_FILE: "CHANGELOG.txt"
+
+      - name: Commit version bump to branch
+        run: |
+          VERSION="${{ needs.build-and-audit.outputs.next-version }}"
+          BRANCH_NAME="chore/bump-version-${VERSION}"
+
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+          # Create new branch
+          git checkout -b "$BRANCH_NAME"
+
+          # Commit version bump
+          git add CHANGELOG.txt
+          git commit -m "chore: bump version to $VERSION"
+
+          # Push branch
+          git push origin "$BRANCH_NAME"
+
+          # Create PR using gh cli
+          gh pr create \
+            --title "Release $VERSION - Version Bump" \
+            --body "Automated version bump to $VERSION. This PR was created by the release workflow." \
+            --base master \
+            --head "$BRANCH_NAME" \
+            --label "release:automated"
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Git Tag
+        run: |
+          git tag -a ${{ needs.build-and-audit.outputs.tag-name }} -m "Release ${{ needs.build-and-audit.outputs.tag-name }}"
+          git push origin ${{ needs.build-and-audit.outputs.tag-name }}
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: release-site
+          path: .
+
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "release.zip"
+          removeArtifacts: true
+          makeLatest: true
+          tag: ${{ needs.build-and-audit.outputs.tag-name }}
+          bodyFile: "CHANGELOG.txt"
+          generateReleaseNotes: false
