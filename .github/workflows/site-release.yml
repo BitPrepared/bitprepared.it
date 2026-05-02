@@ -89,3 +89,94 @@ jobs:
           echo "   Type: ${{ github.event.inputs.release_type }}"
           echo "   Version: ${{ steps.detect-version.outputs.version }}"
           echo "   Tag: ${{ steps.detect-version.outputs.tag }}"
+
+  build-and-audit:
+    needs: pre-check
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    outputs:
+      next-version: ${{ needs.pre-check.outputs.next-version }}
+      tag-name: ${{ needs.pre-check.outputs.tag-name }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Show release info
+        run: |
+          echo "📦 Building release:"
+          echo "   Type: ${{ github.event.inputs.release_type }}"
+          echo "   Version: ${{ needs.pre-check.outputs.next-version }}"
+          echo "   Tag: ${{ needs.pre-check.outputs.tag-name }}"
+
+      - name: Validate CHANGELOG
+        run: |
+          chmod +x ./scripts/validate-changelog.sh
+          ./scripts/validate-changelog.sh
+        env:
+          RELEASE_TYPE: ${{ github.event.inputs.release_type }}
+
+      - name: Bump version in CHANGELOG (local only)
+        run: |
+          chmod +x ./scripts/bump-version.sh
+          ./scripts/bump-version.sh ${{ github.event.inputs.release_type }}
+        env:
+          CHANGELOG_FILE: "CHANGELOG.txt"
+
+      - name: Build the site in the jekyll/builder container
+        run: |
+          docker run \
+          -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
+          jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
+
+      - name: Run accessibility audit
+        run: |
+          # Build a11y Docker image
+          docker build -t bitprepared-a11y:latest -f docker/accessibility/Dockerfile .
+          # Start Jekyll in background
+          docker run -d \
+            --name bitprepared-jekyll \
+            -v ${{ github.workspace }}:/srv/jekyll \
+            -p 4000:4000 \
+            jekyll/jekyll:latest \
+            jekyll serve --config _config.yml,_config_dev.yml --host 0.0.0.0
+          # Wait for Jekyll to be ready
+          for i in {1..30}; do
+            if curl -f -s -o /dev/null http://localhost:4000; then
+              echo "Jekyll ready"
+              break
+            fi
+            sleep 1
+          done
+          # Run accessibility audit
+          mkdir -p docs/accessibility/reports
+          docker run --rm --init \
+            -v ${{ github.workspace }}/docs/accessibility/reports:/app/reports \
+            --add-host=host.docker.internal:host-gateway \
+            -e SITE_URL=http://host.docker.internal:4000 \
+            bitprepared-a11y:latest \
+            bash /app/scripts/accessibility-full-audit.sh
+          # Stop Jekyll
+          docker stop bitprepared-jekyll || true
+          docker rm bitprepared-jekyll || true
+
+      - name: Generate accessibility summary
+        run: |
+          ./scripts/analyze-a11y-reports.sh docs/accessibility/reports > docs/accessibility/reports/summary.md
+
+      - uses: montudor/action-zip@v1
+        with:
+          args: zip -qq -r release.zip _site
+
+      - name: Upload accessibility summary as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: accessibility-report
+          path: docs/accessibility/reports/summary.md
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-site
+          path: release.zip
