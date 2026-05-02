@@ -51,6 +51,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Inline styles: 0 occorrenze (eccezione JSON-LD schema legittimo)
 
 ### Fixed
+- Visual regression: Screenshot capture logic unification
+  - Created shared screenshot-utils.js module with waitForImages, generateFilename, captureScreenshot
+  - Refactored create-baseline.js and capture.js to use shared module (53 lines removed)
+  - Standardized viewport heights: desktop 1080px in both scripts
+  - Result: Zero size discrepancies between baseline and validation (108/108 tests passing)
+  - Single source of truth for screenshot capture logic
 - CSS classi spostate da scout-tech.css → styles.css (scout-tech non caricato)
 - Edit button: aggiunto positioning styles (#edit-btn) in CSS
 - Edit button: aggiunto visual styles (.evento-edit-icon) bianco/quadrato
