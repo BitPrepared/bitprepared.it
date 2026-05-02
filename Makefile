@@ -390,8 +390,9 @@ accessibility-issues:
 .PHONY: version-validate version-bump version-show
 version-validate:
 	@echo "📋 Validating CHANGELOG..."
+	@echo "   Release type: $${RELEASE_TYPE:-patch}"
 	@chmod +x ./scripts/validate-changelog.sh
-	@./scripts/validate-changelog.sh
+	@RELEASE_TYPE="${RELEASE_TYPE}" ./scripts/validate-changelog.sh
 
 version-bump:
 	@echo "🔖 Bumping version..."
@@ -442,12 +443,7 @@ extract-critical:
 release:
 	@echo "🚀 Starting release process..."
 	@echo ""
-	@echo "Step 1: Validating CHANGELOG..."
-	@chmod +x ./scripts/validate-changelog.sh
-	@./scripts/validate-changelog.sh
-	@echo "✅ CHANGELOG valid"
-	@echo ""
-	@echo "Step 2: Determining next version..."
+	@echo "Step 1: Determining release type..."
 	@read -p "Release type (major/minor/patch): " release_type; \
 	LAST_VERSION=$$(grep "^## \[" CHANGELOG.txt | grep -v "^## \[Unreleased\]" | head -1 | sed 's/^## \[\([^]]*\)\].*/\1/'); \
 	if [[ -z "$$LAST_VERSION" ]]; then \
@@ -471,6 +467,11 @@ release:
 	echo "📌 Next version: $$NEXT_VERSION"; \
 	BRANCH_NAME="chore/bump-version-$$NEXT_VERSION"; \
 	echo "📌 Branch: $$BRANCH_NAME"; \
+	echo ""; \
+	echo "Step 2: Validating CHANGELOG for $$release_type release..."; \
+	chmod +x ./scripts/validate-changelog.sh; \
+	RELEASE_TYPE="$$release_type" ./scripts/validate-changelog.sh; \
+	echo "✅ CHANGELOG valid"; \
 	echo ""; \
 	echo "Step 3: Checking if branch exists..."; \
 	if git ls-remote --heads origin "$$BRANCH_NAME" | grep -q "$$BRANCH_NAME"; then \
@@ -496,6 +497,15 @@ release:
 	echo "✅ Pushed"; \
 	echo ""; \
 	echo "Step 7: Creating PR..."; \
+	gh pr create \
+		--title "Release $$NEXT_VERSION - Version Bump" \
+		--body "Automated version bump to $$NEXT_VERSION. **Release type: $$release_type**\n\nThis PR was created by the release workflow." \
+		--base master \
+		--head "$$BRANCH_NAME" \
+		--label "release:automated"; \
+	echo ""; \
+	echo "✅ Release PR created!"; \
+	echo "🔗 View PR: gh pr view" \
 	gh pr create \
 		--title "Release $$NEXT_VERSION - Version Bump" \
 		--body "Automated version bump to $$NEXT_VERSION. This PR was created by the release workflow." \

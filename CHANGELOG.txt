@@ -68,6 +68,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Color preservation: Added rule to preserve .text-primary color inside .page-body
 - Liquid syntax: Fixed orphaned endif tag in index.html
 - Card consistency: All blog/news cards now match homepage card structure
+- DEV: GitHub Actions validate-pr.yml bug
+  - Fixed RELEASE_TYPE detection: removed broken conditional step
+  - Now defaults to 'patch' when no release label present (previously failed with 'auto')
+  - Simplified workflow logic for release type detection
+- DEV: Makefile release workflow improvements
+  - version-validate now accepts RELEASE_TYPE parameter: make version-validate RELEASE_TYPE=minor
+  - release target now asks type first, then validates with correct type
+  - PR body includes release type for clarity
+  - Version calculation and validation now use consistent type
 - Fase 1: CSS/JS cleanup per Jekyll 4 refactor
   - CSS utility classes: .text-brand-dark, .text-muted (sostituiscono inline styles)
   - Edit button development-only script esterno (edit-button-dev.js)
@@ -220,6 +229,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Aggiornamento software list
 
+[Unreleased.1.0] - 2026-05-02
+
+[Unreleased.1.0]: https://github.com/bitprepared/bitprepared.it/compare/vUnreleased...vUnreleased.1.0
 [Unreleased]: https://github.com/bitprepared/bitprepared.it/compare/v1.0.0...HEAD
 [1.0.0]: https://github.com/bitprepared/bitprepared.it/compare/v20260426T125004...v1.0.0
 [20260426T125004]: https://github.com/bitprepared/bitprepared.it/compare/v0.9.0...v20260426T125004
