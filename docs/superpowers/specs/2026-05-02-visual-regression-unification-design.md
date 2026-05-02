@@ -79,3 +79,5 @@ Extract common screenshot logic into shared module.
 2. Run validation immediately after
 3. Verify identical sizes for all pages
 4. Test on problematic pages: /eventi/, /eventi/epppi/, /eventi/campo-eg/
+
+**Important**: Docker/make commands must be executed by user, not in implementation.
