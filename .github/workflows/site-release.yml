@@ -1,149 +1,128 @@
 name: Release Site
 
-# on:
-#   push:
-#     branches: [ "master" ]
-#   pull_request:
-#     branches: [ "master" ]
-
 on:
-  pull_request:
-    branches:
-      - master
-    types:
-      - closed
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: 'Release type'
+        required: true
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
+        default: patch
 
 jobs:
-  determine-release-type:
-    if: github.event.pull_request.merged == true
+  pre-check:
     runs-on: ubuntu-latest
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     outputs:
-      release-type: ${{ steps.detect-type.outputs.type }}
-      next-version: ${{ steps.detect-type.outputs.version }}
-      tag-name: ${{ steps.detect-type.outputs.tag }}
+      next-version: ${{ steps.detect-version.outputs.version }}
+      tag-name: ${{ steps.detect-version.outputs.tag }}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Detect release type from labels
-        id: detect-type
+      - name: Detect next version
+        id: detect-version
         run: |
-          echo "🏷️  Determining release type from PR labels..."
-
-          # Detect from labels
-          if [[ "${{ contains(github.event.pull_request.labels.*.name, 'release:major') }}" == "true" ]]; then
-            echo "type=major" >> $GITHUB_OUTPUT
-          elif [[ "${{ contains(github.event.pull_request.labels.*.name, 'release:minor') }}" == "true" ]]; then
-            echo "type=minor" >> $GITHUB_OUTPUT
-          else
-            echo "type=patch" >> $GITHUB_OUTPUT
-          fi
+          RELEASE_TYPE="${{ github.event.inputs.release_type }}"
 
           # Get last version from CHANGELOG (skip [Unreleased])
           LAST_VERSION=$(grep "^## \[" CHANGELOG.txt | grep -v "^## \[Unreleased\]" | head -1 | sed 's/^## \[\([^]]*\)\].*/\1/')
+
           echo "📌 Last version: $LAST_VERSION"
 
-          # Check if old timestamp format
-          if [[ "$LAST_VERSION" == *"T"* ]]; then
-            echo "⚠️  Old timestamp format detected, migrating to semver"
+          # Fallback for first release
+          if [[ -z "$LAST_VERSION" ]]; then
+            echo "⚠️  No previous version found, assuming initial release"
             NEXT_VERSION="1.0.0"
           else
-            # Parse current version
-            CURRENT_MAJOR=$(echo "$LAST_VERSION" | cut -d. -f1)
-            CURRENT_MINOR=$(echo "$LAST_VERSION" | cut -d. -f2)
-            CURRENT_PATCH=$(echo "$LAST_VERSION" | cut -d. -f3)
+            # Check if old timestamp format
+            if [[ "$LAST_VERSION" == *"T"* ]]; then
+              echo "⚠️  Old timestamp format detected, migrating to semver"
+              NEXT_VERSION="1.0.0"
+            else
+              # Parse current version
+              CURRENT_MAJOR=$(echo "$LAST_VERSION" | cut -d. -f1)
+              CURRENT_MINOR=$(echo "$LAST_VERSION" | cut -d. -f2)
+              CURRENT_PATCH=$(echo "$LAST_VERSION" | cut -d. -f3)
 
-            # Calculate next version based on type
-            TYPE="${{ steps.detect-type.outputs.type }}"
-            case "$TYPE" in
-              major)
-                NEXT_MAJOR=$((CURRENT_MAJOR + 1))
-                NEXT_VERSION="${NEXT_MAJOR}.0.0"
-                ;;
-              minor)
-                NEXT_MINOR=$((CURRENT_MINOR + 1))
-                NEXT_VERSION="${CURRENT_MAJOR}.${NEXT_MINOR}.0"
-                ;;
-              patch)
-                NEXT_PATCH=$((CURRENT_PATCH + 1))
-                NEXT_VERSION="${CURRENT_MAJOR}.${CURRENT_MINOR}.${NEXT_PATCH}"
-                ;;
-            esac
+              # Calculate next version based on type
+              case "$RELEASE_TYPE" in
+                major)
+                  NEXT_MAJOR=$((CURRENT_MAJOR + 1))
+                  NEXT_VERSION="${NEXT_MAJOR}.0.0"
+                  ;;
+                minor)
+                  NEXT_MINOR=$((CURRENT_MINOR + 1))
+                  NEXT_VERSION="${CURRENT_MAJOR}.${NEXT_MINOR}.0"
+                  ;;
+                patch)
+                  NEXT_PATCH=$((CURRENT_PATCH + 1))
+                  NEXT_VERSION="${CURRENT_MAJOR}.${CURRENT_MINOR}.${NEXT_PATCH}"
+                  ;;
+              esac
+            fi
           fi
 
           echo "version=$NEXT_VERSION" >> $GITHUB_OUTPUT
           echo "tag=v$NEXT_VERSION" >> $GITHUB_OUTPUT
 
-          echo "📌 Release type: $TYPE"
+          echo "📌 Release type: $RELEASE_TYPE"
           echo "📌 Next version: $NEXT_VERSION"
           echo "🏷️  Tag: v$NEXT_VERSION"
 
-  release:
-    if: github.event.pull_request.merged == true
-    needs: determine-release-type
-    runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check if release branch exists
+        run: |
+          VERSION="${{ steps.detect-version.outputs.version }}"
+          BRANCH_NAME="chore/bump-version-${VERSION}"
+          chmod +x ./scripts/check-branch-exists.sh
+          ./scripts/check-branch-exists.sh "$BRANCH_NAME"
 
       - name: Show release info
         run: |
           echo "📦 Release Information:"
-          echo "   Type: ${{ needs.determine-release-type.outputs.release-type }}"
-          echo "   Version: ${{ needs.determine-release-type.outputs.next-version }}"
-          echo "   Tag: ${{ needs.determine-release-type.outputs.tag-name }}"
+          echo "   Type: ${{ github.event.inputs.release_type }}"
+          echo "   Version: ${{ steps.detect-version.outputs.version }}"
+          echo "   Tag: ${{ steps.detect-version.outputs.tag }}"
+
+  build-and-audit:
+    needs: pre-check
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    outputs:
+      next-version: ${{ needs.pre-check.outputs.next-version }}
+      tag-name: ${{ needs.pre-check.outputs.tag-name }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Show release info
+        run: |
+          echo "📦 Building release:"
+          echo "   Type: ${{ github.event.inputs.release_type }}"
+          echo "   Version: ${{ needs.pre-check.outputs.next-version }}"
+          echo "   Tag: ${{ needs.pre-check.outputs.tag-name }}"
 
       - name: Validate CHANGELOG
         run: |
           chmod +x ./scripts/validate-changelog.sh
           ./scripts/validate-changelog.sh
         env:
-          RELEASE_TYPE: ${{ needs.determine-release-type.outputs.release-type }}
+          RELEASE_TYPE: ${{ github.event.inputs.release_type }}
 
-      - name: Bump version in CHANGELOG
+      - name: Bump version in CHANGELOG (local only)
         run: |
           chmod +x ./scripts/bump-version.sh
-          ./scripts/bump-version.sh ${{ needs.determine-release-type.outputs.release-type }}
+          ./scripts/bump-version.sh ${{ github.event.inputs.release_type }}
         env:
           CHANGELOG_FILE: "CHANGELOG.txt"
-
-      - name: Commit version bump to branch
-        run: |
-          VERSION="${{ needs.determine-release-type.outputs.next-version }}"
-          BRANCH_NAME="chore/bump-version-${VERSION}"
-
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-
-          # Create new branch
-          git checkout -b "$BRANCH_NAME"
-
-          # Commit version bump
-          git add CHANGELOG.txt
-          git commit -m "chore: bump version to $VERSION"
-
-          # Push branch
-          git push origin "$BRANCH_NAME"
-
-          # Create PR using gh cli
-          gh pr create \
-            --title "Release $VERSION - Version Bump" \
-            --body "Automated version bump to $VERSION. This PR was created by the release workflow." \
-            --base master \
-            --head "$BRANCH_NAME" \
-            --label "release:automated"
-
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build the site in the jekyll/builder container
         run: |
@@ -190,22 +169,90 @@ jobs:
         with:
           args: zip -qq -r release.zip _site
 
+      - name: Upload accessibility summary as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: accessibility-report
+          path: docs/accessibility/reports/summary.md
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-site
+          path: release.zip
+
+  release:
+    needs: build-and-audit
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    environment: production
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Show release info
+        run: |
+          echo "📦 Releasing:"
+          echo "   Version: ${{ needs.build-and-audit.outputs.next-version }}"
+          echo "   Tag: ${{ needs.build-and-audit.outputs.tag-name }}"
+
+      - name: Bump version in CHANGELOG
+        run: |
+          chmod +x ./scripts/bump-version.sh
+          ./scripts/bump-version.sh ${{ github.event.inputs.release_type }}
+        env:
+          CHANGELOG_FILE: "CHANGELOG.txt"
+
+      - name: Commit version bump to branch
+        run: |
+          VERSION="${{ needs.build-and-audit.outputs.next-version }}"
+          BRANCH_NAME="chore/bump-version-${VERSION}"
+
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+          # Create new branch
+          git checkout -b "$BRANCH_NAME"
+
+          # Commit version bump
+          git add CHANGELOG.txt
+          git commit -m "chore: bump version to $VERSION"
+
+          # Push branch
+          git push origin "$BRANCH_NAME"
+
+          # Create PR using gh cli
+          gh pr create \
+            --title "Release $VERSION - Version Bump" \
+            --body "Automated version bump to $VERSION. This PR was created by the release workflow." \
+            --base master \
+            --head "$BRANCH_NAME" \
+            --label "release:automated"
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Create Git Tag
         run: |
-          git tag -a ${{ needs.determine-release-type.outputs.tag-name }} -m "Release ${{ needs.determine-release-type.outputs.tag-name }}"
-          git push origin ${{ needs.determine-release-type.outputs.tag-name }}
+          git tag -a ${{ needs.build-and-audit.outputs.tag-name }} -m "Release ${{ needs.build-and-audit.outputs.tag-name }}"
+          git push origin ${{ needs.build-and-audit.outputs.tag-name }}
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: release-site
+          path: .
 
       - uses: ncipollo/release-action@v1
         with:
           artifacts: "release.zip"
           removeArtifacts: true
           makeLatest: true
-          tag: ${{ needs.determine-release-type.outputs.tag-name }}
+          tag: ${{ needs.build-and-audit.outputs.tag-name }}
           bodyFile: "CHANGELOG.txt"
           generateReleaseNotes: false
-
-      - name: Upload accessibility summary as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: accessibility-report
-          path: docs/accessibility/reports/summary.md
