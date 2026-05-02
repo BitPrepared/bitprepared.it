@@ -1,6 +1,7 @@
 const { chromium } = require('@playwright/test');
 const fs = require('fs');
 const path = require('path');
+const { captureScreenshot, generateFilename } = require('./screenshot-utils');
 
 // Handle interrupt signals
 let browsers = [];
@@ -83,28 +84,7 @@ async function captureScreenshots(serverType, baseUrl, viewportsToUse) {
 
         console.log(`    🔗 ${pageUrl}`);
 
-        await page.goto(fullUrl, {
-          waitUntil: 'networkidle',
-          timeout: 30000
-        });
-
-        // Wait for all images to load (handles lazy loading)
-        await page.evaluate(() => {
-          const images = Array.from(document.querySelectorAll('img'));
-          return Promise.all(images.map(img => {
-            if (img.complete && img.naturalHeight > 0) return;
-            return new Promise(resolve => {
-              img.addEventListener('load', resolve);
-              img.addEventListener('error', resolve); // Also handle load errors
-              setTimeout(resolve, 3000); // Timeout 3s per image
-            });
-          }));
-        });
-
-        // Extra delay for stable rendering
-        await page.waitForTimeout(500);
-
-        const filename = pageUrl.replace(/^\//, '').replace(/\/$/, '').replace(/\//g, '_') || 'index';
+        const filename = generateFilename(pageUrl);
         const screenshotPath = path.join(__dirname, `../../screenshots/${serverType}/${viewportName}/${filename}.png`);
 
         const dir = path.dirname(screenshotPath);
@@ -112,10 +92,7 @@ async function captureScreenshots(serverType, baseUrl, viewportsToUse) {
           fs.mkdirSync(dir, { recursive: true });
         }
 
-        await page.screenshot({
-          path: screenshotPath,
-          fullPage: true
-        });
+        await captureScreenshot(page, fullUrl, screenshotPath);
 
         await page.close();
       } catch (error) {
