@@ -2,6 +2,7 @@ const { chromium } = require('@playwright/test');
 const fs = require('fs');
 const path = require('path');
 const { extractPagesFromSitemap } = require('./extract-pages-from-sitemap');
+const { captureScreenshot, generateFilename } = require('./screenshot-utils');
 
 // Handle interrupt signals
 let browser = null;
@@ -101,29 +102,7 @@ async function createBaseline() {
 
           console.log(`    🔗 ${pageUrl}`);
 
-          await page.goto(fullUrl, {
-            waitUntil: 'networkidle',
-            timeout: 30000
-          });
-
-          // Homepage: wait for images to load (lazy loading issue)
-          if (pageUrl === '/' || pageUrl === '') {
-            await page.evaluate(() => {
-              const images = Array.from(document.querySelectorAll('img[loading="lazy"]'));
-              images.forEach(img => img.loading = 'eager');
-            });
-            await page.waitForTimeout(500); // Small wait for images
-          } else if (pageUrl.includes('/tags/#')) {
-            // Tag pages with hash: wait for tag view to load
-            await page.waitForTimeout(500); // Wait for JavaScript to execute
-          } else {
-            // Other pages: wait for marker with short timeout
-            await page.waitForSelector('[data-visual-regression-marker="ready"]', {
-              timeout: 2000
-            }).catch(() => {}); // Silent fail
-          }
-
-          const filename = pageUrl.replace(/^\//, '').replace(/\/$/, '').replace(/\//g, '_') || 'index';
+          const filename = generateFilename(pageUrl);
           const baselinePath = path.join(baselineBaseFolder, viewportName, `${filename}.png`);
 
           const dir = path.dirname(baselinePath);
@@ -131,10 +110,7 @@ async function createBaseline() {
             fs.mkdirSync(dir, { recursive: true });
           }
 
-          await page.screenshot({
-            path: baselinePath,
-            fullPage: true
-          });
+          await captureScreenshot(page, fullUrl, baselinePath);
 
           await page.close();
         } catch (error) {
