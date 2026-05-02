@@ -17,7 +17,7 @@ process.on('SIGTERM', async () => {
 });
 
 const viewports = {
-  desktop: { width: 1920, height: 2000 },  // Increased height for full-page capture
+  desktop: { width: 1920, height: 1080 },
   tablet: { width: 768, height: 1024 },
   mobile: { width: 375, height: 667 }
 };
