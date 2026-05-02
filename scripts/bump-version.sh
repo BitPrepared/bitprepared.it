@@ -18,8 +18,8 @@ if [ ! -f "$CHANGELOG_FILE" ]; then
   exit 1
 fi
 
-# Get last version
-LAST_VERSION=$(grep -m 1 "^\## \[" "$CHANGELOG_FILE" | sed 's/^\## \[\([^]]*\)\].*/\1/')
+# Get last version (skip [Unreleased])
+LAST_VERSION=$(grep "^## \[" "$CHANGELOG_FILE" | grep -v "^## \[Unreleased\]" | head -1 | sed 's/^## \[\([^]]*\)\].*/\1/')
 if [ -z "$LAST_VERSION" ]; then
   echo "❌ ERROR: No version entry found in $CHANGELOG_FILE"
   exit 1
