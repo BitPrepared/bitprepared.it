@@ -1,13 +1,20 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Native lazy loading with Intersection Observer fallback
   const lazyImages = document.querySelectorAll('img[loading="lazy"]');
 
-  if ('loading' in HTMLImageElement.prototype) {
-    // Browser supports native lazy loading
-    console.log('✅ Native lazy loading supported');
-  } else {
-    // Fallback to Intersection Observer
+  // Add loaded class when images finish loading (works for both native and fallback)
+  lazyImages.forEach(function(img) {
+    if (img.complete) {
+      img.classList.add('loaded');
+    } else {
+      img.addEventListener('load', function() {
+        img.classList.add('loaded');
+      });
+    }
+  });
+
+  // Intersection Observer fallback for browsers without native lazy loading
+  if (!('loading' in HTMLImageElement.prototype)) {
     console.log('⚠️  Using Intersection Observer fallback');
     const imageObserver = new IntersectionObserver(function(entries, observer) {
       entries.forEach(function(entry) {
@@ -16,7 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
           if (img.dataset.src) {
             img.src = img.dataset.src;
           }
-          img.classList.add('loaded');
           imageObserver.unobserve(img);
         }
       });
@@ -25,6 +31,8 @@ document.addEventListener('DOMContentLoaded', function() {
     lazyImages.forEach(function(img) {
       imageObserver.observe(img);
     });
+  } else {
+    console.log('✅ Native lazy loading supported');
   }
 });
 </script>
