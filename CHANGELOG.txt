@@ -210,6 +210,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### 2019-06-01
   * aggiornamento software list
 
+[1.0.0] - 2026-05-02
+
+[1.0.0]: https://github.com/bitprepared/bitprepared.it/compare/vUnreleased...v1.0.0
 [Unreleased]: https://github.com/bitprepared/bitprepared.it/compare/v20260426T125004...HEAD
 [20260426T125004]: https://github.com/bitprepared.bitprepared.it/releases/tag/v20260426T125004
 
