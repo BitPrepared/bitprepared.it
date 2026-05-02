@@ -27,6 +27,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Layout widths: blog and tags pages now use max-w-6xl (previously max-w-4xl)
 - Removed page-body wrapper from blog/tags layouts for direct content rendering
 - CSS cleanup: Removed obsolete .tag-post-card, .tags-archive width constraints
+- Fase 1: Rimozione inline CSS/JS
+  - Index.html: 3 card con classi CSS invece di inline styles
+  - Edit button: script inline → file esterno con data attributes
+  - Edit button: caricato solo in development environment
+  - CSS: classi brand color in styles.css (scout-tech.css non caricato)
+  - Default layout: include edit-button.html per edit button globale
+  - Inline styles: 0 occorrenze (eccezione JSON-LD schema legittimo)
+- DEV: Makefile serve improvements
+  - POLLING parameter: make serve POLLING=1 for force_polling
+  - Default make serve: no force_polling (lighter CPU usage)
+- DEV: Autonomous server management
+  - New targets: serve-bg, serve-static-bg, stop-servers, stop-serve, stop-static
+  - Servers start/stop automatically for validate-graphics, accessibility-audit, visual-baseline
+  - No more manual server management required
+  - Automatic cleanup even if commands fail
+- DEV: Accessibility workflow improvements
+  - Fused accessibility-analyze + accessibility-score into single target
+  - accessibility-analyze generates physical summary.md report
+  - accessibility-audit now runs analyze automatically after audit
+  - Added A11Y_PAGE parameter: make accessibility-audit A11Y_PAGE=index (homepage only)
+  - Removed: accessibility-full, accessibility-quick (simplified interface)
+  - Quick scores now show ALL pages, not just homepage
+- DEV: GitHub Actions workflow updates
+  - New workflow: validate-pr.yml for pre-merge checks
+  - Updated: site-release.yml uses semantic versioning
+  - Automatic CHANGELOG bump + git tag creation on merge
+  - Accessibility report now uploaded as workflow artifact
+- UI: Social icon styling improvements
+  - Better visual consistency across social media icons
+  - Improved hover states and alignment
+- UI: Mobile-friendly CSS improvements
+  - Enhanced responsive design for mobile devices
+  - Better layout and spacing on small screens
+  - Streamlined CSS for improved mobile performance
 
 ### Fixed
 - Card width constraints: Removed max-width: 900px from .tags-archive
@@ -40,17 +74,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Make target: test-cleanup per verificare rimozione inline CSS/JS
   - Documentation: Implementation plan, design spec, test report
   - project_path configuration per development edit button
-
-### Changed
-- Fase 1: Rimozione inline CSS/JS
-  - Index.html: 3 card con classi CSS invece di inline styles
-  - Edit button: script inline → file esterno con data attributes
-  - Edit button: caricato solo in development environment
-  - CSS: classi brand color in styles.css (scout-tech.css non caricato)
-  - Default layout: include edit-button.html per edit button globale
-  - Inline styles: 0 occorrenze (eccezione JSON-LD schema legittimo)
-
-### Fixed
 - Visual regression: Screenshot capture logic unification
   - Created shared screenshot-utils.js module with waitForImages, generateFilename, captureScreenshot
   - Refactored create-baseline.js and capture.js to use shared module (53 lines removed)
@@ -75,146 +98,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - New baseline screenshots for all viewports (desktop, mobile, tablet)
   - Improved comparison script with better error reporting
   - Enhanced page extraction from sitemap
-
-### Changed
-- DEV: Makefile serve improvements
-  - POLLING parameter: make serve POLLING=1 for force_polling
-  - Default make serve: no force_polling (lighter CPU usage)
-- DEV: Autonomous server management
-  - New targets: serve-bg, serve-static-bg, stop-servers, stop-serve, stop-static
-  - Servers start/stop automatically for validate-graphics, accessibility-audit, visual-baseline
-  - No more manual server management required
-  - Automatic cleanup even if commands fail
-
-- DEV: Accessibility workflow improvements
-  - Fused accessibility-analyze + accessibility-score into single target
-  - accessibility-analyze generates physical summary.md report
-  - accessibility-audit now runs analyze automatically after audit
-  - Added A11Y_PAGE parameter: make accessibility-audit A11Y_PAGE=index (homepage only)
-  - Removed: accessibility-full, accessibility-quick (simplified interface)
-  - Quick scores now show ALL pages, not just homepage
-
-- DEV: GitHub Actions workflow updates
-  - New workflow: validate-pr.yml for pre-merge checks
-  - Updated: site-release.yml uses semantic versioning
-  - Automatic CHANGELOG bump + git tag creation on merge
-  - Accessibility report now uploaded as workflow artifact
-
-- UI: Social icon styling improvements
-  - Better visual consistency across social media icons
-  - Improved hover states and alignment
-
-- UI: Mobile-friendly CSS improvements
-  - Enhanced responsive design for mobile devices
-  - Better layout and spacing on small screens
-  - Streamlined CSS for improved mobile performance
-
-### Fixed
-- FIX: Server cleanup on command failure
+- Server cleanup on command failure
   - validate-graphics, accessibility-audit, visual-baseline now always stop servers
   - Subshell pattern ensures cleanup even if docker run fails
-- FIX: Container name conflicts in serve-bg
+- Container name conflicts in serve-bg
   - Automatic cleanup of existing containers before starting new ones
   - Improved stop-serve with fallback PID handling
 
-## [20260426T125004] - 2026-04-26
-
-### 2026-04-26
-  * FEATURE: Accessibility miglioramenti WCAG AA
-    - Contrast: --color-secondary scuro (#0d5c0d, ratio 11.7:1)
-    - Semantics: Heading order corretto (h4→h3 program items)
-    - Layout: Post tags spacing migliorato (.post-tags flex container)
-  * DEV: Docker container stabilità
-    - Accessibility: Playwright→Puppeteer (chromium di sistema)
-    - Visual regression: Chromium args per no-crash Docker
-
-### 2026-04-26
-  * MIGRATION: Scout Tech Redesign applicato a Jekyll 4
-    - CSS Migration: 5 files → 2 files (main.css, scout-tech.css)
-    - JS Updates: Aggiunto tailwind-config.js
-    - Layout Updates: Modernizzati tutti layout con Tailwind CSS
-    - Homepage: Complete redesign con hero section e cards
-    - Eventi: Aggiornato layout per design system moderno
-    - Branch: feature/apply-scout-tech-redesign
-    - Basato su: MIGRAZIONE_JEKYLL4.md
-  * FIX: Sezione tags non funzionante
-    - Aggiunto styles tags.css a scout-tech.css (163 righe)
-    - Ripristinate classi: .tags-archive, .tag-link, .tag-post-card, .btn-primary
-  * FIX: Homepage cards "Scopri..." disallineati
-    - Aggiunto flex flex-col alle article cards
-    - Aggiunto flex-grow ai contenuti per allineare bottoni in basso
-    - Aggiunto text-center ai link per migliorare allineamento
-  * FIX: Software icone centrate invece che a sinistra
-    - Modificato .page-body img in main.css
-    - Aggiunto selettore specifico per permalink-software
-    - Icone ora allineate a sinistra con inline-block
-
-### 2026-04-24
-  * FIX: Visual regression timing issues
-    - Added global data-visual-regression-marker to default layout
-    - Scripts wait for marker instead of page-specific selectors
-    - Works for ALL pages, prevents lazy-loaded content timing issues
-  * FIX: Visual baseline script execution
-    - Corretto comando Docker: npm run create-baseline (non node diretto)
-    - Allineate pagine in capture.js, create-baseline.js, compare.js
-    - Aggiunte pagine mancanti: /tags/, /articles/, /project/github/
-    - Fix filename pattern: removed trailing underscore (about_.png → about.png)
-  * FIX: Docker permissions
-    - Pass host UID to container with --user $(id -u):$(id -g)
-    - Prevents root-owned files in screenshots/ directory
-    - visual-clean now ignores permission errors
-
-### 2026-04-21
-  * FIX: Visual baseline creation script
-    - Corretto comando Docker: npm run create-baseline (non node diretto)
-    - Allineate pagine in capture.js, create-baseline.js, compare.js
-    - Aggiunte pagine mancanti: /tags/, /articles/, /project/github/
-    - Makefile: usa npm run invece di node diretto
-
-### 2026-04-21
-  * FEATURE: Generatore automatico blog post per eventi
-    - Script Ruby: scripts/generate-blog-post.rb
-    - Parse evento YAML → genera blog post Jekyll con frontmatter completo
-    - Target: make generate-blog-post (Docker)
-  * FEATURE: Visual Regression Testing in Docker
-    - Container con Playwright + Jekyll + Ruby
-    - Screenshot multi-viewport (19 pagine × 3 viewports)
-    - Report HTML con diff images
-    - Target: make validate-graphics
-  * REFACTOR: Template epppi → evento (standard per tutti i nuovi eventi)
-    - Layout: _layouts/evento.html
-    - CSS: assets/css/evento-custom.css
-    - Generalizzati contenuti: highlights, outcomes dinamici
-  * DOCS: Workflow system completo
-    - docs/WORKFLOW.md: guida completa sviluppo
-    - docs/CHECKLIST.md: checklist pre-commit
-    - Makefile: target 'make workflow'
-  * IMAGE: Nuova locandina EPPPI 2026
-    - assets/images/locandina_epppi_2026.jpg
-    - Design aggiornato per evento "Essere solidi in una società immateriale"
-
-### 2026-04-20
-  * EPPPI 2026: nuovo layout con grafica migliorata
-    - Pulsante edit MarkText (solo development)
-    - Icone Font Ashley colorate
-    - Sezione "10 motivi per cui questo EPPPI è diverso"
-    - Sezione "Cosa porterai a casa"
-    - Locandina prima sezione Social
-    - Configurazione JEKYLL_ENV=production
-
-### 2023-04-25
-  * fixed buonacaccia link epppi
-  * create github workflow for release
-  * script per l'autoaggiornamento
-
-### 2019-06-01
-  * aggiornamento software list
-
-[1.0.0] - 2026-05-02
-
-[1.0.0]: https://github.com/bitprepared/bitprepared.it/compare/vUnreleased...v1.0.0
-[Unreleased]: https://github.com/bitprepared/bitprepared.it/compare/v20260426T125004...HEAD
-[20260426T125004]: https://github.com/bitprepared.bitprepared.it/releases/tag/v20260426T125004
+## [1.0.0] - 2026-05-02
 
 ### Added
 - Phase 3: Accessibility, SEO, Images, and Performance
@@ -239,3 +130,98 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Duplicate structured-data include in default layout
 - Removed glob dependency from check-aria.js
 - Graceful fallback when ImageMagick not available
+
+## [20260426T125004] - 2026-04-26
+
+### Added
+- FEATURE: Accessibility miglioramenti WCAG AA
+  - Contrast: --color-secondary scuro (#0d5c0d, ratio 11.7:1)
+  - Semantics: Heading order corretto (h4→h3 program items)
+  - Layout: Post tags spacing migliorato (.post-tags flex container)
+- DEV: Docker container stabilità
+  - Accessibility: Playwright→Puppeteer (chromium di sistema)
+  - Visual regression: Chromium args per no-crash Docker
+- MIGRATION: Scout Tech Redesign applicato a Jekyll 4
+  - CSS Migration: 5 files → 2 files (main.css, scout-tech.css)
+  - JS Updates: Aggiunto tailwind-config.js
+  - Layout Updates: Modernizzati tutti layout con Tailwind CSS
+  - Homepage: Complete redesign con hero section e cards
+  - Eventi: Aggiornato layout per design system moderno
+  - Branch: feature/apply-scout-tech-redesign
+  - Basato su: MIGRAZIONE_JEKYLL4.md
+- FEATURE: Generatore automatico blog post per eventi
+  - Script Ruby: scripts/generate-blog-post.rb
+  - Parse evento YAML → genera blog post Jekyll con frontmatter completo
+  - Target: make generate-blog-post (Docker)
+- FEATURE: Visual Regression Testing in Docker
+  - Container con Playwright + Jekyll + Ruby
+  - Screenshot multi-viewport (19 pagine × 3 viewports)
+  - Report HTML con diff images
+  - Target: make validate-graphics
+- REFACTOR: Template epppi → evento (standard per tutti i nuovi eventi)
+  - Layout: _layouts/evento.html
+  - CSS: assets/css/evento-custom.css
+  - Generalizzati contenuti: highlights, outcomes dinamici
+- DOCS: Workflow system completo
+  - docs/WORKFLOW.md: guida completa sviluppo
+  - docs/CHECKLIST.md: checklist pre-commit
+  - Makefile: target 'make workflow'
+- IMAGE: Nuova locandina EPPPI 2026
+  - assets/images/locandina_epppi_2026.jpg
+  - Design aggiornato per evento "Essere solidi in una società immateriale"
+- EPPPI 2026: nuovo layout con grafica migliorata
+  - Pulsante edit MarkText (solo development)
+  - Icone Font Ashley colorate
+  - Sezione "10 motivi per cui questo EPPPI è diverso"
+  - Sezione "Cosa porterai a casa"
+  - Locandina prima sezione Social
+  - Configurazione JEKYLL_ENV=production
+
+### Fixed
+- Sezione tags non funzionante
+  - Aggiunto styles tags.css a scout-tech.css (163 righe)
+  - Ripristinate classi: .tags-archive, .tag-link, .tag-post-card, .btn-primary
+- Homepage cards "Scopri..." disallineati
+  - Aggiunto flex flex-col alle article cards
+  - Aggiunto flex-grow ai contenuti per allineare bottoni in basso
+  - Aggiunto text-center ai link per migliorare allineamento
+- Software icone centrate invece che a sinistra
+  - Modificato .page-body img in main.css
+  - Aggiunto selettore specifico per permalink-software
+  - Icone ora allineate a sinistra con inline-block
+- Visual regression timing issues
+  - Added global data-visual-regression-marker to default layout
+  - Scripts wait for marker instead of page-specific selectors
+  - Works for ALL pages, prevents lazy-loaded content timing issues
+- Visual baseline script execution
+  - Corretto comando Docker: npm run create-baseline (non node diretto)
+  - Allineate pagine in capture.js, create-baseline.js, compare.js
+  - Aggiunte pagine mancanti: /tags/, /articles/, /project/github/
+  - Fix filename pattern: removed trailing underscore (about_.png → about.png)
+- Docker permissions
+  - Pass host UID to container with --user $(id -u):$(id -g)
+  - Prevents root-owned files in screenshots/ directory
+  - visual-clean now ignores permission errors
+- Visual baseline creation script
+  - Corretto comando Docker: npm run create-baseline (non node diretto)
+  - Allineate pagine in capture.js, create-baseline.js, compare.js
+  - Aggiunte pagine mancanti: /tags/, /articles/, /project/github/
+  - Makefile: usa npm run invece di node diretto
+
+## [0.9.0] - 2023-04-25
+
+### Fixed
+- Buonacaccia link epppi
+- Create github workflow for release
+- Script per l'autoaggiornamento
+
+## [0.1.0] - 2019-06-01
+
+### Changed
+- Aggiornamento software list
+
+[Unreleased]: https://github.com/bitprepared/bitprepared.it/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/bitprepared/bitprepared.it/compare/v20260426T125004...v1.0.0
+[20260426T125004]: https://github.com/bitprepared/bitprepared.it/compare/v0.9.0...v20260426T125004
+[0.9.0]: https://github.com/bitprepared/bitprepared.it/compare/v0.1.0...v0.9.0
+[0.1.0]: https://github.com/bitprepared/bitprepared.it/releases/tag/v0.1.0
