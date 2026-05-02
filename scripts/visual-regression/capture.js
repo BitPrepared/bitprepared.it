@@ -92,11 +92,11 @@ async function captureScreenshots(serverType, baseUrl, viewportsToUse) {
         await page.evaluate(() => {
           const images = Array.from(document.querySelectorAll('img'));
           return Promise.all(images.map(img => {
-            if (img.complete) return;
+            if (img.complete && img.naturalHeight > 0) return;
             return new Promise(resolve => {
               img.addEventListener('load', resolve);
               img.addEventListener('error', resolve); // Also handle load errors
-              setTimeout(resolve, 1000); // Timeout 1s per image
+              setTimeout(resolve, 3000); // Timeout 3s per image
             });
           }));
         });
