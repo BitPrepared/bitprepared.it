@@ -7,7 +7,7 @@ GEM_VOLUME = bitprepared-gems
 POLLING ?= 0
 A11Y_PAGE ?= full
 
-.PHONY: serve serve-bg serve-static serve-static-bg build build-css clean install install-gems help open validate-graphics compare-graphics visual-baseline visual-clean docker-build-visual docker-build-a11y workflow generate-blog-post check-links accessibility-audit accessibility-analyze accessibility-clean accessibility-purge stop-servers stop-serve stop-static version-validate version-bump version-show
+.PHONY: serve serve-bg serve-static serve-static-bg build build-css clean install install-gems help open validate-graphics compare-graphics visual-baseline visual-clean docker-build-visual docker-build-a11y workflow generate-blog-post check-links accessibility-audit accessibility-analyze accessibility-clean accessibility-purge stop-servers stop-serve stop-static version-validate version-bump version-show release
 
 help:
 	@echo "Uso: make [target]"
@@ -36,6 +36,10 @@ help:
 		@echo "  accessibility-analyze - Analizza report, genera summary.md e mostra score di tutte le pagine"
 		@echo "  accessibility-clean  - Rimuovi report accessibilità"
 		@echo "  accessibility-purge  - Rimuovi report + Docker image a11y"
+	@echo "  release          - Crea PR release (valida CHANGELOG, bump versione, crea branch+PR)"
+	@echo "  version-validate - Valida CHANGELOG.txt"
+	@echo "  version-bump     - Bump versione in CHANGELOG.txt (interactive)"
+	@echo "  version-show     - Mostra versione corrente e git tags"
 	@echo "  help             - Mostra questo messaggio"
 	@echo ""
 	@echo "Opzioni:"
@@ -432,3 +436,67 @@ optimize-images:
 extract-critical:
 	@echo "🎨 Extracting critical CSS..."
 	@node scripts/extract-critical-css.js
+
+# Release workflow
+.PHONY: release
+release:
+	@echo "🚀 Starting release process..."
+	@echo ""
+	@echo "Step 1: Validating CHANGELOG..."
+	@chmod +x ./scripts/validate-changelog.sh
+	@./scripts/validate-changelog.sh
+	@echo "✅ CHANGELOG valid"
+	@echo ""
+	@echo "Step 2: Determining next version..."
+	@read -p "Release type (major/minor/patch): " release_type; \
+	LAST_VERSION=$$(grep "^## \[" CHANGELOG.txt | grep -v "^## \[Unreleased\]" | head -1 | sed 's/^## \[\([^]]*\)\].*/\1/'); \
+	if [[ -z "$$LAST_VERSION" ]]; then \
+		NEXT_VERSION="1.0.0"; \
+	else \
+		CURRENT_MAJOR=$$(echo "$$LAST_VERSION" | cut -d. -f1); \
+		CURRENT_MINOR=$$(echo "$$LAST_VERSION" | cut -d. -f2); \
+		CURRENT_PATCH=$$(echo "$$LAST_VERSION" | cut -d. -f3); \
+		case "$$release_type" in \
+			major) NEXT_VERSION=$$((CURRENT_MAJOR + 1)).0.0 ;; \
+			minor) NEXT_VERSION=$$CURRENT_MAJOR.$$((CURRENT_MINOR + 1)).0 ;; \
+			patch) NEXT_VERSION=$$CURRENT_MAJOR.$$CURRENT_MINOR.$$((CURRENT_PATCH + 1)) ;; \
+			*) echo "❌ Invalid type. Use major, minor, or patch."; exit 1 ;; \
+		esac; \
+	fi; \
+	echo "📌 Next version: $$NEXT_VERSION"; \
+	BRANCH_NAME="chore/bump-version-$$NEXT_VERSION"; \
+	echo "📌 Branch: $$BRANCH_NAME"; \
+	echo ""; \
+	echo "Step 3: Checking if branch exists..."; \
+	if git ls-remote --heads origin "$$BRANCH_NAME" | grep -q "$$BRANCH_NAME"; then \
+		echo "❌ Branch '$$BRANCH_NAME' already exists on remote."; \
+		echo "Delete it first: git push origin --delete $$BRANCH_NAME"; \
+		exit 1; \
+	fi; \
+	echo "✅ Branch available"; \
+	echo ""; \
+	echo "Step 4: Bumping version in CHANGELOG..."; \
+	chmod +x ./scripts/bump-version.sh; \
+	./scripts/bump-version.sh $$release_type; \
+	echo "✅ Version bumped"; \
+	echo ""; \
+	echo "Step 5: Creating branch and committing..."; \
+	git checkout -b "$$BRANCH_NAME"; \
+	git add CHANGELOG.txt; \
+	git commit -m "chore: bump version to $$NEXT_VERSION"; \
+	echo "✅ Committed"; \
+	echo ""; \
+	echo "Step 6: Pushing branch..."; \
+	git push origin "$$BRANCH_NAME"; \
+	echo "✅ Pushed"; \
+	echo ""; \
+	echo "Step 7: Creating PR..."; \
+	gh pr create \
+		--title "Release $$NEXT_VERSION - Version Bump" \
+		--body "Automated version bump to $$NEXT_VERSION. This PR was created by the release workflow." \
+		--base master \
+		--head "$$BRANCH_NAME" \
+		--label "release:automated"; \
+	echo ""; \
+	echo "✅ Release PR created!"; \
+	echo "🔗 View PR: gh pr view"
