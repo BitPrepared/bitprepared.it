@@ -3,10 +3,15 @@ name: Create Release
 on:
   workflow_dispatch:
     inputs:
-      tag:
-        description: 'Git tag to release (e.g. v1.0.0)'
+      release_type:
+        description: 'Release type'
         required: true
-        type: string
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
+        default: patch
 
 jobs:
   build-and-release:
@@ -19,15 +24,64 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.inputs.tag }}
           fetch-depth: 0
+
+      - name: Detect version from CHANGELOG
+        id: detect-version
+        run: |
+          # Get last version from CHANGELOG (skip [Unreleased])
+          LAST_VERSION=$(grep "^## \[" CHANGELOG.txt | grep -v "^## \[Unreleased\]" | head -1 | sed 's/^## \[\([^]]*\)\].*/\1/')
+
+          echo "📌 Last version: $LAST_VERSION"
+
+          # Parse current version
+          CURRENT_MAJOR=$(echo "$LAST_VERSION" | cut -d. -f1)
+          CURRENT_MINOR=$(echo "$LAST_VERSION" | cut -d. -f2)
+          CURRENT_PATCH=$(echo "$LAST_VERSION" | cut -d. -f3)
+
+          # Get release type from input
+          RELEASE_TYPE="${{ github.event.inputs.release_type }}"
+
+          # Calculate next version
+          case "$RELEASE_TYPE" in
+            major)
+              NEXT_MAJOR=$((CURRENT_MAJOR + 1))
+              NEXT_VERSION="${NEXT_MAJOR}.0.0"
+              ;;
+            minor)
+              NEXT_MINOR=$((CURRENT_MINOR + 1))
+              NEXT_VERSION="${CURRENT_MAJOR}.${NEXT_MINOR}.0"
+              ;;
+            patch)
+              NEXT_PATCH=$((CURRENT_PATCH + 1))
+              NEXT_VERSION="${CURRENT_MAJOR}.${CURRENT_MINOR}.${NEXT_PATCH}"
+              ;;
+          esac
+
+          echo "version=$NEXT_VERSION" >> $GITHUB_OUTPUT
+          echo "tag=v$NEXT_VERSION" >> $GITHUB_OUTPUT
+
+          echo "🏷️  Release type: $RELEASE_TYPE"
+          echo "📌 Next version: $NEXT_VERSION"
+          echo "🏷️  Tag: v$NEXT_VERSION"
 
       - name: Show release info
         run: |
-          echo "📦 Creating release for tag: ${{ github.event.inputs.tag }}"
-          TAG="${{ github.event.inputs.tag }}"
-          VERSION="${TAG#v}"
-          echo "Version: $VERSION"
+          echo "📦 Creating release:"
+          echo "   Type: ${{ github.event.inputs.release_type }}"
+          echo "   Version: ${{ steps.detect-version.outputs.version }}"
+          echo "   Tag: ${{ steps.detect-version.outputs.tag }}"
+
+      - name: Create and push git tag
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+          TAG="${{ steps.detect-version.outputs.tag }}"
+          git tag -a "$TAG" -m "Release $TAG"
+          git push origin "$TAG"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build the site in the jekyll/builder container
         run: |
@@ -86,6 +140,7 @@ jobs:
           artifacts: "release.zip"
           removeArtifacts: true
           makeLatest: true
-          tag: ${{ github.event.inputs.tag }}
+          tag: ${{ steps.detect-version.outputs.tag }}
           bodyFile: "CHANGELOG.txt"
+          generateReleaseNotes: false
           generateReleaseNotes: false

@@ -75,11 +75,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - DEV: GitHub Actions workflows restructure
   - Removed: site-release.yml (too complex, tried to do too much)
   - Added: create-release.yml (manual workflow only)
-    - Takes git tag as input (e.g. v1.0.0)
+    - Takes release type as input (major/minor/patch)
+    - Auto-detects version from CHANGELOG
+    - Creates and pushes git tag automatically
     - Builds site with Jekyll
     - Runs accessibility audit
     - Creates GitHub release with artifacts
-    - NO commits, NO bumps, just build + release
+    - NO commits, NO bumps, just tag + build + release
   - Simplified release flow: manual `make release`, then manual workflow
 - DEV: Makefile release workflow restored
   - `make release` creates PR with CHANGELOG bump
@@ -238,9 +240,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Aggiornamento software list
 
-[Unreleased.1.0] - 2026-05-03
-
-[Unreleased.1.0]: https://github.com/bitprepared/bitprepared.it/compare/vUnreleased...vUnreleased.1.0
 [Unreleased]: https://github.com/bitprepared/bitprepared.it/compare/v1.0.0...HEAD
 [1.0.0]: https://github.com/bitprepared/bitprepared.it/compare/v20260426T125004...v1.0.0
 [20260426T125004]: https://github.com/bitprepared/bitprepared.it/compare/v0.9.0...v20260426T125004
