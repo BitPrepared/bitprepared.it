@@ -148,36 +148,43 @@ build:
 	@cp src/robots.txt output/_site/
 
 build-css:
-	@echo "🎨 Generazione CSS unificato in Docker..."
-	@docker run --rm \
-		--mount type=bind,source=${PWD},target=/app \
-		-w /app \
-		node:20-alpine \
-		sh -c 'npm run build:css && cat assets/css/tailwind-input.css assets/css/tailwind.css assets/css/main.css assets/css/scout-tech.css > assets/css/styles.css'
-	@echo "✅ CSS unificato generato: assets/css/styles.css"
+	docker run --rm -it \
+		--user $(shell id -u):$(shell id -g) \
+		--mount type=bind,source=${PWD}/src,target=/workspace \
+		--volume="$(NODE_MODULES_VOLUME):/workspace/node_modules" \
+		-w /workspace/tailwind \
+		node:20 \
+		npm run build:css
 
 clean:
-	rm -rf _site .jekyll-cache
+	rm -rf output/_site output/.jekyll-cache
 
 install:
+	@echo "📦 Installing npm packages..."
 	docker run --rm -it \
-		--mount type=bind,source=${PWD},target=/srv/jekyll \
-		--volume="$(GEM_VOLUME):/usr/local/bundle" \
-		-e BUNDLE_PATH=/usr/local/bundle \
+		--user $(shell id -u):$(shell id -g) \
+		--mount type=bind,source=${PWD}/src,target=/workspace \
+		--volume="$(NODE_MODULES_VOLUME):/workspace/node_modules" \
+		-w /workspace/tailwind \
+		node:20 \
+		npm install
+	@echo "📦 Installing Ruby gems..."
+	docker run --rm -it \
+		--user $(shell id -u):$(shell id -g) \
+		--mount type=bind,source=${PWD}/src,target=/workspace \
+		--volume="$(VENDOR_VOLUME):/workspace/vendor" \
+		-w /workspace/jekyll \
 		$(DOCKER_IMAGE) \
 		bundle install
 
 install-gems:
-	@echo "💎 Installazione gemme nel volume persistente $(GEM_VOLUME)..."
 	docker run --rm -it \
-		--mount type=bind,source=${PWD},target=/srv/jekyll \
-		--volume="$(GEM_VOLUME):/usr/local/bundle" \
-		-e BUNDLE_PATH=/usr/local/bundle \
+		--user $(shell id -u):$(shell id -g) \
+		--mount type=bind,source=${PWD}/src,target=/workspace \
+		--volume="$(VENDOR_VOLUME):/workspace/vendor" \
+		-w /workspace/jekyll \
 		$(DOCKER_IMAGE) \
 		bundle install
-	@echo ""
-	@echo "✅ Gemme installate nel volume Docker '$(GEM_VOLUME)'"
-	@echo "   Questo volume persiste tra le esecuzioni e non richiede re-installazione"
 
 open:
 	@echo "Apertura sito locale: http://localhost:$(PORT)/"
