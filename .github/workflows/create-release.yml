@@ -2,16 +2,10 @@ name: Create Release
 
 on:
   workflow_dispatch:
-    inputs:
-      release_type:
-        description: 'Release type'
-        required: true
-        type: choice
-        options:
-          - major
-          - minor
-          - patch
-        default: patch
+  pull_request:
+    types: [closed]
+    branches:
+      - master
 
 jobs:
   build-and-release:
@@ -26,49 +20,39 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Check if PR was merged
+        if: github.event_name == 'pull_request'
+        run: |
+          if [[ "${{ github.event.pull_request.merged }}" != "true" ]]; then
+            echo "⚠️  PR was closed without merging, skipping release"
+            exit 1
+          fi
+          echo "✅ PR was merged"
+
       - name: Detect version from CHANGELOG
         id: detect-version
         run: |
           # Get last version from CHANGELOG (skip [Unreleased])
+          # This version was already created by make release, so we use it directly
           LAST_VERSION=$(grep "^## \[" CHANGELOG.txt | grep -v "^## \[Unreleased\]" | head -1 | sed 's/^## \[\([^]]*\)\].*/\1/')
 
-          echo "📌 Last version: $LAST_VERSION"
+          echo "📌 Found version in CHANGELOG: $LAST_VERSION"
 
-          # Parse current version
-          CURRENT_MAJOR=$(echo "$LAST_VERSION" | cut -d. -f1)
-          CURRENT_MINOR=$(echo "$LAST_VERSION" | cut -d. -f2)
-          CURRENT_PATCH=$(echo "$LAST_VERSION" | cut -d. -f3)
+          # Use this version as-is (no calculation needed)
+          echo "version=$LAST_VERSION" >> $GITHUB_OUTPUT
+          echo "tag=v$LAST_VERSION" >> $GITHUB_OUTPUT
 
-          # Get release type from input
-          RELEASE_TYPE="${{ github.event.inputs.release_type }}"
-
-          # Calculate next version
-          case "$RELEASE_TYPE" in
-            major)
-              NEXT_MAJOR=$((CURRENT_MAJOR + 1))
-              NEXT_VERSION="${NEXT_MAJOR}.0.0"
-              ;;
-            minor)
-              NEXT_MINOR=$((CURRENT_MINOR + 1))
-              NEXT_VERSION="${CURRENT_MAJOR}.${NEXT_MINOR}.0"
-              ;;
-            patch)
-              NEXT_PATCH=$((CURRENT_PATCH + 1))
-              NEXT_VERSION="${CURRENT_MAJOR}.${CURRENT_MINOR}.${NEXT_PATCH}"
-              ;;
-          esac
-
-          echo "version=$NEXT_VERSION" >> $GITHUB_OUTPUT
-          echo "tag=v$NEXT_VERSION" >> $GITHUB_OUTPUT
-
-          echo "🏷️  Release type: $RELEASE_TYPE"
-          echo "📌 Next version: $NEXT_VERSION"
-          echo "🏷️  Tag: v$NEXT_VERSION"
+          echo "📌 Releasing version: $LAST_VERSION"
+          echo "🏷️  Tag: v$LAST_VERSION"
 
       - name: Show release info
         run: |
           echo "📦 Creating release:"
-          echo "   Type: ${{ github.event.inputs.release_type }}"
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "   Mode: manual trigger"
+          else
+            echo "   Mode: automatic (from PR merge)"
+          fi
           echo "   Version: ${{ steps.detect-version.outputs.version }}"
           echo "   Tag: ${{ steps.detect-version.outputs.tag }}"
 
