@@ -11,3 +11,7 @@ node_modules/
 assets/css/tailwind.css
 docs/accessibility/reports/
 .worktrees/
+
+# Generated output
+output/_site/
+output/.jekyll-cache/
