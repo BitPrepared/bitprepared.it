@@ -45,8 +45,8 @@ walkDir('_site', (file) => {
   }
 });
 
-fs.writeFileSync('docs/accessibility/reports/aria-report.json', JSON.stringify(report, null, 2));
+fs.writeFileSync('output/accessibility/reports/aria-report.json', JSON.stringify(report, null, 2));
 const fileCount = Object.keys(report).length;
 const tagCount = Object.values(report).flat().length;
-console.log(`✅ ARIA report generated: docs/accessibility/reports/aria-report.json`);
+console.log(`✅ ARIA report generated: output/accessibility/reports/aria-report.json`);
 console.log(`📄 ${fileCount} files with ARIA tags, ${tagCount} total attributes`);

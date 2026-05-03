@@ -1,7 +1,7 @@
 #!/bin/bash
 # Analizza report accessibilità e genera summary
 
-REPORTS_DIR="${1:-docs/accessibility/reports}"
+REPORTS_DIR="${1:-output/accessibility/reports}"
 SCRIPT_DIR="$(dirname "$0")"
 
 echo "# Accessibility Audit Summary"
