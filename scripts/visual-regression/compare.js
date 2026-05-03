@@ -89,7 +89,7 @@ function compareImages(img1Path, img2Path, diffPath) {
 }
 
 function generateReport(results) {
-  const reportDir = path.join(__dirname, '../../screenshots/report');
+  const reportDir = path.join(__dirname, '../../output/screenshots/report');
   if (!fs.existsSync(reportDir)) {
     fs.mkdirSync(reportDir, { recursive: true });
   }
@@ -334,7 +334,7 @@ function generateReport(results) {
   fs.writeFileSync(path.join(reportDir, 'index.html'), html);
   fs.writeFileSync(path.join(reportDir, 'results.json'), JSON.stringify(results, null, 2));
 
-  console.log(`\n📊 Report generated: screenshots/report/index.html`);
+  console.log(`\n📊 Report generated: output/screenshots/report/index.html`);
   console.log(`   Passed: ${passedTests}/${totalTests}`);
   console.log(`   Failed: ${failedTests}/${totalTests}`);
 }
@@ -438,10 +438,10 @@ async function main() {
   for (const viewport of filteredViewports) {
     for (const page of pages) {
       const baselinePath = path.join(baselineBasePath, viewport, `${page}.png`);
-      const servePath = path.join(__dirname, `../../screenshots/serve/${viewport}/${page}.png`);
-      const staticPath = path.join(__dirname, `../../screenshots/static/${viewport}/${page}.png`);
-      const serveDiffPath = path.join(__dirname, `../../screenshots/diff/${viewport}/${page}_serve.png`);
-      const staticDiffPath = path.join(__dirname, `../../screenshots/diff/${viewport}/${page}_static.png`);
+      const servePath = path.join(__dirname, `../../output/screenshots/serve/${viewport}/${page}.png`);
+      const staticPath = path.join(__dirname, `../../output/screenshots/static/${viewport}/${page}.png`);
+      const serveDiffPath = path.join(__dirname, `../../output/screenshots/diff/${viewport}/${page}_serve.png`);
+      const staticDiffPath = path.join(__dirname, `../../output/screenshots/diff/${viewport}/${page}_static.png`);
 
       if (!fs.existsSync(baselinePath)) {
         console.log(`⚠️  No baseline for ${viewport}/${page}.png - skipping`);
