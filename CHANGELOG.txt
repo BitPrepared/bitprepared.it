@@ -6,6 +6,46 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2026-05-03
+
+
+### Added
+- Project structure reorganization
+  - All source files moved to src/ subdirectories (src/jekyll/, src/tailwind/, src/docker/)
+  - New output/ directory for generated content (output/_site/, output/screenshots/)
+  - Clear separation between source code and build artifacts
+  - Better project organization and cleaner repository root
+
+### Changed
+- Jekyll configuration: Updated paths in _config.yml
+  - destination: /workspace/output/_site (absolute path in container)
+  - cache: /workspace/output/.jekyll-cache (absolute path in container)
+  - robots.txt path: src/jekyll/robots.txt
+- Makefile Docker commands: All updated for new src/ structure
+  - Mount points: src/ → /workspace, output/ → /workspace/output
+  - build, serve, build-css, install commands all use new structure
+  - serve command: Added --host 0.0.0.0 for Docker accessibility
+  - install commands: Added --no-cache to prevent permission errors
+- Visual regression scripts: Updated screenshot paths
+  - capture.js, compare.js: output/screenshots/ instead of screenshots/
+  - All scripts now point to correct output directory
+- .gitignore: Added new patterns
+  - output/_site/, output/.jekyll-cache/ (generated content)
+  - src/.jekyll-cache/, src/node_modules/, src/output/, src/vendor/ (Docker artifacts)
+- clean command: Enhanced to remove output/_site, output/.jekyll-cache, output/screenshots
+- Docker volumes: Improved permission handling
+  - Removed cache volume from install commands (prevents permission issues)
+  - VENDOR_VOLUME for gems, NODE_MODULES_VOLUME for npm packages
+
+### Fixed
+- Docker permission errors during bundle install
+  - Removed CACHE_VOLUME mount from install commands
+  - Added --no-cache flag to prevent cache directory access issues
+- Jekyll serve not accessible from host
+  - Added --host 0.0.0.0 to bind to all interfaces in container
+- Path resolution issues with relative paths in Jekyll config
+  - Changed to absolute paths (/workspace/output/...) for reliable resolution
+
 ## [1.2.0] - 2026-05-03
 
 
@@ -272,8 +312,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Aggiornamento software list
 
+[1.3.0]: https://github.com/bitprepared/bitprepared.it/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/bitprepared/bitprepared.it/compare/v1.1.0...v1.2.0
-[Unreleased]: https://github.com/bitprepared/bitprepared.it/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/bitprepared/bitprepared.it/compare/v1.2.0...HEAD
 [1.1.0]: https://github.com/bitprepared/bitprepared.it/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/bitprepared/bitprepared.it/compare/v20260426T125004...v1.0.0
 [20260426T125004]: https://github.com/bitprepared/bitprepared.it/compare/v0.9.0...v20260426T125004
