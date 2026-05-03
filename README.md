@@ -49,15 +49,15 @@ Accompagnare gli scout nell'era digitale attraverso:
 
 ### Requisiti
 
-- Docker (nessuna installazione Ruby locale necessaria)
+- Docker (nessuna installazione Ruby/Node locale necessaria)
 
 ### Quick start
 
 ```bash
 make serve      # Avvia server su http://localhost:4000
-make build      # Genera sito statico in _site/
-make clean      # Rimuove _site/ e cache
-make install    # Installa dipendenze bundle (Docker)
+make build      # Genera sito statico in output/_site/
+make clean      # Rimuove output/_site/ e cache
+make install    # Installa dipendenze (Docker)
 ```
 
 Per tutti i comandi disponibili: `make help`
@@ -68,25 +68,31 @@ Per tutti i comandi disponibili: `make help`
 
 ```
 bitprepared.it/
-├── _posts/          → Blog posts (format: yyyy-mm-dd-titolo.md)
-├── _eventi/         → Collection eventi (campo_eg, epppi, stage)
-│   └── README_EVENTO.md → Guida template evento
-├── _software/       → Collection software (GIMP, LibreOffice, etc.)
-├── _layouts/        → Template Jekyll
-│   ├── evento.html  → Layout standard per eventi (ex epppi)
-│   ├── default.html
-│   ├── page.html
-│   └── post.html
-├── _includes/       → Componenti riutilizzabili (nav, footer, etc.)
-├── blog/            → Archivio blog (index.html)
-├── about.md         → Pagina chi siamo
-├── assets/          → CSS, JS, images
-│   └── css/
-│       └── evento-custom.css → Stili template evento
-├── _config.yml      → Configurazione Jekyll
-├── Makefile         → Comandi sviluppo
-└── .github/workflows/
-    └── site-release.yml  → CI/CD deployment
+├── src/                    → Source code
+│   ├── jekyll/            → Jekyll site source
+│   │   ├── _posts/        → Blog posts (yyyy-mm-dd-titolo.md)
+│   │   ├── _eventi/       → Collection eventi (campo_eg, epppi, stage)
+│   │   ├── _software/     → Collection software (GIMP, LibreOffice, etc.)
+│   │   ├── _layouts/      → Template Jekyll
+│   │   ├── _includes/     → Componenti riutilizzabili
+│   │   ├── assets/        → CSS, JS, images
+│   │   ├── _config.yml    → Configurazione Jekyll
+│   │   └── _config_dev.yml → Override development
+│   ├── tailwind/          → Tailwind CSS configuration
+│   └── docker/            → Docker configuration files
+├── output/                → Generated content (non in git)
+│   ├── _site/            → Jekyll build output
+│   └── screenshots/      → Visual regression screenshots
+├── scripts/               → Utility scripts
+│   └── visual-regression/ → Screenshot capture & comparison
+├── tests/                 → Tests & baselines
+│   └── visual-baseline/   → Screenshot baselines by version
+├── docs/                  → Project documentation
+│   ├── WORKFLOW.md       → Development workflow guide
+│   ├── CHECKLIST.md      → Pre-commit checklist
+│   └── VISUAL_REGRESSION_DOCS.md → Technical docs
+├── Makefile               → Development commands
+└── .github/workflows/     → CI/CD pipelines
 ```
 
 ---
@@ -117,9 +123,9 @@ make validate-graphics
 - ⚪ Modifiche contenuto testuale (opzionale)
 
 **Documentazione completa**:
-- [docs/WORKFLOW.md](docs/WORKFLOW.md) - Guida workflow dettagliata
-- [docs/CHECKLIST.md](docs/CHECKLIST.md) - Checklist rapida pre-commit
-- [docs/VISUAL_REGRESSION_DOCS.md](docs/VISUAL_REGRESSION_DOCS.md) - Docs tecniche
+- [WORKFLOW.md](docs/WORKFLOW.md) - Guida workflow dettagliata
+- [CHECKLIST.md](docs/CHECKLIST.md) - Checklist rapida pre-commit
+- [VISUAL_REGRESSION_DOCS.md](docs/VISUAL_REGRESSION_DOCS.md) - Docs tecniche
 
 ### Comandi Utili
 
@@ -136,9 +142,9 @@ Il deployment è automatico tramite **GitHub Actions**:
 
 1. Trigger: Merge di una PR sul branch `master`
 2. Workflow: `.github/workflows/site-release.yml`
-3. Build: Jekyll in container Docker (`jekyll/builder:latest`)
-4. Output: `release.zip` con directory `_site/` compilata
-5. Release: Creata automaticamente con tag timestamp (YYYYMMDDTHHmmss)
+3. Build: Jekyll in container Docker (`jekyll/jekyll:4`)
+4. Output: `release.zip` con directory `output/_site/` compilata
+5. Release: Creata automaticamente con tag semver (v1.2.3, v1.3.0, etc.)
 6. Changelog: `CHANGELOG.txt` usato come release body
 
 ---
@@ -156,8 +162,8 @@ Il deployment è automatico tramite **GitHub Actions**:
 
 ### File config
 
-- `_config.yml` — Configurazione principale
-- `_config_dev.yml` — Override per development
+- `src/jekyll/_config.yml` — Configurazione principale
+- `src/jekyll/_config_dev.yml` — Override per development
 
 ---
 
