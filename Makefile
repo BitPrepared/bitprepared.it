@@ -54,8 +54,10 @@ serve:
 		--mount type=bind,source=${PWD}/src,target=/workspace \
 		--mount type=bind,source=${PWD}/output,target=/workspace/output \
 		--volume="$(NODE_MODULES_VOLUME):/workspace/node_modules" \
-		--volume="$(VENDOR_VOLUME):/workspace/vendor" \
+		--volume="$(VENDOR_VOLUME):/usr/local/bundle" \
 		--volume="$(CACHE_VOLUME):/workspace/.jekyll-cache" \
+		-e BUNDLE_PATH=/usr/local/bundle \
+		-e GEM_HOME=/usr/local/bundle \
 		-w /workspace/jekyll \
 		-e JEKYLL_PATH=/workspace/jekyll \
 		-p $(PORT):4000 \
@@ -79,8 +81,10 @@ serve-bg:
 		--mount type=bind,source=${PWD}/src,target=/workspace \
 		--mount type=bind,source=${PWD}/output,target=/workspace/output \
 		--volume="$(NODE_MODULES_VOLUME):/workspace/node_modules" \
-		--volume="$(VENDOR_VOLUME):/workspace/vendor" \
+		--volume="$(VENDOR_VOLUME):/usr/local/bundle" \
 		--volume="$(CACHE_VOLUME):/workspace/.jekyll-cache" \
+		-e BUNDLE_PATH=/usr/local/bundle \
+		-e GEM_HOME=/usr/local/bundle \
 		-w /workspace/jekyll \
 		-e JEKYLL_PATH=/workspace/jekyll \
 		-p $(PORT):4000 \
@@ -143,8 +147,10 @@ build:
 		--mount type=bind,source=${PWD}/src,target=/workspace \
 		--mount type=bind,source=${PWD}/output,target=/workspace/output \
 		--volume="$(NODE_MODULES_VOLUME):/workspace/node_modules" \
-		--volume="$(VENDOR_VOLUME):/workspace/vendor" \
+		--volume="$(VENDOR_VOLUME):/usr/local/bundle" \
 		--volume="$(CACHE_VOLUME):/workspace/.jekyll-cache" \
+		-e BUNDLE_PATH=/usr/local/bundle \
+		-e GEM_HOME=/usr/local/bundle \
 		-w /workspace/jekyll \
 		-e JEKYLL_PATH=/workspace/jekyll \
 		-e JEKYLL_ENV=production \
@@ -177,7 +183,9 @@ install:
 	docker run --rm -it \
 		--user $(shell id -u):$(shell id -g) \
 		--mount type=bind,source=${PWD}/src,target=/workspace \
-		--volume="$(VENDOR_VOLUME):/workspace/vendor" \
+		--volume="$(VENDOR_VOLUME):/usr/local/bundle" \
+		--volume="$(CACHE_VOLUME):/workspace/.jekyll-cache" \
+		-e GEM_HOME=/usr/local/bundle \
 		-w /workspace/jekyll \
 		$(DOCKER_IMAGE) \
 		bundle install
@@ -186,7 +194,9 @@ install-gems:
 	docker run --rm -it \
 		--user $(shell id -u):$(shell id -g) \
 		--mount type=bind,source=${PWD}/src,target=/workspace \
-		--volume="$(VENDOR_VOLUME):/workspace/vendor" \
+		--volume="$(VENDOR_VOLUME):/usr/local/bundle" \
+		--volume="$(CACHE_VOLUME):/workspace/.jekyll-cache" \
+		-e GEM_HOME=/usr/local/bundle \
 		-w /workspace/jekyll \
 		$(DOCKER_IMAGE) \
 		bundle install
