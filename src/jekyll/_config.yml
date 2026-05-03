@@ -77,8 +77,8 @@ seo:
     username: bitprepared
     card: summary_large_image
 
-# Output directory (relative to src/jekyll/)
-destination: ../../output/_site
+# Output directory (absolute path in container)
+destination: /workspace/output/_site
 
-# Cache directory (relative to src/jekyll/)
-cache: ../../output/.jekyll-cache
+# Cache directory (absolute path in container)
+cache: /workspace/output/.jekyll-cache

@@ -61,7 +61,7 @@ serve:
 		-e JEKYLL_PATH=/workspace/jekyll \
 		-p $(PORT):4000 \
 		$(DOCKER_IMAGE) \
-		sh -c "bundle config set --local path /usr/local/bundle && bundle config set --local cache_path /workspace/.jekyll-cache && bundle exec jekyll serve --config _config.yml,_config_dev.yml $(if $(filter 1,$(POLLING)),--force_polling,)"
+		bundle exec jekyll serve --host 0.0.0.0 --port 4000 --config _config.yml,_config_dev.yml $(if $(filter 1,$(POLLING)),--force_polling,)
 
 serve-static: build
 	@echo "Server statico avviato su http://localhost:$(STATIC_PORT)/"
@@ -88,7 +88,7 @@ serve-bg:
 		-e JEKYLL_PATH=/workspace/jekyll \
 		-p $(PORT):4000 \
 		$(DOCKER_IMAGE) \
-		sh -c "bundle config set --local path /usr/local/bundle && bundle config set --local cache_path /workspace/.jekyll-cache && bundle exec jekyll serve --config _config.yml,_config_dev.yml --host 0.0.0.0 > /dev/null"
+		bundle exec jekyll serve --config _config.yml,_config_dev.yml --host 0.0.0.0 > /dev/null
 	@docker ps -q -f name=bitprepared-jekyll-$(PORT) > .jekyll_serve.pid
 	@echo "⏳ Attendo avvio server..."
 	@for i in $$(seq 1 30); do \
@@ -153,8 +153,8 @@ build:
 		-e JEKYLL_PATH=/workspace/jekyll \
 		-e JEKYLL_ENV=production \
 		$(DOCKER_IMAGE) \
-		sh -c "bundle config set --local path /usr/local/bundle && bundle config set --local cache_path /workspace/.jekyll-cache && bundle exec jekyll build"
-	@cp src/robots.txt output/_site/
+		bundle exec jekyll build
+	@cp src/jekyll/robots.txt output/_site/
 
 build-css:
 	docker run --rm -it \
@@ -182,22 +182,20 @@ install:
 		--user $(shell id -u):$(shell id -g) \
 		--mount type=bind,source=${PWD}/src,target=/workspace \
 		--volume="$(VENDOR_VOLUME):/usr/local/bundle" \
-		--volume="$(CACHE_VOLUME):/workspace/.jekyll-cache" \
 		-e GEM_HOME=/usr/local/bundle \
 		-w /workspace/jekyll \
 		$(DOCKER_IMAGE) \
-		bundle install
+		bundle install --no-cache
 
 install-gems:
 	docker run --rm -it \
 		--user $(shell id -u):$(shell id -g) \
 		--mount type=bind,source=${PWD}/src,target=/workspace \
 		--volume="$(VENDOR_VOLUME):/usr/local/bundle" \
-		--volume="$(CACHE_VOLUME):/workspace/.jekyll-cache" \
 		-e GEM_HOME=/usr/local/bundle \
 		-w /workspace/jekyll \
 		$(DOCKER_IMAGE) \
-		bundle install
+		bundle install --no-cache
 
 open:
 	@echo "Apertura sito locale: http://localhost:$(PORT)/"
