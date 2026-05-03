@@ -44,6 +44,6 @@ ENV CHROME_PATH=/usr/bin/chromium
 RUN mkdir -p /app/reports
 
 # Copy scripts from accessibility directory
-COPY docker/accessibility/scripts/ /app/scripts/
+COPY src/docker/accessibility/scripts/ /app/scripts/
 
 WORKDIR /app
