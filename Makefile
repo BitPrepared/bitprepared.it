@@ -167,6 +167,8 @@ build-css:
 
 clean:
 	rm -rf output/_site output/.jekyll-cache output/screenshots
+	rm -rf src/.jekyll-cache src/node_modules src/output src/vendor
+	rm -rf .jekyll-cache node_modules vendor _site
 
 install:
 	@echo "📦 Installing npm packages..."
@@ -296,6 +298,7 @@ check-links: build
 	@echo "⚠️  Filtro solo errori significativi (ignoro fonts, hash tags, ecc.)"
 	@echo ""
 	@docker run --rm \
+		--user $(shell id -u):$(shell id -g) \
 		--mount type=bind,source=${PWD}/output/_site,target=/test \
 		--mount type=bind,source=${PWD}/src/jekyll/.htmltest.yml,target=/.htmltest.yml \
 		wjdp/htmltest \

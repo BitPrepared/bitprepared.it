@@ -27,9 +27,9 @@ IgnoreDirs:
   - assets/css
 
 ExternalTimeout: 10
-EnableCache: true
+EnableCache: false
 CacheExpires: 24h
-CacheFile: /tmp/htmltest.cache
+CacheFile: /tmp/.htmltest.cache
 
 MaxRedirects: 3
 LogSort: URL
