@@ -50,12 +50,17 @@ help:
 
 serve:
 	docker run --rm -it \
-		--mount type=bind,source=${PWD},target=/srv/jekyll \
-		--volume="$(GEM_VOLUME):/usr/local/bundle" \
-		-e BUNDLE_PATH=/usr/local/bundle \
+		--user $(shell id -u):$(shell id -g) \
+		--mount type=bind,source=${PWD}/src,target=/workspace \
+		--mount type=bind,source=${PWD}/output,target=/workspace/output \
+		--volume="$(NODE_MODULES_VOLUME):/workspace/node_modules" \
+		--volume="$(VENDOR_VOLUME):/workspace/vendor" \
+		--volume="$(CACHE_VOLUME):/workspace/.jekyll-cache" \
+		-w /workspace/jekyll \
+		-e JEKYLL_PATH=/workspace/jekyll \
 		-p $(PORT):4000 \
 		$(DOCKER_IMAGE) \
-		jekyll serve --config _config.yml,_config_dev.yml $(if $(filter 1,$(POLLING)),--force_polling,)
+		bundle exec jekyll serve --config _config.yml,_config_dev.yml $(if $(filter 1,$(POLLING)),--force_polling,)
 
 serve-static: build
 	@echo "Server statico avviato su http://localhost:$(STATIC_PORT)/"
@@ -129,13 +134,18 @@ stop-static:
 
 build:
 	docker run --rm -it \
-		--mount type=bind,source=${PWD},target=/srv/jekyll \
-		--volume="$(GEM_VOLUME):/usr/local/bundle" \
+		--user $(shell id -u):$(shell id -g) \
+		--mount type=bind,source=${PWD}/src,target=/workspace \
+		--mount type=bind,source=${PWD}/output,target=/workspace/output \
+		--volume="$(NODE_MODULES_VOLUME):/workspace/node_modules" \
+		--volume="$(VENDOR_VOLUME):/workspace/vendor" \
+		--volume="$(CACHE_VOLUME):/workspace/.jekyll-cache" \
+		-w /workspace/jekyll \
+		-e JEKYLL_PATH=/workspace/jekyll \
 		-e JEKYLL_ENV=production \
-		-e BUNDLE_PATH=/usr/local/bundle \
 		$(DOCKER_IMAGE) \
-		jekyll build
-	@cp robots.txt _site/
+		bundle exec jekyll build
+	@cp src/robots.txt output/_site/
 
 build-css:
 	@echo "🎨 Generazione CSS unificato in Docker..."
