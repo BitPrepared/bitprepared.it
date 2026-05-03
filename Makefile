@@ -104,9 +104,9 @@ serve-bg:
 serve-static-bg: build
 	@echo "🚀 Avvio server statico in background..."
 	@cd output/_site && python3 -m http.server $(STATIC_PORT) > /tmp/static_server.log 2>&1 & \
-		echo $$! > ../../.static_serve.pid
+		echo $$! > ${PWD}/.static_serve.pid
 	@echo "⏳ Attendo avvio server..."
-	@for i in $$(seq 1 10); do \
+	@for i in $$(seq 1 30); do \
 		if curl -f -s -o /dev/null http://localhost:$(STATIC_PORT); then \
 			echo "✅ Server statico pronto su http://localhost:$(STATIC_PORT)"; \
 			exit 0; \

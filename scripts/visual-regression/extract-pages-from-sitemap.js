@@ -3,10 +3,10 @@ const path = require('path');
 const xml2js = require('xml2js');
 
 async function extractPagesFromSitemap() {
-  const sitemapPath = path.join(__dirname, '../../_site/sitemap.xml');
+  const sitemapPath = path.join(__dirname, '../../output/_site/sitemap.xml');
 
   if (!fs.existsSync(sitemapPath)) {
-    console.error('❌ Sitemap non trovata: _site/sitemap.xml');
+    console.error('❌ Sitemap non trovata: output/_site/sitemap.xml');
     console.error('   Esegui prima: make build');
     process.exit(1);
   }

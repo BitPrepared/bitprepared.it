@@ -397,6 +397,34 @@ function selectBaseline(availableBaselines) {
 
 async function main() {
   console.log('=== Visual Regression Compare ===\n');
+  console.log('ℹ️  Confronta screenshot ESISTENTI (serve vs static vs baseline)');
+  console.log('   Per generare nuovi screenshot: make validate-graphics\n');
+
+  // Check if screenshots exist
+  const serveDir = path.join(__dirname, '../../output/screenshots/serve');
+  const staticDir = path.join(__dirname, '../../output/screenshots/static');
+
+  const serveExists = fs.existsSync(serveDir) && fs.readdirSync(serveDir).length > 0;
+  const staticExists = fs.existsSync(staticDir) && fs.readdirSync(staticDir).length > 0;
+
+  if (!serveExists && !staticExists) {
+    console.log('⚠️  Nessuno screenshot trovato in output/screenshots/');
+    console.log('');
+    console.log('   Per generare screenshot:');
+    console.log('   1. Assicurati che make build sia stato eseguito');
+    console.log('   2. Esegui: make validate-graphics');
+    console.log('      Questo creerà screenshot in output/screenshots/serve/ e output/screenshots/static/');
+    console.log('');
+    process.exit(0);
+  }
+
+  if (!serveExists) {
+    console.log('⚠️  Nessuno screenshot serve trovato');
+  }
+  if (!staticExists) {
+    console.log('⚠️  Nessuno screenshot static trovato');
+  }
+  console.log('');
 
   // Get available baselines and select one
   const availableBaselines = getAvailableBaselines();
