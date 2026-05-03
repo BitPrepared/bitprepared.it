@@ -29,7 +29,7 @@ function optimizeImage(inputPath, outputPath, width) {
 }
 
 function processImages() {
-  const imagesDir = '_site/assets/images';
+  const imagesDir = 'output/_site/assets/images';
 
   if (!fs.existsSync(imagesDir)) {
     console.log('❌ Images directory not found');
