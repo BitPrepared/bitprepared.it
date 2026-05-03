@@ -1,9 +1,10 @@
 JEKYLL_VERSION ?= 4
 PORT ?= 4000
 STATIC_PORT ?= 8000
-PROJECT_PATH ?= /workspace/bitprepared.it
 DOCKER_IMAGE = jekyll/jekyll:$(JEKYLL_VERSION)
-GEM_VOLUME = bitprepared-gems
+NODE_MODULES_VOLUME = bitprepared-node-modules
+VENDOR_VOLUME = bitprepared-vendor
+CACHE_VOLUME = bitprepared-jekyll-cache
 POLLING ?= 0
 A11Y_PAGE ?= full
 
