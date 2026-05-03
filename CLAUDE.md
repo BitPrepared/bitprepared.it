@@ -11,7 +11,7 @@
 **Domande standard**:
 - "Hai eseguito make validate-graphics?"
 - "Vuoi aggiornare la baseline con make visual-baseline?"
-- "Vuoi revieware il report in screenshots/report/index.html?"
+- "Vuoi revieware il report in output/screenshots/report/index.html?"
 
 **Quando NON ricordare**:
 - Modifica contenuto testuale solo
@@ -21,15 +21,15 @@
 ## Pattern Progetto
 
 ### Layout Eventi
-- Layout: `_layouts/evento.html` (NON `_layouts/epppi.html`)
+- Layout: `src/jekyll/_layouts/evento.html` (NON `src/jekyll/_layouts/epppi.html`)
 - Classi CSS: `.evento-*` (NON `.epppi-*`)
-- CSS: `assets/css/evento-custom.css`
+- CSS: `src/jekyll/assets/css/evento-custom.css`
 
 ### Struttura File
 - Pagine: `_pages/*.md` o `*.html`
-- Blog: `_posts/YYYY-MM-DD-titolo.md`
-- Template: `_layouts/*.html` (default, page, post, evento)
-- Assets: `assets/css/*.css`, `assets/js/*`
+- Blog: `src/jekyll/_posts/YYYY-MM-DD-titolo.md`
+- Template: `src/jekyll/_layouts/*.html` (default, page, post, evento)
+- Assets: `src/jekyll/assets/css/*.css`, `src/jekyll/assets/js/*`
 
 ### Frontmatter Jekyll
 ```yaml
@@ -76,7 +76,7 @@ Quando utente aggiunge/modifica features:
 ```bash
 # Ricorda di dire:
 1. Esegui make validate-graphics (richiede 3 terminali: serve, serve-static, validate)
-2. Review screenshots/report/index.html se fallisce
+2. Review output/screenshots/report/index.html se fallisce
 3. Fix bug grafici OR aggiorna baseline con make visual-baseline
 ```
 
