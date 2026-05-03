@@ -76,3 +76,9 @@ seo:
   twitter:
     username: bitprepared
     card: summary_large_image
+
+# Output directory (relative to src/jekyll/)
+destination: ../../output/_site
+
+# Cache directory (relative to src/jekyll/)
+cache: ../../output/.jekyll-cache
