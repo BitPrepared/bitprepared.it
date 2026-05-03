@@ -22,7 +22,7 @@ help:
 	@echo "  open             - Apri sito locale nel browser (http://localhost:4000/)"
 	@echo "  build            - Genera sito statico"
 	@echo "  build-css        - Genera Tailwind CSS localmente (Docker)"
-	@echo "  clean            - Rimuove _site/"
+	@echo "  clean            - Rimuove output/_site/"
 	@echo "  install          - Installa dipendenze bundle (Docker, locale)"
 	@echo "  install-gems     - Installa gemme in volume persistente (una tantum)"
 	@echo "  validate-graphics- Valida grafica serve vs serve-static (Docker)"
@@ -64,7 +64,7 @@ serve:
 
 serve-static: build
 	@echo "Server statico avviato su http://localhost:$(STATIC_PORT)/"
-	@cd _site && python3 -m http.server $(STATIC_PORT)
+	@cd output/_site && python3 -m http.server $(STATIC_PORT)
 
 .PHONY: serve-bg serve-static-bg stop-servers stop-serve stop-static
 
@@ -75,12 +75,17 @@ serve-bg:
 	@docker rm bitprepared-jekyll-$(PORT) 2>/dev/null || true
 	@docker run -d \
 		--name bitprepared-jekyll-$(PORT) \
-		--mount type=bind,source=${PWD},target=/srv/jekyll \
-		--volume="$(GEM_VOLUME):/usr/local/bundle" \
-		-e BUNDLE_PATH=/usr/local/bundle \
+		--user $(shell id -u):$(shell id -g) \
+		--mount type=bind,source=${PWD}/src,target=/workspace \
+		--mount type=bind,source=${PWD}/output,target=/workspace/output \
+		--volume="$(NODE_MODULES_VOLUME):/workspace/node_modules" \
+		--volume="$(VENDOR_VOLUME):/workspace/vendor" \
+		--volume="$(CACHE_VOLUME):/workspace/.jekyll-cache" \
+		-w /workspace/jekyll \
+		-e JEKYLL_PATH=/workspace/jekyll \
 		-p $(PORT):4000 \
 		$(DOCKER_IMAGE) \
-		jekyll serve --config _config.yml,_config_dev.yml --host 0.0.0.0 > /dev/null
+		bundle exec jekyll serve --config _config.yml,_config_dev.yml --host 0.0.0.0 > /dev/null
 	@docker ps -q -f name=bitprepared-jekyll-$(PORT) > .jekyll_serve.pid
 	@echo "⏳ Attendo avvio server..."
 	@for i in $$(seq 1 30); do \
@@ -95,8 +100,8 @@ serve-bg:
 # Avvia server statico in background (scrive PID)
 serve-static-bg: build
 	@echo "🚀 Avvio server statico in background..."
-	@cd _site && python3 -m http.server $(STATIC_PORT) > /tmp/static_server.log 2>&1 & \
-		echo $$! > ../.static_serve.pid
+	@cd output/_site && python3 -m http.server $(STATIC_PORT) > /tmp/static_server.log 2>&1 & \
+		echo $$! > ../../.static_serve.pid
 	@echo "⏳ Attendo avvio server..."
 	@for i in $$(seq 1 10); do \
 		if curl -f -s -o /dev/null http://localhost:$(STATIC_PORT); then \
