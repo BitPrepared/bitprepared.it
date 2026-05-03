@@ -327,7 +327,7 @@ check-links: build
 .PHONY: docker-build-a11y
 docker-build-a11y:
 	@echo "🐳 Building accessibility Docker image..."
-	docker build -t bitprepared-a11y:latest -f docker/accessibility/Dockerfile .
+	docker build -t bitprepared-a11y:latest -f src/docker/accessibility/Dockerfile .
 
 accessibility-audit: docker-build-a11y
 	@echo "🔍 Running accessibility audit..."
