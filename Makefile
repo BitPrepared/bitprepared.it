@@ -103,17 +103,34 @@ serve-bg:
 # Avvia server statico in background (scrive PID)
 serve-static-bg: build
 	@echo "🚀 Avvio server statico in background..."
-	@cd output/_site && python3 -m http.server $(STATIC_PORT) > /tmp/static_server.log 2>&1 & \
-		echo $$! > ${PWD}/.static_serve.pid
-	@echo "⏳ Attendo avvio server..."
-	@for i in $$(seq 1 30); do \
+	@echo "⏳ Fermo eventuale server statico esistente..."
+	@if [ -f .static_serve.pid ]; then \
+		pid=$$(cat .static_serve.pid); \
+		if kill -0 $$pid 2>/dev/null; then \
+			echo "🛑 Fermo vecchio server statico (PID: $$pid)"; \
+			kill $$pid 2>/dev/null || true; \
+			sleep 1; \
+		fi; \
+		rm -f .static_serve.pid; \
+	fi
+	@echo "⏳ Avvio nuovo server..."
+	@(python3 -m http.server $(STATIC_PORT) --directory output/_site > /tmp/static_server.log 2>&1 & echo $$! > .static_serve.pid); \
+	echo "📝 PID salvato: $$(cat .static_serve.pid 2>/dev/null || echo 'N/A')"; \
+	echo "📝 Processo esiste: $$(ps -p $$(cat .static_serve.pid 2>/dev/null) >/dev/null 2>&1 && echo 'SI' || echo 'NO')"; \
+	echo "📝 Directory servita: output/_site"; \
+	echo "📝 Index exists: $$(test -f output/_site/index.html && echo 'SI' || echo 'NO')"; \
+	for i in $$(seq 1 30); do \
 		if curl -f -s -o /dev/null http://localhost:$(STATIC_PORT); then \
 			echo "✅ Server statico pronto su http://localhost:$(STATIC_PORT)"; \
 			exit 0; \
 		fi; \
+		echo "⏳ Tentativo $$i/30..."; \
 		sleep 1; \
 	done; \
-	echo "❌ Timeout avvio server statico"; exit 1
+	echo "❌ Timeout avvio server statico"; \
+	echo "📝 Log errore:"; \
+	cat /tmp/static_server.log 2>/dev/null || echo "Nessun log"; \
+	exit 1
 
 # Ferma entrambi i server
 stop-servers: stop-serve stop-static
