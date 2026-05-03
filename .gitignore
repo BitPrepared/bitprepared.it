@@ -15,3 +15,9 @@ docs/accessibility/reports/
 # Generated output
 output/_site/
 output/.jekyll-cache/
+
+# Docker can create these in src/ during builds (ignore)
+src/.jekyll-cache/
+src/node_modules/
+src/output/
+src/vendor/

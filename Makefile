@@ -166,7 +166,7 @@ build-css:
 		npm run build:css
 
 clean:
-	rm -rf output/_site output/.jekyll-cache
+	rm -rf output/_site output/.jekyll-cache output/screenshots/report
 
 install:
 	@echo "📦 Installing npm packages..."
