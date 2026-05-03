@@ -296,7 +296,8 @@ check-links: build
 	@echo "⚠️  Filtro solo errori significativi (ignoro fonts, hash tags, ecc.)"
 	@echo ""
 	@docker run --rm \
-		--mount type=bind,source=${PWD}/_site,target=/test \
+		--mount type=bind,source=${PWD}/output/_site,target=/test \
+		--mount type=bind,source=${PWD}/src/jekyll/.htmltest.yml,target=/.htmltest.yml \
 		wjdp/htmltest \
 		/test 2>&1 | \
 		grep -v "Non-OK status: 404.*fonts.googleapis.com" | \

@@ -19,6 +19,8 @@ IgnoreURLs:
   - docs.google.com
   - drive.google.com
   - ^mailto:
+  - www.bitprepared.it
+  - bitprepared.it
 
 IgnoreDirs:
   - assets/js
