@@ -166,7 +166,7 @@ build-css:
 		npm run build:css
 
 clean:
-	rm -rf output/_site output/.jekyll-cache output/screenshots
+	rm -rf output/_site output/.jekyll-cache output/screenshots output/accessibility
 	rm -rf src/.jekyll-cache src/node_modules src/output src/vendor
 	rm -rf .jekyll-cache node_modules vendor _site
 
@@ -333,12 +333,12 @@ accessibility-audit: docker-build-a11y
 	@echo "🔍 Running accessibility audit..."
 	@echo ""
 	@$(MAKE) --no-print-directory serve-bg
-	@mkdir -p docs/accessibility/reports
+	@mkdir -p output/accessibility/reports
 	@(if [ "$(A11Y_PAGE)" = "index" ]; then \
 		echo "📊 Testing homepage only..."; \
 		docker run --rm --init \
 			--user $(shell id -u):$(shell id -g) \
-			--mount type=bind,source=${PWD}/docs/accessibility/reports,target=/app/reports \
+			--mount type=bind,source=${PWD}/output/accessibility/reports,target=/app/reports \
 			--add-host=host.docker.internal:host-gateway \
 			-e SITE_URL=http://host.docker.internal:4000 \
 			bitprepared-a11y:latest \
@@ -348,7 +348,7 @@ accessibility-audit: docker-build-a11y
 		echo "⏱️  This may take several minutes..."; \
 		docker run --rm --init \
 			--user $(shell id -u):$(shell id -g) \
-			--mount type=bind,source=${PWD}/docs/accessibility/reports,target=/app/reports \
+			--mount type=bind,source=${PWD}/output/accessibility/reports,target=/app/reports \
 			--add-host=host.docker.internal:host-gateway \
 			-e SITE_URL=http://host.docker.internal:4000 \
 			bitprepared-a11y:latest \
@@ -358,8 +358,8 @@ accessibility-audit: docker-build-a11y
 	$(MAKE) --no-print-directory stop-serve; \
 	exit $$ret)
 	@echo ""
-	@echo "✅ Audit complete! Reports saved to docs/accessibility/reports/"
-	@echo "📋 View JSON: cat docs/accessibility/reports/lighthouse/homepage.report.json"
+	@echo "✅ Audit complete! Reports saved to output/accessibility/reports/"
+	@echo "📋 View JSON: cat output/accessibility/reports/lighthouse/homepage.report.json"
 	@echo ""
 	@$(MAKE) --no-print-directory accessibility-analyze
 
@@ -368,20 +368,20 @@ accessibility-audit: docker-build-a11y
 accessibility-analyze:
 	@echo "📊 Analyzing accessibility reports..."
 	@echo ""
-	@mkdir -p docs/accessibility/reports
-	@./scripts/analyze-a11y-reports.sh docs/accessibility/reports > docs/accessibility/reports/summary.md
-	@echo "✅ Summary saved to docs/accessibility/reports/summary.md"
+	@mkdir -p output/accessibility/reports
+	@./scripts/analyze-a11y-reports.sh output/accessibility/reports > output/accessibility/reports/summary.md
+	@echo "✅ Summary saved to output/accessibility/reports/summary.md"
 	@echo ""
 	@echo "📊 Quick Scores:"
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-	@for file in docs/accessibility/reports/lighthouse/*.json docs/accessibility/reports/lighthouse/*; do \
+	@for file in output/accessibility/reports/lighthouse/*.json output/accessibility/reports/lighthouse/*; do \
 		if [ -f "$$file" ]; then \
 			pagename=$$(basename "$$file" .json | sed 's/\.report$$//'); \
 			score=$$(cat "$$file" | jq -r '.categories.accessibility.score * 100 | floor'); \
 			echo "  ● Lighthouse ($$pagename): $$score%"; \
 		fi; \
 	done
-	@for file in docs/accessibility/reports/axe/*.json; do \
+	@for file in output/accessibility/reports/axe/*.json; do \
 		if [ -f "$$file" ]; then \
 			pagename=$$(basename "$$file" .json); \
 			violations=$$(cat "$$file" | jq '.violations | length'); \
@@ -389,13 +389,13 @@ accessibility-analyze:
 		fi; \
 	done
 	@echo ""
-	@echo "📋 Full summary: cat docs/accessibility/reports/summary.md"
+	@echo "📋 Full summary: cat output/accessibility/reports/summary.md"
 
 # Clean accessibility reports
 .PHONY: accessibility-clean
 accessibility-clean:
 	@echo "🧹 Cleaning accessibility reports..."
-	@rm -rf docs/accessibility/reports/
+	@rm -rf output/accessibility/reports/
 	@echo "✅ Accessibility reports removed"
 	@echo "💡 Run 'make accessibility-audit' to regenerate"
 
@@ -411,10 +411,10 @@ accessibility-purge: accessibility-clean
 accessibility-issues:
 	@echo "🔍 Showing accessibility issues with element locations..."
 	@echo ""
-	@if [ -f docs/accessibility/reports/lighthouse/homepage ]; then \
-		./scripts/show-a11y-issues.sh docs/accessibility/reports/lighthouse/homepage; \
-	elif [ -f docs/accessibility/reports/lighthouse/homepage.json ]; then \
-		./scripts/show-a11y-issues.sh docs/accessibility/reports/lighthouse/homepage.json; \
+	@if [ -f output/accessibility/reports/lighthouse/homepage ]; then \
+		./scripts/show-a11y-issues.sh output/accessibility/reports/lighthouse/homepage; \
+	elif [ -f output/accessibility/reports/lighthouse/homepage.json ]; then \
+		./scripts/show-a11y-issues.sh output/accessibility/reports/lighthouse/homepage.json; \
 	else \
 		echo "No report found. Run 'make accessibility-audit' first"; \
 	fi
