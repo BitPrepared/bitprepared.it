@@ -2,6 +2,21 @@
 layout: default
 ---
 
+{% comment %}Determine volantino image{% endcomment %}
+{% if page.image %}
+  {% assign locandina = page.image %}
+{% elsif page.event_type and page.year %}
+  {% assign event_slug = site.data.eventi[page.event_type].slug %}
+  {% assign locandina = "/assets/images/" | append: event_slug | append: "/locandina_" | append: event_slug | append: "_" | append: page.year | append: ".jpg" %}
+{% else %}
+  {% assign locandina = "/assets/images/generic-featured.png" %}
+{% endif %}
+
+{% comment %}Fallback if calculated image doesn't exist{% endcomment %}
+{% unless site.static_files contains locandina %}
+  {% assign locandina = "/assets/images/generic-featured.png" %}
+{% endunless %}
+
 {% if page.slug == 'epppi' %}
   {% assign bg-dark = 'bg-rossi-950' %}
   {% assign bg-primary = 'bg-rossi-600' %}
@@ -198,7 +213,7 @@ layout: default
 
   <!-- Locandina -->
   <div class="text-center my-8 sm:my-12">
-    <img src="{{ page.image }}" alt="{{ page.hero.title }}" class="max-w-full h-auto rounded-lg border-2 {{ border-color }} mx-auto">
+    <img src="{{ locandina }}" alt="{{ page.hero.title }}" class="max-w-full h-auto rounded-lg border-2 {{ border-color }} mx-auto">
   </div>
 
   <!-- Social -->
