@@ -20,6 +20,25 @@ Il sito BitPrepared usa un sistema automatico per selezionare le immagini giuste
 - File nel filesystem: `src/jekyll/assets/images/epppi/locandina_epppi_2026.jpg`
 - Nel frontmatter evento: `image: /assets/images/epppi/locandina_epppi_2026.jpg`
 
+## Archivio Originali (Matrici)
+
+**Importante:** I file originali (PNG) sono archiviati in `src/matrici/images/`, non in `src/jekyll/assets/images/`.
+
+**Percorsi:**
+- **Originali (PNG)**: `src/matrici/images/` - archivio, non pubblicato
+- **Ottimizzati (JPG)**: `src/jekyll/assets/images/` - pubblicato nel sito
+- **Eccezioni**: favicon.png, logo.png restano in `src/jekyll/assets/images/` (grafica piccola)
+
+**Flusso lavoro:**
+1. Salva originale PNG in `src/matrici/images/`
+2. Esegui `make optimize-images` per generare JPG in `src/jekyll/assets/images/`
+3. Jekyll pubblica solo JPG ottimizzati
+
+**Esempio:**
+- File originale: `src/matrici/images/epppi/locandina_epppi_2026.png`
+- File ottimizzato: `src/jekyll/assets/images/epppi/locandina_epppi_2026.jpg`
+- Nel frontmatter: `image: /assets/images/epppi/locandina_epppi_2026.jpg`
+
 ## Tipi di Immagini
 
 ### 1. Volantini Eventi (Locandine)
@@ -129,19 +148,19 @@ Il sistema ottimizza automaticamente le immagini durante il build:
 
 ```bash
 # 1. Crea la cartella se non esiste
-mkdir -p src/jekyll/assets/images/epppi/
+mkdir -p src/matrici/images/epppi/
 
-# 2. Metti la tua immagine nella cartella giusta con qualsiasi nome
-cp mia-immagine.jpg src/jekyll/assets/images/epppi/
+# 2. Metti la tua immagine PNG nella cartella giusta
+cp mia-immagine.png src/matrici/images/epppi/
 
 # 3. Run build (ottimizza automaticamente)
-make build
+make optimize-images
 ```
 
 L'immagine verrà:
-- Ridimensionata alle dimensioni corrette
-- Compressa alla qualità giusta
-- Salvata con il peso ottimizzato
+- Letta da `src/matrici/images/epppi/mia-immagine.png`
+- Ottimizzata e salvata in `src/jekyll/assets/images/epppi/mia-immagine.jpg`
+- Pubblicata nel sito
 
 **Nota**: Questo metodo richiede che il file sia già nominato correttamente.
 
