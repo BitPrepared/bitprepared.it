@@ -396,9 +396,13 @@ check-placeholders:
 
 optimize-volantini:
 	@echo "📄 Ottimizzazione volantini (A3 @ 300DPI)..."
-	@find src/jekyll/assets/images -name "locandina_*.jpg" -type f 2>/dev/null | while read file; do \
-		magick "$$file" -resize 3508x4961 -quality 85 -strip "$$file.tmp"; \
-		mv "$$file.tmp" "$$file"; \
+	@find $(MATRICE_DIR) -name "locandina_*.png" -type f 2>/dev/null | while read png; do \
+		jpg=$$(echo "$$png" | sed 's|$(MATRICE_DIR)|$(OPTIMIZE_DIR)|' | sed 's/\.png/.jpg/'); \
+		mkdir -p "$$(dirname "$$jpg")"; \
+		if [ ! -f "$$jpg" ] || [ "$$png" -nt "$$jpg" ]; then \
+			echo "   📸 $$png → $$jpg"; \
+			magick "$$png" -resize 3508x4961 -quality 85 -strip "$$jpg"; \
+		fi; \
 	done || echo "   Nessun volantino trovato"
 
 optimize-featured:
