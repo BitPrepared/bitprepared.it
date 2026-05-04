@@ -590,6 +590,17 @@ validate-images:
 	@echo "🔍 Validating optimized images..."
 	@node scripts/validate-optimized-images.js
 
+optimize-loghi:
+	@echo "🖼️  Ottimizzazione loghi branche..."
+	@find $(MATRICE_DIR) -name "*.png" -type f 2>/dev/null | while read png; do \
+		jpg=$$(echo "$$png" | sed 's|$(MATRICE_DIR)|$(OPTIMIZE_DIR)|' | sed 's/\.png/.jpg/'); \
+		mkdir -p "$$(dirname "$$jpg")"; \
+		if [ ! -f "$$jpg" ] || [ "$$png" -nt "$$jpg" ]; then \
+			echo "   📸 $$png → $$jpg"; \
+			magick "$$png" -resize 200x200 -quality 85 "$$jpg"; \
+		fi; \
+	done || echo "   Nessun logo trovato"
+
 .PHONY: extract-critical
 extract-critical:
 	@echo "🎨 Extracting critical CSS..."
