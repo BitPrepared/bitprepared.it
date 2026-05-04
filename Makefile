@@ -50,19 +50,23 @@ help:
 	@echo "  VIEWPORTS='desktop,mobile' make validate-graphics - Test solo viewport specifici"
 
 serve:
+	@mkdir -p output/_site output/.jekyll-cache
+	@chmod 755 output/_site output/.jekyll-cache output
+	@mkdir -p src/output src/jekyll/.jekyll-cache
+	@chmod 755 src/output src/jekyll/.jekyll-cache
 	docker run --rm -it \
 		--user $(shell id -u):$(shell id -g) \
 		--mount type=bind,source=${PWD}/src,target=/workspace \
 		--mount type=bind,source=${PWD}/output,target=/workspace/output \
 		--volume="$(VENDOR_VOLUME):/usr/local/bundle" \
-		--volume="$(CACHE_VOLUME):/workspace/.jekyll-cache" \
 		-e BUNDLE_PATH=/usr/local/bundle \
 		-e GEM_HOME=/usr/local/bundle \
 		-w /workspace/jekyll \
 		-e JEKYLL_PATH=/workspace/jekyll \
 		-p $(PORT):4000 \
 		$(DOCKER_IMAGE) \
-		bundle exec jekyll serve --host 0.0.0.0 --port 4000 --config _config.yml,_config_dev.yml $(if $(filter 1,$(POLLING)),--force_polling,)
+		bundle exec jekyll serve --host 0.0.0.0 --port 4000 --config _config.yml,_config_dev.yml --destination /workspace/output/_site $(if $(filter 1,$(POLLING)),--force_polling,)
+	@rm -rf src/output src/jekyll/.jekyll-cache
 
 serve-static: build
 	@echo "Server statico avviato su http://localhost:$(STATIC_PORT)/"
@@ -73,6 +77,10 @@ serve-static: build
 # Avvia Jekyll serve in background (scrive PID)
 serve-bg:
 	@echo "🚀 Avvio Jekyll in background..."
+	@mkdir -p output/_site output/.jekyll-cache
+	@chmod 755 output/_site output/.jekyll-cache output
+	@mkdir -p src/output src/jekyll/.jekyll-cache
+	@chmod 755 src/output src/jekyll/.jekyll-cache
 	@docker stop bitprepared-jekyll-$(PORT) 2>/dev/null || true
 	@docker rm bitprepared-jekyll-$(PORT) 2>/dev/null || true
 	@docker run -d \
@@ -82,14 +90,13 @@ serve-bg:
 		--mount type=bind,source=${PWD}/output,target=/workspace/output \
 		--volume="$(NODE_MODULES_VOLUME):/workspace/node_modules" \
 		--volume="$(VENDOR_VOLUME):/usr/local/bundle" \
-		--volume="$(CACHE_VOLUME):/workspace/.jekyll-cache" \
 		-e BUNDLE_PATH=/usr/local/bundle \
 		-e GEM_HOME=/usr/local/bundle \
 		-w /workspace/jekyll \
 		-e JEKYLL_PATH=/workspace/jekyll \
 		-p $(PORT):4000 \
 		$(DOCKER_IMAGE) \
-		bundle exec jekyll serve --config _config.yml,_config_dev.yml --host 0.0.0.0 > /dev/null
+		bundle exec jekyll serve --config _config.yml,_config_dev.yml --destination /workspace/output/_site --host 0.0.0.0 > /dev/null
 	@docker ps -q -f name=bitprepared-jekyll-$(PORT) > .jekyll_serve.pid
 	@echo "⏳ Attendo avvio server..."
 	@for i in $$(seq 1 30); do \
@@ -147,6 +154,7 @@ stop-serve:
 		docker rm $$pid 2>/dev/null || true; \
 		rm -f .jekyll_serve.pid; \
 	fi
+	@rm -rf src/output src/jekyll/.jekyll-cache
 	@echo "✅ Jekyll fermato"
 
 # Ferma server statico
@@ -159,19 +167,23 @@ stop-static:
 	fi
 
 build:
+	@mkdir -p output/_site output/.jekyll-cache
+	@chmod 755 output/_site output/.jekyll-cache output
+	@mkdir -p src/output src/jekyll/.jekyll-cache
+	@chmod 755 src/output src/jekyll/.jekyll-cache
 	docker run --rm -it \
 		--user $(shell id -u):$(shell id -g) \
 		--mount type=bind,source=${PWD}/src,target=/workspace \
 		--mount type=bind,source=${PWD}/output,target=/workspace/output \
 		--volume="$(VENDOR_VOLUME):/usr/local/bundle" \
-		--volume="$(CACHE_VOLUME):/workspace/.jekyll-cache" \
 		-e BUNDLE_PATH=/usr/local/bundle \
 		-e GEM_HOME=/usr/local/bundle \
 		-w /workspace/jekyll \
 		-e JEKYLL_PATH=/workspace/jekyll \
 		-e JEKYLL_ENV=production \
 		$(DOCKER_IMAGE) \
-		bundle exec jekyll build
+		bundle exec jekyll build --destination /workspace/output/_site
+	@rm -rf src/output src/jekyll/.jekyll-cache
 	@cp src/jekyll/robots.txt output/_site/
 
 build-css:
@@ -185,7 +197,7 @@ build-css:
 
 clean:
 	rm -rf output/_site output/.jekyll-cache output/screenshots output/accessibility
-	rm -rf src/.jekyll-cache src/node_modules src/output src/vendor
+	rm -rf src/jekyll/.jekyll-cache src/output src/.jekyll-cache src/node_modules src/vendor
 	rm -rf .jekyll-cache node_modules vendor _site
 
 install:

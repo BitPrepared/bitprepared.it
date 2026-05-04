@@ -26,3 +26,4 @@ src/vendor/
 
 # Old accessibility reports location (now in output/accessibility/)
 docs/accessibility/reports/
+src/jekyll/.jekyll-cache/

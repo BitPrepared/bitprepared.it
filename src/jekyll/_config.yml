@@ -52,11 +52,10 @@ exclude:
   - test-lookup.html
   - screenshots/
   - scripts/
-  - .jekyll-cache/
   - .jekyll-metadata/
 
 # Development configuration
-project_path: /workspace/bitprepared.it
+project_path: /workspace
 
 # SEO configuration
 seo:
