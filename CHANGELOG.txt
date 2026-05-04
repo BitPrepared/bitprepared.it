@@ -55,6 +55,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Removed .jekyll-cache/ from Jekyll exclude list (was conflicting with cache path)
   - Fixed project_path in _config.yml and _config_dev.yml (was /workspace/bitprepared.it, now /workspace)
   - Added explicit --destination flag to Jekyll commands for reliable path resolution
+- make generate-blog-post errors
+  - Fixed undefined GEM_VOLUME variable (changed to VENDOR_VOLUME)
+  - Added missing working directory (-w /srv/jekyll) to Docker command
+  - Fixed mount points: now mounts src/jekyll/ and scripts/ separately
+  - Added --user flag to prevent root-owned files
+  - Updated example paths to reflect new src/ structure
+  - Fixed blog post generation using event date instead of current date
+  - Blog posts now generated with today's date (not future event date)
+  - Added numbered event selection for easier use
 
 ## [1.2.0] - 2026-05-03
 

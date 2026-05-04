@@ -304,20 +304,34 @@ workflow:
 
 generate-blog-post:
 	@echo "📝 Generazione blog post da evento..."
-	@read -p "Path file evento (es: _pages/eventi/epppi_rs.md): " event_path; \
+	@echo "📂 Eventi disponibili:"
+	@find src/jekyll/_eventi -name "*.md" -not -name "README*" -not -name "percorso*" | nl -w2 -s'. '
+	@read -p "Seleziona numero evento: " event_num; \
+	event_path=$$(find src/jekyll/_eventi -name "*.md" -not -name "README*" -not -name "percorso*" | sed -n "$${event_num}p"); \
+	if [ -z "$$event_path" ]; then \
+		echo "❌ Numero non valido"; \
+		exit 1; \
+	fi; \
+	echo "✅ Selezionato: $$event_path"; \
+	event_name=$$(basename "$$event_path"); \
 	docker run --rm \
-		--mount type=bind,source=${PWD},target=/srv/jekyll \
-		--volume="$(GEM_VOLUME):/usr/local/bundle" \
+		--user $(shell id -u):$(shell id -g) \
+		--mount type=bind,source=${PWD}/src/jekyll,target=/srv/jekyll \
+		--mount type=bind,source=${PWD}/scripts,target=/srv/scripts \
+		--volume="$(VENDOR_VOLUME):/usr/local/bundle" \
 		-e BUNDLE_PATH=/usr/local/bundle \
+		-w /srv/jekyll \
 		$(DOCKER_IMAGE) \
-		ruby /srv/jekyll/scripts/generate-blog-post.rb "$$event_path"
+		ruby /srv/scripts/generate-blog-post.rb "_eventi/$$event_name"
 	@echo ""
 	@echo "🚀 Apertura MarkText con il file generato..."
-	@ls -t _posts/*.md 2>/dev/null | head -1 | xargs -r marktext 2>/dev/null &
+	@ls -t src/jekyll/_posts/*.md 2>/dev/null | head -1 | xargs -r marktext 2>/dev/null &
 	@echo ""
 	@echo "📝 PROSSIMI PASSI:"
 	@echo "1. Modifica il file in MarkText (sostituisci placeholder)"
 	@echo "2. Verifica frontmatter e contenuti"
+	@echo "3. Salva e chiudi MarkText"
+	@echo "4. Git add e commit"
 	@echo "3. Salva e chiudi MarkText"
 	@echo "4. Git add e commit"
 
