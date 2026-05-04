@@ -41,6 +41,8 @@ help:
 	@echo "  check-placeholders - Verifica assenza placeholder immagini"
 	@echo "  generate-placeholders - Genera placeholder per nuovi eventi/ambientazioni"
 	@echo "  optimize-images - Ottimizza tutte le immagini (dimensioni, peso)"
+	@echo "  migrate-images - Sposta PNG originali in src/matrici/images/"
+	@echo "  validate-images - Valida specifiche immagini ottimizzate"
 	@echo "  accessibility-audit- Audit accessibilità + auto-analyze (default: full 8 pagine, usa A11Y_PAGE=index per solo homepage)"
 		@echo "  accessibility-analyze - Analizza report, genera summary.md e mostra score di tutte le pagine"
 		@echo "  accessibility-clean  - Rimuovi report accessibilità"
