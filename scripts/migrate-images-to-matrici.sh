@@ -29,7 +29,8 @@ while IFS= read -r -d '' png; do
   if [[ "$filename" == "favicon.png" ]] || \
      [[ "$filename" == "logo.png" ]] || \
      [[ "$filename" == "agesci_logo.png" ]] || \
-     [[ "$dirname" == *"loghi_branche" ]]; then
+     [[ "$dirname" == *"loghi_branche" ]] || \
+     [[ "$dirname" == *"pages" ]]; then
     echo "   ⏭️  Skip (eccezione): $filename"
     continue
   fi
