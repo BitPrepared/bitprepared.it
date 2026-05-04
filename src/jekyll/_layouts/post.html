@@ -12,13 +12,24 @@ layout: default
 	</div>
 </header>
 
+{% comment %}Determine featured image{% endcomment %}
+{% if page.featured %}
+  {% assign featured_image = page.featured %}
+{% elsif page.event_type and page.ambientazione %}
+  {% assign event_slug = site.data.eventi[page.event_type].slug %}
+  {% assign amb_slug = site.data.ambientazioni[page.ambientazione].slug %}
+  {% assign featured_image = "/assets/images/" | append: event_slug | append: "/" | append: event_slug | append: "-" | append: amb_slug | append: "-featured.jpg" %}
+{% else %}
+  {% assign featured_image = "/assets/images/generic-featured.png" %}
+{% endif %}
+
 <!-- Post Content -->
 <main class="page-section px-6 py-16 min-h-[50vh]">
 	<div class="max-w-4xl mx-auto">
 		<article class="page-content">
-			{% if page.featured %}
+			{% if featured_image %}
 			<div class="post-featured-image mb-8 rounded-lg overflow-hidden border border-secondary">
-				<img src="/assets/{{ page.featured }}" alt="" loading="lazy" class="w-full h-auto" role="presentation">
+				<img src="{{ featured_image }}" alt="" loading="lazy" class="w-full h-auto" role="presentation">
 			</div>
 			{% endif %}
 
