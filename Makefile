@@ -8,7 +8,7 @@ CACHE_VOLUME = bitprepared-jekyll-cache
 POLLING ?= 0
 A11Y_PAGE ?= full
 
-.PHONY: serve serve-bg serve-static serve-static-bg build build-css clean install install-gems help open validate-graphics compare-graphics visual-baseline visual-clean docker-build-visual docker-build-a11y workflow generate-blog-post check-links check-html check-placeholders generate-placeholders optimize-images optimize-volantini optimize-featured accessibility-audit accessibility-analyze accessibility-clean accessibility-purge stop-servers stop-serve stop-static version-validate version-bump version-show release
+.PHONY: serve serve-bg serve-static serve-static-bg build build-css clean install install-gems help open validate-graphics compare-graphics visual-baseline visual-clean docker-build-visual docker-build-a11y workflow generate-blog-post check-links check-html check-placeholders generate-placeholders optimize-images optimize-volantini optimize-featured optimize-generic accessibility-audit accessibility-analyze accessibility-clean accessibility-purge stop-servers stop-serve stop-static version-validate version-bump version-show release
 
 help:
 	@echo "Uso: make [target]"
@@ -404,6 +404,13 @@ optimize-featured:
 		mv "$$file.tmp" "$$file"; \
 	done || echo "   Nessuna featured trovata"
 
+optimize-generic:
+	@echo "🖼️  Ottimizzazione generic (16:9)..."
+	@find src/jekyll/assets/images -name "generic-featured.png" -type f 2>/dev/null | while read file; do \
+		magick "$$file" -resize 1200x630 -quality 85 -strip "$$file.tmp"; \
+		mv "$$file.tmp" "$$file"; \
+	done || echo "   Nessuna immagine generic trovata"
+
 
 # Accessibility Audit (Docker-based)
 .PHONY: docker-build-a11y
@@ -548,7 +555,7 @@ optimize-images:
 	@echo "🖼️  Ottimizzazione immagini..."
 	@$(MAKE) optimize-volantini
 	@$(MAKE) optimize-featured
-	@node scripts/optimize-images.js
+	@$(MAKE) optimize-generic
 	@echo "✅ Ottimizzazione completata"
 
 .PHONY: extract-critical
