@@ -48,6 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Changed to absolute paths (/workspace/output/...) for reliable resolution
 - Jekyll creating src/output and src/jekyll/.jekyll-cache with root ownership
   - Removed CACHE_VOLUME mount from serve, serve-bg, and build commands (was conflicting with bind mounts)
+  - Removed NODE_MODULES_VOLUME mount from serve-bg command (Jekyll doesn't need npm packages)
   - Pre-create directories with correct user ownership (755 permissions) before Jekyll runs
   - Added automatic cleanup after make serve, make build, and make stop-serve
   - Added src/jekyll/.jekyll-cache/ to .gitignore

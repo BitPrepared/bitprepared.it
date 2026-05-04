@@ -88,7 +88,6 @@ serve-bg:
 		--user $(shell id -u):$(shell id -g) \
 		--mount type=bind,source=${PWD}/src,target=/workspace \
 		--mount type=bind,source=${PWD}/output,target=/workspace/output \
-		--volume="$(NODE_MODULES_VOLUME):/workspace/node_modules" \
 		--volume="$(VENDOR_VOLUME):/usr/local/bundle" \
 		-e BUNDLE_PATH=/usr/local/bundle \
 		-e GEM_HOME=/usr/local/bundle \
