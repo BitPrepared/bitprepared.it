@@ -27,6 +27,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Site now uses Font Awesome 6.4.0 with modern woff2 fonts in src/jekyll/assets/fonts/webfonts/
   - Total cleanup: ~710KB saved (81% reduction in CSS directory size)
   - Only necessary CSS files remain: styles.css, fontawesome-all.css, tailwind-input.css
+- Obsolete JavaScript files in src/jekyll/assets/js/
+  - Removed jquery.min.js (95KB) - jQuery not used in modern site
+  - Removed skel.min.js (20KB) - old skel framework no longer used
+  - Removed skel-panels.min.js (14KB) - skel plugin no longer used
+  - Removed init.js (1.1KB) - skel configuration no longer used
+  - Removed html5shiv.js (2.4KB) - IE8 polyfill obsolete
+  - Total cleanup: ~132KB saved (90% reduction in JS directory size)
+  - Only necessary JS files remain: scroll-animations.js, edit-button-dev.js
+  - Site now uses modern vanilla JavaScript instead of old frameworks
 
 ### Changed
 - Tailwind CSS configuration paths
