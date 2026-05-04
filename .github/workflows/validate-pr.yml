@@ -70,3 +70,46 @@ jobs:
             echo "❌ CHANGELOG validation failed"
             exit 1
           fi
+
+  check-html-in-markdown:
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for HTML in markdown files
+        id: check-html
+        run: |
+          chmod +x ./scripts/check-html-in-markdown.sh
+          ./scripts/check-html-in-markdown.sh
+
+      - name: Comment on PR if HTML found
+        if: failure() && steps.check-html.outcome == 'failure'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '❌ **HTML Found in Markdown Files**\n\n' +
+                    'Jekyll usa Liquid templates, non HTML inline nei file markdown.\n\n' +
+                    '**Problemi trovati:**\n' +
+                    '- Rimuovi tutti i tag HTML dai file markdown (`.md`)\n' +
+                    '- Usa componenti Liquid o layout invece\n' +
+                    '- Per script con variabili Liquid, mantienili inline in `.md`\n\n' +
+                    'Per details, vedi il workflow log.'
+            })
+
+      - name: Check result
+        if: always()
+        run: |
+          if [[ "${{ steps.check-html.outcome }}" == "success" ]]; then
+            echo "✅ No HTML found in markdown files"
+          else
+            echo "❌ HTML found in markdown files"
+            exit 1
+          fi

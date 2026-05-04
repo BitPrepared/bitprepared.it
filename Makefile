@@ -8,7 +8,7 @@ CACHE_VOLUME = bitprepared-jekyll-cache
 POLLING ?= 0
 A11Y_PAGE ?= full
 
-.PHONY: serve serve-bg serve-static serve-static-bg build build-css clean install install-gems help open validate-graphics compare-graphics visual-baseline visual-clean docker-build-visual docker-build-a11y workflow generate-blog-post check-links accessibility-audit accessibility-analyze accessibility-clean accessibility-purge stop-servers stop-serve stop-static version-validate version-bump version-show release
+.PHONY: serve serve-bg serve-static serve-static-bg build build-css clean install install-gems help open validate-graphics compare-graphics visual-baseline visual-clean docker-build-visual docker-build-a11y workflow generate-blog-post check-links check-html accessibility-audit accessibility-analyze accessibility-clean accessibility-purge stop-servers stop-serve stop-static version-validate version-bump version-show release
 
 help:
 	@echo "Uso: make [target]"
@@ -33,6 +33,7 @@ help:
 	@echo "  workflow         - Mostra guida workflow sviluppo"
 	@echo "  generate-blog-post- Genera blog post da file evento"
 	@echo "  check-links      - Verifica link broken nel sito (htmltest)"
+	@echo "  check-html       - Verifica HTML nei file markdown (Jekyll)"
 	@echo "  accessibility-audit- Audit accessibilità + auto-analyze (default: full 8 pagine, usa A11Y_PAGE=index per solo homepage)"
 		@echo "  accessibility-analyze - Analizza report, genera summary.md e mostra score di tutte le pagine"
 		@echo "  accessibility-clean  - Rimuovi report accessibilità"
@@ -338,6 +339,14 @@ check-links: build
 	@echo "   - Link interni con hash (#tags)"
 	@echo "   - Errori certificati SSL (siti esterni con problemi)"
 	@echo "   - Alt text vuoto (accessibilità)"
+
+check-html:
+	@echo "🔍 Verifica HTML nei file markdown..."
+	@echo ""
+	@chmod +x ./scripts/check-html-in-markdown.sh
+	@./scripts/check-html-in-markdown.sh
+	@echo ""
+	@echo "✅ Nessun HTML trovato nei file markdown!"
 
 
 # Accessibility Audit (Docker-based)
