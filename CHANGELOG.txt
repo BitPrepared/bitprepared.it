@@ -46,6 +46,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Added --host 0.0.0.0 to bind to all interfaces in container
 - Path resolution issues with relative paths in Jekyll config
   - Changed to absolute paths (/workspace/output/...) for reliable resolution
+- Jekyll creating src/output and src/jekyll/.jekyll-cache with root ownership
+  - Removed CACHE_VOLUME mount from serve, serve-bg, and build commands (was conflicting with bind mounts)
+  - Pre-create directories with correct user ownership (755 permissions) before Jekyll runs
+  - Added automatic cleanup after make serve, make build, and make stop-serve
+  - Added src/jekyll/.jekyll-cache/ to .gitignore
+  - Removed .jekyll-cache/ from Jekyll exclude list (was conflicting with cache path)
+  - Fixed project_path in _config.yml and _config_dev.yml (was /workspace/bitprepared.it, now /workspace)
+  - Added explicit --destination flag to Jekyll commands for reliable path resolution
 
 ## [1.2.0] - 2026-05-03
 
