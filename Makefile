@@ -229,8 +229,8 @@ validate-graphics: docker-build-visual
 		echo "📂 Baseline specificata: $(BASELINE_VERSION)"; \
 	fi
 	@$(MAKE) --no-print-directory serve-static-bg
-	@mkdir -p screenshots/serve screenshots/static screenshots/diff screenshots/report
-	@chmod -R 777 screenshots/
+	@mkdir -p output/screenshots/serve output/screenshots/static output/screenshots/diff output/screenshots/report
+	@chmod -R 777 output/screenshots/
 	@echo "📸 Eseguo capture..."
 	@(docker run --rm --init \
 		--mount type=bind,source=${PWD},target=/app \
@@ -250,7 +250,7 @@ validate-graphics: docker-build-visual
 compare-graphics: docker-build-visual
 	@echo "📊 Confronto screenshot esistenti (no capture)..."
 	@echo ""
-	@mkdir -p screenshots/diff screenshots/report
+	@mkdir -p output/screenshots/diff output/screenshots/report
 	docker run --rm --init \
 		--mount type=bind,source=${PWD},target=/app \
 		--user $(shell id -u):$(shell id -g) \
@@ -279,7 +279,7 @@ visual-baseline: docker-build-visual
 
 visual-clean:
 	@echo "🧹 Rimozione screenshots..."
-	@rm -rf screenshots/
+	@rm -rf output/screenshots/
 	@echo "✅ Screenshots rimossi"
 
 docker-build-visual:
