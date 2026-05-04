@@ -584,6 +584,10 @@ migrate-images:
 	@chmod +x ./scripts/migrate-images-to-matrici.sh
 	@./scripts/migrate-images-to-matrici.sh
 
+validate-images:
+	@echo "🔍 Validating optimized images..."
+	@node scripts/validate-optimized-images.js
+
 .PHONY: extract-critical
 extract-critical:
 	@echo "🎨 Extracting critical CSS..."
