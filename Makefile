@@ -407,16 +407,16 @@ optimize-volantini:
 
 optimize-featured:
 	@echo "🖼️  Ottimizzazione featured (16:9)..."
-	@echo "   Conversione PNG → JPG..."
-	@find src/jekyll/assets/images -name "*-featured.png" -type f 2>/dev/null | while read png; do \
-		jpg=$${png%.png}.jpg; \
+	@find $(MATRICE_DIR) -name "*-featured.png" -type f 2>/dev/null | while read png; do \
+		jpg=$$(echo "$$png" | sed 's|$(MATRICE_DIR)|$(OPTIMIZE_DIR)|' | sed 's/\.png/.jpg/'); \
+		mkdir -p "$$(dirname "$$jpg")"; \
 		if [ ! -f "$$jpg" ] || [ "$$png" -nt "$$jpg" ]; then \
-			echo "   Converting $$png → $$jpg"; \
+			echo "   📸 $$png → $$jpg"; \
 			magick "$$png" -resize 1200x630 -quality 85 "$$jpg"; \
 		fi; \
 	done
-	@echo "   Ottimizzazione JPG..."
-	@find src/jekyll/assets/images -name "*-featured.jpg" -type f 2>/dev/null | while read file; do \
+	@echo "   Ottimizzazione JPG esistenti..."
+	@find $(OPTIMIZE_DIR) -name "*-featured.jpg" -type f 2>/dev/null | while read file; do \
 		magick "$$file" -resize 1200x630 -quality 85 -strip "$$file.tmp"; \
 		mv "$$file.tmp" "$$file"; \
 	done || echo "   Nessuna featured trovata"
