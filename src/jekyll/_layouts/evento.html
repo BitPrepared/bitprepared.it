@@ -13,7 +13,13 @@ layout: default
 {% endif %}
 
 {% comment %}Fallback if calculated image doesn't exist{% endcomment %}
-{% unless site.static_files contains locandina %}
+{% assign file_exists = false %}
+{% for static_file in site.static_files %}
+  {% if static_file.path == locandina %}
+    {% assign file_exists = true %}
+  {% endif %}
+{% endfor %}
+{% unless file_exists %}
   {% assign locandina = "/assets/images/generic-featured.png" %}
 {% endunless %}
 

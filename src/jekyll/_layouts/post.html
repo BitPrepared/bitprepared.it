@@ -27,7 +27,13 @@ layout: default
 {% endif %}
 
 {% comment %}Fallback if calculated image doesn't exist{% endcomment %}
-{% unless site.static_files contains featured_image %}
+{% assign file_exists = false %}
+{% for static_file in site.static_files %}
+  {% if static_file.path == featured_image %}
+    {% assign file_exists = true %}
+  {% endif %}
+{% endfor %}
+{% unless file_exists %}
   {% assign featured_image = "/assets/images/generic-featured.png" %}
 {% endunless %}
 
