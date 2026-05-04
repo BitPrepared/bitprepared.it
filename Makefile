@@ -314,7 +314,7 @@ generate-blog-post:
 	fi; \
 	echo "✅ Selezionato: $$event_path"; \
 	event_name=$$(basename "$$event_path"); \
-	docker run --rm \
+	generated_file=$$(docker run --rm \
 		--user $(shell id -u):$(shell id -g) \
 		--mount type=bind,source=${PWD}/src/jekyll,target=/srv/jekyll \
 		--mount type=bind,source=${PWD}/scripts,target=/srv/scripts \
@@ -322,10 +322,14 @@ generate-blog-post:
 		-e BUNDLE_PATH=/usr/local/bundle \
 		-w /srv/jekyll \
 		$(DOCKER_IMAGE) \
-		ruby /srv/scripts/generate-blog-post.rb "_eventi/$$event_name"
-	@echo ""
-	@echo "🚀 Apertura MarkText con il file generato..."
-	@ls -t src/jekyll/_posts/*.md 2>/dev/null | head -1 | xargs -r marktext 2>/dev/null &
+		ruby /srv/scripts/generate-blog-post.rb "_eventi/$$event_name" 2>&1 | grep "📝 FILENAME:" | cut -d: -f2); \
+	if [ -n "$$generated_file" ]; then \
+		echo ""; \
+		echo "🚀 Apertura MarkText con il file generato..."; \
+		full_path="${PWD}/src/jekyll/$$generated_file"; \
+		echo "📂 Apertura: $$full_path"; \
+		marktext "$$full_path" 2>/dev/null & \
+	fi
 	@echo ""
 	@echo "📝 PROSSIMI PASSI:"
 	@echo "1. Modifica il file in MarkText (sostituisci placeholder)"

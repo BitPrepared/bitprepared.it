@@ -259,6 +259,7 @@ MARKDOWN
     # Write file
     File.write(filename, content)
     puts "✅ Blog post generato: #{filename}"
+    puts "📝 FILENAME:#{filename}"  # Special marker for Makefile to capture
   end
 end
 

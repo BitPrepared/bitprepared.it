@@ -55,7 +55,7 @@ exclude:
   - .jekyll-metadata/
 
 # Development configuration
-project_path: /workspace
+project_path: /workspace/src/jekyll
 
 # SEO configuration
 seo:

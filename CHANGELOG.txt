@@ -53,17 +53,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Added automatic cleanup after make serve, make build, and make stop-serve
   - Added src/jekyll/.jekyll-cache/ to .gitignore
   - Removed .jekyll-cache/ from Jekyll exclude list (was conflicting with cache path)
-  - Fixed project_path in _config.yml and _config_dev.yml (was /workspace/bitprepared.it, now /workspace)
+  - Fixed project_path in _config.yml and _config_dev.yml for new src/ structure
+  - project_path now points to /workspace/src/jekyll (was /workspace)
+  - Edit button now opens files with correct paths in MarkText
   - Added explicit --destination flag to Jekyll commands for reliable path resolution
 - make generate-blog-post errors
   - Fixed undefined GEM_VOLUME variable (changed to VENDOR_VOLUME)
   - Added missing working directory (-w /srv/jekyll) to Docker command
   - Fixed mount points: now mounts src/jekyll/ and scripts/ separately
   - Added --user flag to prevent root-owned files
-  - Updated example paths to reflect new src/ structure
   - Fixed blog post generation using event date instead of current date
   - Blog posts now generated with today's date (not future event date)
   - Added numbered event selection for easier use
+  - Fixed MarkText integration: script now communicates filename to Makefile
+  - MarkText now opens files with correct absolute paths from host perspective
 
 ## [1.2.0] - 2026-05-03
 
