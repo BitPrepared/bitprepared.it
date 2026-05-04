@@ -3,6 +3,10 @@ const path = require('path');
 const sharp = require('sharp');
 const yaml = require('js-yaml');
 
+// Directory constants
+const MATRICE_DIR = 'src/matrici/images';
+const OPTIMIZE_DIR = 'src/jekyll/assets/images';
+
 // Load configurations
 const eventiPath = path.join(__dirname, '../src/jekyll/_data/eventi.yaml');
 const ambientazioniPath = path.join(__dirname, '../src/jekyll/_data/ambientazioni.yaml');
@@ -41,7 +45,7 @@ async function generateEventPlaceholders() {
 
   for (const [key, event] of Object.entries(eventi)) {
     const filename = `locandina_${event.slug}_${currentYear}.jpg`;
-    const filepath = path.join(__dirname, '../src/jekyll/assets/images', event.slug, filename);
+    const filepath = path.join(__dirname, '../', MATRICE_DIR, event.slug, filename);
     const label = `PLACEHOLDER - Volantino ${event.name} ${currentYear}`;
 
     await createPlaceholder(filepath, label);
@@ -52,7 +56,7 @@ async function generatePostPlaceholders() {
   for (const [eventKey, event] of Object.entries(eventi)) {
     for (const [ambKey, amb] of Object.entries(ambientazioni)) {
       const filename = `${event.slug}-${amb.slug}-featured.jpg`;
-      const filepath = path.join(__dirname, '../src/jekyll/assets/images', event.slug, filename);
+      const filepath = path.join(__dirname, '../', MATRICE_DIR, event.slug, filename);
       const label = `PLACEHOLDER - ${event.name} / ${amb.name}`;
 
       await createPlaceholder(filepath, label);
