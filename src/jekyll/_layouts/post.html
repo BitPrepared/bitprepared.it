@@ -23,6 +23,11 @@ layout: default
   {% assign featured_image = "/assets/images/generic-featured.png" %}
 {% endif %}
 
+{% comment %}Fallback if calculated image doesn't exist{% endcomment %}
+{% unless site.static_files contains featured_image %}
+  {% assign featured_image = "/assets/images/generic-featured.png" %}
+{% endunless %}
+
 <!-- Post Content -->
 <main class="page-section px-6 py-16 min-h-[50vh]">
 	<div class="max-w-4xl mx-auto">
