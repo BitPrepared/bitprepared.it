@@ -8,6 +8,8 @@ modified: 2026-04-21
 image: /assets/images/pages/campo-eg.jpg
 event_status: upcoming
 event_date: 2026-07-29
+event_type: campo-eg
+year: 2026
 
 benefits_title: "Perché partecipare al Campo EG"
 benefits:
