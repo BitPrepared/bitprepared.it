@@ -8,7 +8,7 @@ CACHE_VOLUME = bitprepared-jekyll-cache
 POLLING ?= 0
 A11Y_PAGE ?= full
 
-.PHONY: serve serve-bg serve-static serve-static-bg build build-css clean install install-gems help open validate-graphics compare-graphics visual-baseline visual-clean docker-build-visual docker-build-a11y workflow generate-blog-post check-links check-html accessibility-audit accessibility-analyze accessibility-clean accessibility-purge stop-servers stop-serve stop-static version-validate version-bump version-show release
+.PHONY: serve serve-bg serve-static serve-static-bg build build-css clean install install-gems help open validate-graphics compare-graphics visual-baseline visual-clean docker-build-visual docker-build-a11y workflow generate-blog-post check-links check-html check-placeholders generate-placeholders optimize-images optimize-volantini optimize-featured accessibility-audit accessibility-analyze accessibility-clean accessibility-purge stop-servers stop-serve stop-static version-validate version-bump version-show release
 
 help:
 	@echo "Uso: make [target]"
@@ -34,6 +34,9 @@ help:
 	@echo "  generate-blog-post- Genera blog post da file evento"
 	@echo "  check-links      - Verifica link broken nel sito (htmltest)"
 	@echo "  check-html       - Verifica HTML nei file markdown (Jekyll)"
+	@echo "  check-placeholders - Verifica assenza placeholder immagini"
+	@echo "  generate-placeholders - Genera placeholder per nuovi eventi/ambientazioni"
+	@echo "  optimize-images - Ottimizza tutte le immagini (dimensioni, peso)"
 	@echo "  accessibility-audit- Audit accessibilità + auto-analyze (default: full 8 pagine, usa A11Y_PAGE=index per solo homepage)"
 		@echo "  accessibility-analyze - Analizza report, genera summary.md e mostra score di tutte le pagine"
 		@echo "  accessibility-clean  - Rimuovi report accessibilità"
@@ -165,7 +168,7 @@ stop-static:
 		echo "✅ Server statico fermato"; \
 	fi
 
-build:
+build: optimize-images
 	@mkdir -p output/_site output/.jekyll-cache
 	@chmod 755 output/_site output/.jekyll-cache output
 	@mkdir -p src/output src/jekyll/.jekyll-cache
@@ -377,6 +380,30 @@ check-html:
 	@echo ""
 	@echo "✅ Nessun HTML trovato nei file markdown!"
 
+generate-placeholders:
+	@echo "📸 Genero placeholder immagini..."
+	@cd scripts && node generate-image-placeholders.js
+	@echo "✅ Placeholder generati"
+
+check-placeholders:
+	@echo "🔍 Verifico placeholder..."
+	@cd scripts && node check-image-placeholders.js
+	@echo "✅ Nessun placeholder trovato"
+
+optimize-volantini:
+	@echo "📄 Ottimizzazione volantini (A3 @ 300DPI)..."
+	@find src/jekyll/assets/images -name "locandina_*.jpg" -type f 2>/dev/null | while read file; do \
+		magick "$$file" -resize 3508x4961 -quality 85 -strip "$$file.tmp"; \
+		mv "$$file.tmp" "$$file"; \
+	done || echo "   Nessun volantino trovato"
+
+optimize-featured:
+	@echo "🖼️  Ottimizzazione featured (16:9)..."
+	@find src/jekyll/assets/images -name "*-featured.jpg" -type f 2>/dev/null | while read file; do \
+		magick "$$file" -resize 1200x630 -quality 85 -strip "$$file.tmp"; \
+		mv "$$file.tmp" "$$file"; \
+	done || echo "   Nessuna featured trovata"
+
 
 # Accessibility Audit (Docker-based)
 .PHONY: docker-build-a11y
@@ -518,8 +545,11 @@ check-aria:
 
 .PHONY: optimize-images
 optimize-images:
-	@echo "🖼️  Optimizing images..."
+	@echo "🖼️  Ottimizzazione immagini..."
+	@$(MAKE) optimize-volantini
+	@$(MAKE) optimize-featured
 	@node scripts/optimize-images.js
+	@echo "✅ Ottimizzazione completata"
 
 .PHONY: extract-critical
 extract-critical:
