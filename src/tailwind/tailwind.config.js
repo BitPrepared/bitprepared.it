@@ -1,11 +1,11 @@
 module.exports = {
   content: [
-    "_layouts/**/*.html",
-    "_pages/**/*.html",
-    "_includes/**/*.html",
-    "_posts/**/*.md",
-    "*.html",  // Include root index.html
-    "*.md"     // Include root markdown files
+    "../jekyll/_layouts/**/*.html",
+    "../jekyll/_pages/**/*.html",
+    "../jekyll/_includes/**/*.html",
+    "../jekyll/_posts/**/*.md",
+    "../jekyll/*.html",  // Include root index.html
+    "../jekyll/*.md"     // Include root markdown files
   ],
   theme: {
     extend: {

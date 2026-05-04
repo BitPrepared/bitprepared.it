@@ -17,6 +17,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Better project organization and cleaner repository root
   - docs/ moved from src/jekyll/ to project root (project-wide, not Jekyll-specific)
 
+### Removed
+- Obsolete CSS files in src/jekyll/assets/css/
+  - Removed main.css (6.4KB) - content already included in styles.css
+  - Removed scout-tech.css (18KB) - old design system no longer used
+  - Removed critical.css (468 bytes) - not used in production
+  - Removed legacy/ directory (28KB) - old CSS files from pre-refactor era
+  - Total cleanup: ~96KB saved (11% reduction in CSS directory size)
+  - Only necessary CSS files remain: styles.css, fontawesome-all.css, tailwind-input.css
+
+### Changed
+- Tailwind CSS configuration paths
+  - Fixed tailwind.config.js content paths for new src/ structure
+  - Changed from relative paths (_layouts/**/*.html) to correct paths (../jekyll/_layouts/**/*.html)
+  - make build-css now works correctly without "No utility classes were detected" warning
+
 ### Changed
 - Jekyll configuration: Updated paths in _config.yml
   - destination: /workspace/output/_site (absolute path in container)
