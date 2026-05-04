@@ -4,6 +4,22 @@
 
 Il sito BitPrepared usa un sistema automatico per selezionare le immagini giuste basandosi sul tipo di evento e sull'ambientazione. Questa guida spiega come creare, ottimizzare e gestire le immagini per il sito.
 
+## Percorsi dei File
+
+**Importante:** Ci sono due tipi di percorsi da conoscere:
+
+1. **Percorso sorgente** (dove lavori): `src/jekyll/assets/images/`
+   - Qui crei e modifichi i file
+   - Esempio: `src/jekyll/assets/images/epppi/locandina_epppi_2026.jpg`
+
+2. **Percorso pubblicato** (nel sito): `/assets/images/`
+   - Questo è il percorso che Jekyll usa nel sito generato
+   - Non includere `src/jekyll/` nel frontmatter
+
+**Esempio:**
+- File nel filesystem: `src/jekyll/assets/images/epppi/locandina_epppi_2026.jpg`
+- Nel frontmatter evento: `image: /assets/images/epppi/locandina_epppi_2026.jpg`
+
 ## Tipi di Immagini
 
 ### 1. Volantini Eventi (Locandine)
@@ -112,10 +128,13 @@ title: Annuncio generale
 Il sistema ottimizza automaticamente le immagini durante il build:
 
 ```bash
-# 1. Metti la tua immagine nella cartella giusta con qualsiasi nome
+# 1. Crea la cartella se non esiste
+mkdir -p src/jekyll/assets/images/epppi/
+
+# 2. Metti la tua immagine nella cartella giusta con qualsiasi nome
 cp mia-immagine.jpg src/jekyll/assets/images/epppi/
 
-# 2. Run build (ottimizza automaticamente)
+# 3. Run build (ottimizza automaticamente)
 make build
 ```
 
