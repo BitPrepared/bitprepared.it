@@ -113,3 +113,49 @@ jobs:
             echo "❌ HTML found in markdown files"
             exit 1
           fi
+
+  check-image-placeholders:
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          cd scripts
+          npm install
+
+      - name: Check image placeholders
+        id: check-placeholders
+        run: |
+          cd scripts
+          node check-image-placeholders.js
+
+      - name: Validate image specs
+        id: validate-specs
+        run: |
+          cd scripts
+          node validate-image-specs.js
+
+      - name: Comment on PR if issues found
+        if: failure()
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '❌ **Image Issues Found**\n\n' +
+                    'Sostituisci placeholder o correggi specifiche:\n' +
+                    '- **Volantini**: 3508×4961px (A3), max 500KB\n' +
+                    '- **Featured**: 1200×630px (16:9), max 200KB\n\n' +
+                    'Vedi log per dettagli completi.\n\n' +
+                    '📖 Guida: docs/IMAGE_GUIDE.md'
+            })
