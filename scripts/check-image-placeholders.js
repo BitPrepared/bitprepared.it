@@ -2,6 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
 
+// Directory constants
+const MATRICE_DIR = 'src/matrici/images';
+
 async function isPlaceholder(filepath) {
   try {
     const metadata = await sharp(filepath).metadata();
@@ -45,7 +48,7 @@ async function checkDirectory(dir) {
 }
 
 async function main() {
-  const imagesDir = path.join(__dirname, '../src/jekyll/assets/images');
+  const imagesDir = path.join(__dirname, '../', MATRICE_DIR);
 
   console.log('🔍 Checking for placeholder images...\n');
 
