@@ -15,6 +15,9 @@ layout: default
 {% comment %}Determine featured image{% endcomment %}
 {% if page.featured %}
   {% assign featured_image = page.featured %}
+  {% unless featured_image contains '/' %}
+    {% assign featured_image = '/assets/' | append: featured_image %}
+  {% endunless %}
 {% elsif page.event_type and page.ambientazione %}
   {% assign event_slug = site.data.eventi[page.event_type].slug %}
   {% assign amb_slug = site.data.ambientazioni[page.ambientazione].slug %}
