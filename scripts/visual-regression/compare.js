@@ -89,7 +89,7 @@ function compareImages(img1Path, img2Path, diffPath) {
 }
 
 function generateReport(results) {
-  const reportDir = path.join(__dirname, '../../screenshots/report');
+  const reportDir = path.join(__dirname, '../../output/screenshots/report');
   if (!fs.existsSync(reportDir)) {
     fs.mkdirSync(reportDir, { recursive: true });
   }
@@ -334,7 +334,7 @@ function generateReport(results) {
   fs.writeFileSync(path.join(reportDir, 'index.html'), html);
   fs.writeFileSync(path.join(reportDir, 'results.json'), JSON.stringify(results, null, 2));
 
-  console.log(`\n📊 Report generated: screenshots/report/index.html`);
+  console.log(`\n📊 Report generated: output/screenshots/report/index.html`);
   console.log(`   Passed: ${passedTests}/${totalTests}`);
   console.log(`   Failed: ${failedTests}/${totalTests}`);
 }
@@ -397,6 +397,34 @@ function selectBaseline(availableBaselines) {
 
 async function main() {
   console.log('=== Visual Regression Compare ===\n');
+  console.log('ℹ️  Confronta screenshot ESISTENTI (serve vs static vs baseline)');
+  console.log('   Per generare nuovi screenshot: make validate-graphics\n');
+
+  // Check if screenshots exist
+  const serveDir = path.join(__dirname, '../../output/screenshots/serve');
+  const staticDir = path.join(__dirname, '../../output/screenshots/static');
+
+  const serveExists = fs.existsSync(serveDir) && fs.readdirSync(serveDir).length > 0;
+  const staticExists = fs.existsSync(staticDir) && fs.readdirSync(staticDir).length > 0;
+
+  if (!serveExists && !staticExists) {
+    console.log('⚠️  Nessuno screenshot trovato in output/screenshots/');
+    console.log('');
+    console.log('   Per generare screenshot:');
+    console.log('   1. Assicurati che make build sia stato eseguito');
+    console.log('   2. Esegui: make validate-graphics');
+    console.log('      Questo creerà screenshot in output/screenshots/serve/ e output/screenshots/static/');
+    console.log('');
+    process.exit(0);
+  }
+
+  if (!serveExists) {
+    console.log('⚠️  Nessuno screenshot serve trovato');
+  }
+  if (!staticExists) {
+    console.log('⚠️  Nessuno screenshot static trovato');
+  }
+  console.log('');
 
   // Get available baselines and select one
   const availableBaselines = getAvailableBaselines();
@@ -438,10 +466,10 @@ async function main() {
   for (const viewport of filteredViewports) {
     for (const page of pages) {
       const baselinePath = path.join(baselineBasePath, viewport, `${page}.png`);
-      const servePath = path.join(__dirname, `../../screenshots/serve/${viewport}/${page}.png`);
-      const staticPath = path.join(__dirname, `../../screenshots/static/${viewport}/${page}.png`);
-      const serveDiffPath = path.join(__dirname, `../../screenshots/diff/${viewport}/${page}_serve.png`);
-      const staticDiffPath = path.join(__dirname, `../../screenshots/diff/${viewport}/${page}_static.png`);
+      const servePath = path.join(__dirname, `../../output/screenshots/serve/${viewport}/${page}.png`);
+      const staticPath = path.join(__dirname, `../../output/screenshots/static/${viewport}/${page}.png`);
+      const serveDiffPath = path.join(__dirname, `../../output/screenshots/diff/${viewport}/${page}_serve.png`);
+      const staticDiffPath = path.join(__dirname, `../../output/screenshots/diff/${viewport}/${page}_static.png`);
 
       if (!fs.existsSync(baselinePath)) {
         console.log(`⚠️  No baseline for ${viewport}/${page}.png - skipping`);

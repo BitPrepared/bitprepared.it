@@ -11,3 +11,19 @@ node_modules/
 assets/css/tailwind.css
 docs/accessibility/reports/
 .worktrees/
+
+# Generated output
+output/_site/
+output/.jekyll-cache/
+output/accessibility/
+output/screenshots/
+
+# Docker can create these in src/ during builds (ignore)
+src/.jekyll-cache/
+src/node_modules/
+src/output/
+src/vendor/
+
+# Old accessibility reports location (now in output/accessibility/)
+docs/accessibility/reports/
+src/jekyll/.jekyll-cache/

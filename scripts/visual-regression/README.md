@@ -62,7 +62,7 @@ make validate-graphics
 - ✅ Se OK: `Visual regression PASSED`
 - ❌ Se differenze > 1%: `Visual regression FAILED` + report
 
-**Report**: `screenshots/report/index.html`
+**Report**: `output/screenshots/report/index.html`
 
 ## Workflow Release
 
@@ -79,7 +79,7 @@ make serve-static
 make validate-graphics
 
 # 3. Se ci sono differenze:
-# - Apri screenshots/report/index.html
+# - Apri output/screenshots/report/index.html
 # - Se differenze accettabili (fix bug):
 # Terminal 1: make serve (se non già attivo)
 # Terminal 2: make visual-baseline
@@ -160,7 +160,7 @@ make visual-baseline
 
 **Report non si apre**:
 ```bash
-xdg-open screenshots/report/index.html
+xdg-open output/screenshots/report/index.html
 ```
 
 **Container non parte**:

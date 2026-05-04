@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  },
+  "scripts": {
+    "build:css": "tailwindcss -i ../jekyll/assets/css/tailwind-input.css -o ../jekyll/assets/css/tailwind.css --minify"
+  }
+}

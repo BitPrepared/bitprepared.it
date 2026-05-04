@@ -237,19 +237,11 @@ MARKDOWN
   end
 
   def write_post(content)
-    # Generate filename from date and title
-    date_str = @event_data[:frontmatter]['hero']['date']
-    if date_str =~ /(\d{1,2})-(\d{1,2}) (\w+) (\d{4})/
-      year = $4
-      day = sprintf('%02d', $1.to_i)
-      # Default to month 05 if can't parse Italian month
-      month = '05'
-    else
-      # Fallback to current date (approximate)
-      year = '2026'
-      month = '05'
-      day = '08'
-    end
+    # Generate filename from TODAY's date (not event date)
+    today = Date.today
+    year = today.year.to_s
+    month = sprintf('%02d', today.month)
+    day = sprintf('%02d', today.day)
 
     title_slug = slugify(@event_data[:frontmatter]['title'].split('|').first.strip)
     filename = "_posts/#{year}-#{month}-#{day}-#{title_slug}.md"
@@ -267,6 +259,7 @@ MARKDOWN
     # Write file
     File.write(filename, content)
     puts "✅ Blog post generato: #{filename}"
+    puts "📝 FILENAME:#{filename}"  # Special marker for Makefile to capture
   end
 end
 

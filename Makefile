@@ -1,13 +1,14 @@
 JEKYLL_VERSION ?= 4
 PORT ?= 4000
 STATIC_PORT ?= 8000
-PROJECT_PATH ?= /workspace/bitprepared.it
 DOCKER_IMAGE = jekyll/jekyll:$(JEKYLL_VERSION)
-GEM_VOLUME = bitprepared-gems
+NODE_MODULES_VOLUME = bitprepared-node-modules
+VENDOR_VOLUME = bitprepared-vendor
+CACHE_VOLUME = bitprepared-jekyll-cache
 POLLING ?= 0
 A11Y_PAGE ?= full
 
-.PHONY: serve serve-bg serve-static serve-static-bg build build-css clean install install-gems help open validate-graphics compare-graphics visual-baseline visual-clean docker-build-visual docker-build-a11y workflow generate-blog-post check-links accessibility-audit accessibility-analyze accessibility-clean accessibility-purge stop-servers stop-serve stop-static version-validate version-bump version-show release
+.PHONY: serve serve-bg serve-static serve-static-bg build build-css clean install install-gems help open validate-graphics compare-graphics visual-baseline visual-clean docker-build-visual docker-build-a11y workflow generate-blog-post check-links check-html accessibility-audit accessibility-analyze accessibility-clean accessibility-purge stop-servers stop-serve stop-static version-validate version-bump version-show release
 
 help:
 	@echo "Uso: make [target]"
@@ -21,7 +22,7 @@ help:
 	@echo "  open             - Apri sito locale nel browser (http://localhost:4000/)"
 	@echo "  build            - Genera sito statico"
 	@echo "  build-css        - Genera Tailwind CSS localmente (Docker)"
-	@echo "  clean            - Rimuove _site/"
+	@echo "  clean            - Rimuove output/_site/"
 	@echo "  install          - Installa dipendenze bundle (Docker, locale)"
 	@echo "  install-gems     - Installa gemme in volume persistente (una tantum)"
 	@echo "  validate-graphics- Valida grafica serve vs serve-static (Docker)"
@@ -32,6 +33,7 @@ help:
 	@echo "  workflow         - Mostra guida workflow sviluppo"
 	@echo "  generate-blog-post- Genera blog post da file evento"
 	@echo "  check-links      - Verifica link broken nel sito (htmltest)"
+	@echo "  check-html       - Verifica HTML nei file markdown (Jekyll)"
 	@echo "  accessibility-audit- Audit accessibilità + auto-analyze (default: full 8 pagine, usa A11Y_PAGE=index per solo homepage)"
 		@echo "  accessibility-analyze - Analizza report, genera summary.md e mostra score di tutte le pagine"
 		@echo "  accessibility-clean  - Rimuovi report accessibilità"
@@ -48,33 +50,52 @@ help:
 	@echo "  VIEWPORTS='desktop,mobile' make validate-graphics - Test solo viewport specifici"
 
 serve:
+	@mkdir -p output/_site output/.jekyll-cache
+	@chmod 755 output/_site output/.jekyll-cache output
+	@mkdir -p src/output src/jekyll/.jekyll-cache
+	@chmod 755 src/output src/jekyll/.jekyll-cache
 	docker run --rm -it \
-		--mount type=bind,source=${PWD},target=/srv/jekyll \
-		--volume="$(GEM_VOLUME):/usr/local/bundle" \
+		--user $(shell id -u):$(shell id -g) \
+		--mount type=bind,source=${PWD}/src,target=/workspace \
+		--mount type=bind,source=${PWD}/output,target=/workspace/output \
+		--volume="$(VENDOR_VOLUME):/usr/local/bundle" \
 		-e BUNDLE_PATH=/usr/local/bundle \
+		-e GEM_HOME=/usr/local/bundle \
+		-w /workspace/jekyll \
+		-e JEKYLL_PATH=/workspace/jekyll \
 		-p $(PORT):4000 \
 		$(DOCKER_IMAGE) \
-		jekyll serve --config _config.yml,_config_dev.yml $(if $(filter 1,$(POLLING)),--force_polling,)
+		bundle exec jekyll serve --host 0.0.0.0 --port 4000 --config _config.yml,_config_dev.yml --destination /workspace/output/_site $(if $(filter 1,$(POLLING)),--force_polling,)
+	@rm -rf src/output src/jekyll/.jekyll-cache
 
 serve-static: build
 	@echo "Server statico avviato su http://localhost:$(STATIC_PORT)/"
-	@cd _site && python3 -m http.server $(STATIC_PORT)
+	@cd output/_site && python3 -m http.server $(STATIC_PORT)
 
 .PHONY: serve-bg serve-static-bg stop-servers stop-serve stop-static
 
 # Avvia Jekyll serve in background (scrive PID)
 serve-bg:
 	@echo "🚀 Avvio Jekyll in background..."
+	@mkdir -p output/_site output/.jekyll-cache
+	@chmod 755 output/_site output/.jekyll-cache output
+	@mkdir -p src/output src/jekyll/.jekyll-cache
+	@chmod 755 src/output src/jekyll/.jekyll-cache
 	@docker stop bitprepared-jekyll-$(PORT) 2>/dev/null || true
 	@docker rm bitprepared-jekyll-$(PORT) 2>/dev/null || true
 	@docker run -d \
 		--name bitprepared-jekyll-$(PORT) \
-		--mount type=bind,source=${PWD},target=/srv/jekyll \
-		--volume="$(GEM_VOLUME):/usr/local/bundle" \
+		--user $(shell id -u):$(shell id -g) \
+		--mount type=bind,source=${PWD}/src,target=/workspace \
+		--mount type=bind,source=${PWD}/output,target=/workspace/output \
+		--volume="$(VENDOR_VOLUME):/usr/local/bundle" \
 		-e BUNDLE_PATH=/usr/local/bundle \
+		-e GEM_HOME=/usr/local/bundle \
+		-w /workspace/jekyll \
+		-e JEKYLL_PATH=/workspace/jekyll \
 		-p $(PORT):4000 \
 		$(DOCKER_IMAGE) \
-		jekyll serve --config _config.yml,_config_dev.yml --host 0.0.0.0 > /dev/null
+		bundle exec jekyll serve --config _config.yml,_config_dev.yml --destination /workspace/output/_site --host 0.0.0.0 > /dev/null
 	@docker ps -q -f name=bitprepared-jekyll-$(PORT) > .jekyll_serve.pid
 	@echo "⏳ Attendo avvio server..."
 	@for i in $$(seq 1 30); do \
@@ -89,17 +110,34 @@ serve-bg:
 # Avvia server statico in background (scrive PID)
 serve-static-bg: build
 	@echo "🚀 Avvio server statico in background..."
-	@cd _site && python3 -m http.server $(STATIC_PORT) > /tmp/static_server.log 2>&1 & \
-		echo $$! > ../.static_serve.pid
-	@echo "⏳ Attendo avvio server..."
-	@for i in $$(seq 1 10); do \
+	@echo "⏳ Fermo eventuale server statico esistente..."
+	@if [ -f .static_serve.pid ]; then \
+		pid=$$(cat .static_serve.pid); \
+		if kill -0 $$pid 2>/dev/null; then \
+			echo "🛑 Fermo vecchio server statico (PID: $$pid)"; \
+			kill $$pid 2>/dev/null || true; \
+			sleep 1; \
+		fi; \
+		rm -f .static_serve.pid; \
+	fi
+	@echo "⏳ Avvio nuovo server..."
+	@(python3 -m http.server $(STATIC_PORT) --directory output/_site > /tmp/static_server.log 2>&1 & echo $$! > .static_serve.pid); \
+	echo "📝 PID salvato: $$(cat .static_serve.pid 2>/dev/null || echo 'N/A')"; \
+	echo "📝 Processo esiste: $$(ps -p $$(cat .static_serve.pid 2>/dev/null) >/dev/null 2>&1 && echo 'SI' || echo 'NO')"; \
+	echo "📝 Directory servita: output/_site"; \
+	echo "📝 Index exists: $$(test -f output/_site/index.html && echo 'SI' || echo 'NO')"; \
+	for i in $$(seq 1 30); do \
 		if curl -f -s -o /dev/null http://localhost:$(STATIC_PORT); then \
 			echo "✅ Server statico pronto su http://localhost:$(STATIC_PORT)"; \
 			exit 0; \
 		fi; \
+		echo "⏳ Tentativo $$i/30..."; \
 		sleep 1; \
 	done; \
-	echo "❌ Timeout avvio server statico"; exit 1
+	echo "❌ Timeout avvio server statico"; \
+	echo "📝 Log errore:"; \
+	cat /tmp/static_server.log 2>/dev/null || echo "Nessun log"; \
+	exit 1
 
 # Ferma entrambi i server
 stop-servers: stop-serve stop-static
@@ -115,6 +153,7 @@ stop-serve:
 		docker rm $$pid 2>/dev/null || true; \
 		rm -f .jekyll_serve.pid; \
 	fi
+	@rm -rf src/output src/jekyll/.jekyll-cache
 	@echo "✅ Jekyll fermato"
 
 # Ferma server statico
@@ -127,46 +166,67 @@ stop-static:
 	fi
 
 build:
+	@mkdir -p output/_site output/.jekyll-cache
+	@chmod 755 output/_site output/.jekyll-cache output
+	@mkdir -p src/output src/jekyll/.jekyll-cache
+	@chmod 755 src/output src/jekyll/.jekyll-cache
 	docker run --rm -it \
-		--mount type=bind,source=${PWD},target=/srv/jekyll \
-		--volume="$(GEM_VOLUME):/usr/local/bundle" \
-		-e JEKYLL_ENV=production \
+		--user $(shell id -u):$(shell id -g) \
+		--mount type=bind,source=${PWD}/src,target=/workspace \
+		--mount type=bind,source=${PWD}/output,target=/workspace/output \
+		--volume="$(VENDOR_VOLUME):/usr/local/bundle" \
 		-e BUNDLE_PATH=/usr/local/bundle \
+		-e GEM_HOME=/usr/local/bundle \
+		-w /workspace/jekyll \
+		-e JEKYLL_PATH=/workspace/jekyll \
+		-e JEKYLL_ENV=production \
 		$(DOCKER_IMAGE) \
-		jekyll build
-	@cp robots.txt _site/
+		bundle exec jekyll build --destination /workspace/output/_site
+	@rm -rf src/output src/jekyll/.jekyll-cache
+	@cp src/jekyll/robots.txt output/_site/
 
 build-css:
-	@echo "🎨 Generazione CSS unificato in Docker..."
-	@docker run --rm \
-		--mount type=bind,source=${PWD},target=/app \
-		-w /app \
-		node:20-alpine \
-		sh -c 'npm run build:css && cat assets/css/tailwind-input.css assets/css/tailwind.css assets/css/main.css assets/css/scout-tech.css > assets/css/styles.css'
-	@echo "✅ CSS unificato generato: assets/css/styles.css"
+	docker run --rm -it \
+		--user $(shell id -u):$(shell id -g) \
+		--mount type=bind,source=${PWD}/src,target=/workspace \
+		--volume="$(NODE_MODULES_VOLUME):/workspace/node_modules" \
+		-w /workspace/tailwind \
+		node:20 \
+		npm run build:css
 
 clean:
-	rm -rf _site .jekyll-cache
+	rm -rf output/_site output/.jekyll-cache output/screenshots output/accessibility
+	rm -rf src/jekyll/.jekyll-cache src/output src/.jekyll-cache src/node_modules src/vendor
+	rm -rf .jekyll-cache node_modules vendor _site
 
 install:
+	@echo "📦 Installing npm packages..."
 	docker run --rm -it \
-		--mount type=bind,source=${PWD},target=/srv/jekyll \
-		--volume="$(GEM_VOLUME):/usr/local/bundle" \
-		-e BUNDLE_PATH=/usr/local/bundle \
+		--user $(shell id -u):$(shell id -g) \
+		--mount type=bind,source=${PWD}/src,target=/workspace \
+		--volume="$(NODE_MODULES_VOLUME):/workspace/node_modules" \
+		-w /workspace/tailwind \
+		node:20 \
+		npm install
+	@echo "📦 Installing Ruby gems..."
+	docker run --rm -it \
+		--user $(shell id -u):$(shell id -g) \
+		--mount type=bind,source=${PWD}/src,target=/workspace \
+		--volume="$(VENDOR_VOLUME):/usr/local/bundle" \
+		-e GEM_HOME=/usr/local/bundle \
+		-w /workspace/jekyll \
 		$(DOCKER_IMAGE) \
-		bundle install
+		bundle install --no-cache
 
 install-gems:
-	@echo "💎 Installazione gemme nel volume persistente $(GEM_VOLUME)..."
 	docker run --rm -it \
-		--mount type=bind,source=${PWD},target=/srv/jekyll \
-		--volume="$(GEM_VOLUME):/usr/local/bundle" \
-		-e BUNDLE_PATH=/usr/local/bundle \
+		--user $(shell id -u):$(shell id -g) \
+		--mount type=bind,source=${PWD}/src,target=/workspace \
+		--volume="$(VENDOR_VOLUME):/usr/local/bundle" \
+		-e GEM_HOME=/usr/local/bundle \
+		-w /workspace/jekyll \
 		$(DOCKER_IMAGE) \
-		bundle install
-	@echo ""
-	@echo "✅ Gemme installate nel volume Docker '$(GEM_VOLUME)'"
-	@echo "   Questo volume persiste tra le esecuzioni e non richiede re-installazione"
+		bundle install --no-cache
 
 open:
 	@echo "Apertura sito locale: http://localhost:$(PORT)/"
@@ -180,8 +240,8 @@ validate-graphics: docker-build-visual
 		echo "📂 Baseline specificata: $(BASELINE_VERSION)"; \
 	fi
 	@$(MAKE) --no-print-directory serve-static-bg
-	@mkdir -p screenshots/serve screenshots/static screenshots/diff screenshots/report
-	@chmod -R 777 screenshots/
+	@mkdir -p output/screenshots/serve output/screenshots/static output/screenshots/diff output/screenshots/report
+	@chmod -R 777 output/screenshots/
 	@echo "📸 Eseguo capture..."
 	@(docker run --rm --init \
 		--mount type=bind,source=${PWD},target=/app \
@@ -201,7 +261,7 @@ validate-graphics: docker-build-visual
 compare-graphics: docker-build-visual
 	@echo "📊 Confronto screenshot esistenti (no capture)..."
 	@echo ""
-	@mkdir -p screenshots/diff screenshots/report
+	@mkdir -p output/screenshots/diff output/screenshots/report
 	docker run --rm --init \
 		--mount type=bind,source=${PWD},target=/app \
 		--user $(shell id -u):$(shell id -g) \
@@ -230,7 +290,7 @@ visual-baseline: docker-build-visual
 
 visual-clean:
 	@echo "🧹 Rimozione screenshots..."
-	@rm -rf screenshots/
+	@rm -rf output/screenshots/
 	@echo "✅ Screenshots rimossi"
 
 docker-build-visual:
@@ -244,20 +304,38 @@ workflow:
 
 generate-blog-post:
 	@echo "📝 Generazione blog post da evento..."
-	@read -p "Path file evento (es: _pages/eventi/epppi_rs.md): " event_path; \
-	docker run --rm \
-		--mount type=bind,source=${PWD},target=/srv/jekyll \
-		--volume="$(GEM_VOLUME):/usr/local/bundle" \
+	@echo "📂 Eventi disponibili:"
+	@find src/jekyll/_eventi -name "*.md" -not -name "README*" -not -name "percorso*" | nl -w2 -s'. '
+	@read -p "Seleziona numero evento: " event_num; \
+	event_path=$$(find src/jekyll/_eventi -name "*.md" -not -name "README*" -not -name "percorso*" | sed -n "$${event_num}p"); \
+	if [ -z "$$event_path" ]; then \
+		echo "❌ Numero non valido"; \
+		exit 1; \
+	fi; \
+	echo "✅ Selezionato: $$event_path"; \
+	event_name=$$(basename "$$event_path"); \
+	generated_file=$$(docker run --rm \
+		--user $(shell id -u):$(shell id -g) \
+		--mount type=bind,source=${PWD}/src/jekyll,target=/srv/jekyll \
+		--mount type=bind,source=${PWD}/scripts,target=/srv/scripts \
+		--volume="$(VENDOR_VOLUME):/usr/local/bundle" \
 		-e BUNDLE_PATH=/usr/local/bundle \
+		-w /srv/jekyll \
 		$(DOCKER_IMAGE) \
-		ruby /srv/jekyll/scripts/generate-blog-post.rb "$$event_path"
-	@echo ""
-	@echo "🚀 Apertura MarkText con il file generato..."
-	@ls -t _posts/*.md 2>/dev/null | head -1 | xargs -r marktext 2>/dev/null &
+		ruby /srv/scripts/generate-blog-post.rb "_eventi/$$event_name" 2>&1 | grep "📝 FILENAME:" | cut -d: -f2); \
+	if [ -n "$$generated_file" ]; then \
+		echo ""; \
+		echo "🚀 Apertura MarkText con il file generato..."; \
+		full_path="${PWD}/src/jekyll/$$generated_file"; \
+		echo "📂 Apertura: $$full_path"; \
+		marktext "$$full_path" 2>/dev/null & \
+	fi
 	@echo ""
 	@echo "📝 PROSSIMI PASSI:"
 	@echo "1. Modifica il file in MarkText (sostituisci placeholder)"
 	@echo "2. Verifica frontmatter e contenuti"
+	@echo "3. Salva e chiudi MarkText"
+	@echo "4. Git add e commit"
 	@echo "3. Salva e chiudi MarkText"
 	@echo "4. Git add e commit"
 
@@ -267,7 +345,9 @@ check-links: build
 	@echo "⚠️  Filtro solo errori significativi (ignoro fonts, hash tags, ecc.)"
 	@echo ""
 	@docker run --rm \
-		--mount type=bind,source=${PWD}/_site,target=/test \
+		--user $(shell id -u):$(shell id -g) \
+		--mount type=bind,source=${PWD}/output/_site,target=/test \
+		--mount type=bind,source=${PWD}/src/jekyll/.htmltest.yml,target=/.htmltest.yml \
 		wjdp/htmltest \
 		/test 2>&1 | \
 		grep -v "Non-OK status: 404.*fonts.googleapis.com" | \
@@ -289,23 +369,31 @@ check-links: build
 	@echo "   - Errori certificati SSL (siti esterni con problemi)"
 	@echo "   - Alt text vuoto (accessibilità)"
 
+check-html:
+	@echo "🔍 Verifica HTML nei file markdown..."
+	@echo ""
+	@chmod +x ./scripts/check-html-in-markdown.sh
+	@./scripts/check-html-in-markdown.sh
+	@echo ""
+	@echo "✅ Nessun HTML trovato nei file markdown!"
+
 
 # Accessibility Audit (Docker-based)
 .PHONY: docker-build-a11y
 docker-build-a11y:
 	@echo "🐳 Building accessibility Docker image..."
-	docker build -t bitprepared-a11y:latest -f docker/accessibility/Dockerfile .
+	docker build -t bitprepared-a11y:latest -f src/docker/accessibility/Dockerfile .
 
 accessibility-audit: docker-build-a11y
 	@echo "🔍 Running accessibility audit..."
 	@echo ""
 	@$(MAKE) --no-print-directory serve-bg
-	@mkdir -p docs/accessibility/reports
+	@mkdir -p output/accessibility/reports
 	@(if [ "$(A11Y_PAGE)" = "index" ]; then \
 		echo "📊 Testing homepage only..."; \
 		docker run --rm --init \
 			--user $(shell id -u):$(shell id -g) \
-			--mount type=bind,source=${PWD}/docs/accessibility/reports,target=/app/reports \
+			--mount type=bind,source=${PWD}/output/accessibility/reports,target=/app/reports \
 			--add-host=host.docker.internal:host-gateway \
 			-e SITE_URL=http://host.docker.internal:4000 \
 			bitprepared-a11y:latest \
@@ -315,7 +403,7 @@ accessibility-audit: docker-build-a11y
 		echo "⏱️  This may take several minutes..."; \
 		docker run --rm --init \
 			--user $(shell id -u):$(shell id -g) \
-			--mount type=bind,source=${PWD}/docs/accessibility/reports,target=/app/reports \
+			--mount type=bind,source=${PWD}/output/accessibility/reports,target=/app/reports \
 			--add-host=host.docker.internal:host-gateway \
 			-e SITE_URL=http://host.docker.internal:4000 \
 			bitprepared-a11y:latest \
@@ -325,8 +413,8 @@ accessibility-audit: docker-build-a11y
 	$(MAKE) --no-print-directory stop-serve; \
 	exit $$ret)
 	@echo ""
-	@echo "✅ Audit complete! Reports saved to docs/accessibility/reports/"
-	@echo "📋 View JSON: cat docs/accessibility/reports/lighthouse/homepage.report.json"
+	@echo "✅ Audit complete! Reports saved to output/accessibility/reports/"
+	@echo "📋 View JSON: cat output/accessibility/reports/lighthouse/homepage.report.json"
 	@echo ""
 	@$(MAKE) --no-print-directory accessibility-analyze
 
@@ -335,20 +423,20 @@ accessibility-audit: docker-build-a11y
 accessibility-analyze:
 	@echo "📊 Analyzing accessibility reports..."
 	@echo ""
-	@mkdir -p docs/accessibility/reports
-	@./scripts/analyze-a11y-reports.sh docs/accessibility/reports > docs/accessibility/reports/summary.md
-	@echo "✅ Summary saved to docs/accessibility/reports/summary.md"
+	@mkdir -p output/accessibility/reports
+	@./scripts/analyze-a11y-reports.sh output/accessibility/reports > output/accessibility/reports/summary.md
+	@echo "✅ Summary saved to output/accessibility/reports/summary.md"
 	@echo ""
 	@echo "📊 Quick Scores:"
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-	@for file in docs/accessibility/reports/lighthouse/*.json docs/accessibility/reports/lighthouse/*; do \
+	@for file in output/accessibility/reports/lighthouse/*.json output/accessibility/reports/lighthouse/*; do \
 		if [ -f "$$file" ]; then \
 			pagename=$$(basename "$$file" .json | sed 's/\.report$$//'); \
 			score=$$(cat "$$file" | jq -r '.categories.accessibility.score * 100 | floor'); \
 			echo "  ● Lighthouse ($$pagename): $$score%"; \
 		fi; \
 	done
-	@for file in docs/accessibility/reports/axe/*.json; do \
+	@for file in output/accessibility/reports/axe/*.json; do \
 		if [ -f "$$file" ]; then \
 			pagename=$$(basename "$$file" .json); \
 			violations=$$(cat "$$file" | jq '.violations | length'); \
@@ -356,13 +444,13 @@ accessibility-analyze:
 		fi; \
 	done
 	@echo ""
-	@echo "📋 Full summary: cat docs/accessibility/reports/summary.md"
+	@echo "📋 Full summary: cat output/accessibility/reports/summary.md"
 
 # Clean accessibility reports
 .PHONY: accessibility-clean
 accessibility-clean:
 	@echo "🧹 Cleaning accessibility reports..."
-	@rm -rf docs/accessibility/reports/
+	@rm -rf output/accessibility/reports/
 	@echo "✅ Accessibility reports removed"
 	@echo "💡 Run 'make accessibility-audit' to regenerate"
 
@@ -378,10 +466,10 @@ accessibility-purge: accessibility-clean
 accessibility-issues:
 	@echo "🔍 Showing accessibility issues with element locations..."
 	@echo ""
-	@if [ -f docs/accessibility/reports/lighthouse/homepage ]; then \
-		./scripts/show-a11y-issues.sh docs/accessibility/reports/lighthouse/homepage; \
-	elif [ -f docs/accessibility/reports/lighthouse/homepage.json ]; then \
-		./scripts/show-a11y-issues.sh docs/accessibility/reports/lighthouse/homepage.json; \
+	@if [ -f output/accessibility/reports/lighthouse/homepage ]; then \
+		./scripts/show-a11y-issues.sh output/accessibility/reports/lighthouse/homepage; \
+	elif [ -f output/accessibility/reports/lighthouse/homepage.json ]; then \
+		./scripts/show-a11y-issues.sh output/accessibility/reports/lighthouse/homepage.json; \
 	else \
 		echo "No report found. Run 'make accessibility-audit' first"; \
 	fi

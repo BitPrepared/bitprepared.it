@@ -6,6 +6,94 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+
+### Added
+- Project structure reorganization
+  - All source files moved to src/ subdirectories (src/jekyll/, src/tailwind/, src/docker/)
+  - New output/ directory for generated content (output/_site/, output/screenshots/)
+  - Clear separation between source code and build artifacts
+  - Better project organization and cleaner repository root
+  - docs/ moved from src/jekyll/ to project root (project-wide, not Jekyll-specific)
+
+### Removed
+- Obsolete CSS files in src/jekyll/assets/css/
+  - Removed main.css (6.4KB) - content already included in styles.css
+  - Removed scout-tech.css (18KB) - old design system no longer used
+  - Removed critical.css (468 bytes) - not used in production
+  - Removed legacy/ directory (28KB) - old CSS files from pre-refactor era
+  - Removed font/ directory (614KB) - obsolete Font Awesome 5 fonts (.eot, .svg, .ttf, .woff, .otf)
+  - Site now uses Font Awesome 6.4.0 with modern woff2 fonts in src/jekyll/assets/fonts/webfonts/
+  - Total cleanup: ~710KB saved (81% reduction in CSS directory size)
+  - Only necessary CSS files remain: styles.css, fontawesome-all.css, tailwind-input.css
+- Obsolete JavaScript files in src/jekyll/assets/js/
+  - Removed jquery.min.js (95KB) - jQuery not used in modern site
+  - Removed skel.min.js (20KB) - old skel framework no longer used
+  - Removed skel-panels.min.js (14KB) - skel plugin no longer used
+  - Removed init.js (1.1KB) - skel configuration no longer used
+  - Removed html5shiv.js (2.4KB) - IE8 polyfill obsolete
+  - Total cleanup: ~132KB saved (90% reduction in JS directory size)
+  - Only necessary JS files remain: scroll-animations.js, edit-button-dev.js
+  - Site now uses modern vanilla JavaScript instead of old frameworks
+
+### Changed
+- Tailwind CSS configuration paths
+  - Fixed tailwind.config.js content paths for new src/ structure
+  - Changed from relative paths (_layouts/**/*.html) to correct paths (../jekyll/_layouts/**/*.html)
+  - make build-css now works correctly without "No utility classes were detected" warning
+
+### Changed
+- Jekyll configuration: Updated paths in _config.yml
+  - destination: /workspace/output/_site (absolute path in container)
+  - cache: /workspace/output/.jekyll-cache (absolute path in container)
+  - robots.txt path: src/jekyll/robots.txt
+- Makefile Docker commands: All updated for new src/ structure
+  - Mount points: src/ → /workspace, output/ → /workspace/output
+  - build, serve, build-css, install commands all use new structure
+  - serve command: Added --host 0.0.0.0 for Docker accessibility
+  - install commands: Added --no-cache to prevent permission errors
+- Visual regression scripts: Updated screenshot paths
+  - capture.js, compare.js: output/screenshots/ instead of screenshots/
+  - All scripts now point to correct output directory
+- .gitignore: Added new patterns
+  - output/_site/, output/.jekyll-cache/ (generated content)
+  - src/.jekyll-cache/, src/node_modules/, src/output/, src/vendor/ (Docker artifacts)
+- clean command: Enhanced to remove output/_site, output/.jekyll-cache, output/screenshots
+- Docker volumes: Improved permission handling
+  - Removed cache volume from install commands (prevents permission issues)
+  - VENDOR_VOLUME for gems, NODE_MODULES_VOLUME for npm packages
+
+### Fixed
+- Docker permission errors during bundle install
+  - Removed CACHE_VOLUME mount from install commands
+  - Added --no-cache flag to prevent cache directory access issues
+- Jekyll serve not accessible from host
+  - Added --host 0.0.0.0 to bind to all interfaces in container
+- Path resolution issues with relative paths in Jekyll config
+  - Changed to absolute paths (/workspace/output/...) for reliable resolution
+- Jekyll creating src/output and src/jekyll/.jekyll-cache with root ownership
+  - Removed CACHE_VOLUME mount from serve, serve-bg, and build commands (was conflicting with bind mounts)
+  - Removed NODE_MODULES_VOLUME mount from serve-bg command (Jekyll doesn't need npm packages)
+  - Pre-create directories with correct user ownership (755 permissions) before Jekyll runs
+  - Added automatic cleanup after make serve, make build, and make stop-serve
+  - Added src/jekyll/.jekyll-cache/ to .gitignore
+  - Removed .jekyll-cache/ from Jekyll exclude list (was conflicting with cache path)
+  - Fixed project_path in _config.yml and _config_dev.yml for new src/ structure
+  - project_path now points to /workspace/src/jekyll (was /workspace)
+  - Edit button now opens files with correct paths in MarkText
+  - Added explicit --destination flag to Jekyll commands for reliable path resolution
+- make generate-blog-post errors
+  - Fixed undefined GEM_VOLUME variable (changed to VENDOR_VOLUME)
+  - Added missing working directory (-w /srv/jekyll) to Docker command
+  - Fixed mount points: now mounts src/jekyll/ and scripts/ separately
+  - Added --user flag to prevent root-owned files
+  - Fixed blog post generation using event date instead of current date
+  - Blog posts now generated with today's date (not future event date)
+  - Added numbered event selection for easier use
+  - Fixed MarkText integration: script now communicates filename to Makefile
+  - MarkText now opens files with correct absolute paths from host perspective
+
 ## [1.2.0] - 2026-05-03
 
 
@@ -273,7 +361,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Aggiornamento software list
 
 [1.2.0]: https://github.com/bitprepared/bitprepared.it/compare/v1.1.0...v1.2.0
-[Unreleased]: https://github.com/bitprepared/bitprepared.it/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/bitprepared/bitprepared.it/compare/v1.2.0...HEAD
 [1.1.0]: https://github.com/bitprepared/bitprepared.it/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/bitprepared/bitprepared.it/compare/v20260426T125004...v1.0.0
 [20260426T125004]: https://github.com/bitprepared/bitprepared.it/compare/v0.9.0...v20260426T125004

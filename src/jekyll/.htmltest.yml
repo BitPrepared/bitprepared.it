@@ -1,0 +1,36 @@
+DirectoryPath: /test
+DirectoryIndex: index.html
+
+IgnoreDirectoryMissingTrailingSlash:
+  - /
+
+IgnoreURLs:
+  - example.com
+  - example.org
+  - test.com
+  - localhost
+  - 127.0.0.1
+  - 0.0.0.0
+  - twitter.com
+  - x.com
+  - facebook.com
+  - instagram.com
+  - linkedin.com
+  - docs.google.com
+  - drive.google.com
+  - ^mailto:
+  - www.bitprepared.it
+  - bitprepared.it
+
+IgnoreDirs:
+  - assets/js
+  - assets/css
+
+ExternalTimeout: 10
+EnableCache: false
+CacheExpires: 24h
+CacheFile: /tmp/.htmltest.cache
+
+MaxRedirects: 3
+LogSort: URL
+NoHTMLCheck: true

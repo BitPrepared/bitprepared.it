@@ -85,7 +85,7 @@ async function captureScreenshots(serverType, baseUrl, viewportsToUse) {
         console.log(`    🔗 ${pageUrl}`);
 
         const filename = generateFilename(pageUrl);
-        const screenshotPath = path.join(__dirname, `../../screenshots/${serverType}/${viewportName}/${filename}.png`);
+        const screenshotPath = path.join(__dirname, `../../output/screenshots/${serverType}/${viewportName}/${filename}.png`);
 
         const dir = path.dirname(screenshotPath);
         if (!fs.existsSync(dir)) {
