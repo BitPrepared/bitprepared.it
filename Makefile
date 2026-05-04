@@ -423,10 +423,14 @@ optimize-featured:
 
 optimize-generic:
 	@echo "🖼️  Ottimizzazione generic (16:9)..."
-	@find src/jekyll/assets/images -name "generic-featured.png" -type f 2>/dev/null | while read file; do \
-		magick "$$file" -resize 1200x630 -quality 85 -strip "$$file.tmp"; \
-		mv "$$file.tmp" "$$file"; \
-	done || echo "   Nessuna immagine generic trovata"
+	@if [ -f "$(MATRICE_DIR)/generic-featured.png" ]; then \
+			magick "$(MATRICE_DIR)/generic-featured.png" -resize 1200x630 -quality 85 -strip "$(OPTIMIZE_DIR)/generic-featured.jpg"; \
+	fi
+	@# Fallback: se non esiste matrice, ottimizza quello in place
+	@if [ ! -f "$(MATRICE_DIR)/generic-featured.png" ] && [ -f "$(OPTIMIZE_DIR)/generic-featured.png" ]; then \
+			magick "$(OPTIMIZE_DIR)/generic-featured.png" -resize 1200x630 -quality 85 -strip "$(OPTIMIZE_DIR)/generic-featured.jpg.tmp"; \
+			mv "$(OPTIMIZE_DIR)/generic-featured.jpg.tmp" "$(OPTIMIZE_DIR)/generic-featured.jpg"; \
+	fi
 
 
 # Accessibility Audit (Docker-based)
