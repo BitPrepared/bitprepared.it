@@ -12,7 +12,7 @@ A11Y_PAGE ?= full
 MATRICE_DIR = src/matrici/images
 OPTIMIZE_DIR = src/jekyll/assets/images
 
-.PHONY: serve serve-bg serve-static serve-static-bg build build-css clean install install-gems help open validate-graphics compare-graphics visual-baseline visual-clean docker-build-visual docker-build-a11y workflow generate-blog-post check-links check-html check-placeholders generate-placeholders optimize-images optimize-volantini optimize-featured optimize-generic accessibility-audit accessibility-analyze accessibility-clean accessibility-purge stop-servers stop-serve stop-static version-validate version-bump version-show release
+.PHONY: serve serve-bg serve-static serve-static-bg build build-css clean install install-gems help open validate-graphics compare-graphics visual-baseline visual-clean docker-build-visual docker-build-a11y workflow generate-blog-post check-links check-html check-placeholders generate-placeholders optimize-images optimize-volantini optimize-featured optimize-generic migrate-images validate-images accessibility-audit accessibility-analyze accessibility-clean accessibility-purge stop-servers stop-serve stop-static version-validate version-bump version-show release
 
 help:
 	@echo "Uso: make [target]"
@@ -578,6 +578,11 @@ optimize-images:
 	@$(MAKE) optimize-featured
 	@$(MAKE) optimize-generic
 	@echo "✅ Ottimizzazione completata"
+
+migrate-images:
+	@echo "📦 Migrazione immagini in matrici..."
+	@chmod +x ./scripts/migrate-images-to-matrici.sh
+	@./scripts/migrate-images-to-matrici.sh
 
 .PHONY: extract-critical
 extract-critical:
