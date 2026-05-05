@@ -132,7 +132,72 @@ make validate-graphics
 ```bash
 make workflow          # Mostra guida workflow
 make help              # Tutti i comandi disponibili
+make optimize-images   # Ottimizza immagini da matrici
+make generate-placeholders  # Genera placeholder immagini
 ```
+
+---
+
+## Gestione Immagini
+
+### Struttura Directory
+
+Il progetto usa un sistema di **matrici** per la gestione delle immagini:
+
+- **`src/matrici/images/`** — Repository immagini originali (PNG sorgenti)
+- **`src/jekyll/assets/images/`** — Immagini ottimizzate (generato, non in git)
+
+### Workflow Immagini
+
+```bash
+# 1. Aggiungi immagine sorgente alle matrici
+cp nuova_logo.png src/matrici/images/pages/software/
+
+# 2. Rigenera assets/images
+make optimize-images
+
+# 3. Verifica/commit
+git status
+git add src/matrici/images/
+```
+
+### Tipi Immagini
+
+**Loghi (PNG con trasparenza):**
+- Software: `src/matrici/images/pages/software/*.png`
+- Bran: `src/matrici/images/loghi_branche/*.png`
+- Apple touch icons: `src/matrici/images/apple-touch-icon-precomposed.png`
+
+**Locandine (A3 @ 300DPI):**
+- Pattern: `src/matrici/images/{slug}/locandina_{slug}_{YYYY}.png`
+- Output: `src/jekyll/assets/images/{slug}/locandina_{slug}_{YYYY}.jpg` (3508×4961)
+
+**Featured images (16:9):**
+- Pattern: `src/matrici/images/{slug}/{slug}-{amb}-featured.png`
+- Output: `src/jekyll/assets/images/{slug}/{slug}-{amb}-featured.jpg` (1200×630)
+
+### Placeholder
+
+Genera automaticamente placeholder per immagini mancanti:
+
+```bash
+make generate-placeholders  # Crea placeholder PNG (1 pixel rosso)
+make generate-placeholders-force  # Sovrascrive anche immagini esistenti
+```
+
+**Protezione:** placeholder non sovrascrivono immagini reali (> 1KB)
+
+### Ottimizzazione Automatica
+
+`make optimize-images` esegue:
+1. Copia loghi software/branche (PNG as-is)
+2. Genera apple-touch-icon multi-dimensione da sorgente unica
+3. Ottimizza volantini (PNG → JPG, A3 @ 300DPI)
+4. Ottimizza featured images (PNG → JPG, 16:9)
+
+**Nota:** Richiede ImageMagick per ottimizzazione. In CI disponibile automaticamente.
+
+---
 
 ---
 

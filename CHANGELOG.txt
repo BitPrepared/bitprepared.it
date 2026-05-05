@@ -8,9 +8,64 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-
 ### Added
-- Project structure reorganization
+- Image management system with matrici (source repository)
+  - src/matrici/images/ for original PNG sources
+  - src/jekyll/assets/images/ as generated cache (not in git)
+  - Automatic optimization pipeline: PNG → JPG with size constraints
+  - Multi-size generation from single source (apple-touch-icon)
+  - Placeholder generation with protection against overwriting real images
+- make optimize-images target for automatic image processing
+  - Copy software logos (PNG with transparency)
+  - Copy branch logos (PNG with transparency)
+  - Generate apple-touch-icon sizes (72x72, 114x114, 144x144) from single source
+  - Optimize volantini (A3 @ 300DPI, 3508x4961)
+  - Optimize featured images (16:9, 1200x630)
+- make generate-placeholders for missing images
+  - Creates 1px red PNG placeholders for missing event/featured images
+  - Protection against overwriting real images (> 1KB)
+  - Force mode with --force flag
+- CI/CD integration for image optimization
+  - Automatic image generation during release workflow
+  - ImageMagick installed in CI for resize operations
+  - PR validation for generated images sync
+- .gitignore update for src/jekyll/assets/images/ (generated cache)
+
+### Changed
+- Image workflow from manual to automated
+  - Old: Manual optimization, JPG in git
+  - New: PNG sources in matrici, automatic generation, git-ignored cache
+- apple-touch-icon management
+  - Old: Multiple size files manually maintained
+  - New: Single high-res source, automatic multi-size generation
+  - Dimension validation (minimum 144x144, recommends 512x512)
+- HTML layout for apple-touch-icon
+  - Added explicit links for all sizes (72x72, 114x114, 144x144)
+  - Ensures iOS devices use correct resolution
+
+### Fixed
+- JPG conversion breaking PNG transparency
+  - Software logos now copied as PNG (transparency preserved)
+  - Branch logos now copied as PNG (transparency preserved)
+  - Apple-touch-icon generated as PNG (not JPG)
+- Missing image generation for campo-eg locandina
+  - Fixed optimize-volantini to handle both PNG and JPG placeholders
+  - generate-placeholders now creates PNG (not JPG)
+- Placeholder generation overwriting real images
+  - Added dimension check (> 1KB = real image, skip)
+  - Added --force flag to override protection when needed
+- Image dimension validation
+  - apple-touch-icon source validated for minimum 144x144
+  - Warning if upsampling required (quality degradation risk)
+
+### Removed
+- Manual image optimization workflow
+- Multiple redundant image files in git
+  - Software logo JPG versions (replaced with PNG generation)
+  - Branch logo JPG versions (replaced with PNG generation)
+  - Individual apple-touch-icon sizes (replaced with single source)
+
+### Project structure reorganization
   - All source files moved to src/ subdirectories (src/jekyll/, src/tailwind/, src/docker/)
   - New output/ directory for generated content (output/_site/, output/screenshots/)
   - Clear separation between source code and build artifacts
