@@ -573,13 +573,37 @@ check-aria:
 	@echo "🔍 Checking ARIA tags..."
 	@node scripts/check-aria.js
 
-.PHONY: optimize-images
-optimize-images:
+.PHONY: optimize-images copy-software-logos copy-branch-logos
+optimize-images: copy-software-logos copy-branch-logos
 	@echo "🖼️  Ottimizzazione immagini..."
 	@$(MAKE) optimize-volantini
 	@$(MAKE) optimize-featured
 	@$(MAKE) optimize-generic
 	@echo "✅ Ottimizzazione completata"
+
+copy-software-logos:
+	@echo "📋 Copia loghi software (PNG as-is)..."
+	@mkdir -p $(OPTIMIZE_DIR)/pages/software
+	@find $(MATRICE_DIR)/pages/software -name "*.png" -type f 2>/dev/null | while read png; do \
+		target=$$(echo "$$png" | sed 's|$(MATRICE_DIR)|$(OPTIMIZE_DIR)|'); \
+		mkdir -p "$$(dirname "$$target")"; \
+		if [ ! -f "$$target" ] || [ "$$png" -nt "$$target" ]; then \
+			echo "   📋 $$png → $$target"; \
+			cp "$$png" "$$target"; \
+		fi; \
+	done || echo "   Nessun logo software trovato"
+
+copy-branch-logos:
+	@echo "📋 Copia loghi branche (PNG as-is)..."
+	@mkdir -p $(OPTIMIZE_DIR)/loghi_branche
+	@find $(MATRICE_DIR)/loghi_branche -name "*.png" -type f 2>/dev/null | while read png; do \
+		target=$$(echo "$$png" | sed 's|$(MATRICE_DIR)|$(OPTIMIZE_DIR)|'); \
+		mkdir -p "$$(dirname "$$target")"; \
+		if [ ! -f "$$target" ] || [ "$$png" -nt "$$target" ]; then \
+			echo "   📋 $$png → $$target"; \
+			cp "$$png" "$$target"; \
+		fi; \
+	done || echo "   Nessun logo branca trovato"
 
 migrate-images:
 	@echo "📦 Migrazione immagini in matrici..."
