@@ -642,8 +642,8 @@ copy-apple-icons:
 	else \
 		echo "   ⚠️  ImageMagick non disponibile, copio sorgente"; \
 		cp "$$SOURCE" "$(OPTIMIZE_DIR)/apple-touch-icon-precomposed.png"; \
-	fi
-	@if [ ! -f "$(OPTIMIZE_DIR)/apple-touch-icon-precomposed.png" ] || [ "$$SOURCE" -nt "$(OPTIMIZE_DIR)/apple-touch-icon-precomposed.png" ]; then \
+	fi; \
+	if [ ! -f "$(OPTIMIZE_DIR)/apple-touch-icon-precomposed.png" ] || [ "$$SOURCE" -nt "$(OPTIMIZE_DIR)/apple-touch-icon-precomposed.png" ]; then \
 		echo "   📋 fallback"; \
 		cp "$$SOURCE" "$(OPTIMIZE_DIR)/apple-touch-icon-precomposed.png"; \
 	fi
