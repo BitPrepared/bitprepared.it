@@ -578,8 +578,8 @@ check-aria:
 	@echo "🔍 Checking ARIA tags..."
 	@node scripts/check-aria.js
 
-.PHONY: optimize-images copy-software-logos copy-branch-logos
-optimize-images: copy-software-logos copy-branch-logos
+.PHONY: optimize-images copy-software-logos copy-branch-logos copy-apple-icons
+optimize-images: copy-software-logos copy-branch-logos copy-apple-icons
 	@echo "🖼️  Ottimizzazione immagini..."
 	@$(MAKE) optimize-volantini
 	@$(MAKE) optimize-featured
@@ -609,6 +609,26 @@ copy-branch-logos:
 			cp "$$png" "$$target"; \
 		fi; \
 	done || echo "   Nessun logo branca trovato"
+
+copy-apple-icons:
+	@echo "📋 Copia apple-touch-icon e PNG root (PNG as-is)..."
+	@# Apple touch icons
+	@find $(MATRICE_DIR) -maxdepth 1 -name "apple-touch-icon*.png" -type f 2>/dev/null | while read png; do \
+		target=$$(echo "$$png" | sed 's|$(MATRICE_DIR)|$(OPTIMIZE_DIR)|'); \
+		if [ ! -f "$$target" ] || [ "$$png" -nt "$$target" ]; then \
+			echo "   📋 $$png → $$target"; \
+			cp "$$png" "$$target"; \
+		fi; \
+	done
+	@# Other root PNG files that should not be converted
+	@for file in favicon.png agesci_logo.png placeholder-blog.png placeholder-news.png; do \
+		if [ -f "$(MATRICE_DIR)/$$file" ]; then \
+			if [ ! -f "$(OPTIMIZE_DIR)/$$file" ] || [ "$(MATRICE_DIR)/$$file" -nt "$(OPTIMIZE_DIR)/$$file" ]; then \
+				echo "   📋 $$file"; \
+				cp "$(MATRICE_DIR)/$$file" "$(OPTIMIZE_DIR)/$$file"; \
+			fi; \
+		fi; \
+	done || echo "   Nessun file root trovato"
 
 migrate-images:
 	@echo "📦 Migrazione immagini in matrici..."
