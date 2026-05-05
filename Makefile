@@ -611,16 +611,42 @@ copy-branch-logos:
 	done || echo "   Nessun logo branca trovato"
 
 copy-apple-icons:
-	@echo "📋 Copia apple-touch-icon e PNG root (PNG as-is)..."
-	@# Apple touch icons
-	@find $(MATRICE_DIR) -maxdepth 1 -name "apple-touch-icon*.png" -type f 2>/dev/null | while read png; do \
-		target=$$(echo "$$png" | sed 's|$(MATRICE_DIR)|$(OPTIMIZE_DIR)|'); \
-		if [ ! -f "$$target" ] || [ "$$png" -nt "$$target" ]; then \
-			echo "   📋 $$png → $$target"; \
-			cp "$$png" "$$target"; \
+	@echo "📋 Generazione apple-touch-icon da sorgente high-res..."
+	@if [ -f "$(MATRICE_DIR)/apple-touch-icon-precomposed.png" ]; then \
+		SOURCE="$(MATRICE_DIR)/apple-touch-icon-precomposed.png"; \
+	elif [ -f "$(MATRICE_DIR)/apple-touch-icon-144x144-precomposed.png" ]; then \
+		SOURCE="$(MATRICE_DIR)/apple-touch-icon-144x144-precomposed.png"; \
+	else \
+		echo "   ⚠️  Nessun apple-touch-icon sorgente trovato"; \
+		exit 0; \
+	fi; \
+	if command -v magick >/dev/null 2>&1; then \
+		DIMENSIONS=$$(magick identify -format "%w %h" "$$SOURCE" 2>/dev/null); \
+		WIDTH=$$(echo $$DIMENSIONS | cut -d' ' -f1); \
+		HEIGHT=$$(echo $$DIMENSIONS | cut -d' ' -f2); \
+		MIN_SIZE=144; \
+		if [ -n "$$WIDTH" ] && [ -n "$$HEIGHT" ]; then \
+			if [ "$$WIDTH" -lt "$$MIN_SIZE" ] || [ "$$HEIGHT" -lt "$$MIN_SIZE" ]; then \
+				echo "   ⚠️  WARNING: Sorgente troppo piccola ($$WIDTH×$$HEIGHT)"; \
+				echo "   ⚠️  Minimo richiesto: $$MIN_SIZE×$$MIN_SIZE"; \
+				echo "   ⚠️  Upsampling degraderà qualità! Usa sorgente almeno 512×512"; \
+			fi; \
 		fi; \
-	done
-	@# Other root PNG files that should not be converted
+		for size in 72 114 144; do \
+			TARGET="$(OPTIMIZE_DIR)/apple-touch-icon-$${size}x$${size}-precomposed.png"; \
+			if [ ! -f "$$TARGET" ] || [ "$$SOURCE" -nt "$$TARGET" ]; then \
+				echo "   📸 $$SOURCE → $${size}x$${size}"; \
+				magick "$$SOURCE" -resize $${size}x$${size} "$$TARGET"; \
+			fi; \
+		done; \
+	else \
+		echo "   ⚠️  ImageMagick non disponibile, copio sorgente"; \
+		cp "$$SOURCE" "$(OPTIMIZE_DIR)/apple-touch-icon-precomposed.png"; \
+	fi
+	@if [ ! -f "$(OPTIMIZE_DIR)/apple-touch-icon-precomposed.png" ] || [ "$$SOURCE" -nt "$(OPTIMIZE_DIR)/apple-touch-icon-precomposed.png" ]; then \
+		echo "   📋 fallback"; \
+		cp "$$SOURCE" "$(OPTIMIZE_DIR)/apple-touch-icon-precomposed.png"; \
+	fi
 	@for file in favicon.png agesci_logo.png placeholder-blog.png placeholder-news.png; do \
 		if [ -f "$(MATRICE_DIR)/$$file" ]; then \
 			if [ ! -f "$(OPTIMIZE_DIR)/$$file" ] || [ "$(MATRICE_DIR)/$$file" -nt "$(OPTIMIZE_DIR)/$$file" ]; then \
@@ -628,7 +654,7 @@ copy-apple-icons:
 				cp "$(MATRICE_DIR)/$$file" "$(OPTIMIZE_DIR)/$$file"; \
 			fi; \
 		fi; \
-	done || echo "   Nessun file root trovato"
+	done
 
 migrate-images:
 	@echo "📦 Migrazione immagini in matrici..."
