@@ -114,6 +114,54 @@ jobs:
             exit 1
           fi
 
+  check-generated-images:
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y make imagemagick
+
+      - name: Generate images from matrici
+        run: |
+          make optimize-images
+
+      - name: Check if assets/images needs update
+        id: check-images
+        run: |
+          if [[ -n "$(git diff src/jekyll/assets/images/)" ]]; then
+            echo "❌ Generated images are out of sync with matrici"
+            echo "Run 'make optimize-images' and commit the changes"
+            git diff --stat src/jekyll/assets/images/
+            exit 1
+          else
+            echo "✅ Generated images are in sync with matrici"
+          fi
+
+      - name: Comment on PR if images out of sync
+        if: failure() && steps.check-images.outcome == 'failure'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '❌ **Images Out of Sync**\n\n' +
+                    'Le immagini in `src/jekyll/assets/images/` non sono sincronizzate con `src/matrici/images/`.\n\n' +
+                    '**Soluzione:**\n' +
+                    '```bash\n' +
+                    'make optimize-images\n' +
+                    'git add src/jekyll/assets/images/\n' +
+                    'git commit -m "chore: regenerate optimized images"\n' +
+                    '```\n\n' +
+                    'Questo genererà le immagini ottimizzate dalle matrici.'
+            })
+
   check-image-placeholders:
     runs-on: ubuntu-latest
     env:

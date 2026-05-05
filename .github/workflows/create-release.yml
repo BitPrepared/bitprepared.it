@@ -66,6 +66,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y make imagemagick
+
+      - name: Optimize images from matrici
+        run: |
+          make optimize-images
+
       - name: Build the site in the jekyll/builder container
         run: |
           docker run \

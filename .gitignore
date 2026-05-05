@@ -24,6 +24,9 @@ src/node_modules/
 src/output/
 src/vendor/
 
+# Generated images from matrici (run make optimize-images to regenerate)
+src/jekyll/assets/images/
+
 # Old accessibility reports location (now in output/accessibility/)
 docs/accessibility/reports/
 src/jekyll/.jekyll-cache/

@@ -391,6 +391,11 @@ generate-placeholders:
 	@cd scripts && node generate-image-placeholders.js
 	@echo "✅ Placeholder generati"
 
+generate-placeholders-force:
+	@echo "📸 Genero placeholder immagini (force mode)..."
+	@cd scripts && node generate-image-placeholders.js --force
+	@echo "✅ Placeholder generati (sovrascritti)"
+
 check-placeholders:
 	@echo "🔍 Verifico placeholder..."
 	@cd scripts && node check-image-placeholders.js
