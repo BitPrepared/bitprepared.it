@@ -12,7 +12,7 @@ A11Y_PAGE ?= full
 MATRICE_DIR = src/matrici/images
 OPTIMIZE_DIR = src/jekyll/assets/images
 
-.PHONY: serve serve-bg serve-static serve-static-bg build build-css clean install install-gems help open validate-graphics compare-graphics visual-baseline visual-clean docker-build-visual docker-build-a11y workflow generate-blog-post check-links check-html check-placeholders generate-placeholders optimize-images optimize-volantini optimize-featured optimize-generic migrate-images validate-images accessibility-audit accessibility-analyze accessibility-clean accessibility-purge stop-servers stop-serve stop-static version-validate version-bump version-show release
+.PHONY: serve serve-bg serve-static serve-static-bg build build-css clean install install-gems help open validate-graphics compare-graphics visual-baseline visual-clean docker-build-visual docker-build-a11y workflow generate-blog-post check-links check-html check-placeholders generate-placeholders optimize-images optimize-volantini optimize-featured optimize-generic migrate-images validate-images accessibility-audit accessibility-analyze accessibility-clean accessibility-purge stop-servers stop-serve stop-static version-validate version-bump version-show release init-matrici generate-icons
 
 help:
 	@echo "Uso: make [target]"
@@ -40,7 +40,6 @@ help:
 	@echo "  check-html       - Verifica HTML nei file markdown (Jekyll)"
 	@echo "  check-placeholders - Verifica assenza placeholder immagini"
 	@echo "  generate-placeholders - Genera placeholder per nuovi eventi/ambientazioni"
-	@echo "  optimize-images - Ottimizza tutte le immagini (dimensioni, peso)"
 	@echo "  migrate-images - Sposta PNG originali in src/matrici/images/"
 	@echo "  validate-images - Valida specifiche immagini ottimizzate"
 	@echo "  accessibility-audit- Audit accessibilità + auto-analyze (default: full 8 pagine, usa A11Y_PAGE=index per solo homepage)"
@@ -48,6 +47,9 @@ help:
 		@echo "  accessibility-clean  - Rimuovi report accessibilità"
 		@echo "  accessibility-purge  - Rimuovi report + Docker image a11y"
 	@echo "  release          - Crea PR release (valida CHANGELOG, bump versione, crea branch+PR)"
+	@echo "  init-matrici     - Inizializza struttura matrici immagini"
+	@echo "  generate-icons   - Genera icone da SVG sorgente"
+	@echo "  optimize-images  - Ottimizza immagini con manifesti (dipende da generate-icons)"
 	@echo "  version-validate - Valida CHANGELOG.txt"
 	@echo "  version-bump     - Bump versione in CHANGELOG.txt (interactive)"
 	@echo "  version-show     - Mostra versione corrente e git tags"
@@ -578,13 +580,6 @@ check-aria:
 	@echo "🔍 Checking ARIA tags..."
 	@node scripts/check-aria.js
 
-.PHONY: optimize-images copy-software-logos copy-branch-logos copy-apple-icons
-optimize-images: copy-software-logos copy-branch-logos copy-apple-icons
-	@echo "🖼️  Ottimizzazione immagini..."
-	@$(MAKE) optimize-volantini
-	@$(MAKE) optimize-featured
-	@$(MAKE) optimize-generic
-	@echo "✅ Ottimizzazione completata"
 
 copy-software-logos:
 	@echo "📋 Copia loghi software (PNG as-is)..."
@@ -755,3 +750,25 @@ release:
 	echo "   1. Merge this PR"; \
 	echo "   2. Go to Actions → 'Create Release' workflow"; \
 	echo "   3. Run workflow to build and create release"
+
+.PHONY: init-matrici generate-icons optimize-images
+
+init-matrici:
+	@echo "📁 Inizializzazione struttura matrici..."
+	@mkdir -p src/matrici/images/production/eventi
+	@mkdir -p src/matrici/images/production/software
+	@mkdir -p src/matrici/images/production/loghi-branche
+	@mkdir -p src/matrici/images/production/root
+	@mkdir -p src/matrici/images/source-icons
+	@mkdir -p src/matrici/images/supporto
+	@echo "✅ Struttura creata"
+
+generate-icons:
+	@echo "🎨 Generazione icone da SVG..."
+	@node scripts/generate-icons-from-svg.js
+	@echo "✅ Icone generate"
+
+optimize-images: generate-icons
+	@echo "🖼️  Ottimizzazione immagini con manifesti..."
+	@node scripts/optimize-with-manifest.js
+	@echo "✅ Ottimizzazione completata"
