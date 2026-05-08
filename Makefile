@@ -8,7 +8,11 @@ CACHE_VOLUME = bitprepared-jekyll-cache
 POLLING ?= 0
 A11Y_PAGE ?= full
 
-.PHONY: serve serve-bg serve-static serve-static-bg build build-css clean install install-gems help open validate-graphics compare-graphics visual-baseline visual-clean docker-build-visual docker-build-a11y workflow generate-blog-post check-links check-html accessibility-audit accessibility-analyze accessibility-clean accessibility-purge stop-servers stop-serve stop-static version-validate version-bump version-show release
+# Image directories
+MATRICE_DIR = src/matrici/images
+OPTIMIZE_DIR = src/jekyll/assets/images
+
+.PHONY: serve serve-bg serve-static serve-static-bg build build-css clean install install-gems help open validate-graphics compare-graphics visual-baseline visual-clean docker-build-visual docker-build-a11y workflow generate-blog-post check-links check-html check-placeholders generate-placeholders optimize-images optimize-volantini optimize-featured optimize-generic migrate-images validate-images accessibility-audit accessibility-analyze accessibility-clean accessibility-purge stop-servers stop-serve stop-static version-validate version-bump version-show release init-matrici generate-icons
 
 help:
 	@echo "Uso: make [target]"
@@ -34,11 +38,18 @@ help:
 	@echo "  generate-blog-post- Genera blog post da file evento"
 	@echo "  check-links      - Verifica link broken nel sito (htmltest)"
 	@echo "  check-html       - Verifica HTML nei file markdown (Jekyll)"
+	@echo "  check-placeholders - Verifica assenza placeholder immagini"
+	@echo "  generate-placeholders - Genera placeholder per nuovi eventi/ambientazioni"
+	@echo "  migrate-images - Sposta PNG originali in src/matrici/images/"
+	@echo "  validate-images - Valida specifiche immagini ottimizzate"
 	@echo "  accessibility-audit- Audit accessibilità + auto-analyze (default: full 8 pagine, usa A11Y_PAGE=index per solo homepage)"
 		@echo "  accessibility-analyze - Analizza report, genera summary.md e mostra score di tutte le pagine"
 		@echo "  accessibility-clean  - Rimuovi report accessibilità"
 		@echo "  accessibility-purge  - Rimuovi report + Docker image a11y"
 	@echo "  release          - Crea PR release (valida CHANGELOG, bump versione, crea branch+PR)"
+	@echo "  init-matrici     - Inizializza struttura matrici immagini"
+	@echo "  generate-icons   - Genera icone da SVG sorgente"
+	@echo "  optimize-images  - Ottimizza immagini con manifesti (dipende da generate-icons)"
 	@echo "  version-validate - Valida CHANGELOG.txt"
 	@echo "  version-bump     - Bump versione in CHANGELOG.txt (interactive)"
 	@echo "  version-show     - Mostra versione corrente e git tags"
@@ -165,7 +176,7 @@ stop-static:
 		echo "✅ Server statico fermato"; \
 	fi
 
-build:
+build: optimize-images
 	@mkdir -p output/_site output/.jekyll-cache
 	@chmod 755 output/_site output/.jekyll-cache output
 	@mkdir -p src/output src/jekyll/.jekyll-cache
@@ -377,6 +388,59 @@ check-html:
 	@echo ""
 	@echo "✅ Nessun HTML trovato nei file markdown!"
 
+generate-placeholders:
+	@echo "📸 Genero placeholder immagini..."
+	@cd scripts && node generate-image-placeholders.js
+	@echo "✅ Placeholder generati"
+
+generate-placeholders-force:
+	@echo "📸 Genero placeholder immagini (force mode)..."
+	@cd scripts && node generate-image-placeholders.js --force
+	@echo "✅ Placeholder generati (sovrascritti)"
+
+check-placeholders:
+	@echo "🔍 Verifico placeholder..."
+	@cd scripts && node check-image-placeholders.js
+	@echo "✅ Nessun placeholder trovato"
+
+optimize-volantini:
+	@echo "📄 Ottimizzazione volantini (A3 @ 300DPI)..."
+	@find $(MATRICE_DIR) -name "locandina_*.png" -type f 2>/dev/null | while read png; do \
+		jpg=$$(echo "$$png" | sed 's|$(MATRICE_DIR)|$(OPTIMIZE_DIR)|' | sed 's/\.png/.jpg/'); \
+		mkdir -p "$$(dirname "$$jpg")"; \
+		if [ ! -f "$$jpg" ] || [ "$$png" -nt "$$jpg" ]; then \
+			echo "   📸 $$png → $$jpg"; \
+			magick "$$png" -resize 3508x4961 -quality 85 -strip "$$jpg"; \
+		fi; \
+	done || echo "   Nessun volantino trovato"
+
+optimize-featured:
+	@echo "🖼️  Ottimizzazione featured (16:9)..."
+	@find $(MATRICE_DIR) -name "*-featured.png" -type f 2>/dev/null | while read png; do \
+		jpg=$$(echo "$$png" | sed 's|$(MATRICE_DIR)|$(OPTIMIZE_DIR)|' | sed 's/\.png/.jpg/'); \
+		mkdir -p "$$(dirname "$$jpg")"; \
+		if [ ! -f "$$jpg" ] || [ "$$png" -nt "$$jpg" ]; then \
+			echo "   📸 $$png → $$jpg"; \
+			magick "$$png" -resize 1200x630 -quality 85 "$$jpg"; \
+		fi; \
+	done
+	@echo "   Ottimizzazione JPG esistenti..."
+	@find $(OPTIMIZE_DIR) -name "*-featured.jpg" -type f 2>/dev/null | while read file; do \
+		magick "$$file" -resize 1200x630 -quality 85 -strip "$$file.tmp"; \
+		mv "$$file.tmp" "$$file"; \
+	done || echo "   Nessuna featured trovata"
+
+optimize-generic:
+	@echo "🖼️  Ottimizzazione generic (16:9)..."
+	@if [ -f "$(MATRICE_DIR)/generic-featured.png" ]; then \
+			magick "$(MATRICE_DIR)/generic-featured.png" -resize 1200x630 -quality 85 -strip "$(OPTIMIZE_DIR)/generic-featured.jpg"; \
+	fi
+	@# Fallback: se non esiste matrice, ottimizza quello in place
+	@if [ ! -f "$(MATRICE_DIR)/generic-featured.png" ] && [ -f "$(OPTIMIZE_DIR)/generic-featured.png" ]; then \
+			magick "$(OPTIMIZE_DIR)/generic-featured.png" -resize 1200x630 -quality 85 -strip "$(OPTIMIZE_DIR)/generic-featured.jpg.tmp"; \
+			mv "$(OPTIMIZE_DIR)/generic-featured.jpg.tmp" "$(OPTIMIZE_DIR)/generic-featured.jpg"; \
+	fi
+
 
 # Accessibility Audit (Docker-based)
 .PHONY: docker-build-a11y
@@ -516,10 +580,96 @@ check-aria:
 	@echo "🔍 Checking ARIA tags..."
 	@node scripts/check-aria.js
 
-.PHONY: optimize-images
-optimize-images:
-	@echo "🖼️  Optimizing images..."
-	@node scripts/optimize-images.js
+
+copy-software-logos:
+	@echo "📋 Copia loghi software (PNG as-is)..."
+	@mkdir -p $(OPTIMIZE_DIR)/pages/software
+	@find $(MATRICE_DIR)/pages/software -name "*.png" -type f 2>/dev/null | while read png; do \
+		target=$$(echo "$$png" | sed 's|$(MATRICE_DIR)|$(OPTIMIZE_DIR)|'); \
+		mkdir -p "$$(dirname "$$target")"; \
+		if [ ! -f "$$target" ] || [ "$$png" -nt "$$target" ]; then \
+			echo "   📋 $$png → $$target"; \
+			cp "$$png" "$$target"; \
+		fi; \
+	done || echo "   Nessun logo software trovato"
+
+copy-branch-logos:
+	@echo "📋 Copia loghi branche (PNG as-is)..."
+	@mkdir -p $(OPTIMIZE_DIR)/loghi_branche
+	@find $(MATRICE_DIR)/loghi_branche -name "*.png" -type f 2>/dev/null | while read png; do \
+		target=$$(echo "$$png" | sed 's|$(MATRICE_DIR)|$(OPTIMIZE_DIR)|'); \
+		mkdir -p "$$(dirname "$$target")"; \
+		if [ ! -f "$$target" ] || [ "$$png" -nt "$$target" ]; then \
+			echo "   📋 $$png → $$target"; \
+			cp "$$png" "$$target"; \
+		fi; \
+	done || echo "   Nessun logo branca trovato"
+
+copy-apple-icons:
+	@echo "📋 Generazione apple-touch-icon da sorgente high-res..."
+	@if [ -f "$(MATRICE_DIR)/apple-touch-icon-precomposed.png" ]; then \
+		SOURCE="$(MATRICE_DIR)/apple-touch-icon-precomposed.png"; \
+	elif [ -f "$(MATRICE_DIR)/apple-touch-icon-144x144-precomposed.png" ]; then \
+		SOURCE="$(MATRICE_DIR)/apple-touch-icon-144x144-precomposed.png"; \
+	else \
+		echo "   ⚠️  Nessun apple-touch-icon sorgente trovato"; \
+		exit 0; \
+	fi; \
+	if command -v magick >/dev/null 2>&1; then \
+		DIMENSIONS=$$(magick identify -format "%w %h" "$$SOURCE" 2>/dev/null); \
+		WIDTH=$$(echo $$DIMENSIONS | cut -d' ' -f1); \
+		HEIGHT=$$(echo $$DIMENSIONS | cut -d' ' -f2); \
+		MIN_SIZE=144; \
+		if [ -n "$$WIDTH" ] && [ -n "$$HEIGHT" ]; then \
+			if [ "$$WIDTH" -lt "$$MIN_SIZE" ] || [ "$$HEIGHT" -lt "$$MIN_SIZE" ]; then \
+				echo "   ⚠️  WARNING: Sorgente troppo piccola ($$WIDTH×$$HEIGHT)"; \
+				echo "   ⚠️  Minimo richiesto: $$MIN_SIZE×$$MIN_SIZE"; \
+				echo "   ⚠️  Upsampling degraderà qualità! Usa sorgente almeno 512×512"; \
+			fi; \
+		fi; \
+		for size in 72 114 144; do \
+			TARGET="$(OPTIMIZE_DIR)/apple-touch-icon-$${size}x$${size}-precomposed.png"; \
+			if [ ! -f "$$TARGET" ] || [ "$$SOURCE" -nt "$$TARGET" ]; then \
+				echo "   📸 $$SOURCE → $${size}x$${size}"; \
+				magick "$$SOURCE" -resize $${size}x$${size} "$$TARGET"; \
+			fi; \
+		done; \
+	else \
+		echo "   ⚠️  ImageMagick non disponibile, copio sorgente"; \
+		cp "$$SOURCE" "$(OPTIMIZE_DIR)/apple-touch-icon-precomposed.png"; \
+	fi; \
+	if [ ! -f "$(OPTIMIZE_DIR)/apple-touch-icon-precomposed.png" ] || [ "$$SOURCE" -nt "$(OPTIMIZE_DIR)/apple-touch-icon-precomposed.png" ]; then \
+		echo "   📋 fallback"; \
+		cp "$$SOURCE" "$(OPTIMIZE_DIR)/apple-touch-icon-precomposed.png"; \
+	fi
+	@for file in favicon.png agesci_logo.png placeholder-blog.png placeholder-news.png; do \
+		if [ -f "$(MATRICE_DIR)/$$file" ]; then \
+			if [ ! -f "$(OPTIMIZE_DIR)/$$file" ] || [ "$(MATRICE_DIR)/$$file" -nt "$(OPTIMIZE_DIR)/$$file" ]; then \
+				echo "   📋 $$file"; \
+				cp "$(MATRICE_DIR)/$$file" "$(OPTIMIZE_DIR)/$$file"; \
+			fi; \
+		fi; \
+	done
+
+migrate-images:
+	@echo "📦 Migrazione immagini in matrici..."
+	@chmod +x ./scripts/migrate-images-to-matrici.sh
+	@./scripts/migrate-images-to-matrici.sh
+
+validate-images:
+	@echo "🔍 Validating optimized images..."
+	@node scripts/validate-optimized-images.js
+
+optimize-loghi:
+	@echo "🖼️  Ottimizzazione loghi branche..."
+	@find $(MATRICE_DIR) -name "*.png" -type f 2>/dev/null | while read png; do \
+		jpg=$$(echo "$$png" | sed 's|$(MATRICE_DIR)|$(OPTIMIZE_DIR)|' | sed 's/\.png/.jpg/'); \
+		mkdir -p "$$(dirname "$$jpg")"; \
+		if [ ! -f "$$jpg" ] || [ "$$png" -nt "$$jpg" ]; then \
+			echo "   📸 $$png → $$jpg"; \
+			magick "$$png" -resize 200x200 -quality 85 "$$jpg"; \
+		fi; \
+	done || echo "   Nessun logo trovato"
 
 .PHONY: extract-critical
 extract-critical:
@@ -600,3 +750,25 @@ release:
 	echo "   1. Merge this PR"; \
 	echo "   2. Go to Actions → 'Create Release' workflow"; \
 	echo "   3. Run workflow to build and create release"
+
+.PHONY: init-matrici generate-icons optimize-images
+
+init-matrici:
+	@echo "📁 Inizializzazione struttura matrici..."
+	@mkdir -p src/matrici/images/production/eventi
+	@mkdir -p src/matrici/images/production/software
+	@mkdir -p src/matrici/images/production/loghi-branche
+	@mkdir -p src/matrici/images/production/root
+	@mkdir -p src/matrici/images/source-icons
+	@mkdir -p src/matrici/images/supporto
+	@echo "✅ Struttura creata"
+
+generate-icons:
+	@echo "🎨 Generazione icone da SVG..."
+	@node scripts/generate-icons-from-svg.js
+	@echo "✅ Icone generate"
+
+optimize-images: generate-icons
+	@echo "🖼️  Ottimizzazione immagini con manifesti..."
+	@node scripts/optimize-with-manifest.js
+	@echo "✅ Ottimizzazione completata"

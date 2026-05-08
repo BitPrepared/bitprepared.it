@@ -8,6 +8,8 @@ modified: 2026-04-21
 image: /assets/images/pages/stage.jpg
 event_date: 2018-09-15
 event_status: past
+event_type: stage
+year: 2018
 
 benefits_title: "Perché partecipare allo Stage"
 benefits:

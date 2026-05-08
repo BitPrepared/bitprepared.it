@@ -1,0 +1,11 @@
+epppi:
+  name: "EPPPI"
+  slug: "epppi"
+
+campo-eg:
+  name: "Campo EG"
+  slug: "campo-eg"
+
+stage:
+  name: "Stage"
+  slug: "stage"

@@ -64,11 +64,11 @@ software_list:
     description: Programma per realizzare un Percorso Rettificato Belga Multimediale. Dopo aver riportato i dati presi sul campo in missione puo' essere utile rivedere il percorso che si e' fatto su un "sito" corredato di immagini, descrizioni, foto ecc...
     external: true
 
-  - name: Flora
-    icon: /assets/images/pages/software/flora.png
-    url: http://www.bitprepared.it/flora/flora.php
-    description: Sito per la ricerca dicotomica di fiori e piante. Utile per scoprire informazioni dettagliate sulla flora che abbiamo trovato al campo.
-    external: true
+  # - name: Flora
+  #   icon: /assets/images/pages/software/flora.png
+  #   url: http://www.bitprepared.it/flora/flora.php
+  #   description: Sito per la ricerca dicotomica di fiori e piante. Utile per scoprire informazioni dettagliate sulla flora che abbiamo trovato al campo.
+  #   external: true
 
   - name: VLC
     icon: /assets/images/pages/software/vlc.png

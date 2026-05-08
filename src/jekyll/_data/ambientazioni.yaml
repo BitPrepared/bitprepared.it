@@ -1,0 +1,19 @@
+momo:
+  name: "Momo"
+  slug: "momo"
+
+star-trek:
+  name: "Star Trek"
+  slug: "star-trek"
+
+star-wars:
+  name: "Star Wars"
+  slug: "star-wars"
+
+monkey-island:
+  name: "Monkey Island"
+  slug: "monkey-island"
+
+matrix:
+  name: "Matrix"
+  slug: "matrix"
