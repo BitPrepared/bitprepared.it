@@ -20,6 +20,39 @@ Il sito BitPrepared usa un sistema automatico per selezionare le immagini giuste
 - File nel filesystem: `src/jekyll/assets/images/epppi/locandina_epppi_2026.jpg`
 - Nel frontmatter evento: `image: /assets/images/epppi/locandina_epppi_2026.jpg`
 
+## Struttura Matrici Organizzata
+
+Il sistema matrici è ora organizzato in 3 sottodirectory:
+
+### production/
+Immagini usate dal sito, ottimizzate per produzione
+- `eventi/` - Locandine e featured per eventi
+- `software/` - Loghi software
+- `loghi-branche/` - Loghi EG/RS/Capi
+- `root/` - Immagini root (generic-featured, agesci-logo, placeholders)
+
+### source-icons/
+Sorgenti uniche che generano multiple varianti
+- `site-icon.svg` - Genera favicon.ico, apple-touch-icon*.png, manifest.json
+
+### supporto/
+Archivio, non copiato in assets
+- `mockup/` - Mockup design
+- `strumenti/` - File di lavoro
+- `risorse/` - Risorse varie
+
+## File Manifesto
+
+### .locked
+File che non devono essere modificati:
+- generic-featured.png
+- agesci_logo.png
+- placeholder-blog.png
+- placeholder-news.png
+
+### .rules
+Regole conversioni per categoria. Vedi design document per dettagli completi.
+
 ## Archivio Originali (Matrici)
 
 **Importante:** I file originali (PNG) sono archiviati in `src/matrici/images/`, non in `src/jekyll/assets/images/`.

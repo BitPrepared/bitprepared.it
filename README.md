@@ -136,6 +136,18 @@ make optimize-images   # Ottimizza immagini da matrici
 make generate-placeholders  # Genera placeholder immagini
 ```
 
+## Gestione Immagini 2.0
+
+### Comandi nuovi
+make init-matrici       # Inizializza struttura matrici
+make generate-icons       # Genera icone da SVG sorgente
+make optimize-images      # Ottimizza immagini con manifesti
+
+### Struttura Matrici
+- `src/matrici/images/production/` → Immagini per sito
+- `src/matrici/images/source-icons/` → Sorgenti icone
+- `src/matrici/images/supporto/` → Archivio (non copiato)
+
 ---
 
 ## Gestione Immagini
