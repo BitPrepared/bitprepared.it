@@ -57,7 +57,7 @@ async function generateEventPlaceholders(force) {
 
   for (const [key, event] of Object.entries(eventi)) {
     const filename = `locandina_${event.slug}_${currentYear}.png`;
-    const filepath = path.join(__dirname, '../', MATRICE_DIR, event.slug, filename);
+    const filepath = path.join(__dirname, '../', MATRICE_DIR, 'production/eventi', event.slug, filename);
     const label = `PLACEHOLDER - Volantino ${event.name} ${currentYear}`;
 
     await createPlaceholder(filepath, label, force);
@@ -68,7 +68,7 @@ async function generatePostPlaceholders(force) {
   for (const [eventKey, event] of Object.entries(eventi)) {
     for (const [ambKey, amb] of Object.entries(ambientazioni)) {
       const filename = `${event.slug}-${amb.slug}-featured.png`;
-      const filepath = path.join(__dirname, '../', MATRICE_DIR, event.slug, filename);
+      const filepath = path.join(__dirname, '../', MATRICE_DIR, 'production/eventi', event.slug, filename);
       const label = `PLACEHOLDER - ${event.name} / ${amb.name}`;
 
       await createPlaceholder(filepath, label, force);
