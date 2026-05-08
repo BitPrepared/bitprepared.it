@@ -22,6 +22,13 @@ function loadManifests() {
 // Parse .rules file
 function parseRules(rulesPath) {
   const rules = {};
+
+  // Check if rules file exists
+  if (!fs.existsSync(rulesPath)) {
+    console.warn(`⚠️  Rules file not found: ${rulesPath}`);
+    return rules;
+  }
+
   const content = fs.readFileSync(rulesPath, 'utf8');
   const sections = content.split(/\[([^\]]+)\]/).filter(s => s.trim());
 
@@ -31,9 +38,14 @@ function parseRules(rulesPath) {
 
     rules[category] = {};
     lines.slice(1).forEach(line => {
-      const [key, value] = line.split(':').map(s => s.trim());
-      if (key && value) {
+      // Safe array destructuring with validation
+      const parts = line.split(':').map(s => s.trim());
+      if (parts.length >= 2 && parts[0] && parts[1]) {
+        const [key, value] = parts;
         rules[category][key] = value;
+      } else if (parts.length === 1 && parts[0]) {
+        // Handle lines without colons - skip or log warning
+        console.warn(`⚠️  Invalid rule format in [${category}]: ${line}`);
       }
     });
   });
@@ -105,23 +117,47 @@ async function convertImage(src, dest, rule) {
     // Parse dimensions if specified
     if (rule.dimensions) {
       const [width, height] = rule.dimensions.split('x').map(Number);
+
+      // Validate dimensions are valid numbers
+      if (isNaN(width) || isNaN(height)) {
+        throw new Error(`Invalid dimensions: ${rule.dimensions} (must be numbers)`);
+      }
+
       pipeline = pipeline.resize(width, height, {
         fit: 'inside',
         withoutEnlargement: true
       });
     }
 
-    // Determine output format
+    // Determine output format with null safety check
+    if (!rule.convert_to) {
+      throw new Error('convert_to rule is missing or null');
+    }
+
     const format = rule.convert_to.toLowerCase();
     let outputPath = dest;
 
     if (format === 'jpg' || format === 'jpeg') {
       // Change extension to .jpg
       outputPath = dest.replace(/\.png$/i, '.jpg');
-      pipeline = pipeline.jpeg({ quality: parseInt(rule.quality) || 85 });
+
+      // Validate quality is a valid number
+      const quality = parseInt(rule.quality);
+      if (rule.quality && isNaN(quality)) {
+        throw new Error(`Invalid quality value: ${rule.quality} (must be a number)`);
+      }
+
+      pipeline = pipeline.jpeg({ quality: quality || 85 });
     } else if (format === 'webp') {
       outputPath = dest.replace(/\.png$/i, '.webp');
-      pipeline = pipeline.webp({ quality: parseInt(rule.quality) || 85 });
+
+      // Validate quality is a valid number
+      const quality = parseInt(rule.quality);
+      if (rule.quality && isNaN(quality)) {
+        throw new Error(`Invalid quality value: ${rule.quality} (must be a number)`);
+      }
+
+      pipeline = pipeline.webp({ quality: quality || 85 });
     } else if (format === 'png') {
       pipeline = pipeline.png();
     }
