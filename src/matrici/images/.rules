@@ -1,0 +1,24 @@
+# Regole conversione per categoria
+# Format: [category]
+#   convert_to: jpg|png|webp
+#   dimensions: WIDTHxHEIGHT (opzionale)
+#   quality: 1-100 (opzionale, solo per jpg/webp)
+#   copy_only: true|false (se true, non convertire)
+
+[production/eventi]
+convert_to: jpg
+dimensions: 3508x4961
+quality: 85
+
+[production/software]
+convert_to: png
+copy_only: true
+
+[production/loghi-branche]
+convert_to: png
+copy_only: true
+
+[production/root]
+convert_to: jpg
+dimensions: 1200x630
+quality: 85
