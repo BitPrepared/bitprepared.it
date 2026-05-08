@@ -189,10 +189,12 @@ async function optimizeImages() {
     const relativePath = path.relative(productionDir, file);
     const targetPath = path.join(ASSETS_DIR, relativePath);
     const category = getCategory(relativePath);
+    const fileName = path.basename(file);
 
     try {
-      // Skip locked files
-      if (lockedFiles.includes(relativePath)) {
+      // Skip locked files - check both full path and filename
+      const isLocked = lockedFiles.includes(relativePath) || lockedFiles.includes(fileName);
+      if (isLocked) {
         console.log(`🔒 Locked: ${relativePath}`);
         await copyFile(file, targetPath);
         processed++;
