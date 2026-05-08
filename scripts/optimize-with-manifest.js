@@ -30,25 +30,32 @@ function parseRules(rulesPath) {
   }
 
   const content = fs.readFileSync(rulesPath, 'utf8');
-  const sections = content.split(/\[([^\]]+)\]/).filter(s => s.trim());
 
-  sections.forEach(section => {
-    const lines = section.trim().split('\n');
-    const category = lines[0].trim();
+  // Match [category] sections and their content
+  const sectionRegex = /\[([^\]]+)\]\s*([^[]*)/g;
+  let match;
 
-    rules[category] = {};
-    lines.slice(1).forEach(line => {
-      // Safe array destructuring with validation
-      const parts = line.split(':').map(s => s.trim());
-      if (parts.length >= 2 && parts[0] && parts[1]) {
-        const [key, value] = parts;
-        rules[category][key] = value;
-      } else if (parts.length === 1 && parts[0]) {
-        // Handle lines without colons - skip or log warning
-        console.warn(`⚠️  Invalid rule format in [${category}]: ${line}`);
-      }
-    });
-  });
+  while ((match = sectionRegex.exec(content)) !== null) {
+    const category = match[1].trim();
+    const sectionContent = match[2].trim();
+
+    if (category && sectionContent) {
+      rules[category] = {};
+
+      // Parse key-value pairs in section content
+      const lines = sectionContent.split('\n');
+      lines.forEach(line => {
+        line = line.trim();
+        if (line && !line.startsWith('#')) {
+          const parts = line.split(':').map(s => s.trim());
+          if (parts.length >= 2 && parts[0] && parts[1]) {
+            const [key, value] = parts;
+            rules[category][key] = value;
+          }
+        }
+      });
+    }
+  }
 
   return rules;
 }
@@ -59,6 +66,7 @@ function getCategory(relativePath) {
   if (relativePath.startsWith('software/')) return 'production/software';
   if (relativePath.startsWith('loghi-branche/')) return 'production/loghi-branche';
   if (relativePath.startsWith('root/')) return 'production/root';
+  if (relativePath.startsWith('pages/')) return 'production/pages';
   return null;
 }
 

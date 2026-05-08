@@ -22,3 +22,7 @@ copy_only: true
 convert_to: jpg
 dimensions: 1200x630
 quality: 85
+
+[production/pages]
+convert_to: png
+copy_only: true

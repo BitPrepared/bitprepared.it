@@ -207,3 +207,32 @@ jobs:
                     'Vedi log per dettagli completi.\n\n' +
                     '📖 Guida: docs/IMAGE_GUIDE.md'
             })
+
+  check-matrici-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check matrici → assets sync
+        run: |
+          node scripts/check-matrici-sync.js
+
+      - name: Comment on PR if out of sync
+        if: failure()
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '❌ **Matrici/Images Out of Sync**\n\n' +
+                    'Le immagini in src/matrici/images/ non sono sincronizzate con src/jekyll/assets/images/\n\n' +
+                    '**Soluzione:**\n' +
+                    '```bash\n' +
+                    'make optimize-images\n' +
+                    'git add src/jekyll/assets/images/\n' +
+                    'git commit -m "chore: sync assets from matrici"\n' +
+                    '```\n\n' +
+                    'Vedi docs/IMAGE_GUIDE.md per dettagli'
+            })
